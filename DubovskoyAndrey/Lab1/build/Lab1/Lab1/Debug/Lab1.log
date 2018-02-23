@@ -1,0 +1,64 @@
+﻿  Main.cpp
+f:\dubovskoyav\lab1\include\list.h(8): error C2143: синтаксическая ошибка: отсутствие ";" перед "<"
+  f:\dubovskoyav\lab1\include\list.h(22): note: см. ссылку на создание экземпляров класса шаблон при компиляции "List<TKey>"
+f:\dubovskoyav\lab1\include\list.h(8): error C4430: отсутствует спецификатор типа - предполагается int. Примечание. C++ не поддерживает int по умолчанию
+f:\dubovskoyav\lab1\include\list.h(8): error C2238: непредвиденные лексемы перед ";"
+f:\dubovskoyav\lab1\include\list.h(21): error C2143: синтаксическая ошибка: отсутствие ";" перед "<"
+f:\dubovskoyav\lab1\include\list.h(21): error C4430: отсутствует спецификатор типа - предполагается int. Примечание. C++ не поддерживает int по умолчанию
+f:\dubovskoyav\lab1\include\list.h(21): error C2238: непредвиденные лексемы перед ";"
+f:\dubovskoyav\lab1\include\list.h(136): error C2988: неопознанное объявление или определение шаблона
+f:\dubovskoyav\lab1\include\list.h(136): error C2143: синтаксическая ошибка: отсутствие ";" перед "<"
+f:\dubovskoyav\lab1\include\list.h(136): error C2059: синтаксическая ошибка: <
+f:\dubovskoyav\lab1\include\list.h(136): error C2065: TKey: необъявленный идентификатор
+f:\dubovskoyav\lab1\include\list.h(136): error C2923: List: "TKey" не является допустимым аргументом типа шаблон для параметра "TKey"
+f:\dubovskoyav\lab1\include\stack.h(13): error C2524: Stack<TKey>: список параметров деструктор должен быть пустым
+  f:\dubovskoyav\lab1\include\stack.h(20): note: см. ссылку на создание экземпляров класса шаблон при компиляции "Stack<TKey>"
+f:\dubovskoyav\lab1\include\stack.h(35): error C2039: {dtor}: не является членом "Stack<TKey>"
+f:\dubovskoyav\lab1\include\stack.h(13): error C2524: Stack<char>: список параметров деструктор должен быть пустым
+  f:\dubovskoyav\lab1\samples\main.cpp(14): note: см. ссылку на создание экземпляров класса шаблон при компиляции "Stack<char>"
+f:\dubovskoyav\lab1\samples\main.cpp(28): error C3867: "Stack<char>::Take": нестандартный синтаксис; используйте "&", чтобы создать указатель на член
+f:\dubovskoyav\lab1\samples\main.cpp(28): error C2446: !=: нет преобразования "int" в "char (__thiscall Stack<char>::* )(void)"
+  f:\dubovskoyav\lab1\samples\main.cpp(28): note: Не существует преобразований из целых значений в указатели на члены
+f:\dubovskoyav\lab1\samples\main.cpp(29): error C3867: "Stack<char>::Pop": нестандартный синтаксис; используйте "&", чтобы создать указатель на член
+f:\dubovskoyav\lab1\samples\main.cpp(35): error C2659: =: функция в качестве левого операнда
+f:\dubovskoyav\lab1\samples\main.cpp(43): error C3867: "Stack<char>::Pop": нестандартный синтаксис; используйте "&", чтобы создать указатель на член
+f:\dubovskoyav\lab1\samples\main.cpp(49): error C3867: "Stack<char>::IsEmpty": нестандартный синтаксис; используйте "&", чтобы создать указатель на член
+f:\dubovskoyav\lab1\samples\main.cpp(51): error C3867: "Stack<char>::Pop": нестандартный синтаксис; используйте "&", чтобы создать указатель на член
+f:\dubovskoyav\lab1\samples\main.cpp(95): error C3867: "Stack<char>::Pop": нестандартный синтаксис; используйте "&", чтобы создать указатель на член
+f:\dubovskoyav\lab1\samples\main.cpp(95): error C2440: =: невозможно преобразовать "char (__thiscall Stack<char>::* )(void)" в "char"
+  f:\dubovskoyav\lab1\samples\main.cpp(95): note: Не существует контекста, в котором такое преобразование возможно
+f:\dubovskoyav\lab1\samples\main.cpp(110): error C2065: j: необъявленный идентификатор
+f:\dubovskoyav\lab1\samples\main.cpp(110): error C2228: выражение слева от ".Operand" должно представлять класс, структуру или объединение
+f:\dubovskoyav\lab1\samples\main.cpp(111): error C2065: j: необъявленный идентификатор
+f:\dubovskoyav\lab1\samples\main.cpp(112): error C2065: j: необъявленный идентификатор
+f:\dubovskoyav\lab1\samples\main.cpp(112): error C2228: выражение слева от ".Value" должно представлять класс, структуру или объединение
+f:\dubovskoyav\lab1\samples\main.cpp(118): error C3867: "Stack<char>::Pop": нестандартный синтаксис; используйте "&", чтобы создать указатель на член
+f:\dubovskoyav\lab1\samples\main.cpp(118): error C2440: =: невозможно преобразовать "char (__thiscall Stack<char>::* )(void)" в "float"
+  f:\dubovskoyav\lab1\samples\main.cpp(118): note: Не существует контекста, в котором такое преобразование возможно
+f:\dubovskoyav\lab1\samples\main.cpp(119): error C3867: "Stack<char>::Pop": нестандартный синтаксис; используйте "&", чтобы создать указатель на член
+f:\dubovskoyav\lab1\samples\main.cpp(119): error C2440: =: невозможно преобразовать "char (__thiscall Stack<char>::* )(void)" в "float"
+  f:\dubovskoyav\lab1\samples\main.cpp(119): note: Не существует контекста, в котором такое преобразование возможно
+f:\dubovskoyav\lab1\samples\main.cpp(120): warning C4244: аргумент: преобразование "float" в "char", возможна потеря данных
+f:\dubovskoyav\lab1\samples\main.cpp(124): error C3867: "Stack<char>::Pop": нестандартный синтаксис; используйте "&", чтобы создать указатель на член
+f:\dubovskoyav\lab1\samples\main.cpp(124): error C2440: =: невозможно преобразовать "char (__thiscall Stack<char>::* )(void)" в "float"
+  f:\dubovskoyav\lab1\samples\main.cpp(124): note: Не существует контекста, в котором такое преобразование возможно
+f:\dubovskoyav\lab1\samples\main.cpp(125): error C3867: "Stack<char>::Pop": нестандартный синтаксис; используйте "&", чтобы создать указатель на член
+f:\dubovskoyav\lab1\samples\main.cpp(125): error C2440: =: невозможно преобразовать "char (__thiscall Stack<char>::* )(void)" в "float"
+  f:\dubovskoyav\lab1\samples\main.cpp(125): note: Не существует контекста, в котором такое преобразование возможно
+f:\dubovskoyav\lab1\samples\main.cpp(126): warning C4244: аргумент: преобразование "float" в "char", возможна потеря данных
+f:\dubovskoyav\lab1\samples\main.cpp(130): error C3867: "Stack<char>::Pop": нестандартный синтаксис; используйте "&", чтобы создать указатель на член
+f:\dubovskoyav\lab1\samples\main.cpp(130): error C2440: =: невозможно преобразовать "char (__thiscall Stack<char>::* )(void)" в "float"
+  f:\dubovskoyav\lab1\samples\main.cpp(130): note: Не существует контекста, в котором такое преобразование возможно
+f:\dubovskoyav\lab1\samples\main.cpp(131): error C3867: "Stack<char>::Pop": нестандартный синтаксис; используйте "&", чтобы создать указатель на член
+f:\dubovskoyav\lab1\samples\main.cpp(131): error C2440: =: невозможно преобразовать "char (__thiscall Stack<char>::* )(void)" в "float"
+  f:\dubovskoyav\lab1\samples\main.cpp(131): note: Не существует контекста, в котором такое преобразование возможно
+f:\dubovskoyav\lab1\samples\main.cpp(132): warning C4244: аргумент: преобразование "float" в "char", возможна потеря данных
+f:\dubovskoyav\lab1\samples\main.cpp(136): error C3867: "Stack<char>::Pop": нестандартный синтаксис; используйте "&", чтобы создать указатель на член
+f:\dubovskoyav\lab1\samples\main.cpp(136): error C2440: =: невозможно преобразовать "char (__thiscall Stack<char>::* )(void)" в "float"
+  f:\dubovskoyav\lab1\samples\main.cpp(136): note: Не существует контекста, в котором такое преобразование возможно
+f:\dubovskoyav\lab1\samples\main.cpp(137): error C3867: "Stack<char>::Pop": нестандартный синтаксис; используйте "&", чтобы создать указатель на член
+f:\dubovskoyav\lab1\samples\main.cpp(137): error C2440: =: невозможно преобразовать "char (__thiscall Stack<char>::* )(void)" в "float"
+  f:\dubovskoyav\lab1\samples\main.cpp(137): note: Не существует контекста, в котором такое преобразование возможно
+f:\dubovskoyav\lab1\samples\main.cpp(138): warning C4244: аргумент: преобразование "float" в "char", возможна потеря данных
+f:\dubovskoyav\lab1\samples\main.cpp(142): error C3867: "Stack<char>::Pop": нестандартный синтаксис; используйте "&", чтобы создать указатель на член
+f:\dubovskoyav\lab1\samples\main.cpp(10): fatal error C1075: в конце файла обнаружен левый непарный фигурная скобка "{"
