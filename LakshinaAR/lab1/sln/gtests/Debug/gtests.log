@@ -1,0 +1,13 @@
+﻿Build started 27.02.2018 22:01:32.
+     1>Project "D:\mp2-practice\LakshinaAR\lab1\sln\gtests\gtests.vcxproj" on node 2 (Rebuild target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt "D:\mp2-practice\LakshinaAR\lab1\gtest\gtest-all.cc"
+         gtest-all.cc
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\Lib.exe /OUT:"D:\mp2-practice\LakshinaAR\lab1\sln\Debug\gtests.lib" /NOLOGO "Debug\gtest-all.obj"
+         gtests.vcxproj -> D:\mp2-practice\LakshinaAR\lab1\sln\Debug\gtests.lib
+     1>Done Building Project "D:\mp2-practice\LakshinaAR\lab1\sln\gtests\gtests.vcxproj" (Rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:04.98
