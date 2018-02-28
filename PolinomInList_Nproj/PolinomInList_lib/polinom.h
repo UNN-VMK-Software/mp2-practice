@@ -6,14 +6,20 @@ template <typename T>
 class Polinom {
 	string s;
 private:
-	RingList<T> *monoms;
+	RingList<T> monoms;
 public:
-	Polinom() {};
-	Polinom(const string &s1);
+	Polinom(const string &str) {
+	s = str;
+	int i = 0;
+	while (i<s.size())
+	{
+
+	}
+	};
 	Polinom(const Polinom &p1);
 	~Polinom();
 	Polinom operator+(const Polinom &p1);
 	Polinom operator*(const Polinom &p1);
-	*const operator+(const double d);
+	Polinom operator*(const double &d);
 	const Polinom& operator=(const Polinom &p1);
 };
