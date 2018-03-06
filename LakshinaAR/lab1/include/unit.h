@@ -3,7 +3,7 @@
 
 
 //Звено списка
-template<typename type>
+template<class type>
 class unit
 {
 public:

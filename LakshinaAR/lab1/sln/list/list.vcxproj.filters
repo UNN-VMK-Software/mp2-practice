@@ -18,10 +18,10 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="D:\mp2-practice\LakshinaAR\lab1\include\list.h">
+    <ClInclude Include="..\..\include\unit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D:\mp2-practice\LakshinaAR\lab1\include\unit.h">
+    <ClInclude Include="..\..\include\list.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

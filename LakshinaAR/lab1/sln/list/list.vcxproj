@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{F2DDA41C-C893-4C6C-A07D-8C273925E2A1}</ProjectGuid>
+    <ProjectGuid>{BD32CA67-223B-4F87-BA45-0DBC111D0A34}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>list</RootNamespace>
   </PropertyGroup>
@@ -74,8 +74,8 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="D:\mp2-practice\LakshinaAR\lab1\include\list.h" />
-    <ClInclude Include="D:\mp2-practice\LakshinaAR\lab1\include\unit.h" />
+    <ClInclude Include="..\..\include\list.h" />
+    <ClInclude Include="..\..\include\unit.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

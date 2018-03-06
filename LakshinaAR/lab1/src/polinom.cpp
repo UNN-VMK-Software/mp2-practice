@@ -46,8 +46,6 @@ polynom::polynom(string pol)
 }	
 
 
-
-
  //Конструктор копирования
 polynom:: polynom (const polynom& pol)
 {
@@ -112,11 +110,10 @@ polynom polynom::operator+(const polynom& pol) const
 }
 
 
-
 //Умножение на константу слева
 polynom polynom::operator*(const double a) const
 {
-	unit<monom>* actual = (*this).list_pol.GetHead()->next;
+	unit<monom>* actual = (*this).list_pol.GetHead()->next;		
 	while (actual != (*this).list_pol.GetHead())
 	{
 		actual->data.coeff *= a;
@@ -152,7 +149,7 @@ polynom polynom::operator*(const polynom& pol) const
 }
 
 
-//Оператор вставки в поток
+//Оператор вставки в поток???????
 ostream& operator<<(ostream &ostr,const polynom& pol)
 {
 	unit<monom>* actual = pol.list_pol.GetHead();
@@ -161,13 +158,6 @@ ostream& operator<<(ostream &ostr,const polynom& pol)
 	{
 		actual = actual->next;
 		monom temp = actual->data;
-
-		/*
-		if (abs(temp.coeff - 1) > EPS && abs(temp.coeff + 1) > EPS || temp.abc == 0)
-			ostr << temp.coeff;
-		else if (abs(temp.coeff + 1) < EPS && abs(temp.coeff - 1) > EPS)
-			ostr << '-';
-		*/
 
 		if (temp.coeff>0)
 		{
@@ -191,9 +181,6 @@ ostream& operator<<(ostream &ostr,const polynom& pol)
 			ostr<< "z^" << a;
 		else if (a == 1) ostr << "z";
 
-
-		//if(actual->next != h && actual->next->data.coeff>0)
-			//ostr << "+";
 	}
 	return ostr;
 }

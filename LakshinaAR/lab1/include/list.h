@@ -2,7 +2,7 @@
 #include "unit.h"
 
 //Циклический список с головой
-template<typename type>
+template<class type>
 class list
 {
 private:
@@ -10,7 +10,7 @@ private:
 	void Clean();										//Очистка списка
 public:
 	list();												//Конструктор по умолчанию
-	list(const list<type>& a);						    //Конструктор копирования
+	list(const list<type>& a);                  	    //Конструктор копирования
 	~list();											//Деструктор
 	list<type>& operator=(const list<type> &a);		    //Перегрузка оператора присваивания
 	void Insert(type elem);					        	//Вставка в упорядоченный список
@@ -22,7 +22,7 @@ public:
 
 
 //Очистка списка
-template <typename type>
+template <class type>
 void list<type>::Clean()
 {
 	unit<type>* actual = head->next;   
@@ -36,19 +36,21 @@ void list<type>::Clean()
 }
 
 //Конструктор по умолчанию
-template <typename type>
+template <class type>
 list<type>::list()
 {
 	head = new unit<type>;
 	head->next = head;
 }
 
+
 //Конструктор копирования
-template <typename type>
-list<type>::list(const list<type>& a) : list()
+template <class type>
+list<type>::list(const list<type>& a) //: 
+	//list()
 {
+	unit<type>* A = a.head;
 	unit<type>* B = head;
-	unit<type>* A = a.head;   // А - указатель на голову списка а
 	while (A->next != a.head)
 	{
 		A = A->next;
@@ -58,18 +60,17 @@ list<type>::list(const list<type>& a) : list()
 	B->next = head;
 }
 
+
 //Деструктор
-template <typename type>
+template <class type>
 list<type>::~list()
 {
 	Clean();
 	delete head;
 }
 
-
-
 //Оператор присваивания
-template <typename type>
+template <class type>
 list<type>& list<type>::operator=(const list<type>& a)
 {
 	Clean();
@@ -86,7 +87,7 @@ list<type>& list<type>::operator=(const list<type>& a)
 }
 
 //Вставка в упорядоченный список
-template <typename type>
+template <class type>
 void list<type>::Insert(type elem)
 {
 	unit<type>* actual = head;
@@ -105,8 +106,8 @@ bool list<type>::operator==(const list<type>& sp) const
 	bool res = true;
 	if (this != &sp)
 	{
-		node<type>* a = head->next;
-		node<type>* b = sp.head->next;
+		unit<type>* a = head->next;
+		unit<type>* b = sp.head->next;
 		
 		while (a->data == b->data && a != head && b != sp.head)
 		{

@@ -28,3 +28,16 @@ bool monom:: operator> (const monom& m)
 		res=false;
 	return res;
 }	 
+
+bool monom:: operator==(const monom& m)
+{
+	bool res = true;
+	if (abc != m.abc || coeff != m.coeff )
+		res=false;
+	return res;
+}
+
+bool monom:: operator!=(const monom& m)
+{
+	return !(*this == m);
+}
