@@ -1,3 +1,6 @@
 ﻿  main.cpp
+c:\users\soroka\desktop\mp2-practice\polinominlist_nproj\polinominlist_lib\polinom.h(17): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\soroka\desktop\mp2-practice\polinominlist_nproj\polinominlist_lib\polinom.h(41): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\soroka\desktop\mp2-practice\polinominlist_nproj\polinominlist_lib\polinom.h(46): warning C4018: <: несоответствие типов со знаком и без знака
   Sample.vcxproj -> C:\Users\Soroka\Desktop\mp2-practice\PolinomInList_Nproj\Debug\Sample.exe
   Sample.vcxproj -> C:\Users\Soroka\Desktop\mp2-practice\PolinomInList_Nproj\Debug\Sample.pdb (Partial PDB)

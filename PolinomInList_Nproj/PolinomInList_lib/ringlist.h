@@ -1,11 +1,13 @@
 #pragma once
  
+#include <string>
 #include <cstring>
+#include <cstdlib>
+#include  <cctype>
 #include <iostream>
 
 using namespace std;
 
-template <typename T>
 class Monom {
 	double cf; //коэффициент (может быть отрицательный)
 	unsigned int abc; //степени x*100+y*10+z
@@ -13,7 +15,7 @@ public:
 	Monom (int cval = 1, int ival = 0){
 		cf = cval; abc = ival;
 	};
-	void SetCoeff(int cval) { cf = cval; }
+	void SetCoeff(double cval) { cf = cval; }
 	double GetCoeff(void) { return cf; }
 	void SetIndex(int ival) { abc = ival; }
 	unsigned int GetIndex(void) { return abc; }
@@ -24,12 +26,15 @@ public:
 	int operator==(const Monom &m) {
 		return (cf == m.cf) && (abc == m.abc);
 	}
+	int operator!=(const Monom &m) {
+		return !(*this==m);
+	}
 	int operator<(const Monom &m) {
 		return abc<m.abc;
 	}
 };
 
-template <typename T>
+template <class T>
 struct Link {
 	T data;
 	Link* pNext;
@@ -56,7 +61,7 @@ public:
 	};
 };
 
-template <typename T>
+template <class T>
 struct RingList{
 private:
 	Link<T> *head, *current;
@@ -95,7 +100,7 @@ public:
 		{
 			while (tmp2!=head)
 			{
-				tmp2 = current->next;
+				tmp2 = current->pNext;
 				delete current;
 				current = tmp2;
 			}
@@ -110,7 +115,7 @@ public:
 			return true;
 		else return false;
 	};
-	Link* GetNext() { current = current->pNext; }
+	Link<T>* GetNext() { current = current->pNext; }
 	void InsertToTail(const T& d){
 		current = head;
 		if (head->pNext == head)
