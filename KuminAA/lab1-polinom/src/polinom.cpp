@@ -50,7 +50,7 @@ Polinom& Polinom::operator+(const Polinom& P)
 {
 	Polinom temp(*this);
 	P.list->reset();
-	while (!P.list->isended)
+	while (!P.list->isended())
 	{
 		temp.list->InsertToOrdered(P.list->GetNext());
 	}
@@ -61,7 +61,7 @@ Polinom& Polinom::operator*(const int& a)
 {
 	Polinom temp(*this);
 	temp.list->reset();
-	while (!temp.list->isended)
+	while (!temp.list->isended())
 	{
 		temp.list->GetNext().coeff *= a;
 	}
@@ -70,5 +70,5 @@ Polinom& Polinom::operator*(const int& a)
 
 Polinom& Polinom::operator*(const Polinom& P)
 {
-
+	return *this;
 }
