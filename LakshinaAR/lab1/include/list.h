@@ -7,8 +7,9 @@ class list
 {
 private:
 	unit<type>* head;									//Указатель на голову
-	void Clean();										//Очистка списка
+	//void Clean();										//Очистка списка
 public:
+	void Clean();
 	list();												//Конструктор по умолчанию
 	list(const list<type>& a);                  	    //Конструктор копирования
 	~list();											//Деструктор
@@ -46,11 +47,16 @@ list<type>::list()
 
 //Конструктор копирования
 template <class type>
-list<type>::list(const list<type>& a) //: 
-	//list()
+list<type>::list(const list<type>& a)
 {
+	head =  new unit<type>;             //!!!!!!!!!!
 	unit<type>* A = a.head;
 	unit<type>* B = head;
+	if ( A->next == a.head)
+	{
+		head->next = head;
+		return;
+	}
 	while (A->next != a.head)
 	{
 		A = A->next;
@@ -100,6 +106,7 @@ void list<type>::Insert(type elem)
 	actual->next->next = actual_2;
 }
 
+// Оператор равно
 template<class type>
 bool list<type>::operator==(const list<type>& sp) const
 {

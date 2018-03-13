@@ -24,8 +24,7 @@ public:
     friend polynom operator*(const double a,const polynom& pol) { return pol*a; }	                                 //Умножение на константу справа
     polynom operator-() const { return (-1)*(*this); }                                                               //Унарный минус
     friend ostream& operator<<(ostream &ostr, const polynom &pol);	                                                 //Вставка в поток
-
-	
+		
 	bool operator==(const polynom& pml) const { return list_pol == pml.list_pol; }		
 	bool operator!=(const polynom& pml) const { return list_pol != pml.list_pol; }
 

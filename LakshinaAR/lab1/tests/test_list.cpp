@@ -2,19 +2,16 @@
 #include "list.h"
 
 
-// Всё понятно, надо переписать по-своему и решить проблема :list()
 
 class Test_List : public ::testing::Test 
 {
 protected:
 	list<int> A;
 	list<int> B;
-
 public:
 	Test_List() { B.Insert(5); B.Insert(1);}
 	~Test_List() {}
 };
-
 
 
 // Пустой список 
@@ -96,9 +93,7 @@ TEST_F(Test_List, insert_in_empty_list_is_correct_2)
 }
 
 
-
-
-// Непустой список
+// 
 
 TEST_F(Test_List, can_copy_not_empty_list)
 {

@@ -64,7 +64,7 @@ polynom& polynom:: operator=(const polynom &pol)
 polynom polynom::operator+(const polynom& pol) const
 {
 	polynom res;
-	unit<monom>* rh = res.list_pol.GetHead();
+	unit<monom>* r = res.list_pol.GetHead();
 	unit<monom>* a = list_pol.GetHead();
 	unit<monom>* b = pol.list_pol.GetHead();
 	unit<monom>* A = a->next;
@@ -74,38 +74,42 @@ polynom polynom::operator+(const polynom& pol) const
 	{
 		if (A->data < B->data)
 		{
-			rh->next = new unit<monom>(A->data);
+			r->next = new unit<monom>(A->data);
 			A = A->next;
-			rh = rh->next;
+			r = r->next;
 		}
 		else 
 			if (A->data > B->data)
 			{
-				rh->next = new unit<monom>(B->data);
+				r->next = new unit<monom>(B->data);
 			    B = B->next;
-			    rh = rh->next;
+			    r = r->next;
 			}
 			else
 			{
-				rh->next = new unit<monom>(monom(A->data.coeff + B->data.coeff, A->data.abc));
-				rh = rh->next;
+				if (abs(A->data.coeff + B->data.coeff) != 0)                                              //!!!!!!!!!!!!!
+				{
+					r->next = new unit<monom>(monom(A->data.coeff + B->data.coeff, A->data.abc));
+					r = r->next;
+				}
+		
 				A = A->next;
 			    B = B->next;
 			}
 	}
 	while (A != a)
 	{
-		rh->next = new unit<monom>(A->data);
+		r->next = new unit<monom>(A->data);
 		A = A->next;
-		rh = rh->next;
+		r = r->next;
 	}
 	while (B != b)
 	{
-		rh->next = new unit<monom>(B->data);
+		r->next = new unit<monom>(B->data);
 		B = B->next;
-		rh = rh->next;
+		r = r->next;
 	}
-	rh->next = res.list_pol.GetHead();
+	r->next = res.list_pol.GetHead();
 	return res;
 }
 
@@ -113,11 +117,19 @@ polynom polynom::operator+(const polynom& pol) const
 //Умножение на константу слева
 polynom polynom::operator*(const double a) const
 {
-	unit<monom>* actual = (*this).list_pol.GetHead()->next;		
-	while (actual != (*this).list_pol.GetHead())
+	unit<monom>* actual = (*this).list_pol.GetHead()->next;
+	if (a != 0)
 	{
-		actual->data.coeff *= a;
-		actual = actual->next;
+		while (actual != (*this).list_pol.GetHead())
+		{ 
+			actual->data.coeff *= a;
+			actual = actual->next;
+		}
+	}
+	else 
+	{
+		actual->data.coeff = 0;
+		actual->data.abc = 0;
 	}
 	return *this;
 }

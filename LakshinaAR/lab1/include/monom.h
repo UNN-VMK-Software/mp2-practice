@@ -1,5 +1,6 @@
 #pragma once
 
+//#define EPS 1e-15
 
 class monom
 {
