@@ -4,7 +4,7 @@
 
 Polinom::Polinom(const string &str) {
 	s = str;
-	int f = 0;
+	int f = 0, v = 0;
 	int i = 0, j, k, st = 0;
 	double x = 1; //коэффициент
 	Monom tmp;
@@ -25,8 +25,9 @@ Polinom::Polinom(const string &str) {
 			a[j] = s[i];
 			j++;
 			i++;
+			v++;
 		}
-		if (a != NULL)
+		if (v != 0)
 		{
 			i--;
 			as = a;
@@ -103,25 +104,40 @@ Polinom::Polinom(const string &str) {
 			st = 0;
 			x = 1;
 		}
+		v = 0;
 		i++; // итерация
 	}
 }
 Polinom::Polinom(const Polinom &p1) {
-	
+	s = p1.s;
+	monoms = p1.monoms;
 }
 Polinom Polinom::operator+(const Polinom &p1) {
-	Polinom tmp;
+	Polinom tmp(p1);
+	monoms.Sequencing();
+	tmp.monoms.Sequencing(); //упорядочила оба списка
+	tmp.monoms = monoms.Merge(tmp.monoms); // слила их в один
+	tmp.monoms.SameABC(); //ищем одинаковые элементы и складываем их
 	return tmp;
 }
 Polinom Polinom::operator*(const Polinom &p1) {
-	Polinom tmp;
+	Polinom tmp(p1);
 	return tmp;
 }
 Polinom Polinom::operator*(const double &d) {
-	Polinom tmp;
-	return tmp;
+	Link<Monom> *tmp;
+	monoms.Reset();
+	tmp = monoms.GetNext();
+	while (tmp != monoms.GetHead()) {
+		tmp->data = tmp->data*d;
+		tmp = monoms.GetNext();
+	}
+	return *this;
 }
 const Polinom& Polinom::operator=(const Polinom &p1) {
-	Polinom tmp;
-	return tmp;
+	if (this != &p1) {
+		s = p1.s;
+		monoms = p1.monoms;
+	}
+	return *this;
 }
