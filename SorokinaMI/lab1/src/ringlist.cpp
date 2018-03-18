@@ -4,10 +4,10 @@ Monom::Monom() {
 	cf = 0;
 	abc = 1003;
 }
-/*Monom (int cval = 1, int ival = 0){
-cf = cval; abc = ival;
-};*/
-
+Monom::Monom(double d, unsigned int st) {
+	cf = d;
+	abc = st;
+}
 Monom& Monom::operator=(const Monom &m) {
 	cf = m.cf; abc = m.abc;
 	return *this;

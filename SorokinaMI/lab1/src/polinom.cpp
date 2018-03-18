@@ -114,21 +114,41 @@ Polinom::Polinom(const Polinom &p1) {
 }
 Polinom Polinom::operator+(const Polinom &p1) {
 	Polinom tmp(p1);
-	monoms.Sequencing();
-	tmp.monoms.Sequencing(); //упорядочила оба списка
-	tmp.monoms = monoms.Merge(tmp.monoms); // слила их в один
-	tmp.monoms.SameABC(); //ищем одинаковые элементы и складываем их
+	Link <Monom> *m1;
+	monoms.Reset();
+	m1 = monoms.GetNext();
+	tmp.monoms.Sequencing();
+	while (!monoms.IsEnded()) {
+		tmp.monoms.Insert(monoms.GetValue());
+		m1 = monoms.GetNext();
+	}
 	return tmp;
 }
 Polinom Polinom::operator*(const Polinom &p1) {
 	Polinom tmp(p1);
-	return tmp;
+	Polinom Res;
+	Monom MAX(1,999);
+	Link <Monom> *m1, *m2;
+	monoms.Reset();
+	m1 = monoms.GetNext();
+	tmp.monoms.Reset();
+	m2 = monoms.GetNext();
+	while (!monoms.IsEnded()) {
+		while (!tmp.monoms.IsEnded()) {
+			if (monoms.GetValue()*tmp.monoms.GetValue() < MAX) {
+				Res.monoms.Insert(monoms.GetValue()*tmp.monoms.GetValue());
+			}
+			m1 = monoms.GetNext();
+		}
+		m2 = monoms.GetNext();
+	}
+	return Res;
 }
 Polinom Polinom::operator*(const double &d) {
 	Link<Monom> *tmp;
 	monoms.Reset();
 	tmp = monoms.GetNext();
-	while (tmp != monoms.GetHead()) {
+	while (!monoms.IsEnded()) {
 		tmp->data = tmp->data*d;
 		tmp = monoms.GetNext();
 	}
