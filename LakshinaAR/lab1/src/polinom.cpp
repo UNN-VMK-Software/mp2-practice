@@ -6,7 +6,7 @@ using namespace std;
 //Разбор строки
 polynom::polynom(string pol)
 {
-	int d[3] = { 100,10,1 };
+	int a[3] = { 100,10,1 };
 	while (pol.length())
 	{
 		string part;
@@ -20,24 +20,23 @@ polynom::polynom(string pol)
 		while (part[pos] != 'x' && part[pos] != 'y' && part[pos] != 'z' && pos < part.length())
 			pos++;
 
-		string c = part.substr(0,pos);
+		string c = part.substr(0,pos);    // с - коэф  part
 		if (c == "+" || c.length() == 0)
 			temp.coeff = 1;
 		else if (c == "-")
 			temp.coeff = -1;
-		else temp.coeff = stod(c);
-		
-		//???
+		else temp.coeff = stod(c);  // stod извлекает число с плавающей точкой из строки 
+	
 		part.erase(0, pos);       // удаляем коэф
 		part += ' ';
 		for (int i = 0; i < 3; i++)
 		{
-			pos = part.find((char)(120 + i));     // 120 - код символа x
+			pos = part.find((char)(120 + i));     // 120 - код символа x, 121 - y, 122 - z
 			if (pos > -1)
 			{
 				if (part[pos + 1] != '^')
 					part.insert(pos + 1, "^1");
-				temp.abc += d[i] * stoi(part.substr(pos + 2, 1));          // stoi преобразует последовательность символов в целое число.
+				temp.abc += a[i] * stoi(part.substr(pos + 2, 1));          // stoi преобразует последовательность символов в целое число.
 				part.erase(pos, 3);
 			}
 		}
@@ -87,12 +86,11 @@ polynom polynom::operator+(const polynom& pol) const
 			}
 			else
 			{
-				if (abs(A->data.coeff + B->data.coeff) != 0)                                              //!!!!!!!!!!!!!
+				if (abs(A->data.coeff + B->data.coeff) != 0)                                              //!!!!!!!!!!
 				{
 					r->next = new unit<monom>(monom(A->data.coeff + B->data.coeff, A->data.abc));
 					r = r->next;
-				}
-		
+				}		
 				A = A->next;
 			    B = B->next;
 			}
@@ -192,7 +190,6 @@ ostream& operator<<(ostream &ostr,const polynom& pol)
 		if(a>1)
 			ostr<< "z^" << a;
 		else if (a == 1) ostr << "z";
-
 	}
 	return ostr;
 }

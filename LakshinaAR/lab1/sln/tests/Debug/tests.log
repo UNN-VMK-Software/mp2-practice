@@ -1,4 +1,4 @@
-﻿Build started 13.03.2018 21:52:07.
+﻿Build started 18.03.2018 20:56:23.
      1>Project "D:\mp2-practice\LakshinaAR\lab1\sln\tests\tests.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"D:\mp2-practice\LakshinaAR\lab1\include" /I"D:\mp2-practice\LakshinaAR\lab1\gtest" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt "D:\mp2-practice\LakshinaAR\lab1\tests\test_polinom.cpp"
@@ -12,4 +12,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.78
+Time Elapsed 00:00:02.66

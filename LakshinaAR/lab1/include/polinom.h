@@ -14,7 +14,7 @@ class polynom
 private:
 	list<monom> list_pol;		                                                                                     //Список - полином
 public:
-	polynom(const string pol = "" );	                                                                      //Разбор строки
+	polynom(const string pol = "" );	                                                                             //Разбор строки
 	polynom(const polynom& pol);                           							                                 //Конструктор копирования+
 	polynom& operator=(const polynom &pol);                                                                          //Присваивание
 	polynom operator+(const polynom& pol) const;			                                                         //Сложение полиномов
@@ -25,8 +25,8 @@ public:
     polynom operator-() const { return (-1)*(*this); }                                                               //Унарный минус
     friend ostream& operator<<(ostream &ostr, const polynom &pol);	                                                 //Вставка в поток
 		
-	bool operator==(const polynom& pml) const { return list_pol == pml.list_pol; }		
-	bool operator!=(const polynom& pml) const { return list_pol != pml.list_pol; }
+	bool operator==(const polynom& pol) const { return list_pol == pol.list_pol; }		
+	bool operator!=(const polynom& pol) const { return list_pol != pol.list_pol; }
 
-	polynom(list<monom> &inlist) : list_pol(inlist) {}								                //Конструктор по списку
+	polynom(list<monom> &list) : list_pol(list) {}								                                     //Конструктор по списку
 };
