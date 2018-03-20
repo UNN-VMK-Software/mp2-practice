@@ -8,9 +8,9 @@ using namespace std;
 class polynom {
 private:
 	list<monom> plist;
-	static list<monom> parse(const string);				
-	static list <monom> reduction(list <monom>);
+	static list<monom> parse(const string);			
 public:	
+	list <monom> reduction(list <monom>);
 	polynom(const string expr = "");
 	polynom(const polynom& pol) : plist(pol.plist) {  }
 	polynom operator+(const polynom&) const;	

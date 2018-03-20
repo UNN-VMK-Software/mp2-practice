@@ -13,13 +13,14 @@ public:
 	list(const list<type>& list2);
 	list<type>& operator=(const list<type>& list2);
 	void InsertOrd(type a);
+	void Insert(node<type>*, type );
 	void Reset() { curr = head->next; }
 	void GetNext() { curr = curr->next; }
-	node<type>* GetCurr() { return curr; }
-	bool IsEnded() { return curr == head; }
+	node<type>* GetCurr() const { return curr; }
+	bool IsEnded() const { return curr == head; }
 	bool operator==(const list<type>&) const;
 	bool operator!=(const list<type>& list2) const { return !(*this == list2); }
-	void Insert(node<type>*, type );
+	
 };
 
 template <class type> list<type>::list() {
