@@ -8,16 +8,16 @@ polynom::polynom(const string expr) {
 };
 
 list<monom> polynom::reduction(list <monom> p) {
-	list<monom> res;	
+	list<monom> res;
 	p.Reset();
 	res.Reset();
 	node<monom> temp(p.GetCurr()->data.cf);
 	while (!(p.IsEnded()))
 	{
 		temp.data.abc = p.GetCurr()->data.abc;
-		if (p.GetCurr()->data.abc == p.GetCurr()->next->data.abc)
-		{			
-			temp.data.cf += p.GetCurr()->next->data.cf;			
+		if (p.GetCurr()->data.abc == p.GetCurr()->next->data.abc && (p.GetCurr()->next->data.cf || p.GetCurr()->next->data.abc))
+		{
+			temp.data.cf += p.GetCurr()->next->data.cf;
 		}
 		else
 		{
@@ -27,9 +27,10 @@ list<monom> polynom::reduction(list <monom> p) {
 				res.GetNext();
 			}
 			temp.data.cf = p.GetCurr()->next->data.cf;
-		}		
+		} 
 		p.GetNext();
-	}
+
+	} 	
 	return res;
 }
 
@@ -49,7 +50,7 @@ list<monom> polynom::parse(const string expr) {
 		str.erase(0, pos);
 
 		pos = 0;						
-		while (pos < part.length() && (isdigit(part[pos]) || part[pos] == '+' || part[pos] == '-'))
+		while (part[pos] != 'x' && part[pos] != 'y' && part[pos] != 'z' && pos < part.length())
 			pos++;
 		if (pos == 1 && (part[0] == '-' || part[0] == '+') || pos == 0)
 

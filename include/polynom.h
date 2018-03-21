@@ -10,8 +10,9 @@ private:
 	list<monom> plist;
 	static list<monom> parse(const string);			
 public:	
-	list <monom> reduction(list <monom>);
+	list<monom> reduction(list <monom> p);
 	polynom(const string expr = "");
+	polynom(list<monom> &expr) : plist(expr) {}
 	polynom(const polynom& pol) : plist(pol.plist) {  }
 	polynom operator+(const polynom&) const;	
 	polynom operator-(const polynom& pol) const { return *this + pol*(-1); }

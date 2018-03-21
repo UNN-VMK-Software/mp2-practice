@@ -94,12 +94,12 @@ template <class type> bool list<type>::operator==(const list<type>& list2) const
 	{
 		node<type>* cur2 = list2.head->next;
 		node<type>* cur = head->next;
-		while (cur != head && cur2 != list2.head && cur->data == cur2->data)
+		while (cur->data == cur2->data && cur != head && cur2 != list2.head )
 		{
 			cur = cur->next;
 			cur2 = cur2->next;
 		}
-		if (cur->data != cur2->data)
+		if (cur != head || cur2 != list2.head)
 			res = false;
 	}
 	return res;
