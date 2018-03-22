@@ -107,10 +107,9 @@ RingList<T>::RingList(const RingList<T> &l1) {
 	if (l1.head->pNext != l1.head)
 	{
 		head = new Link<T>;
-		head->pNext = new Link<T>(l1.head->pNext->data, l1.head->pNext->pNext);
-		current = head->pNext;
-		Link<T> *tmp2 = l1.head->pNext->pNext;
-		while (tmp2 != head)
+		current = head;
+		Link<T> *tmp2 = l1.head->pNext;
+		while (tmp2 != l1.head)
 		{
 			current->pNext = new Link<T>(tmp2->data, tmp2->pNext);
 			current = current->pNext;
@@ -235,14 +234,12 @@ RingList<T> RingList<T>::operator=(const RingList<T> &l1) {
 	if (this != &l1) {
 		Clean();
 		if (l1.head->pNext == l1.head) {
-			head->pNext = head;
-			current = head;
+			return *this;
 		}
 		else {
-			head->pNext = new Link<T>(l1.head->pNext->data, l1.head->pNext->pNext);
-			current = head->pNext;
-			Link<T> *tmp2 = l1.head->pNext->pNext;
-			while (tmp2 != head)
+			Link<T> *tmp2 = l1.head->pNext;
+			current = head;
+			while (tmp2!=l1.head)
 			{
 				current->pNext = new Link<T>(tmp2->data, tmp2->pNext);
 				current = current->pNext;
@@ -260,16 +257,16 @@ void RingList<T>::Clean() {
 	Link<T> *tmp2 = current;
 	if (head->pNext != head)
 	{
-		while (tmp2 != head)
+		while (!IsEnded())
 		{
-			tmp2 = current->pNext;
+			tmp2 = GetNext();
 			delete current;
 			current = tmp2;
 		}
-		delete current;
+		head->pNext = head;
+		current = head;
 	}
-	else
-		delete head;
+	else return;
 }
 
 template <class T>
