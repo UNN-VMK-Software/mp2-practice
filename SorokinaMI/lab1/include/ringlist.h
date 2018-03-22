@@ -97,6 +97,7 @@ bool Link<T>::operator==(const Link<T> &node2) {
 
 template <class T>
 RingList<T>::RingList() {
+	head = new Link<T>;
 	head->pNext = head;
 	current = head;
 }
@@ -105,6 +106,7 @@ template <class T>
 RingList<T>::RingList(const RingList<T> &l1) {
 	if (l1.head->pNext != l1.head)
 	{
+		head = new Link<T>;
 		head->pNext = new Link<T>(l1.head->pNext->data, l1.head->pNext->pNext);
 		current = head->pNext;
 		Link<T> *tmp2 = l1.head->pNext->pNext;
@@ -117,6 +119,7 @@ RingList<T>::RingList(const RingList<T> &l1) {
 		current->pNext = head;
 	}
 	else {
+		head = new Link<T>;
 		head->pNext = head;
 		current = head;
 	}

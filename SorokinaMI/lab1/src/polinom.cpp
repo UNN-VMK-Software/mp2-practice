@@ -8,9 +8,10 @@ Polinom::Polinom(const string &str) {
 	int i = 0, j, k, st = 0;
 	double x = 1; //коэффициент
 	Monom tmp;
+
 	while (i<s.size())
 	{
-		char a[20], c[10], p[1];
+		 
 		string as;
 
 		if (s[i] == '-')
@@ -18,9 +19,9 @@ Polinom::Polinom(const string &str) {
 			x = -1;
 			i++;
 		}
-
+		char a[20];
 		j = 0;
-		while ((s[i] != '+') && (s[i] != '-'))
+		while ((s[i] != '+') && (s[i] != '-') && (i<s.size()))
 		{
 			a[j] = s[i];
 			j++;
@@ -38,22 +39,21 @@ Polinom::Polinom(const string &str) {
 
 				if (isdigit(as[k]) != 0)
 				{
-					while ((isdigit(as[k]) != 0) && (as[k] == '.') && (k < as.length()))
+				    char c[10];
+					string cs;
+					while (((isdigit(as[k]) != 0) || (as[k] == '.')) && (k < as.length()))
 					{
-						if (c[k] == '.')
-							f = 1;
 						c[k] = as[k];
 						k++;
 					}
-					if (!f)
-					{
-						c[k] = '.';
-					}
-					x *= atof(c);
+					cs = c;
+			        cs.erase(k);
+					x *= stod(cs);
 				}
 
 				tmp.SetCoeff(x);
 
+				char p[1];
 				if (as[k] == 'x')
 				{
 					if (as[k + 1] == '^')

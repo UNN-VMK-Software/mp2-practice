@@ -1,7 +1,6 @@
-﻿  ringlist.cpp
-  polinom.cpp
-c:\users\soroka\desktop\mp2-practice\sorokinami\lab1\src\polinom.cpp(11): warning C4018: <: несоответствие типов со знаком и без знака
-c:\users\soroka\desktop\mp2-practice\sorokinami\lab1\src\polinom.cpp(36): warning C4018: <: несоответствие типов со знаком и без знака
-c:\users\soroka\desktop\mp2-practice\sorokinami\lab1\src\polinom.cpp(41): warning C4018: <: несоответствие типов со знаком и без знака
-  Создание кода...
+﻿  polinom.cpp
+c:\users\soroka\desktop\mp2-practice\sorokinami\lab1\src\polinom.cpp(12): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\soroka\desktop\mp2-practice\sorokinami\lab1\src\polinom.cpp(24): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\soroka\desktop\mp2-practice\sorokinami\lab1\src\polinom.cpp(37): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\soroka\desktop\mp2-practice\sorokinami\lab1\src\polinom.cpp(44): warning C4018: <: несоответствие типов со знаком и без знака
   PolinomInList_lib.vcxproj -> C:\Users\Soroka\Desktop\mp2-practice\SorokinaMI\lab1\build\PolinomInList_proj\Debug\PolinomInList_lib.lib
