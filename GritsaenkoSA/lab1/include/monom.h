@@ -1,6 +1,6 @@
 ﻿#pragma once
 #define EPS 1e-15	//Для сравнения чисел с плавающей точкой
-
+#include <math.h>
 //Класс Моном
 
 class monom

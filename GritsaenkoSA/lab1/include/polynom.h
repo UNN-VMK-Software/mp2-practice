@@ -12,7 +12,7 @@
 class polynom
 {
 private:
-	list<monom> pmlist;		//Список, содержащий полином
+	list<monom> pmlist;		//Список, содержащий полином //список мономов
 public:
 	polynom(const polynom& src) : pmlist(src.pmlist) {}								//Конструктор копирования
 	polynom& operator=(const polynom &src) { pmlist = src.pmlist; return *this; }	//Перегрузка оператора присваивания
