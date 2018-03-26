@@ -81,6 +81,7 @@
     <Link>
       <AdditionalLibraryDirectories>..\Debug</AdditionalLibraryDirectories>
       <AdditionalDependencies>..\..\sln\gtest\Debug\polinom.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <FullProgramDatabaseFile>true</FullProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -107,6 +108,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>..\Release</AdditionalLibraryDirectories>
       <AdditionalDependencies>..\..\sln\gtest\Debug\polinom.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <FullProgramDatabaseFile>true</FullProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
