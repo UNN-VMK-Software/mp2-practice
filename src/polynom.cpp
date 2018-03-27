@@ -186,16 +186,18 @@ ostream& operator<<(ostream& os, const polynom& pol)
 	node<monom> temp;	
 	p.plist.Reset();
 	node<monom>*start = p.plist.GetCurr();
+	if (p.plist.IsEnded())
+		os << '0';
 	while (!(p.plist.IsEnded()))
 	{
 		temp = p.plist.GetCurr()->data;
 		if (temp.data.cf > 0 && p.plist.GetCurr()!=start)
 			os << '+';
-		if (temp.data.cf != 1 && temp.data.cf != -1)
+		if ((temp.data.cf != 1 && temp.data.cf != -1) || temp.data.abc == 0)
 			os << temp.data.cf;
 		else 
 			if (temp.data.cf == -1)
-				os << '-';
+				os << '-';			
 		for (int i = 0; i < 3; i++)
 		{
 			if (temp.data.abc / k[i] % 10 != 0)

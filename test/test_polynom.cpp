@@ -39,15 +39,20 @@ INSTANTIATE_TEST_CASE_P(1,
 		tparse("-yxz", vector<monom> {monom(-1, 111)}),			
 		tparse("z+6y^8+9x", vector<monom> {monom(9, 100), monom(6, 80), monom(1, 1)}),
 		tparse("-3.89zy+35.0x^3y-2z^4x-8", vector<monom> {monom(35,310), monom(-2,104), monom(-3.89,11), monom(-8,0)}),
-		tparse("2+2x^2y^2-2xz^5", vector<monom> {monom(2,220), monom(-2,105), monom(2, 0)}),
-
-		tparse("x+x", vector<monom> {monom(2,100)}),
-		tparse("xy-yx", vector<monom> {}),
-		tparse("0.46z+z", vector<monom> {monom(1.46, 1)}),
-		tparse("xy^2+z+x-2z+9x+3", vector<monom> {monom(1, 120), monom(10, 100), monom(-1, 1), monom(3, 0)})
+		tparse("2+2x^2y^2-2xz^5", vector<monom> {monom(2,220), monom(-2,105), monom(2, 0)})
 	
 	));
 
+INSTANTIATE_TEST_CASE_P(2,
+	pol_parse,
+	::testing::Values(
+		tparse("x+x+4x+x+3", vector<monom> {monom(7, 100), monom (3,0)}),
+		tparse("xy-yx", vector<monom> {}),
+		tparse("0.46z+z", vector<monom> {monom(1.46, 1)}),
+		tparse("1+3", vector<monom> {monom(4, 0)}),
+		tparse("x^2+x+1+3x^2-2x+1+1", vector<monom> {monom(4, 200), monom(-1,100), monom(3)}),
+		tparse("xy^2+z+x-2z+9x+3", vector<monom> {monom(1, 120), monom(10, 100), monom(-1, 1), monom(3, 0)})
+	));
 
 
 struct tcalc
@@ -77,7 +82,7 @@ TEST_P(pol_plus, polynom_plus_polynom)
 	EXPECT_EQ(pres, pl + pr);
 }
 
-INSTANTIATE_TEST_CASE_P(2,
+INSTANTIATE_TEST_CASE_P(3,
 	pol_plus,
 	::testing::Values(
 		tcalc("4", "1", "3"),
@@ -111,7 +116,7 @@ TEST_P(pol_mult, polynom_mult_polynom)
 	EXPECT_EQ(pres, pl * pr);
 }
 
-INSTANTIATE_TEST_CASE_P(3,
+INSTANTIATE_TEST_CASE_P(4,
 	pol_mult,
 	::testing::Values(
 		tcalc("15", "3", "5"),
@@ -142,7 +147,7 @@ TEST_P(c_mult, polynom_mult_const)
 	EXPECT_EQ(pres, p * k);
 }
 
-INSTANTIATE_TEST_CASE_P(4,
+INSTANTIATE_TEST_CASE_P(5,
 	c_mult,
 	::testing::Values(
 		tcalc("", "x", "", 0),
