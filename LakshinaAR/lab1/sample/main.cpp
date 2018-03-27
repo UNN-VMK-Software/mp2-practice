@@ -4,6 +4,8 @@
 
 using namespace std;
 
+const string sym = "+-*^xyz0123456789";
+
 int main()
 {
 	string s1,s2;
@@ -47,11 +49,13 @@ int main()
 					cout << "Result of operation: " << p1*p2 << endl;
 					break;
 				}
-			}
-		}
+			 }
+		  }
+
+
 		if (counter == 3)
 		{
-			cout << "Enter polinom p1: ";
+			cout << "Enter polinom p: ";
 			cin >> s1;
 			p1 = s1;
 			cout << "Enter const: ";

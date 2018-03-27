@@ -7,7 +7,7 @@ class list
 {
 private:
 	unit<type>* head;									//Указатель на голову
-	//void Clean();										//Очистка списка
+	unit<type>* act;
 public:
 	void Clean();
 	list();												//Конструктор по умолчанию
@@ -15,10 +15,17 @@ public:
 	~list();											//Деструктор
 	list<type>& operator=(const list<type> &a);		    //Перегрузка оператора присваивания
 	void Insert(type elem);					        	//Вставка в упорядоченный список
-	unit<type>* GetHead() const { return head; }        //Получить голову списка
-
 	bool operator==(const list<type>& sp) const;								
 	bool operator!=(const list<type>& sp) const { return !(*this == sp); }
+	
+	// Навигация
+	unit<type>* GetHead() const { return head; }       
+	void HeadNext() {act = head -> next;}
+	void Step() {act = act -> next;}
+	unit<type>* GetAct() const {return act;}
+	bool IsNotOver() const { return !(act == head); }
+	void InsertAfter(unit<type>* z , type a ) { unit<type>* temp = z->next; z->next = new unit<type>(a); z->next->next = temp;}
+
 };
 
 

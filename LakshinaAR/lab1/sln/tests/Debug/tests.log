@@ -1,5 +1,6 @@
-﻿Build started 18.03.2018 20:56:23.
+﻿Build started 27.03.2018 22:46:13.
      1>Project "D:\mp2-practice\LakshinaAR\lab1\sln\tests\tests.vcxproj" on node 2 (Build target(s)).
+       Project file contains ToolsVersion="15.0". This toolset may be unknown or missing, in which case you may be able to resolve this by installing the appropriate version of MSBuild, or the build may have been forced to a particular ToolsVersion for policy reasons. Treating the project as if it had ToolsVersion="4.0". For more information, please see http://go.microsoft.com/fwlink/?LinkId=291333.
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"D:\mp2-practice\LakshinaAR\lab1\include" /I"D:\mp2-practice\LakshinaAR\lab1\gtest" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt "D:\mp2-practice\LakshinaAR\lab1\tests\test_polinom.cpp"
          test_polinom.cpp
@@ -12,4 +13,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:02.66
+Time Elapsed 00:00:03.43

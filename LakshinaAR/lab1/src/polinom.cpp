@@ -6,7 +6,6 @@ using namespace std;
 //Разбор строки
 polynom::polynom(string pol)
 {
-	int a[3] = { 100,10,1 };
 	while (pol.length())
 	{
 		string part;
@@ -14,21 +13,24 @@ polynom::polynom(string pol)
 		int pos = 1; 
 		while (pos < pol.length() && pol[pos] != '+' && pol[pos] != '-')
 			pos++;
-		part = pol.substr(0, pos);          // substr возвращает строку, являющуюся подстрокой исходной строки (начиная с какого, сколько)
-		pol.erase(0, pos);                  // erase удаляет из строки последовательность символ заданной длины, начиная с указанной позиции (начиная с какого, сколько)
+		part = pol.substr(0, pos);              // substr возвращает строку, являющуюся подстрокой исходной строки (начиная с какого, сколько)
+		pol.erase(0, pos);                      // erase удаляет из строки последовательность символ заданной длины, начиная с указанной позиции (начиная с какого, сколько)
 		pos = 0;
 		while (part[pos] != 'x' && part[pos] != 'y' && part[pos] != 'z' && pos < part.length())
 			pos++;
 
-		string c = part.substr(0,pos);    // с - коэф  part
+		string c = part.substr(0,pos);            // с - коэф  part
 		if (c == "+" || c.length() == 0)
 			temp.coeff = 1;
-		else if (c == "-")
-			temp.coeff = -1;
-		else temp.coeff = stod(c);  // stod извлекает число с плавающей точкой из строки 
+		else 
+			if (c == "-")
+				temp.coeff = -1;
+		else
+			temp.coeff = stod(c);                // stod извлекает число с плавающей точкой из строки 
 	
-		part.erase(0, pos);       // удаляем коэф
+		part.erase(0, pos);                       // удаляем коэф
 		part += ' ';
+		int a[3] = { 100,10,1 };
 		for (int i = 0; i < 3; i++)
 		{
 			pos = part.find((char)(120 + i));     // 120 - код символа x, 121 - y, 122 - z
@@ -63,51 +65,53 @@ polynom& polynom:: operator=(const polynom &pol)
 polynom polynom::operator+(const polynom& pol) const
 {
 	polynom res;
-	unit<monom>* r = res.list_pol.GetHead();
-	unit<monom>* a = list_pol.GetHead();
-	unit<monom>* b = pol.list_pol.GetHead();
-	unit<monom>* A = a->next;
-	unit<monom>* B = b->next;
+	polynom pthis = *this;
+	polynom p = pol;
 
-	while (A != a && B != b)
+	pthis.list_pol.HeadNext();
+	p.list_pol.HeadNext();
+	res.list_pol.HeadNext();
+
+	while (pthis.list_pol.IsNotOver() && p.list_pol.IsNotOver())
 	{
-		if (A->data < B->data)
+		if (pthis.list_pol.GetAct()->data > p.list_pol.GetAct()->data)
 		{
-			r->next = new unit<monom>(A->data);
-			A = A->next;
-			r = r->next;
+			res.list_pol.InsertAfter(res.list_pol.GetAct(), p.list_pol.GetAct()->data);            
+			p.list_pol.Step();
+			res.list_pol.Step();
 		}
 		else 
-			if (A->data > B->data)
+			if (pthis.list_pol.GetAct()->data < p.list_pol.GetAct()->data)
 			{
-				r->next = new unit<monom>(B->data);
-			    B = B->next;
-			    r = r->next;
+				res.list_pol.InsertAfter(res.list_pol.GetAct(), pthis.list_pol.GetAct()->data);
+				pthis.list_pol.Step();
+				res.list_pol.Step();
 			}
 			else
 			{
-				if (abs(A->data.coeff + B->data.coeff) != 0)                                              //!!!!!!!!!!
+				double new_coeff = pthis.list_pol.GetAct()->data.coeff + p.list_pol.GetAct()->data.coeff;
+				if (new_coeff)
 				{
-					r->next = new unit<monom>(monom(A->data.coeff + B->data.coeff, A->data.abc));
-					r = r->next;
-				}		
-				A = A->next;
-			    B = B->next;
+					monom temp(new_coeff, pthis.list_pol.GetAct()->data.abc);
+					res.list_pol.InsertAfter(res.list_pol.GetAct(), temp);
+					res.list_pol.Step();
+				}
+				pthis.list_pol.Step();
+				p.list_pol.Step();
 			}
 	}
-	while (A != a)
+	while (pthis.list_pol.IsNotOver())
 	{
-		r->next = new unit<monom>(A->data);
-		A = A->next;
-		r = r->next;
+		res.list_pol.InsertAfter(res.list_pol.GetAct(), pthis.list_pol.GetAct()->data);
+		pthis.list_pol.Step();
+		res.list_pol.Step();
 	}
-	while (B != b)
+	while (p.list_pol.IsNotOver())
 	{
-		r->next = new unit<monom>(B->data);
-		B = B->next;
-		r = r->next;
+		res.list_pol.InsertAfter(res.list_pol.GetAct(), p.list_pol.GetAct()->data);
+		p.list_pol.Step();
+		res.list_pol.Step();
 	}
-	r->next = res.list_pol.GetHead();
 	return res;
 }
 
@@ -115,21 +119,18 @@ polynom polynom::operator+(const polynom& pol) const
 //Умножение на константу слева
 polynom polynom::operator*(const double a) const
 {
-	unit<monom>* actual = (*this).list_pol.GetHead()->next;
-	if (a != 0)
+	polynom res;
+	if (a)
 	{
-		while (actual != (*this).list_pol.GetHead())
-		{ 
-			actual->data.coeff *= a;
-			actual = actual->next;
+		res = *this;
+		res.list_pol.HeadNext();
+		while (res.list_pol.IsNotOver())
+		{
+			res.list_pol.GetAct()->data.coeff *= a;
+			res.list_pol.Step();
 		}
 	}
-	else 
-	{
-		actual->data.coeff = 0;
-		actual->data.abc = 0;
-	}
-	return *this;
+	return res;
 }
 
 
@@ -137,59 +138,76 @@ polynom polynom::operator*(const double a) const
 polynom polynom::operator*(const polynom& pol) const
 {
 	polynom res;
-	unit<monom>* actual = pol.list_pol.GetHead()->next;
-	while (actual != pol.list_pol.GetHead())
+	polynom pthis = *this;
+	polynom p =pol;
+
+	pthis.list_pol.HeadNext();
+	p.list_pol.HeadNext();
+
+	while (pthis.list_pol.IsNotOver())
 	{
-		polynom new_this(*this);
-		unit<monom>* pos = new_this.list_pol.GetHead()->next;
-		while (pos != new_this.list_pol.GetHead())
+		double pthis_coeff = pthis.list_pol.GetAct()->data.coeff;
+		int pthis_abc = pthis.list_pol.GetAct()->data.abc;
+		polynom temp(pol);
+		temp.list_pol.HeadNext();
+		while (temp.list_pol.IsNotOver())
 		{
-			pos->data.coeff *= actual->data.coeff;
-			int new_abc = pos->data.abc + actual->data.abc;
-			if (new_abc / 100 < 10 && new_abc / 10 % 10 < 10 && new_abc % 10 < 10)                    
-				pos->data.abc = new_abc;
-			else
+			int temp_abc = temp.list_pol.GetAct()->data.abc;
+			if ((temp_abc % 10 + pthis_abc % 10) < 10     &&    (temp_abc/10 % 10 + pthis_abc/10 % 10) < 10     &&    (temp_abc/100 + pthis_abc/100) < 10)
+			{
+				temp.list_pol.GetAct()->data.abc += pthis_abc;
+				temp.list_pol.GetAct()->data.coeff *= pthis_coeff;
+			}
+			else 
 				throw "large index";
-			pos = pos->next;
+			temp.list_pol.Step();
 		}
-		res = res + new_this;
-		actual = actual->next;
+		res = res + temp;
+		pthis.list_pol.Step();
 	}
 	return res;
 }
 
 
-//Оператор вставки в поток???????
+
+//Оператор вставки в поток
 ostream& operator<<(ostream &ostr,const polynom& pol)
 {
-	unit<monom>* actual = pol.list_pol.GetHead();
-	unit<monom>* h = actual;
-	while (actual->next != h )
-	{
-		actual = actual->next;
-		monom temp = actual->data;
+	polynom p = pol;
+	p.list_pol.HeadNext();
 
-		if (temp.coeff>0)
+	while (p.list_pol.IsNotOver())
+	{
+		monom temp = p.list_pol.GetAct()->data;
+
+		if (temp.coeff > 0)
 		{
 			ostr << "+";
 			if (temp.coeff != 1)
 				ostr << temp.coeff;
 		}
-		else ostr << temp.coeff;
+		else
+			ostr << temp.coeff;
 		
-
 		int a = temp.abc / 100;
-		if(a>1)
+		if (a>1)
 			ostr << "x^" << a;
-		else if (a == 1) ostr << "x";
+		else 
+			if (a == 1) 
+				ostr << "x";
 		a = temp.abc / 10 % 10;
-		if(a>1)
+		if (a>1)
 			ostr << "y^" << a;
-		else if (a == 1) ostr << "y";
+		else 
+			if (a == 1) 
+				ostr << "y";
 		a = temp.abc % 10;
-		if(a>1)
+		if (a>1)
 			ostr<< "z^" << a;
-		else if (a == 1) ostr << "z";
+		else
+			if (a == 1) 
+				ostr << "z";
+		p.list_pol.Step();  
 	}
 	return ostr;
 }

@@ -16,7 +16,7 @@ monom& monom:: operator=(const monom& m)
 bool monom:: operator< (const monom& m) 
 {
 	bool res = true;
-	if (abc>=m.abc)
+	if (abc >= m.abc)
 		res=false;
 	return res;
 }	 
@@ -24,7 +24,7 @@ bool monom:: operator< (const monom& m)
 bool monom:: operator> (const monom& m)
 {
 	bool res = true;
-	if (abc<=m.abc)
+	if (abc <= m.abc)
 		res=false;
 	return res;
 }	 
