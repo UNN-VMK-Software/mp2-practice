@@ -8,18 +8,18 @@ class list
 private:
 	node<T>* head;	
 	node<T>* Current;//Указатель на голову
-	void Clean();										//Служебный метод, очистка списка
+	void Clean();									//Служебный метод, очистка списка
 public:
-	list();												//Конструктор по умолчанию
-	~list();											//Деструктор
+	list();											//Конструктор по умолчанию
+	~list();										//Деструктор
 	list(const list<T>& src);						//Конструктор копирования
-	list<T>& operator=(const list<T>& src);		//Перегрузка оператора присваивания
+	list<T>& operator=(const list<T>& temp);		//Перегрузка оператора присваивания
 	void InsertInOrder(T elem);						//Вставка в упорядоченный список
-	void InsertAfter(const node<T>* A, T data);//вставка
+	void InsertAfter(const node<T>* A, T data);		//вставка после
 	node<T>* GetHead() const { return head; }		//Получить указатель на голову
-	bool IsEmpty() const;                       //проверка на пустоту
-	bool operator==(const list<T>& rlst) const;								//Операторы
-	bool operator!=(const list<T>& rlst) const { return !(*this == rlst); }	//Сравнения
+	bool IsEmpty() const;							//проверка на пустоту
+	bool operator==(const list<T>& var) const;								//Оператор сравнения ==
+	bool operator!=(const list<T>& temp) const { return !(*this == temp); }	//Оператор сравнения не равно
 };
 
 
@@ -34,7 +34,7 @@ void list<T>::Clean()
 			delete curr;
 			curr = temp;
 		}
-		head->next = head;
+		head->next = head;//?
 }
 
 
@@ -62,8 +62,8 @@ list<T>::list(const list<T>& src) //: list()
 		head = NULL;
 	else
 	{
-		head = new node<T>(src.head->data);
-		Current = head;
+		//head =
+		Current = new node<T>(src.head->data); //head;
 		node<T>* a =src.head->next;
 		while (a != src.Current)
 		{
@@ -98,18 +98,18 @@ bool list<T>::IsEmpty() const
 
 
 template <class T>//Оператор присваивания
-list<T>& list<T>::operator=(const list<T>& src) 
+list<T>& list<T>::operator=(const list<T>& temp) 
 {
 	Clean();
-	node<T>* psrc = src.head;
-	node<T>* pcur = head;
-	while (psrc->next != src.head)
+	node<T>* ptemp = temp.head;
+	node<T>* pcurr = head;
+	while (ptemp->next != temp.head)
 	{
-		psrc = psrc->next;
-		pcur->next = new node<T>(psrc->data);
-		pcur = pcur->next;
+		ptemp = ptemp->next;
+		pcurr->next = new node<T>(ptemp->data);
+		pcurr = pcurr->next;
 	}
-	pcur->next = head;
+	pcurr->next = head;
 	return *this;
 }
 
