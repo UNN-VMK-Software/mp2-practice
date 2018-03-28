@@ -23,7 +23,8 @@ list<monom> polynom::reduction(list <monom> p) {
 		{
 			if (temp.data.cf)
 			{
-				res.Insert(res.GetCurr(), temp.data);
+				//res.Insert(res.GetCurr(), temp.data);
+				res.InsertToTail(temp.data);
 				res.GetNext();
 			}
 			temp.data.cf = p.GetCurr()->next->data.cf;
@@ -89,14 +90,16 @@ polynom polynom::operator+(const polynom& pol) const
 	{
 		if (list1.GetCurr()->data > list2.GetCurr()->data)
 		{
-			res.plist.Insert(res.plist.GetCurr(), list1.GetCurr()->data);
+			//res.plist.Insert(res.plist.GetCurr(), list1.GetCurr()->data);
+			res.plist.InsertToTail(list1.GetCurr()->data);
 			list1.GetNext();
 			res.plist.GetNext();
 		}
 		else 
 			if (list1.GetCurr()->data < list2.GetCurr()->data)
 			{
-				res.plist.Insert(res.plist.GetCurr(), list2.GetCurr()->data);
+				//res.plist.Insert(res.plist.GetCurr(), list2.GetCurr()->data);
+				res.plist.InsertToTail(list2.GetCurr()->data);
 				list2.GetNext();
 				res.plist.GetNext();
 			}
@@ -106,8 +109,8 @@ polynom polynom::operator+(const polynom& pol) const
 				if (rcf)
 				{
 					monom temp(rcf, list1.GetCurr()->data.abc);
-					res.plist.Insert(res.plist.GetCurr(), temp);
-					
+					//res.plist.Insert(res.plist.GetCurr(), temp);
+					res.plist.InsertToTail(temp);
 					res.plist.GetNext();
 				}
 				list1.GetNext();
@@ -117,13 +120,15 @@ polynom polynom::operator+(const polynom& pol) const
 	
 	while (!list1.IsEnded())
 	{
-		res.plist.Insert(res.plist.GetCurr(), list1.GetCurr()->data);
+		//res.plist.Insert(res.plist.GetCurr(), list1.GetCurr()->data);
+		res.plist.InsertToTail(list1.GetCurr()->data);
 		list1.GetNext();
 		res.plist.GetNext();
 	}
 	while (!list2.IsEnded())
 	{
-		res.plist.Insert(res.plist.GetCurr(), list2.GetCurr()->data);
+		//res.plist.Insert(res.plist.GetCurr(), list2.GetCurr()->data);
+		res.plist.InsertToTail(list2.GetCurr()->data);
 		list2.GetNext();
 		res.plist.GetNext();
 	}

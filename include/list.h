@@ -14,6 +14,7 @@ public:
 	list<type>& operator=(const list<type>& list2);
 	void InsertOrd(type a);
 	void Insert(node<type>*, type );
+	void InsertToTail(type a);
 	void Reset() { curr = head->next; }
 	void GetNext() { curr = curr->next; }
 	node<type>* GetCurr() const { return curr; }
@@ -111,4 +112,14 @@ template <class type> void list<type>::Insert(node<type>* p,type d) {
 		p->next = new node<type>(d);
 		p->next->next = temp;		
 	
+}
+
+template <class type> void list<type>::InsertToTail(type a)
+{
+	Reset();	
+	while (curr->next != head)
+		GetNext();
+	node<type>* temp = curr->next;
+	curr->next = new node<type>(a);
+	curr->next->next = temp;
 }

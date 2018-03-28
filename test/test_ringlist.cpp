@@ -148,6 +148,15 @@ TEST_F(TList, insert)
 	EXPECT_EQ(l2.GetCurr()->next->next->next->next, l2.GetCurr());
 }
 
+TEST_F(TList, insert_to_tail)
+{
+	l2.InsertToTail(3);
+	l2.Reset();
+	EXPECT_EQ(4, l2.GetCurr()->data);
+	EXPECT_EQ(2, l2.GetCurr()->next->data);
+	EXPECT_EQ(3, l2.GetCurr()->next->next->data);
+}
+
 TEST_F(TList, filled_lists_are_equal)
 {
 	list<int> l(l2);

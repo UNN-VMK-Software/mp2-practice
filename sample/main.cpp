@@ -53,7 +53,7 @@ void main() {
 			cout << "Enter the second polynom:\n";
 			cin >> s2;
 			p2 = s2;
-			cout << p1 << '-' << p2 << '=' << p1 - p2 << '\n';
+			cout <<'('<< p1<<')' << '-' <<'('<< p2<<')' << '=' << p1 - p2 << '\n';
 
 			system("pause");
 			break;
@@ -68,7 +68,7 @@ void main() {
 			cout << "Enter the second polynom:\n";
 			cin >> s2;
 			p2 = s2;
-			cout << p1 << '*' << p2 << '=' << p1 * p2 << '\n';
+			cout << '(' << p1 << ')' << '*' << '(' << p2 << ')' << '=' << p1 * p2 << '\n';
 
 			system("pause");
 			break;
@@ -83,7 +83,7 @@ void main() {
 			cout << "Enter const:\n";
 			cin >> c;
 			
-			cout << p1 << '*' << c << '=' << p1 * c << '\n';
+			cout << '(' << p1 << ')' << '*' << c << '=' << p1 * c << '\n';
 
 			system("pause");
 			break;
