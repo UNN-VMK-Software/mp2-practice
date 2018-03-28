@@ -44,10 +44,18 @@
 int main() {
 	std::string s;
 	std::cout << "Enter your polinom. It must be like '25x^2+34x^2y^8z^4' " << std::endl;
-	std::cin >> s;
-//	TPolinom zero("0");
+	//std::cin >> s;
+	TPolinom zero("");
 	std::vector<TPolinom> Vector_of_Polinoms;
-	Vector_of_Polinoms.push_back(TPolinom(s));
+	Vector_of_Polinoms.resize(2);
+	//TPolinom temp(s);
+	TPolinom temp2("25x^2+34x^2y^8z^4");
+	Vector_of_Polinoms[0] = temp2;
+	std::cout << Vector_of_Polinoms[0] << endl;
+	TPolinom temp3("58x^1y^2z^3");
+	Vector_of_Polinoms[1] = temp3;
+	std::cout << Vector_of_Polinoms[1] << endl;
+	std::cout << Vector_of_Polinoms[0] << endl;
 	int menu = 1;
 	int nPolinoms = 1;
 	int a, b, c;
@@ -64,34 +72,34 @@ int main() {
 		switch (menu)
 		{
 		case 1: 
-			std::cout << "Enter your polinom. It must be like '25x^2+34x^2y^8z^4' " << std::endl;
-			std::cin >> s;
-			//TPolinom temp(s);
-			//Vector_of_Polinoms[++nPolinoms] = temp; // сначала увеличит, потом присвоит?
-			Vector_of_Polinoms.push_back(TPolinom(s));
-			std::cin >> menu;
-			break;
+		{ std::cout << "Enter your polinom. It must be like '25x^2+34x^2y^8z^4' " << std::endl;
+		std::cin >> s;
+		TPolinom temp1(s);
+		Vector_of_Polinoms.push_back(temp1);
+		nPolinoms++;
+		std::cin >> menu;
+		break; }
 		case 2:
 			do {
 				std::cout << "Enter number of the polinom you want to delete " << std::endl;
 				std::cin >> a;
-			} while (a >= 0 && a <= nPolinoms);
-			//Vector_of_Polinoms[a].monoms->Clean();
+			} while (a < 0 || a > nPolinoms);
+			Vector_of_Polinoms[a]=zero;
 			std::cin >> menu;
 			break;
 		case 3:
 			do {
 				std::cout << "Enter number of the first polinom you want to sum " << std::endl;
 				std::cin >> a;
-			} while (a >= 0 && a <= Vector_of_Polinoms.size());
+			} while (a < 0 || a > Vector_of_Polinoms.size());
 			do {
 				std::cout << "Enter number of the second polinom you want to sum " << std::endl;
 				std::cin >> b;
-			} while (b >= 0 && b <= Vector_of_Polinoms.size());
+			} while (b < 0 || b > Vector_of_Polinoms.size());
 			do {
 				std::cout << "Enter number of the polinom you want to save the result. If you dont want to save, enter '-1' " << std::endl;
 				std::cin >> c;
-			} while (c >= -1 && c <= Vector_of_Polinoms.size());
+			} while (c < -1 || c > Vector_of_Polinoms.size());
 			if (c == -1)
 			{
 				TPolinom res;
@@ -105,15 +113,15 @@ int main() {
 			do {
 				std::cout << "Enter number of the first polinom you want to multiple " << std::endl;
 				std::cin >> a;
-			} while (a >= 0 && a <= Vector_of_Polinoms.size());
+			} while (a < 0 || a > Vector_of_Polinoms.size());
 			do {
 				std::cout << "Enter number of the second polinom you want to multiple " << std::endl;
 				std::cin >> b;
-			} while (b >= 0 && b <= Vector_of_Polinoms.size());
+			} while (b < 0 || b > Vector_of_Polinoms.size());
 			do {
 				std::cout << "Enter number of the polinom you want to save the result. If you dont want to save, enter '-1' " << std::endl;
 				std::cin >> c;
-			} while (c >= -1 && c <= Vector_of_Polinoms.size());
+			} while (c < -1 || c > Vector_of_Polinoms.size());
 			if (c == -1)
 			{
 				TPolinom res;
@@ -128,13 +136,13 @@ int main() {
 			do {
 				std::cout << "Enter number of the first polinom you want to sum " << std::endl;
 				std::cin >> a;
-			} while (a >= 0 && a <= Vector_of_Polinoms.size());
+			} while (a < 0 || a > Vector_of_Polinoms.size());
 			std::cout << "Enter number you want your polinom to multiple";
 			std::cin >> d;
 			do {
 				std::cout << "Enter number of the polinom you want to save the result. If you dont want to save, enter '-1' " << std::endl;
 				std::cin >> c;
-			} while (c >= -1 && c <= Vector_of_Polinoms.size());
+			} while (c < -1 || c > Vector_of_Polinoms.size());
 			if (c == -1)
 			{
 				TPolinom res;
@@ -148,11 +156,11 @@ int main() {
 			do {
 				std::cout << "Choose polinom you want to print" << std::endl;
 				std::cin >> a;
-			} while (a >= 0 && a <= Vector_of_Polinoms.size());
+			} while (a < 0 || a >= Vector_of_Polinoms.size());
 			std::cout << Vector_of_Polinoms[a];
 			std::cin >> menu;
 			break;
-		default:exit(0);
+		default:exit(1);
 		}
 	}
 	return 0;

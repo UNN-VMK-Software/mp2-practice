@@ -15,8 +15,25 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\..\..\Visual Studio 2017\Projects\Polinoms\Polinoms\Header.h">
+    <ClInclude Include="..\..\..\include\Polinoms.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RingList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TLink.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\polinom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\RingList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\TLink.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
