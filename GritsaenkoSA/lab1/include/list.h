@@ -6,8 +6,9 @@ template<class T>
 class list
 {
 private:
-	node<T>* head;	
+	node<T>* head;	//голова
 	node<T>* Current;//Указатель на голову
+	node<T>* tail;//хвост
 	void Clean();									//Служебный метод, очистка списка
 public:
 	list();											//Конструктор по умолчанию
@@ -18,6 +19,9 @@ public:
 	void InsertAfter(const node<T>* A, T data);		//вставка после
 	node<T>* GetHead() const { return head; }		//Получить указатель на голову
 	bool IsEmpty() const;							//проверка на пустоту
+	void reset(); //current = head
+	void gonext();//переход на следующее звено
+	void insertup(const T &d);//вставка
 	bool operator==(const list<T>& var) const;								//Оператор сравнения ==
 	bool operator!=(const list<T>& temp) const { return !(*this == temp); }	//Оператор сравнения не равно
 };
@@ -54,11 +58,43 @@ list<T>::~list()
 	delete head;
 }
 
+template<class T>//переход на следующий
+ void list<T>::gonext()
+{
+	current = current->next;
+}
+
 
 template <class T>//Конструктор копирования
 list<T>::list(const list<T>& src) //: list()
-{
-	if (src.IsEmpty())
+{	
+	node<T>* psrc = src.head;
+	node<T>* pcur = head;
+	while (psrc->next != src.head)
+	{
+		psrc = psrc->next;
+		pcur->next = new node<T>(psrc->data);
+		pcur = pcur->next;
+	} 
+	pcur->next = head;
+
+
+
+	/*head = new node<T>();
+	node<T>* temp = head;
+	node<T>* temp1 = src.head->next;
+	while (temp1 != src.head)
+	{
+		temp->next = new node<T>(temp1->data);
+		temp = temp->next;
+		temp1 = temp1->next;
+	}
+	tail = temp;
+	tail->next = head;*/
+
+
+
+	/*if (src.IsEmpty())
 		head = NULL;
 	else
 	{
@@ -73,19 +109,9 @@ list<T>::list(const list<T>& src) //: list()
 		}
 		Current->next = new node<T>(a->data, head);
 		Current = Current->next;
-	}
+	}*/
 
-
-
-	/*node<T>* psrc = src.head;
-	node<T>* pcur = head;
-	while (psrc->next != src.head)
-	{
-		psrc = psrc->next;
-		pcur->next = new node<T>(psrc->data);
-		pcur = pcur->next;
-	} 
-	pcur->next = head;*/
+		
 }
 
 template <class T>// проверка на пустоту
@@ -96,6 +122,31 @@ bool list<T>::IsEmpty() const
 	else return false;
 }
 
+template<class T>//current = head;
+void list<T>::reset()
+{
+	current = head;
+}
+
+
+ template<class T>
+ void list<T>::insertup(const T & d)
+{
+	node<T>* t = new node<T>(d);
+	node<T>* tt = head->next;
+	node<T>* pred = head;
+	while ((tt != head) && (tt->data > t->data))
+	{
+		pred = tt;
+		tt = tt->next;
+	}
+	pred->next = t;
+	t->next = tt;
+	if (tt == head)
+	{
+		tail = t;
+	}
+}
 
 template <class T>//Оператор присваивания
 list<T>& list<T>::operator=(const list<T>& temp) 
