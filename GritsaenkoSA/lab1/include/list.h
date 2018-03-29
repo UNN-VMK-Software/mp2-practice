@@ -7,23 +7,27 @@ class list
 {
 private:
 	node<T>* head;	//голова
-	node<T>* Current;//Указатель на голову
-	node<T>* tail;//хвост
-	void Clean();									//Служебный метод, очистка списка
+	node<T>* Current;//Указатель 
+	node<T>* tail;//хвост								
 public:
 	list();											//Конструктор по умолчанию
 	~list();										//Деструктор
+	void Clean();//очистка списка
 	list(const list<T>& src);						//Конструктор копирования
 	list<T>& operator=(const list<T>& temp);		//Перегрузка оператора присваивания
 	void InsertInOrder(T elem);						//Вставка в упорядоченный список
-	void InsertAfter(const node<T>* A, T data);		//вставка после
+	void InsertAfterH(const node<T>* A, T data);		//вставка после
+	void InsertAfter(node<T>* temp1, const T& temp2);//вставка после
 	node<T>* GetHead() const { return head; }		//Получить указатель на голову
 	bool IsEmpty() const;							//проверка на пустоту
 	void reset(); //current = head
+	void Reset() { Current = head->next; } //Установка на начало
 	void gonext();//переход на следующее звено
-	void insertup(const T &d);//вставка
+	//void insertup(const T &d);//вставка
 	bool operator==(const list<T>& var) const;								//Оператор сравнения ==
 	bool operator!=(const list<T>& temp) const { return !(*this == temp); }	//Оператор сравнения не равно
+	bool IsEnded() const { return Current == head; }		//Проверка на окончание
+	node<T>* GetCurr() const { return Current; } //Получение текущего адреса
 };
 
 
@@ -38,7 +42,7 @@ void list<T>::Clean()
 			delete curr;
 			curr = temp;
 		}
-		head->next = head;//?
+		head->next = head;//вернуть указатель на head
 }
 
 
@@ -47,6 +51,7 @@ list<T>::list()
 {
 	head = new node<T>;
 	head->next = head;
+	Current = head->next;
 }
 
 
@@ -61,7 +66,7 @@ list<T>::~list()
 template<class T>//переход на следующий
  void list<T>::gonext()
 {
-	current = current->next;
+	Current = Current->next;
 }
 
 
@@ -77,7 +82,7 @@ list<T>::list(const list<T>& src) //: list()
 		pcur = pcur->next;
 	} 
 	pcur->next = head;
-
+	Current = head->next;
 
 
 	/*head = new node<T>();
@@ -125,11 +130,11 @@ bool list<T>::IsEmpty() const
 template<class T>//current = head;
 void list<T>::reset()
 {
-	current = head;
+	Current = head;
 }
 
 
- template<class T>
+ /*template<class T>
  void list<T>::insertup(const T & d)
 {
 	node<T>* t = new node<T>(d);
@@ -147,7 +152,7 @@ void list<T>::reset()
 		tail = t;
 	}
 }
-
+*/
 template <class T>//Оператор присваивания
 list<T>& list<T>::operator=(const list<T>& temp) 
 {
@@ -161,6 +166,7 @@ list<T>& list<T>::operator=(const list<T>& temp)
 		pcurr = pcurr->next;
 	}
 	pcurr->next = head;
+	Current = head->next;
 	return *this;
 }
 
@@ -168,18 +174,37 @@ list<T>& list<T>::operator=(const list<T>& temp)
 template <class T>//Вставка в упорядоченный список
 void list<T>::InsertInOrder(T elem)
 {
-	node<T>* temp = new node<T>(elem);
-	node<T>* curr = head;
+	if (head == NULL)
+		throw "list is empty";
+	else 
+	{
+		node<T>* temp = new node<T>(elem);
+		node<T>* curr = head;
 
-	while ((*(curr->next) < *temp) && curr->next != head)
-		curr = curr->next;
-	node<T>* temp1 = curr->next;
-	curr->next = temp;
-	curr->next->next = temp1;
+		while ((*(curr->next) < *temp) && curr->next != head)
+		{
+			curr = curr->next;
+		}
+		node<T>* temp1 = curr->next;
+		curr->next = temp;
+		curr->next->next = temp1;
+	}
+}
+
+template <class T>//вставка после
+void list<T>::InsertAfter(node<T>* temp1, const T& d)
+{
+	if (head == NULL)
+		throw "list is empty";
+	else 
+	{
+		node<T>* temp = temp1->next;
+		temp1->next = new node<T>(d, temp);
+	}
 }
 
 template <class T>//вставка звена после
-void list<T> :: InsertAfter(const node<T>* A, T data)
+void list<T> :: InsertAfterH(const node<T>* A, T data)
 {
 	if (head == NULL)
 		throw "list is empty";

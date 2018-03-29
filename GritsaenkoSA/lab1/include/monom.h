@@ -13,5 +13,5 @@ public:
 	bool operator==(const monom& m) { return (abs(abc - m.abc) < EPS && cf == m.cf); }	//перегружено ==
 	bool operator!=(const monom& m) { return !(*this == m); }							//перегружено не равно
 	monom(double indexcf = 0, unsigned int indexabc = 0) { cf = indexcf; abc = indexabc; }//Конструктор
-	monom& operator=(const monom& src) { cf = src.cf; abc = src.abc; return *this; }	//Оператор присваивания
+	const monom& operator=(const monom& src) { cf = src.cf; abc = src.abc; return *this; }	//Оператор присваивания
 };
