@@ -1,7 +1,5 @@
 ﻿#include "polynom.h"
 
-const string xyz = "xyz";
-
 polynom::polynom(const string expr) {
 	plist = parse(expr);
 	plist = reduction(plist);
@@ -36,6 +34,7 @@ list<monom> polynom::reduction(list <monom> p) {
 }
 
 list<monom> polynom::parse(const string expr) {
+	const string xyz = "xyz";
 	int k[3] = { 100,10,1 };		
 	list<monom> list;
 	
@@ -186,6 +185,7 @@ polynom polynom::operator*(const polynom& pol) const {
 
 ostream& operator<<(ostream& os, const polynom& pol)
 {
+	const string xyz = "xyz";
 	int k[3] = { 100,10,1 };
 	polynom p = pol;
 	node<monom> temp;	

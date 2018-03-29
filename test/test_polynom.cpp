@@ -28,6 +28,11 @@ TEST_P(pol_parse, parse_of_polynom)
 	EXPECT_EQ(GetParam().res, pol);
 }
 
+TEST(polynom, cant_use_space_in_string)
+{
+	ASSERT_ANY_THROW(polynom a("x+ y"));
+}
+
 INSTANTIATE_TEST_CASE_P(1,
 	pol_parse,
 	::testing::Values(
