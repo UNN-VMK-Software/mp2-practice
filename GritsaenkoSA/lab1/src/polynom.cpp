@@ -65,6 +65,11 @@ polynom polynom::operator*(const polynom& pml) const
 	return res;
 }
 
+polynom polynom::operator*(const double mp) const
+{
+	throw "Net";
+}
+
 //Оператор вставки в поток
 ostream& operator<<(ostream &ostr,const polynom& pm)
 {

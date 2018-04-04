@@ -6,23 +6,30 @@ class node
 {
 public:
 	T data;		//Данные в элементе
-	node* next;		//Указатель на следующий эл-т
-	bool operator< (const node& n);	//Оператор сравнения
-	bool operator> (const node& n);	//Оператор сравнения
-	node(T in, node<T>* nxt = NULL) { data = in; next = nxt; }				//Конструктор с параметром
+	node<T>* next;		//Указатель на следующий эл-т
+	bool operator< (const node<T>& n) const;	//Оператор сравнения
+	bool operator> (const node<T>& n) const;	//Оператор сравнения
+	node(T in, node<T>* nxt = NULL);				//Конструктор с параметром
 	node();					//Конструктор по умолчанию
 	//node(T Data, node* NextPtr);// конструктор с двумя параметрами
 
 };
 
+template <class T>
+node<T>::node(T in, node<T>* nxt = NULL)
+{ 
+	data = in;
+	next = nxt;
+}
+
 template <class T> //Оператор сравнения
-bool node<T>::operator< (const node& n) 
+bool node<T>::operator< (const node<T>& n) const
 { 
 	return (data<n.data); 
 }
 
 template <class T> //Оператор сравнения
-bool node<T>::operator> (const node& n) 
+bool node<T>::operator> (const node<T>& n) const
 { 
 	return (data>n.data);
 }

@@ -1,5 +1,8 @@
 ﻿#pragma once
 #include "node.h"
+#include <iostream>
+
+using namespace std;
 
 //Шаблон класса Циклический список с головой
 template<class T>
@@ -28,6 +31,7 @@ public:
 	bool operator!=(const list<T>& temp) const { return !(*this == temp); }	//Оператор сравнения не равно
 	bool IsEnded() const { return Current == head; }		//Проверка на окончание
 	node<T>* GetCurr() const { return Current; } //Получение текущего адреса
+	//int size(); //Возвращает
 };
 
 
@@ -51,7 +55,7 @@ list<T>::list()
 {
 	head = new node<T>;
 	head->next = head;
-	Current = head->next;
+	Current = head;
 }
 
 
@@ -73,60 +77,31 @@ template<class T>//переход на следующий
 template <class T>//Конструктор копирования
 list<T>::list(const list<T>& src) //: list()
 {	
+	head = new node<T>;
+	head->next = head;
+	Current = head;
+	if (src.IsEmpty())
+	{		
+		return;
+	}
 	node<T>* psrc = src.head;
 	node<T>* pcur = head;
 	while (psrc->next != src.head)
 	{
 		psrc = psrc->next;
-		pcur->next = new node<T>(psrc->data);
+		pcur->next = new node<T>(psrc->data);		
 		pcur = pcur->next;
 	} 
 	pcur->next = head;
-	Current = head->next;
-
-
-	/*head = new node<T>();
-	node<T>* temp = head;
-	node<T>* temp1 = src.head->next;
-	while (temp1 != src.head)
-	{
-		temp->next = new node<T>(temp1->data);
-		temp = temp->next;
-		temp1 = temp1->next;
-	}
-	tail = temp;
-	tail->next = head;*/
-
-
-
-	/*if (src.IsEmpty())
-		head = NULL;
-	else
-	{
-		//head =
-		Current = new node<T>(src.head->data); //head;
-		node<T>* a =src.head->next;
-		while (a != src.Current)
-		{
-			Current->next = new node<T>(a->data);
-			Current = Current->next;
-			a = a->next;
-		}
-		Current->next = new node<T>(a->data, head);
-		Current = Current->next;
-	}*/
-
-		
+	Current = head;		
 }
 
 template <class T>// проверка на пустоту
 bool list<T>::IsEmpty() const
 {
-	if (head == NULL)
-		return true;
-	else return false;
+	
+		return (head->next == head);
 }
-
 template<class T>//current = head;
 void list<T>::reset()
 {
@@ -174,14 +149,17 @@ list<T>& list<T>::operator=(const list<T>& temp)
 template <class T>//Вставка в упорядоченный список
 void list<T>::InsertInOrder(T elem)
 {
-	if (head == NULL)
-		throw "list is empty";
+	if (IsEmpty())
+	{
+		head->next= new node<T>(elem);
+		head->next->next=head;
+	}
 	else 
 	{
 		node<T>* temp = new node<T>(elem);
 		node<T>* curr = head;
 
-		while ((*(curr->next) < *temp) && curr->next != head)
+		while (curr->next != head && (*(curr->next) < *temp))
 		{
 			curr = curr->next;
 		}

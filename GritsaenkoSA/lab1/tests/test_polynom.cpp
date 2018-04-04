@@ -4,7 +4,7 @@
 
 using namespace std;
 
-struct parse_test
+/*struct parse_test
 {
 	string str;
 	polynom res;
@@ -52,7 +52,7 @@ TEST_P(pol_parse, correct_parse_of_polynom_strings)
 
 
 
-struct calc_test
+/*struct calc_test
 {
 	string left;
 	string right;
@@ -163,4 +163,4 @@ INSTANTIATE_TEST_CASE_P(Inst4,
 		calc_test("6xy+3x^2", "-2xy-x^2", "", -3),
 		calc_test("xy+yz", "0.1xy+0.1yz", "", 10),
 		calc_test("0", "x", "", 0)
-	));
+	));*/
