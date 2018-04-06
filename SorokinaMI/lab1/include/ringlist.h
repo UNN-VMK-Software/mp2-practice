@@ -1,38 +1,11 @@
 #pragma once
-
+#include "monom.h"
 #include <string>
 #include <cstdlib>
 #include  <cctype>
 #include <iostream>
 
 using namespace std;
-
-class Monom {
-	double cf; //коэффициент (может быть отрицательный)
-	unsigned int abc; //степени x*100+y*10+z
-public:
-	Monom();
-	Monom(double d, unsigned int st);
-	void SetCoeff(double cval) { cf = cval; }
-	double GetCoeff(void) { return cf; }
-	void SetIndex(int ival) { abc = ival; }
-	unsigned int GetIndex(void) { return abc; }
-	Monom& operator=(const Monom &m);
-	Monom& operator+(const Monom &m);
-	Monom& operator*(const double &d);
-	Monom& operator*(const Monom &m);
-	int operator==(const Monom &m);
-	int operator!=(const Monom &m);
-	int operator<(const Monom &m);
-	friend ostream& operator<<(ostream& os, const Monom& m) {
-		Monom Mon;
-		int stx = (int)Mon.abc / 100;
-		int sty = (int)(Mon.abc / 10 - stx * 10);
-		int stz = (int)(Mon.abc % 10);
-		cout << Mon.cf << 'x^' << stx << 'y^' << sty << 'z^' << stz;
-		return os;
-	}
-};
 
 template <class T>
 struct Link {
@@ -43,8 +16,8 @@ public:
 	Link(T val, Link* n);
 	~Link(){};
 	Link(const Link<T> &node2);
-	bool operator==(const Link<T> &node2);
-	bool operator!=(const Link<T> &node2) { return !(*this == node2); }
+	bool operator==(const Link<T> &node2) const; 
+	bool operator!=(const Link<T> &node2) const { return !(*this == node2); }; 
 };
 
 template <class T>
@@ -57,15 +30,26 @@ public:
 	~RingList();
 	void Clean();
 	T& GetValue() { return current->data; }
-	RingList<T> operator=(const RingList<T> &l1);
+	RingList<T>& operator=(const RingList<T> &l1); 
 	void Reset() { current = head; }
-	bool IsEnded();
+	bool IsEnded() const; 
 	Link<T>* GetNext() { current = current->pNext; return current; }
 	void InsertToTail(const T& d); // вставка в конец
 	void Insert(const T& d); // вставка в упорядоченный список
 	void Delete(const T&d);
-	void Sequencing(); // упорядочивание
-	friend ostream& operator<<(ostream& os, const RingList<T>& l);
+	friend ostream& operator<<(ostream& os, const RingList<T>& l)
+	{
+		RingList<T> list(l);
+		list.Reset();
+		Link<T> *tmp = list.GetNext();
+		while (!list.IsEnded())
+		{
+			cout << tmp->data << "+";
+			tmp = list.GetNext();
+		}
+		cout << endl;
+		return os;
+	};
 };
 
 template <class T>
@@ -88,7 +72,7 @@ Link<T>::Link(const Link<T> &node2) {
 }
 
 template <class T>
-bool Link<T>::operator==(const Link<T> &node2) {
+bool Link<T>::operator==(const Link<T> &node2) const{
 	if (data != node2.data)
 		return false;
 	else return true;
@@ -143,7 +127,7 @@ RingList<T>::~RingList() {
 }
 
 template <class T>
-bool RingList<T>::IsEnded() {
+bool RingList<T>::IsEnded() const{
 	if (current == head)
 		return true;
 	else return false;
@@ -206,31 +190,9 @@ void RingList<T>::Delete(const T&d) {
 	}
 }
 
-template <class T>
-void RingList<T>::Sequencing() {
-	RingList<T> tmp;
-	Link<T>*prev;
-	current = head->pNext;
-	T min = current->data;
-	prev = head;
-	while (current != prev) {
-		while (!IsEnded()) {
-			if (current->data < min)
-				min = current->data;
-			prev = current;
-			current = current->pNext;
-		}
-		tmp.InsertToTail(min);
-		Delete(min);
-		prev = head;
-		current = head->pNext;
-	}
-	head = tmp.head;
-}
-
 
 template <class T>
-RingList<T> RingList<T>::operator=(const RingList<T> &l1) {
+RingList<T>& RingList<T>::operator=(const RingList<T> &l1) {
 	if (this != &l1) {
 		Clean();
 		if (l1.head->pNext == l1.head) {
@@ -269,18 +231,4 @@ void RingList<T>::Clean() {
 	else return;
 }
 
-template <class T>
-ostream& operator<<(ostream& os, const RingList<T>& l)
-{
-	RingList<T> list;
-	list.Reset();
-	Link<T> *tmp = list.GetNext();
-	while (!list.IsEnded())
-	{
-		cout << tmp->data << "+";
-		tmp = list.GetNext();
-	}
-	cout << endl;
-	return os;
 
-}

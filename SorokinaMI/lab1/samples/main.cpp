@@ -13,6 +13,7 @@ int main()
 	Polinom P(s);
     cout << "Choose that would you like to do with your polinom: 1 - multiply by a constant, 2 - multiply two polynoms, 3 - add two polynoms" << endl;
 	cin >> f;
+	cin.ignore(2, '\n');
 	switch (f) {
 	case 1: {
 
@@ -38,8 +39,7 @@ int main()
 		Res = P + P2;
 		break;
 	}
-
 	}
-	//здесь печать полинома - результата 
+	cout << Res;
 	return 0;
 }
