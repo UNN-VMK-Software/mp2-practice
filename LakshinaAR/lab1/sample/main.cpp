@@ -4,67 +4,98 @@
 
 using namespace std;
 
-const string sym = "+-*^xyz0123456789";
 
-int main()
+
+char menu()
+{
+	char choice;
+	cout<<"Choose a operation"<<endl;
+	cout<<"1. p1 + p2"<<endl;
+	cout<<"2. p1 - p2"<<endl; 
+	cout<<"3. p1*p2"<<endl;
+	cout<<"4. c*p1"<<endl;
+	cout<<"5. p1*c"<<endl;
+	cout<<"6. Exit"<<endl;
+
+	cout << "Your choice: ";
+	cin >> choice;
+	return choice;
+}
+
+
+
+int main()          
 {
 	string s1,s2;
 	polynom p1, p2;
 	double c;
-	int counter;
+	char number;
 
-	cout<<"Choose a operation"<<endl;
-	cout<<"1. p1 + p2"<<endl;
-	cout<<"2. p1 - p2"<<endl; 
-	cout<<"3. c*p2"<<endl;
-	cout<<"4. p1*p2"<<endl;
-
-	cout << "Your choice: ";
-	cin >> counter;
-	
-	if (counter>0 && counter<5)
+	do
 	{
-		if (counter == 1 || counter == 2  || counter == 4)
+		number = menu();
+		switch(number)
 		{
-			cout << "Enter polinom p1: ";
-			cin >> s1;
-			p1 = s1;
-			cout << "Enter polinom p2: ";
-			cin >> s2;
-			p2 = s2;
-			switch (counter)
+		case '1':
 			{
-			case 1:
-				{
-					cout << "Result of operation: " << p1 + p2 << endl;
-					break;
-				}
-			case 2:
-				{
-					cout << "Result of operation: " << p1 - p2 << endl;
-					break;
-				}
-			case 4:
-				{
-					cout << "Result of operation: " << p1*p2 << endl;
-					break;
-				}
-			 }
-		  }
-
-
-		if (counter == 3)
-		{
-			cout << "Enter polinom p: ";
-			cin >> s1;
-			p1 = s1;
-			cout << "Enter const: ";
-			cin >> c;
-			cout << "Result of operation: " << c*p1 << endl;
+				cout << "Enter polinom p1: ";
+				cin >> s1;
+				p1 = s1;
+				cout << "Enter polinom p2: ";
+				cin >> s2;
+				p2 = s2;
+				cout << "Result of operation: " << p1 + p2 << endl << endl;
+				break;
+			}
+		case '2':
+			{
+				cout << "Enter polinom p1: ";
+				cin >> s1;
+				p1 = s1;
+				cout << "Enter polinom p2: ";
+				cin >> s2;
+				p2 = s2;
+				cout << "Result of operation: " << p1 - p2 << endl << endl;
+				break;
+			}
+		case '3':
+			{
+				cout << "Enter polinom p1: ";
+				cin >> s1;
+				p1 = s1;
+				cout << "Enter polinom p2: ";
+				cin >> s2;
+				p2 = s2;
+				cout << "Result of operation: " << p1 * p2 << endl << endl;
+				break;
+			}
+		case '4':
+			{
+				cout << "Enter polinom p1: ";
+				cin >> s1;
+				p1 = s1;
+				cout << "Enter const c: ";
+				cin >> c;
+				cout << "Result of operation: " << c*p1 << endl << endl;
+				break;
+			}
+		case '5':
+			{
+				cout << "Enter polinom p1: ";
+				cin >> s1;
+				p1 = s1;
+				cout << "Enter const c: ";
+				cin >> c;
+				cout << "Result of operation: " << p1*c << endl << endl;
+				break;
+			}
+		case '6':
+			{
+				break;
+			}
 		}
 	}
-	else
-		cout << "Incorrect input "<< endl;
+	while (number != '6');
 
 	return 0;
 }

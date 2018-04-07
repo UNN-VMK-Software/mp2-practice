@@ -64,15 +64,15 @@ INSTANTIATE_TEST_CASE_P(Inst2, sum_cl,::testing::Values(
 class mult_pol_cl : public ::testing::TestWithParam<calc_st>
 {
 protected:
-	polynom pl, pr, pres;
+	polynom pa, pb, pres;
 public:
-	mult_pol_cl() : pl(GetParam().a),  pr(GetParam().b),  pres(GetParam().res) {} 
+	mult_pol_cl() : pa(GetParam().a),  pb(GetParam().b),  pres(GetParam().res) {} 
 	~mult_pol_cl() {}
 };
 
 TEST_P(mult_pol_cl, polynom_mult_polynom)
 {
-	EXPECT_EQ(pres, pl * pr);
+	EXPECT_EQ(pres, pa * pb);
 }
 
 INSTANTIATE_TEST_CASE_P(Inst3, mult_pol_cl,::testing::Values(  

@@ -7,7 +7,7 @@ class list
 {
 private:
 	unit<type>* head;									//Указатель на голову
-	unit<type>* act;
+	unit<type>* act;                                    //Указатель на текущий
 public:
 	void Clean();
 	list();												//Конструктор по умолчанию
@@ -15,17 +15,15 @@ public:
 	~list();											//Деструктор
 	list<type>& operator=(const list<type> &a);		    //Перегрузка оператора присваивания
 	void Insert(type elem);					        	//Вставка в упорядоченный список
+	void InsertToTail(type elem);                       //Вставка в конец
 	bool operator==(const list<type>& sp) const;								
 	bool operator!=(const list<type>& sp) const { return !(*this == sp); }
 	
 	// Навигация
-	unit<type>* GetHead() const { return head; }       
-	void HeadNext() {act = head -> next;}
+	void Reset() {act = head -> next;}
 	void Step() {act = act -> next;}
 	unit<type>* GetAct() const {return act;}
 	bool IsNotOver() const { return !(act == head); }
-	void InsertAfter(unit<type>* z , type a ) { unit<type>* temp = z->next; z->next = new unit<type>(a); z->next->next = temp;}
-
 };
 
 
@@ -49,6 +47,7 @@ list<type>::list()
 {
 	head = new unit<type>;
 	head->next = head;
+	act = head;
 }
 
 
@@ -56,7 +55,7 @@ list<type>::list()
 template <class type>
 list<type>::list(const list<type>& a)
 {
-	head =  new unit<type>;             //!!!!!!!!!!
+	head =  new unit<type>;             
 	unit<type>* A = a.head;
 	unit<type>* B = head;
 	if ( A->next == a.head)
@@ -71,6 +70,7 @@ list<type>::list(const list<type>& a)
 		B = B->next;
 	} 
 	B->next = head;
+	act = head -> next;
 }
 
 
@@ -96,6 +96,7 @@ list<type>& list<type>::operator=(const list<type>& a)
 		B = B->next;
 	}
 	B->next = head;
+	act = head;
 	return *this;
 }
 
@@ -132,4 +133,16 @@ bool list<type>::operator==(const list<type>& sp) const
 			res = false;
 	}
 	return res;
+}
+
+// Вставка в конец
+template<class type>
+void list<type> :: InsertToTail(type elem)
+{
+	Reset();
+	while (act ->next != head)
+		Step();
+	unit<type>* temp = act->next;
+	act->next = new unit<type>(elem);
+	act->next->next = temp;
 }

@@ -11,6 +11,6 @@ public:
 	unit* next;	                                                        //Указатель на следующий элемент
 	unit() { next = nullptr; }										    //Конструктор по умолчанию
 	unit(type dz) { data = dz; next = nullptr; }					    //Конструктор с параметром
-	bool operator< (const unit& z) { return (data < z.data); }	 
-	bool operator> (const unit& z) { return (data > z.data); }	
+	bool operator< (const unit& z) const { return (data < z.data); }	    
+	bool operator> (const unit& z) const { return (data > z.data); }	
 };

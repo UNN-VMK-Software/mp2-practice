@@ -2,10 +2,35 @@
 using namespace std;
 
 
+list<monom> polynom::similar_terms(list <monom> sp) 
+{
+	list<monom> res;
+	res.Reset();
+	sp.Reset();
+	unit<monom> mon(sp.GetAct()->data.coeff);
+	while (sp.IsNotOver())
+	{
+		mon.data.abc = sp.GetAct()->data.abc;
+		if (sp.GetAct()->data.abc == sp.GetAct()->next->data.abc && (sp.GetAct()->next->data.coeff || sp.GetAct()->next->data.abc))
+			mon.data.coeff += sp.GetAct()->next->data.coeff;
+		else
+		{
+			if (mon.data.coeff)
+			{
+				res.InsertToTail(mon.data);
+				res.Step();
+			}
+			mon.data.coeff = sp.GetAct()->next->data.coeff;
+		}
+		sp.Step();
+	} 	
+	return res;
+}
 
 //Разбор строки
 polynom::polynom(string pol)
 {
+	list<monom> res;
 	while (pol.length())
 	{
 		string part;
@@ -43,7 +68,9 @@ polynom::polynom(string pol)
 			}
 		}
 		list_pol.Insert(temp);
-	}		
+
+	}
+		list_pol = similar_terms(list_pol);
 }	
 
 
@@ -68,22 +95,22 @@ polynom polynom::operator+(const polynom& pol) const
 	polynom pthis = *this;
 	polynom p = pol;
 
-	pthis.list_pol.HeadNext();
-	p.list_pol.HeadNext();
-	res.list_pol.HeadNext();
+	pthis.list_pol.Reset();
+	p.list_pol.Reset();
+	res.list_pol.Reset();
 
 	while (pthis.list_pol.IsNotOver() && p.list_pol.IsNotOver())
 	{
 		if (pthis.list_pol.GetAct()->data > p.list_pol.GetAct()->data)
 		{
-			res.list_pol.InsertAfter(res.list_pol.GetAct(), p.list_pol.GetAct()->data);            
+			res.list_pol.InsertToTail(p.list_pol.GetAct()->data);            
 			p.list_pol.Step();
 			res.list_pol.Step();
 		}
 		else 
 			if (pthis.list_pol.GetAct()->data < p.list_pol.GetAct()->data)
 			{
-				res.list_pol.InsertAfter(res.list_pol.GetAct(), pthis.list_pol.GetAct()->data);
+				res.list_pol.InsertToTail(pthis.list_pol.GetAct()->data);
 				pthis.list_pol.Step();
 				res.list_pol.Step();
 			}
@@ -93,7 +120,7 @@ polynom polynom::operator+(const polynom& pol) const
 				if (new_coeff)
 				{
 					monom temp(new_coeff, pthis.list_pol.GetAct()->data.abc);
-					res.list_pol.InsertAfter(res.list_pol.GetAct(), temp);
+					res.list_pol.InsertToTail(temp);
 					res.list_pol.Step();
 				}
 				pthis.list_pol.Step();
@@ -102,13 +129,13 @@ polynom polynom::operator+(const polynom& pol) const
 	}
 	while (pthis.list_pol.IsNotOver())
 	{
-		res.list_pol.InsertAfter(res.list_pol.GetAct(), pthis.list_pol.GetAct()->data);
+		res.list_pol.InsertToTail(pthis.list_pol.GetAct()->data);
 		pthis.list_pol.Step();
 		res.list_pol.Step();
 	}
 	while (p.list_pol.IsNotOver())
 	{
-		res.list_pol.InsertAfter(res.list_pol.GetAct(), p.list_pol.GetAct()->data);
+		res.list_pol.InsertToTail(p.list_pol.GetAct()->data);
 		p.list_pol.Step();
 		res.list_pol.Step();
 	}
@@ -123,7 +150,7 @@ polynom polynom::operator*(const double a) const
 	if (a)
 	{
 		res = *this;
-		res.list_pol.HeadNext();
+		res.list_pol.Reset();
 		while (res.list_pol.IsNotOver())
 		{
 			res.list_pol.GetAct()->data.coeff *= a;
@@ -139,17 +166,17 @@ polynom polynom::operator*(const polynom& pol) const
 {
 	polynom res;
 	polynom pthis = *this;
-	polynom p =pol;
+	polynom p = pol;
 
-	pthis.list_pol.HeadNext();
-	p.list_pol.HeadNext();
+	pthis.list_pol.Reset();
+	p.list_pol.Reset();
 
 	while (pthis.list_pol.IsNotOver())
 	{
 		double pthis_coeff = pthis.list_pol.GetAct()->data.coeff;
 		int pthis_abc = pthis.list_pol.GetAct()->data.abc;
-		polynom temp(pol);
-		temp.list_pol.HeadNext();
+		polynom temp(pol); 
+		temp.list_pol.Reset();
 		while (temp.list_pol.IsNotOver())
 		{
 			int temp_abc = temp.list_pol.GetAct()->data.abc;
@@ -170,11 +197,11 @@ polynom polynom::operator*(const polynom& pol) const
 
 
 
-//Оператор вставки в поток
+//Оператор вывода
 ostream& operator<<(ostream &ostr,const polynom& pol)
 {
 	polynom p = pol;
-	p.list_pol.HeadNext();
+	p.list_pol.Reset();
 
 	while (p.list_pol.IsNotOver())
 	{
@@ -183,7 +210,10 @@ ostream& operator<<(ostream &ostr,const polynom& pol)
 		if (temp.coeff > 0)
 		{
 			ostr << "+";
-			if (temp.coeff != 1)
+			if (temp.coeff == 1 && temp.abc ==0)
+				ostr << "1";
+			else 
+				if (temp.coeff != 1)
 				ostr << temp.coeff;
 		}
 		else

@@ -13,7 +13,7 @@ monom& monom:: operator=(const monom& m)
 	return *this;
 }
 
-bool monom:: operator< (const monom& m) 
+bool monom:: operator< (const monom& m) const
 {
 	bool res = true;
 	if (abc >= m.abc)
@@ -21,7 +21,7 @@ bool monom:: operator< (const monom& m)
 	return res;
 }	 
 
-bool monom:: operator> (const monom& m)
+bool monom:: operator> (const monom& m) const
 {
 	bool res = true;
 	if (abc <= m.abc)
@@ -29,7 +29,7 @@ bool monom:: operator> (const monom& m)
 	return res;
 }	 
 
-bool monom:: operator==(const monom& m)
+bool monom:: operator==(const monom& m) const
 {
 	bool res = true;
 	if (abc != m.abc || coeff != m.coeff )
@@ -37,7 +37,7 @@ bool monom:: operator==(const monom& m)
 	return res;
 }
 
-bool monom:: operator!=(const monom& m)
+bool monom:: operator!=(const monom& m) const
 {
 	return !(*this == m);
 }
