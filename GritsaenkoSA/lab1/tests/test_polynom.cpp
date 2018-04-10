@@ -4,7 +4,7 @@
 
 using namespace std;
 
-/*struct parse_test
+struct parse_test
 {
 	string str;
 	polynom res;
@@ -33,9 +33,7 @@ TEST_P(pol_parse, correct_parse_of_polynom_strings)
 	EXPECT_EQ(GetParam().res, a_test);
 }
 
-/*INSTANTIATE_TEST_CASE_P(Inst1,
-	pol_parse,
-	::testing::Values(
+/*INSTANTIATE_TEST_CASE_P(Inst1,	pol_parse,	::testing::Values(
 		parse_test("", vector<monom> {}),
 		parse_test("1", vector<monom> {monom(1,0)}),
 		parse_test("1.5", vector<monom> {monom(1.5,0)}),
@@ -47,12 +45,11 @@ TEST_P(pol_parse, correct_parse_of_polynom_strings)
 		parse_test("x^9y^9z^9-3.22xyz", vector<monom> {monom(1,999), monom(-3.22,111)}),
 		parse_test("1-2x+3xy-4xyz", vector<monom> {monom(1,0), monom(-2,100), monom(3,110), monom(-4,111)}),
 		parse_test("0", vector<monom> {})
-	));
-*/
+	));*/
 
 
 
-/*struct calc_test
+struct calc_test
 {
 	string left;
 	string right;
@@ -163,4 +160,4 @@ INSTANTIATE_TEST_CASE_P(Inst4,
 		calc_test("6xy+3x^2", "-2xy-x^2", "", -3),
 		calc_test("xy+yz", "0.1xy+0.1yz", "", 10),
 		calc_test("0", "x", "", 0)
-	));*/
+	));

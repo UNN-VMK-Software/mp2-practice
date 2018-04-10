@@ -1,9 +1,9 @@
 
-int main()
+/*int main()
 {
 	return 0;
-}
-/*#include "monom.h"
+}*/
+#include "monom.h"
 #include "polynom.h"
 #include <iostream>
 #include <ostream>
@@ -63,8 +63,8 @@ void main()
 			break;
 		}
 
-		cout << "Repead - 1" << endl;
+		cout << "Repead : 1" << endl;
 		cin >> flag;
 		
 	}
-}*/
+}

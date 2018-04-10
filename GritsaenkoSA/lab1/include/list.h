@@ -19,17 +19,19 @@ public:
 	list(const list<T>& src);						//Конструктор копирования
 	list<T>& operator=(const list<T>& temp);		//Перегрузка оператора присваивания
 	void InsertInOrder(T elem);						//Вставка в упорядоченный список
-	void InsertAfterH(const node<T>* A, T data);		//вставка после
 	void InsertAfter(node<T>* temp1, const T& temp2);//вставка после
+	void InsertToTail(T elem);					//вставка в конец
 	node<T>* GetHead() const { return head; }		//Получить указатель на голову
 	bool IsEmpty() const;							//проверка на пустоту
 	void reset(); //current = head
 	void Reset() { Current = head->next; } //Установка на начало
 	void gonext();//переход на следующее звено
 	//void insertup(const T &d);//вставка
+	void HeadNext() {Current = head -> next;}
 	bool operator==(const list<T>& var) const;								//Оператор сравнения ==
 	bool operator!=(const list<T>& temp) const { return !(*this == temp); }	//Оператор сравнения не равно
 	bool IsEnded() const { return Current == head; }		//Проверка на окончание
+	bool IsNotOver() const { return !(Current == head); }// проверка на не конец
 	node<T>* GetCurr() const { return Current; } //Получение текущего адреса
 	//int size(); //Возвращает
 };
@@ -168,6 +170,17 @@ void list<T>::InsertInOrder(T elem)
 		curr->next->next = temp1;
 	}
 }
+//вставка в конец
+template<class T>
+void list<T> :: InsertToTail(T elem)
+{
+	Reset();
+	while (Current ->next != head)
+		gonext();
+	node<T>* temp = Current->next;
+	Current->next = new node<T>(elem);
+	Current->next->next = temp;
+}
 
 template <class T>//вставка после
 void list<T>::InsertAfter(node<T>* temp1, const T& d)
@@ -181,26 +194,6 @@ void list<T>::InsertAfter(node<T>* temp1, const T& d)
 	}
 }
 
-template <class T>//вставка звена после
-void list<T> :: InsertAfterH(const node<T>* A, T data)
-{
-	if (head == NULL)
-		throw "list is empty";
-	else 
-	{
-		node<T>* temp = head;
-		while ((temp != A)&&(temp->next!=head))
-			temp = temp->next;
-		if (temp == A)
-		{
-			node<T>* temp1 = temp->next;
-			temp->next = new node<T>(data, temp1);
-		}
-		else
-			throw "net";
-	}
-	
-}
 
 
 template<class T>//Оператор сравнения
