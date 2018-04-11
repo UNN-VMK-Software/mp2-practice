@@ -10,7 +10,7 @@ class list
 {
 private:
 	node<T>* head;	//голова
-	node<T>* Current;//Указатель 
+	node<T>* Current;//Указатель на текущий
 	node<T>* tail;//хвост								
 public:
 	list();											//Конструктор по умолчанию

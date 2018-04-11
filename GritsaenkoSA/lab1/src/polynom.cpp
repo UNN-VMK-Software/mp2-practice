@@ -49,19 +49,19 @@ polynom::polynom(string ipm)
 		
 	}
 
-	listmonom = copy_terms(listmonom);
+	listmonom = unic(listmonom);
 }
 
-
-list<monom> polynom::copy_terms(list <monom> sp) 
+//объединение
+list<monom> polynom::unic(list <monom> sp) 
 {
-	list<monom> res;
+	list<monom> res;//результат
 	res.Reset();
 	sp.Reset();
 	node<monom> mon(sp.GetCurr()->data.cf);
 	while (sp.IsNotOver())
 	{
-		mon.data.abc = sp.GetCurr()->data.abc;
+		mon.data.abc = sp.GetCurr()->data.abc;//копируем свернутую степень
 		if (sp.GetCurr()->data.abc == sp.GetCurr()->next->data.abc && (sp.GetCurr()->next->data.cf || sp.GetCurr()->next->data.abc))
 			mon.data.cf += sp.GetCurr()->next->data.cf;
 		else
@@ -95,14 +95,14 @@ polynom& polynom:: operator=(const polynom &pol)
 polynom polynom::operator+(const polynom& pmr) const
 {
 	polynom res;
-	node<monom>* pmlh = listmonom.GetHead();
-	node<monom>* pmrh = pmr.listmonom.GetHead();
+	node<monom>* leftpol = listmonom.GetHead();
+	node<monom>* righpol = pmr.listmonom.GetHead();
 	node<monom>* resh = res.listmonom.GetHead();
-	node<monom>* cl = pmlh->next;
-	node<monom>* cr = pmrh->next;
-	while (cl != pmlh && cr != pmrh)
+	node<monom>* cl = leftpol->next;
+	node<monom>* cr = righpol->next;
+	while (cl != leftpol && cr != righpol)
 	{
-		if (cl->data < cr->data)
+		if (cl->data < cr->data)//для упорядочивания
 		{
 			resh->next = new node<monom>(cl->data);
 			cl = cl->next;
@@ -116,7 +116,7 @@ polynom polynom::operator+(const polynom& pmr) const
 		}
 		else
 		{
-			double coef = cl->data.cf + cr->data.cf;
+			double coef = cl->data.cf + cr->data.cf;//cкладываем коэф
 			if (abs(coef) > EPS)
 			{
 				resh->next = new node<monom>(monom(coef, cl->data.abc));
@@ -126,13 +126,13 @@ polynom polynom::operator+(const polynom& pmr) const
 			cr = cr->next;
 		}
 	}
-	while (cl != pmlh)
+	while (cl != leftpol)
 	{
 		resh->next = new node<monom>(cl->data);
 		cl = cl->next;
 		resh = resh->next;
 	}
-	while (cr != pmrh)
+	while (cr != righpol)
 	{
 		resh->next = new node<monom>(cr->data);
 		cr = cr->next;
@@ -165,7 +165,7 @@ polynom polynom::operator*(const polynom& pol) const
 		while (temp.listmonom.IsNotOver())
 		{
 			int temp_abc = temp.listmonom.GetCurr()->data.abc;
-			if ((temp_abc % 10 + pthis_abc % 10) < 10     &&    (temp_abc/10 % 10 + pthis_abc/10 % 10) < 10     &&    (temp_abc/100 + pthis_abc/100) < 10)
+			if ((temp_abc % 10 + pthis_abc % 10) < 10     &&    (temp_abc/10 % 10 + pthis_abc/10 % 10) < 10     &&    (temp_abc/100 + pthis_abc/100) < 10)//остаток от деления
 			{
 				temp.listmonom.GetCurr()->data.abc += pthis_abc;
 				temp.listmonom.GetCurr()->data.cf *= pthis_cf;
@@ -178,26 +178,6 @@ polynom polynom::operator*(const polynom& pol) const
 		pthis.listmonom.gonext();
 	}
 return res;
-
-	/*polynom res;
-	node<monom>* curr = pml.listmonom.GetHead()->next;
-	while (curr != pml.listmonom.GetHead())
-	{
-		polynom temp(*this);
-		node<monom>* pos = temp.listmonom.GetHead()->next;
-		while (pos != temp.listmonom.GetHead())
-		{
-			pos->data.cf *= curr->data.cf;
-			int nabc = pos->data.abc + curr->data.abc;
-			if (nabc / 100 < 10 && nabc / 10 % 10 < 10 && nabc % 10 < 10)
-				pos->data.abc = nabc;
-			else
-				throw "Too large exponent";
-			pos = pos->next;
-		}
-		res = res + temp;
-		curr = curr->next;
-	}*/
 
 
 }
@@ -220,34 +200,7 @@ polynom polynom::operator*(const double a) const
 	}
 return res;
 
-
-	/*polynom res;
-	if (a)
-	{
-		res = *this;
-		res.listmonom.HeadNext();
-		while (res.listmonom.IsNotOver())
-		{
-			res.listmonom.GetCurr()->data.cf *= a;
-			res.listmonom.gonext();
-		}
-	}
-return res;*/
 }
-
-/*{
-	polynom res;
-	if (abs(mp) > EPS)
-	{
-		res = *this;
-		node<monom>* curr = res.listmonom.GetHead()->next;
-		while (curr != res.listmonom.GetHead())
-		{
-			curr->data.cf *= mp;
-			curr = curr->next;
-		}
-	}
-	}*/
 
 
 //Оператор вставки в поток
