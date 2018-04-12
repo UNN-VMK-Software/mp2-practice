@@ -14,9 +14,9 @@ class polynom
 private:
 	list<monom> listmonom;		//Список, содержащий полином //список мономов
 public:
-	list<monom> unic(list <monom> sp);//объединяет
-	polynom(const polynom& pol);// : listmonom(src.listmonom) {}								//Конструктор копирования
-	polynom& operator=(const polynom &pol); //{ listmonom = pol.listmonom; return *this; }   //Перегрузка оператора присваивания
+	list<monom> unic(list <monom> & sp);//объединяет
+	polynom(const polynom& pol); 											//Конструктор копирования
+	polynom& operator=(const polynom &pol);									 //Перегрузка оператора присваивания
 	polynom operator-(const polynom& pml) const { return *this + pml*(-1); }		//Бинарный минус
 	polynom operator-() const { return (-1)*(*this); }								//Унарный минус
 	polynom(list<monom> &inlist) : listmonom(inlist) {}								//Конструктор по списку
@@ -24,7 +24,7 @@ public:
 	bool operator!=(const polynom& pml) const { return listmonom != pml.listmonom; }		//Сравнения
 	
 	polynom(const std::string ipm = "");					//Конструктор по строке
-	polynom operator+(const polynom& pml) const;			//Оператор сложения полиномов
+	polynom operator+(const polynom& pol) const;			//Оператор сложения полиномов
 	polynom operator*(const polynom& pol) const;			//Оператор умножения полиномов
 	polynom operator*(const double a) const;				//Умножение на константу
 

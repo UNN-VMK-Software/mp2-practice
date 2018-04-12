@@ -25,7 +25,7 @@ public:
 
 TEST_F(ExList, created_empty_list_is_correct)
 {
-	EXPECT_EQ(true, emp.IsEnded());
+	EXPECT_EQ(true, emp.IsOver());
 }
 
 TEST_F(ExList, can_copy_empty_list)
@@ -36,7 +36,7 @@ TEST_F(ExList, can_copy_empty_list)
 TEST_F(ExList, copied_empty_list_is_correct)
 {
 	list<int> m(emp);
-	EXPECT_EQ(true, m.IsEnded());
+	EXPECT_EQ(true, m.IsOver());
 	EXPECT_NE(m.GetCurr(),emp.GetCurr());
 }
 
@@ -48,7 +48,7 @@ TEST_F(ExList,can_assign_empty_list)
 TEST_F(ExList, assigned_empty_list_is_correct)
 {
 	list<int> m = emp;
-	EXPECT_EQ(true, m.IsEnded());
+	EXPECT_EQ(true, m.IsOver());
 	EXPECT_NE(m.GetCurr(), emp.GetCurr());
 }
 

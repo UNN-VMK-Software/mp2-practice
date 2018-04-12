@@ -9,31 +9,28 @@ template<class T>
 class list
 {
 private:
-	node<T>* head;	//голова
-	node<T>* Current;//Указатель на текущий
-	node<T>* tail;//хвост								
+	node<T>* head; 	//голова
+	node<T>* Current;//Указатель на текущий					
 public:
 	list();											//Конструктор по умолчанию
 	~list();										//Деструктор
-	void Clean();//очистка списка
+	void Clean();									//очистка списка
 	list(const list<T>& src);						//Конструктор копирования
 	list<T>& operator=(const list<T>& temp);		//Перегрузка оператора присваивания
 	void InsertInOrder(T elem);						//Вставка в упорядоченный список
 	void InsertAfter(node<T>* temp1, const T& temp2);//вставка после
-	void InsertToTail(T elem);					//вставка в конец
-	node<T>* GetHead() const { return head; }		//Получить указатель на голову
+	void InsertToTail(T elem);						//вставка в конец
+	
 	bool IsEmpty() const;							//проверка на пустоту
-	void reset(); //current = head
-	void Reset() { Current = head->next; } //Установка на начало
-	void gonext();//переход на следующее звено
-	//void insertup(const T &d);//вставка
-	void HeadNext() {Current = head -> next;}
+
+	node<T>* GetCurr() const { return Current; }	//Получение текущего адреса+
+	void Reset() { Current = head->next; }			//Установка на начало+
+
+	void gonext();									//переход на следующее звено
+	bool IsOver() const { return (Current == head); }// проверка на  конец
+	
 	bool operator==(const list<T>& var) const;								//Оператор сравнения ==
-	bool operator!=(const list<T>& temp) const { return !(*this == temp); }	//Оператор сравнения не равно
-	bool IsEnded() const { return Current == head; }		//Проверка на окончание
-	bool IsNotOver() const { return !(Current == head); }// проверка на не конец
-	node<T>* GetCurr() const { return Current; } //Получение текущего адреса
-	//int size(); //Возвращает
+	bool operator!=(const list<T>& temp) const { return !(*this == temp); }	//Оператор сравнения не равно	
 };
 
 
@@ -104,32 +101,9 @@ bool list<T>::IsEmpty() const
 	
 		return (head->next == head);
 }
-template<class T>//current = head;
-void list<T>::reset()
-{
-	Current = head;
-}
 
 
- /*template<class T>
- void list<T>::insertup(const T & d)
-{
-	node<T>* t = new node<T>(d);
-	node<T>* tt = head->next;
-	node<T>* pred = head;
-	while ((tt != head) && (tt->data > t->data))
-	{
-		pred = tt;
-		tt = tt->next;
-	}
-	pred->next = t;
-	t->next = tt;
-	if (tt == head)
-	{
-		tail = t;
-	}
-}
-*/
+
 template <class T>//Оператор присваивания
 list<T>& list<T>::operator=(const list<T>& temp) 
 {

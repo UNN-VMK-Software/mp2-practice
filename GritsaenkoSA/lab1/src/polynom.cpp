@@ -5,6 +5,7 @@ using namespace std;
 //Конструктор по строке
 polynom::polynom(string ipm)
 {
+	const double EPS = 1e-15;
 	int d[3] = { 100,10,1 };
 	while (ipm.length())
 	{
@@ -53,13 +54,13 @@ polynom::polynom(string ipm)
 }
 
 //объединение
-list<monom> polynom::unic(list <monom> sp) 
+list<monom> polynom::unic(list <monom> & sp) 
 {
 	list<monom> res;//результат
 	res.Reset();
 	sp.Reset();
 	node<monom> mon(sp.GetCurr()->data.cf);
-	while (sp.IsNotOver())
+	while (!sp.IsOver())
 	{
 		mon.data.abc = sp.GetCurr()->data.abc;//копируем свернутую степень
 		if (sp.GetCurr()->data.abc == sp.GetCurr()->next->data.abc && (sp.GetCurr()->next->data.cf || sp.GetCurr()->next->data.abc))
@@ -92,58 +93,60 @@ polynom& polynom:: operator=(const polynom &pol)
 } 
 
 //Оператор сложения полиномов
-polynom polynom::operator+(const polynom& pmr) const
+polynom polynom::operator+(const polynom& pol) const
 {
+
 	polynom res;
-	node<monom>* leftpol = listmonom.GetHead();
-	node<monom>* righpol = pmr.listmonom.GetHead();
-	node<monom>* resh = res.listmonom.GetHead();
-	node<monom>* cl = leftpol->next;
-	node<monom>* cr = righpol->next;
-	while (cl != leftpol && cr != righpol)
+	polynom pthis = *this;
+	polynom p = pol;
+
+	pthis.listmonom.Reset();
+	p.listmonom.Reset();
+	res.listmonom.Reset();
+
+	while (!pthis.listmonom.IsOver() && !p.listmonom.IsOver())
 	{
-		if (cl->data < cr->data)//для упорядочивания
+		if (pthis.listmonom.GetCurr()->data > p.listmonom.GetCurr()->data)//для упорядочивания
 		{
-			resh->next = new node<monom>(cl->data);
-			cl = cl->next;
-			resh = resh->next;
+			res.listmonom.InsertToTail(p.listmonom.GetCurr()->data);
+			p.listmonom.gonext();
+			res.listmonom.gonext();
 		}
-		else if (cl->data > cr->data)
+		else if (pthis.listmonom.GetCurr()->data < p.listmonom.GetCurr()->data)
 		{
-			resh->next = new node<monom>(cr->data);
-			cr = cr->next;
-			resh = resh->next;
+			res.listmonom.InsertToTail(pthis.listmonom.GetCurr()->data);
+			pthis.listmonom.gonext();
+			res.listmonom.gonext();
 		}
 		else
 		{
-			double coef = cl->data.cf + cr->data.cf;//cкладываем коэф
-			if (abs(coef) > EPS)
+			double new_coeff = pthis.listmonom.GetCurr()->data.cf + p.listmonom.GetCurr()->data.cf;
+			if (new_coeff)
 			{
-				resh->next = new node<monom>(monom(coef, cl->data.abc));
-				resh = resh->next;
+				monom temp(new_coeff, pthis.listmonom.GetCurr()->data.abc);
+				res.listmonom.InsertToTail(temp);
+				res.listmonom.gonext();
 			}
-			cl = cl->next;
-			cr = cr->next;
+			pthis.listmonom.gonext();
+			p.listmonom.gonext();
 		}
 	}
-	while (cl != leftpol)
+	while (!pthis.listmonom.IsOver())
 	{
-		resh->next = new node<monom>(cl->data);
-		cl = cl->next;
-		resh = resh->next;
+		res.listmonom.InsertToTail(pthis.listmonom.GetCurr()->data);
+		pthis.listmonom.gonext();
+		res.listmonom.gonext();
 	}
-	while (cr != righpol)
+	while (!p.listmonom.IsOver())
 	{
-		resh->next = new node<monom>(cr->data);
-		cr = cr->next;
-		resh = resh->next;
+		res.listmonom.InsertToTail(p.listmonom.GetCurr()->data);
+		p.listmonom.gonext();
+		res.listmonom.gonext();
 	}
-	resh->next = res.listmonom.GetHead();
+
 	return res;
 }
 
-
-	
 
 //Оператор умножения полиномов
 polynom polynom::operator*(const polynom& pol) const
@@ -156,13 +159,13 @@ polynom polynom::operator*(const polynom& pol) const
 	pthis.listmonom.Reset();
 	p.listmonom.Reset();
 
-	while (pthis.listmonom.IsNotOver())
+	while (!pthis.listmonom.IsOver())
 	{
 		double pthis_cf = pthis.listmonom.GetCurr()->data.cf;
 		int pthis_abc = pthis.listmonom.GetCurr()->data.abc;
 		polynom temp(pol); 
 		temp.listmonom.Reset();
-		while (temp.listmonom.IsNotOver())
+		while (!temp.listmonom.IsOver())
 		{
 			int temp_abc = temp.listmonom.GetCurr()->data.abc;
 			if ((temp_abc % 10 + pthis_abc % 10) < 10     &&    (temp_abc/10 % 10 + pthis_abc/10 % 10) < 10     &&    (temp_abc/100 + pthis_abc/100) < 10)//остаток от деления
@@ -192,7 +195,7 @@ polynom polynom::operator*(const double a) const
 	{
 		res = *this;
 		res.listmonom.Reset();
-		while (res.listmonom.IsNotOver())
+		while (!res.listmonom.IsOver())
 		{
 			res.listmonom.GetCurr()->data.cf *= a;
 			res.listmonom.gonext();
@@ -206,31 +209,45 @@ return res;
 //Оператор вставки в поток
 ostream& operator<<(ostream &ostr,const polynom& pm)
 {
-	node<monom>* curr = pm.listmonom.GetHead();
-	node<monom>* head = curr;
-	while (curr->next != head)
+	polynom p = pm;
+	p.listmonom.Reset();
+	
+	while (!p.listmonom.IsOver())
 	{
-		curr = curr->next;
-		monom temp = curr->data;
+	
+		monom temp = p.listmonom.GetCurr()->data;
 
-		if (abs(temp.cf - 1) > EPS && abs(temp.cf + 1) > EPS || temp.abc == 0)
-			ostr << temp.cf;
-		else if (abs(temp.cf + 1) < EPS && abs(temp.cf - 1) > EPS)
-			ostr << '-';
-		int p = temp.abc / 100;
-		if(p>1)
-			ostr << "x^" << p;
-		else if (p == 1) ostr << "x";
-		p = temp.abc / 10 % 10;
-		if(p>1)
-			ostr << "y^" << p;
-		else if (p == 1) ostr << "y";
-		p = temp.abc % 10;
-		if(p>1)
-			ostr<< "z^" << p;
-		else if (p == 1) ostr << "z";
-		if(curr->next != head && curr->next->data.cf>0)
+		if (temp.cf > 0)
+		{
 			ostr << "+";
+			if (temp.cf == 1 && temp.abc == 0)
+				ostr << "1";
+			else
+			if (temp.cf != 1)
+				ostr << temp.cf;
+		}
+		else
+			ostr << temp.cf;
+
+		int a = temp.abc / 100;
+		if (a>1)
+			ostr << "x^" << a;
+		else
+		if (a == 1)
+			ostr << "x";
+		a = temp.abc / 10 % 10;
+		if (a>1)
+			ostr << "y^" << a;
+		else
+		if (a == 1)
+			ostr << "y";
+		a = temp.abc % 10;
+		if (a>1)
+			ostr << "z^" << a;
+		else
+		if (a == 1)
+			ostr << "z";
+		p.listmonom.gonext();
 	}
 	return ostr;
 }

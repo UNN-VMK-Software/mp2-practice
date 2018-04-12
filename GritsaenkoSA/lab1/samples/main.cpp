@@ -1,8 +1,4 @@
 
-/*int main()
-{
-	return 0;
-}*/
 #include "monom.h"
 #include "polynom.h"
 #include <iostream>
@@ -46,13 +42,14 @@ void main()
 		}
 		case 3:
 		{
-			polynom res = S1*S2;
+			polynom res = S1 * S2;
 			cout << res;
 			break;
 		}
 		case 4:
 		{
 			string con;
+			cout << " Write const" << endl;
 			cin >> con;
 			polynom C(con);
 			polynom res = C*S1;
@@ -63,7 +60,7 @@ void main()
 			break;
 		}
 
-		cout << "Repead : 1" << endl;
+		cout << " \n Repead : 1" << endl;
 		cin >> flag;
 		
 	}
