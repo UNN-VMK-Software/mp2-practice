@@ -1,11 +1,11 @@
 ﻿#include "polynom.h"
+
 using namespace std;
 
 
 //Конструктор по строке
 polynom::polynom(string ipm)
 {
-	const double EPS = 1e-15;
 	int d[3] = { 100,10,1 };
 	while (ipm.length())
 	{
@@ -27,8 +27,7 @@ polynom::polynom(string ipm)
 			temp.cf = -1;
 		else temp.cf = stod(coef);//преобразование строки в число
 
-		if (abs(temp.cf) > EPS)
-		{
+		
 			part.erase(0, pos);
 			part += ' ';
 
@@ -47,11 +46,11 @@ polynom::polynom(string ipm)
 			listmonom.InsertInOrder(temp);
 		}
 
-		
+		listmonom = unic(listmonom);
 	}
 
-	listmonom = unic(listmonom);
-}
+	
+
 
 //объединение
 list<monom> polynom::unic(list <monom> & sp) 

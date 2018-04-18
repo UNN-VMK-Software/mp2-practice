@@ -4,6 +4,12 @@
 
 using namespace std;
 
+TEST(polynom, check_polinom )    
+{
+	
+	ASSERT_ANY_THROW(polynom a("x+1"));
+}
+
 struct parse_test
 {
 	string str;
