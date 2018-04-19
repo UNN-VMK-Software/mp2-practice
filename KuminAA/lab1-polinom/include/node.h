@@ -1,25 +1,24 @@
 #pragma once
 
-template <typename tkey>
+template <typename t>
 class Node
 {
 public:
-	tkey data;
+	t data;
 	Node *next;
-	Node(tkey t, Node *p = NULL) { data = t; next = p; }
-	Node(const Node &l) { data = l.key; next = l.next; }
-	bool operator==(const Node &l) const { return (data == l.key) && (next == l.next); };
-	/*Node& operator=(const Node &l) {
-	data = l.key;
-	next = l.next;
-	retiurn *this;
-	}*/
+	Node(t Data = NULL, Node *Next = NULL) 
+	{ 
+		data = Data; 
+		next = Next; 
+	}
+	Node(const Node &l) { data = l.data; next = NULL; }
+
+	bool operator==(const Node<t> &l) const { return (data == l.data) && (next == l.next); };
+	bool operator!= (const  Node<t>& l) const { return !(*this == l); }
+
+	bool operator< (const Node<t>& l) const { return (data < l.data); }
+	bool operator> (const Node<t>& l) const { return (data > l.data); }
+
 };
 
-//template <typename tkey>
-//Node& Node<tkey>::operator=(const Node &l)
-//{
-//	data = l.key; 
-//	next = l.next;
-//	retiurn *this;
-//}
+
