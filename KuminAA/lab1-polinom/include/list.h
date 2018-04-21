@@ -16,11 +16,15 @@ public:
 	~Ringlist();
 
 	void InsertToOrdered(const t &a);
+	//void DeliteNode(const t &a);
 
 	void reset() { curr = head->next; };
 	t& GetCurr() { return curr->data; };
 	void SetNext() { curr = curr->next; }
-	int isended() { return (curr->next == head); };
+	int isended() { return (curr->next == head->next); };
+
+	int operator==(const Ringlist<t>& l) const;
+	int operator!=(const Ringlist<t>& l) const { return !(*this == l); }
 };
 
 //......................................................................
@@ -102,4 +106,47 @@ void Ringlist<t>::InsertToOrdered(const t &a)
 	Node<t>* temp = curr->next;
 	curr->next = new Node<t>(a, temp);
 	//curr->next->next = temp;
+}
+
+//template<typename t>
+//void Ringlist<t>::DeliteNode(const t &a)
+//{
+//	curr = head->next;
+//	Node<t> *temp;
+//
+//	while (curr != head)
+//	{
+//		if (curr->data == a)
+//		{
+//			temp = curr->next;
+//			delete curr;
+//			curr = temp;
+//		}
+//		curr = curr->next;
+//	}
+//}
+
+template<typename t>
+int Ringlist<t>::operator==(const Ringlist<t>& l) const
+{
+	int k = 1;
+	if (this != &l)
+	{
+		Node<t> *temp = head->next;
+		Node<t> *temp1 = l.head->next;
+
+		while (!(temp1 == l.head || temp == head) && temp->data == temp1->data)
+		{
+			temp = temp->next;
+			temp1 = temp1->next;
+			/*if (temp1->next == l.head)
+				temp1 = new Node<t>(NULL, temp1->next);
+			else
+				if (temp->next == head)
+					temp = new Node<t>(NULL,temp->next);*/
+		}
+		if (temp1 != l.head || temp != head)
+			k = 0;
+	}
+	return k;
 }

@@ -16,9 +16,8 @@ public:
 
 	bool operator< (const Monom& m) const { return (abc<m.abc); }
 	bool operator> (const Monom& m) const { return (abc>m.abc); }
-	bool operator==(const Monom& m) const { return (abc == m.abc); }
+	bool operator==(const Monom& m) const { return (abc == m.abc && coeff == m.coeff); }
 	bool operator!=(const Monom& m) const { return !(*this == m); }
-
 	Monom& operator=(const Monom& m) { coeff = m.coeff; abc = m.abc; return *this; }
 };
 
@@ -26,20 +25,21 @@ public:
 class Polinom
 {
 	Ringlist<Monom> pol;
-	int AddTheSame(const Monom& c, Ringlist<Monom> r);
+	Ringlist<Monom> AddSameAndInsert(const Monom& c, const Ringlist<Monom> r);
 	Ringlist<Monom> Parse(const string& s);
 
 public:
 	Polinom();
 	Polinom(const string& str);
 	Polinom(const Polinom& p);
+	Polinom(const Ringlist<Monom>& p) { pol = p; }
 
 	Polinom& operator=(const Polinom& p);
-	Polinom& operator+(const Polinom& p);
+	Polinom operator+(const Polinom& p);
 	Polinom& operator*(const int& c);
 	Polinom& operator*(const Polinom& p);
 
-	/*friend ostream& operator<< (ostream& os, const Polinom& p);*/
-	/*bool operator== (const Polinom& p) const { return pol == p; }
-	bool operator!= (const Polinom& p) const { return pol != p; }*/
+	friend ostream& operator<< (ostream& os, const Polinom& p);
+	int operator== (const Polinom& p) const { return pol == p.pol; }
+	int operator!= (const Polinom& p) const { return pol != p.pol; }
 };
