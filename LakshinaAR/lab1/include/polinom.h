@@ -14,8 +14,8 @@ class polynom
 private:
 	list<monom> list_pol;		                                                                                     //Полином - список из мономов
 public:
-	list<monom> similar_terms(list <monom> sp);
-	polynom(const string pol = "" );                                                                             //Разбор строки
+	list<monom> similar_terms(list <monom> sp);                                                                      //Подобные слагаемые
+	polynom(const string pol = "" );                                                                                 //Разбор строки
 	polynom(const polynom& pol);                           							                                 //Конструктор копирования
 	polynom& operator=(const polynom &pol);                                                                          //Присваивание
 	polynom operator+(const polynom& pol) const;			                                                         //Сложение полиномов

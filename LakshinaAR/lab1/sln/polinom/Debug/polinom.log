@@ -1,17 +1,10 @@
-﻿Build started 07.04.2018 14:20:37.
+﻿Build started 09.04.2018 19:05:16.
      1>Project "D:\mp2-practice\LakshinaAR\lab1\sln\polinom\polinom.vcxproj" on node 2 (Build target(s)).
        Project file contains ToolsVersion="15.0". This toolset may be unknown or missing, in which case you may be able to resolve this by installing the appropriate version of MSBuild, or the build may have been forced to a particular ToolsVersion for policy reasons. Treating the project as if it had ToolsVersion="4.0". For more information, please see http://go.microsoft.com/fwlink/?LinkId=291333.
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"D:\mp2-practice\LakshinaAR\lab1\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt "D:\mp2-practice\LakshinaAR\lab1\src\polinom.cpp"
-         polinom.cpp
-     1>d:\mp2-practice\lakshinaar\lab1\src\polinom.cpp(39): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\mp2-practice\lakshinaar\lab1\src\polinom.cpp(44): warning C4018: '<' : signed/unsigned mismatch
-       Lib:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\Lib.exe /OUT:"D:\mp2-practice\LakshinaAR\lab1\sln\Debug\polinom.lib" /NOLOGO Debug\monom.obj
-         Debug\polinom.obj
+     1>Lib:
          polinom.vcxproj -> D:\mp2-practice\LakshinaAR\lab1\sln\Debug\polinom.lib
      1>Done Building Project "D:\mp2-practice\LakshinaAR\lab1\sln\polinom\polinom.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.94
+Time Elapsed 00:00:00.10
