@@ -228,9 +228,12 @@ ostream& operator<< (ostream& os, const Polinom& p)
 	Polinom tempP = p;
 	tempP.pol.reset();
 	Monom tempM;
-	Monom FNode = tempP.pol.GetCurr();
-	if (FNode.coeff)
+	int k = 0;
+	while (!tempP.pol.GetCurr().coeff && !tempP.pol.isended())
+		tempP.pol.SetNext();
+	if (!tempP.pol.isended())
 	{
+		Monom FNode = tempP.pol.GetCurr();
 		while (!tempP.pol.isended())
 		{
 
