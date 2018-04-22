@@ -2,17 +2,6 @@
 #include "node.h"
 #include <gtest.h>
 
-//TEST(Monom, can_create_monom)
-//{
-//	ASSERT_NO_THROW(Monom a);
-//}
-
-//TEST(Node<Monom>, can_create_node_monom)
-//{
-//	Monom a;
-//	ASSERT_NO_THROW(Node<Monom> an(a));
-//}
-
 TEST(Node, can_create_node)
 {
 	ASSERT_NO_THROW(Node<double> l(0));
@@ -23,7 +12,7 @@ TEST(Ringlist, can_create_ringlist)
 	ASSERT_NO_THROW(Ringlist<double> l);
 }
 
-
+//---------------------------------------------------------
 class EmptyList : public testing::Test
 {
 protected:

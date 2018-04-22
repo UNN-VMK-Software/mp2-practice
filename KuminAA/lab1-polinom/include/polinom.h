@@ -36,8 +36,8 @@ public:
 
 	Polinom& operator=(const Polinom& p);
 	Polinom operator+(const Polinom& p);
-	Polinom& operator*(const int& c);
-	Polinom& operator*(const Polinom& p);
+	Polinom operator*(const int& c);
+	Polinom operator*(const Polinom& p);
 
 	friend ostream& operator<< (ostream& os, const Polinom& p);
 	int operator== (const Polinom& p) const { return pol == p.pol; }

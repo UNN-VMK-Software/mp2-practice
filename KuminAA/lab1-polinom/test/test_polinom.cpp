@@ -9,6 +9,18 @@ TEST(Polinom, can_create_polinom)
 	ASSERT_NO_THROW(Polinom p);
 }
 
+TEST(Polinom, can_sravnenie_str)
+{
+	string s = "abc";
+	Ringlist<Monom> b;
+	b.InsertToOrdered(Monom(1, 111));
+	Polinom c(b);
+	Polinom a(s);
+	int k = (a == c);
+	EXPECT_EQ(1, k);
+}
+
+
 TEST(Polinom, can_create_polinom_str)
 {
 	string s = "abc";
@@ -41,6 +53,16 @@ TEST(Polinom, can_create_polinom_str2)
 	EXPECT_EQ(a, c);
 }
 
+TEST(Polinom, can_create_polinom_str3)
+{
+	string s1 = "a^2+ab+b^2";
+	string s2 = "a-b";
+	Polinom c("a^3-b^3");
+	Polinom a1(s1), a2(s2);
+	Polinom a = a1 * a2;
+	EXPECT_EQ(a, c);
+}
+
 TEST(Polinom, can_copy_polinoms)
 {
 	Polinom b("abc");
@@ -48,6 +70,7 @@ TEST(Polinom, can_copy_polinoms)
 	//EXPECT_EQ(Polinom a(b), Polinom c(Monom(1, 111)));
 }
 
+//------------------------------------------------------------------------
 class PolTestParse
 {
 public:
@@ -65,6 +88,7 @@ public:
 	}
 };
 
+
 class TestParsing : public ::testing::TestWithParam< PolTestParse>
 {
 protected:
@@ -79,7 +103,7 @@ TEST_P(TestParsing, test_polinom_parsing)
 	EXPECT_EQ(GetParam().res, P1);
 }
 
-INSTANTIATE_TEST_CASE_P(FIRST, TestParsing, ::testing::Values(
+INSTANTIATE_TEST_CASE_P(t1, TestParsing, ::testing::Values(
 	PolTestParse("0", vector<Monom> {Monom()}),
 	PolTestParse("abc", vector<Monom> {Monom(1, 111)}),
 	PolTestParse("cba", vector<Monom> {Monom(1, 111)}),
@@ -95,10 +119,11 @@ INSTANTIATE_TEST_CASE_P(FIRST, TestParsing, ::testing::Values(
 	PolTestParse("a-b", vector<Monom> {Monom(1, 100), Monom(-1, 10)}),
 	PolTestParse("a^2-b^2", vector<Monom> {Monom(1, 200), Monom(-1, 20)}),
 	PolTestParse("abc+abc", vector<Monom> {Monom(2, 111)}),
+	PolTestParse("5.1ab", vector<Monom> {Monom(5.1, 110)}),
 	PolTestParse("a^2b^2c^2", vector<Monom> {Monom(1, 222)})
 ));
 
-
+//------------------------------------------------------------------------
 class TGeneralPol
 {
 public:
@@ -110,7 +135,6 @@ public:
 		res = RES;
 	}
 };
-//............................................................................
 
 class TestSum : public ::testing::TestWithParam<TGeneralPol>
 {
@@ -119,15 +143,13 @@ public:
 	TestSum() : pol1(GetParam().P1), pol2(GetParam().P2), Res(GetParam().res) {};
 	~TestSum() {};
 };
-//............................................................................
 
 TEST_P(TestSum, sum)
 {
 	EXPECT_EQ(Res, pol1 + pol2);
 }
-//............................................................................
 
-INSTANTIATE_TEST_CASE_P(SECOND, TestSum, ::testing::Values(
+INSTANTIATE_TEST_CASE_P(t2, TestSum, ::testing::Values(
 	TGeneralPol("0", "1", "-1"),
 	TGeneralPol("0", "a", "-a"),
 	TGeneralPol("0", "-abc", "abc"),
@@ -136,31 +158,30 @@ INSTANTIATE_TEST_CASE_P(SECOND, TestSum, ::testing::Values(
 	TGeneralPol("3.14a", "3a", "0.14a"),
 	TGeneralPol("18a^2b^2", "10a^2b^2+c^2", "8a^2b^2-c^2")
 ));
-//............................................................................
 
+//------------------------------------------------------------------------
+class TestMult : public ::testing::TestWithParam<TGeneralPol>
+{
+public:
+	Polinom pol1, pol2, Res;
 
-//class TestMult : public ::testing::TestWithParam<TGeneralPol>
-//{
-//public:
-//	Polinom pol1, pol2, Res;
-//
-//	TestMult() : pol1(GetParam().P1), pol2(GetParam().P2), Res(GetParam().res) {}
-//	~TestMult() {}
-//};
-//
-//TEST_P(TestMult, mult)
-//{
-//	EXPECT_EQ(Res, pol1 * pol2);
-//}
-//
-//INSTANTIATE_TEST_CASE_P(THIRD, TestMult, ::testing::Values(
-//	TGeneralPol("2", "2", "1"),
-//	TGeneralPol("abc", "abc", "1"),
-//	TGeneralPol("abc^2", "ac", "cb"),
-//	TGeneralPol("100a^2", "50a", "2a"),
-//	TGeneralPol("111abc", "55.5ab", "2c"),
-//	TGeneralPol("a+b+c", "1", "a+b+c"),
-//	TGeneralPol("a^2-b^2", "a-b", "a+b"),
-//	TGeneralPol("a^3+b^3", "a+b", "a^2-ab+c^2"),
-//	TGeneralPol("a^3-b^3", "a-b", "a^2+ab+c^2")
-//));
+	TestMult() : pol1(GetParam().P1), pol2(GetParam().P2), Res(GetParam().res) {}
+	~TestMult() {}
+};
+
+TEST_P(TestMult, mult)
+{
+	EXPECT_EQ(Res, pol1 * pol2);
+}
+
+INSTANTIATE_TEST_CASE_P(t3, TestMult, ::testing::Values(
+	TGeneralPol("2", "2", "1"),
+	TGeneralPol("abc", "abc", "1"),
+	TGeneralPol("abc^2", "ac", "cb"),
+	TGeneralPol("100a^2", "50a", "2a"),
+	TGeneralPol("111abc", "55.5ab", "2c"),
+	TGeneralPol("a+b+c", "1", "a+b+c"),
+	TGeneralPol("a^2-b^2", "a-b", "a+b"),
+	TGeneralPol("a^3+b^3", "a+b", "a^2-ab+b^2"),
+	TGeneralPol("a^3-b^3", "a-b", "a^2+ab+b^2")
+));
