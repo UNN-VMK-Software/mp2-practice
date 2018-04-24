@@ -46,6 +46,7 @@ void main()
 			TPolinom B(c);
 			C = A + B;
 			cout << C;
+			cout << endl;
 		}
 
 		if (j == 2)
@@ -62,6 +63,7 @@ void main()
 			TPolinom B(c);
 			C = A - B;
 			cout << C;
+			cout << endl;
 		}
 
 		if (j == 3)
@@ -78,6 +80,7 @@ void main()
 			TPolinom B(c);
 			C = A * B;
 			cout << C;
+			cout << endl;
 		}
 
 		if (j == 4)
@@ -91,6 +94,7 @@ void main()
 			TPolinom A(s);
 			C = A * k;
 			cout << C;
+			cout << endl;
 		}
 		
 		if (j == 5)

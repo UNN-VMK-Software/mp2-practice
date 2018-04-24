@@ -165,16 +165,6 @@ TPolinom TPolinom::operator * (const TPolinom& poli2)
 				tmp2.monoms.Insert(monom);
 				C = C + tmp2;
 			}
-			/*int ABC = tmp.monoms.GetLink()->data.abc + monoms.GetLink()->data.abc;
-			if ((ABC / 100 < 10) && (ABC / 10 % 10 < 10) && (ABC % 10 < 10))
-				monom.abc = ABC;
-			else
-				throw "Error";
-
-			TPolinom tmp2;
-			tmp2.monoms.Insert(monom);
-			C = C + tmp2;*/
-
 			tmp.monoms.Next();
 		}
 		monoms.Next();
@@ -219,7 +209,7 @@ ostream& operator <<(ostream& ostr, const TPolinom& poli2)
 	TPolinom B(poli2);
 	B.monoms.Reset();
 
-	while (B.monoms.IsEnded() == false)
+	/*while (B.monoms.IsEnded() == false)
 	{
 		if (B.monoms.GetLink()->data.cf > 0)
 		{
@@ -278,8 +268,76 @@ ostream& operator <<(ostream& ostr, const TPolinom& poli2)
 			}
 		}
 		B.monoms.Next();
-	}
+	}*/
 
+	if (B.monoms.IsEnded() == false)
+	{
+		while (B.monoms.IsEnded() == false)
+		{
+			if (B.monoms.GetLink()->data.cf > 0)
+			{
+				if (B.monoms.GetLink()->data.abc != 0)
+				{
+					if (B.monoms.GetLink()->data.cf == 1)
+					{
+						ostr << "+";
+					}
+					else
+					{
+						ostr << "+" << B.monoms.GetLink()->data.cf;
+					}
+				}
+				else
+				{
+					ostr << "+" << B.monoms.GetLink()->data.cf;
+				}
+			}
+
+			if (B.monoms.GetLink()->data.cf < 0)
+			{
+				ostr << B.monoms.GetLink()->data.cf;
+			}
+
+			if (B.monoms.GetLink()->data.abc != 0)
+			{
+				int a = B.monoms.GetLink()->data.abc / 100;
+				if (a > 1)
+				{
+					ostr << "x^" << a;
+				}
+				if (a == 1)
+				{
+					ostr << "x";
+				}
+
+				a = B.monoms.GetLink()->data.abc / 10 % 10;
+				if (a > 1)
+				{
+					ostr << "y^" << a;
+				}
+				if (a == 1)
+				{
+					ostr << "y";
+				}
+
+				a = B.monoms.GetLink()->data.abc % 10;
+				if (a > 1)
+				{
+					ostr << "z^" << a;
+				}
+				if (a == 1)
+				{
+					ostr << "z";
+				}
+			}
+			B.monoms.Next();
+		}
+	}
+	else
+	{
+		ostr << "0";
+	}
+	
 	return ostr;
 }
 
