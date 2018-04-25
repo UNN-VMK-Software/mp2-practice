@@ -56,8 +56,7 @@ Ringlist<Monom> Polinom::Parse(const string& s)
 				else
 					a = "-1";
 			}
-
-			if (temp[i] == '+')
+			else
 			{
 				i++;
 				j++;
