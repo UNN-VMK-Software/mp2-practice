@@ -1,0 +1,9 @@
+﻿Build started 19.04.2018 17:03:47.
+     1>Project "C:\Temp\mp2-practice\GritsaenkoSA\lab1\build\lab1\gtest\gtest.vcxproj" on node 2 (Build target(s)).
+     1>Lib:
+         gtest.vcxproj -> C:\Temp\mp2-practice\GritsaenkoSA\lab1\build\lab1\Debug\gtest.lib
+     1>Done Building Project "C:\Temp\mp2-practice\GritsaenkoSA\lab1\build\lab1\gtest\gtest.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.78
