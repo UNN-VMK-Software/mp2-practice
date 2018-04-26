@@ -1,32 +1,43 @@
-#include "Monom.h"
+#include "monom.h"
 
-void monom::Push(double f, int abc) 
+monom::monom(double c, unsigned int a)
 {
-	this->abc = abc;
-	this->coeff = f;
+	coeff = c;
+	abc = a;
 }
 
-void monom::Push(monom a) 
+monom& monom:: operator=(const monom& m)
 {
-	this->abc = a.abc;
-	this->coeff = a.coeff;
+	coeff = m.coeff;
+	abc = m.abc;
+	return *this;
 }
 
-
-void monom::Pusha(int a) {
-	int bc = abc % 100;
-	abc = a * 100 + bc;
-}
-void monom::Pushb(int b) {
-	int A = Geta();
-	int C = Getc();
-	abc = 100 * C + 10 * b + C;
-}
-void monom::Pushc(int c) {
-	abc = abc - Getc() + c;
-}
-void monom::Pushf(double f) {
-	this->coeff = f;
+bool monom:: operator< (const monom& m) const
+{
+	bool res = true;
+	if (abc >= m.abc)
+		res = false;
+	return res;
 }
 
-	
+bool monom:: operator> (const monom& m) const
+{
+	bool res = true;
+	if (abc <= m.abc)
+		res = false;
+	return res;
+}
+
+bool monom:: operator==(const monom& m) const
+{
+	bool res = true;
+	if (abc != m.abc || coeff != m.coeff)
+		res = false;
+	return res;
+}
+
+bool monom:: operator!=(const monom& m) const
+{
+	return !(*this == m);
+}

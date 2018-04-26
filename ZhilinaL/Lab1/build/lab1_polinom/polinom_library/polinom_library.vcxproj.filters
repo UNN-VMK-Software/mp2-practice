@@ -7,7 +7,7 @@
     </Filter>
     <Filter Include="Файлы заголовков">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
     <Filter Include="Файлы ресурсов">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
@@ -15,29 +15,31 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\..\..\include\List.h">
+    <ClInclude Include="..\..\..\include\List.h">
       <Filter>Файлы заголовков</Filter>
-    </Text>
-    <Text Include="..\..\..\include\Monom.h">
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Monom.h">
       <Filter>Файлы заголовков</Filter>
-    </Text>
-    <Text Include="..\..\..\include\Node.h">
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Node.h">
       <Filter>Файлы заголовков</Filter>
-    </Text>
-    <Text Include="..\..\..\include\Polinom.h">
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Polinom.h">
       <Filter>Файлы заголовков</Filter>
-    </Text>
-    <Text Include="..\..\..\src\List.cpp">
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\List.cpp">
       <Filter>Исходные файлы</Filter>
-    </Text>
-    <Text Include="..\..\..\src\Monom.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Monom.cpp">
       <Filter>Исходные файлы</Filter>
-    </Text>
-    <Text Include="..\..\..\src\Node.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Node.cpp">
       <Filter>Исходные файлы</Filter>
-    </Text>
-    <Text Include="..\..\..\src\Polinom.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Polinom.cpp">
       <Filter>Исходные файлы</Filter>
-    </Text>
+    </ClCompile>
   </ItemGroup>
 </Project>

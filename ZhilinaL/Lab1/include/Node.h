@@ -1,34 +1,16 @@
 #pragma once
-
-template <typename typediff>
+using namespace std;
+template<typename T>
 class Node
 {
-private:
-	Node* Next;
-	typediff Data;
 public:
-	Node(typediff Data = 0, Node* NextPtr = NULL);
-	Node(const Node<typediff> &NodaCopy);
-	~Node();
+	T data;		                                                    
+	Node* next;	                                                        
+	Node() { next = nullptr; }										   
+	Node(T Data) { data = Data; next = nullptr; }					    
+	bool operator< (const Node& z) const { return (data < z.data); }
+	bool operator> (const Node& z) const { return (data > z.data); }
 };
 
-template <typename typediff>
-Node<typediff> ::Node(typediff data, Node* NextPtr)
-{
-	Data = data;
-	Next = NextPtr;
-}
 
-template <typename typediff>
-Node<typediff> ::Node(const Node<typediff> &NodaCopy)
-{
-	Data = NodaCopy<typediff>.Data;
-	Next = NodaCopy<typediff>.Next;
-}
 
-template <typename typediff>
-Node<typediff> :: ~Node()
-{
-	delete Next;
-	Data = NULL;
-}

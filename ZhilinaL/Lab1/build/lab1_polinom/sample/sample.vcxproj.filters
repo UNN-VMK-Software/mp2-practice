@@ -7,8 +7,8 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\..\..\samples\Main.cpp">
+    <ClCompile Include="..\..\..\samples\Main.cpp">
       <Filter>Исходные файлы</Filter>
-    </Text>
+    </ClCompile>
   </ItemGroup>
 </Project>
