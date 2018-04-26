@@ -13,10 +13,14 @@ class polynom
 {
 private:
 	list<monom> listmonom;		//Список, содержащий полином //список мономов
+
 	list<monom> unic(list <monom> & sp);//объединяет подобные
+
+
+
 public:
 	
-	polynom(const polynom& pol); 											//Конструктор копирования
+	polynom(const polynom& pol); 											// Конструктор копирования
 	polynom& operator=(const polynom &pol);									 //Перегрузка оператора присваивания
 	polynom operator-(const polynom& pml) const { return *this + pml*(-1); }		//Бинарный минус
 	polynom operator-() const { return (-1)*(*this); }								//Унарный минус

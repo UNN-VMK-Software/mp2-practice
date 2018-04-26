@@ -22,6 +22,12 @@ TEST(polynom, degree_not_more_than_9_2)
 	ASSERT_ANY_THROW(a*b);
 }
 
+TEST(polynom, check_polinom )    
+{
+	
+	ASSERT_ANY_THROW(polynom a("x+1"));
+}
+
 struct parse_test
 {
 	string str;
