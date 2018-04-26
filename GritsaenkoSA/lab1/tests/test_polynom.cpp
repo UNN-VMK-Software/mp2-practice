@@ -3,6 +3,24 @@
 #include <vector>
 
 using namespace std;
+TEST(polynom, check_build_polinom)
+{
+
+	ASSERT_NO_THROW(polynom a("x+1"));
+}
+
+
+TEST(polynom, degree_not_more_than_9_1)
+{
+	polynom a("x^4"), b("x^5");
+	ASSERT_NO_THROW(a*b);
+}
+
+TEST(polynom, degree_not_more_than_9_2)
+{
+	polynom a("x^5"), b("x^5");
+	ASSERT_ANY_THROW(a*b);
+}
 
 TEST(polynom, check_polinom )    
 {
