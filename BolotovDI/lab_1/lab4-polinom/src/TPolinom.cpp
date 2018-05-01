@@ -279,5 +279,17 @@ void TPolinom::PrivPod()
 		A.monoms.Next();
 	}
 	
-	*this = res;
+	res.monoms.Reset();
+	TPolinom B;
+	while (res.monoms.IsEnded() == false)
+	{
+		// удаляем, когда cf = 0 
+		if (res.monoms.GetLink()->data.cf != 0)
+		{
+			B.monoms.Insert(res.monoms.GetLink()->data);
+		}
+		res.monoms.Next();
+	}
+
+	*this = B;
 }

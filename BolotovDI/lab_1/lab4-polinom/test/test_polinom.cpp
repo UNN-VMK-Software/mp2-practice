@@ -21,7 +21,7 @@ TEST(TPolinom, can_assign_polinoms)
 {
 	TPolinom a("x^5");
 	TPolinom b;
-	ASSERT_NO_THROW(b=a);
+	ASSERT_NO_THROW(b = a);
 }
 
 TEST(TPolinom, can_sum_polinoms)
@@ -29,7 +29,7 @@ TEST(TPolinom, can_sum_polinoms)
 	TPolinom a("x^5");
 	TPolinom b("x^5");
 	TPolinom c("2x^5");
-	EXPECT_EQ(c, a+b);
+	EXPECT_EQ(c, a + b);
 }
 
 TEST(TPolinom, can_dif_polinoms)

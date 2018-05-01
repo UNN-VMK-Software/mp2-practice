@@ -61,10 +61,10 @@ TEST_F(EmptyList, can_clean_empty_list)
 	ASSERT_NO_THROW(l.Clean());
 }
 
-TEST_F(EmptyList, clean_empty_list_is_correct) 
+TEST_F(EmptyList, clean_empty_list_is_correct)
 {
 	l.Clean();
-	EXPECT_EQ(NULL, l.GetLink()->data); 
+	EXPECT_EQ(NULL, l.GetLink()->data);
 }
 
 TEST_F(EmptyList, can_get_current_from_empty_list)

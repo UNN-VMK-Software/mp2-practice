@@ -7,28 +7,28 @@
     </Filter>
     <Filter Include="Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\include\TLink.h">
+    <ClInclude Include="..\..\..\include\TLink.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\include\TMonom.h">
+    <ClInclude Include="..\..\..\include\TMonom.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\include\TPolinom.h">
+    <ClInclude Include="..\..\..\include\TPolinom.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\include\TRingList.h">
+    <ClInclude Include="..\..\..\include\TRingList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\src\TMonom.cpp">
+    <ClCompile Include="..\..\..\src\TMonom.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\src\TPolinom.cpp">
+    <ClCompile Include="..\..\..\src\TPolinom.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
