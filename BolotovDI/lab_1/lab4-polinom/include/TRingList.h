@@ -6,14 +6,14 @@ template <typename T>
 class TRingList
 {
 private:
-	TLink <T> *head;
-	TLink <T> *current;
+	TLink <T> *head; // голова списка 
+	TLink <T> *current; // текущей элемент в списке
 public:
-	TRingList();
-	TRingList(const TRingList <T> & TRingList2);
-	~TRingList();
+	TRingList(); // конструктор 
+	TRingList(const TRingList <T> & TRingList2); // конструктор копирования
+	~TRingList(); // деструктор 
 
-	TRingList<T>& operator = (const TRingList<T>& TRingList2);
+	TRingList<T>& operator = (const TRingList<T>& TRingList2); // оператор копирования
 
 	void Clean(); // очистка 
 	void Insert(const T& data); // вставка в упорядоченный список
@@ -22,7 +22,7 @@ public:
 	bool IsEnded() const ; // current последний в списке ? 
 	TLink<T>* GetLink(); // вернуть current 
 
-	bool operator == (const TRingList<T>& TRingList2) const;
+	bool operator == (const TRingList<T>& TRingList2) const; // оператор сравнения 
 };
 
 template <typename T>

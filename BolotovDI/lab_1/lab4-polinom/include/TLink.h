@@ -6,16 +6,17 @@ template <typename T>
 class TLink
 {
 public:
-	T data;
-	TLink* pNext;
+	T data; // данные
+	TLink* pNext; // указатель на следующее звено
 
-	TLink();
-	TLink(const TLink& unit);
-	TLink(T d, TLink* unit= NULL);
-	~TLink() {}
+	TLink(); // конструктор 
+	TLink(const TLink& unit); // конструктор копирования 
+	TLink(T d, TLink* unit= NULL); // конструктор 
+	~TLink() {} // деструктор 
 
-	TLink& operator = (const TLink& unit);
-	bool operator == (const TLink& unit) const;
+	TLink& operator = (const TLink& unit); // оператор копирования 
+	// операторы сравнения
+	bool operator == (const TLink& unit) const; 
 	bool operator != (const TLink& unit) const;
 };
 

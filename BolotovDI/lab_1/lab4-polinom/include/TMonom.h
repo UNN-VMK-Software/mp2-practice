@@ -10,17 +10,19 @@ using namespace std;
 
 struct TMonom
 {
-	double cf;
-	unsigned int abc;
+	double cf; // коэффициент монома
+	unsigned int abc; // степень монов=ма 
 
-	TMonom();
-	TMonom(const string s);
-	TMonom(double num, unsigned int num2);
-	~TMonom() {}
+	TMonom(); // конструктор 
+	TMonom(const string s); // конструктор по строке
+	TMonom(double num, unsigned int num2); // констурктор 
+	~TMonom() {} // деструктор 
+	 
+	TMonom operator + (const TMonom& monom); // сумма мономов
+	TMonom operator - (const TMonom& monom); // разность мономов
+	TMonom operator = (const TMonom& monom); // конструткор копировани€ 
 
-	TMonom operator + (const TMonom& monom);
-	TMonom operator - (const TMonom& monom);
-	TMonom operator = (const TMonom& monom);
+	// операторы сравнени€
 	bool operator == (const TMonom& monom) const;
 	bool operator != (const TMonom& monom) const;
 	bool operator > (const TMonom& monom) const;
