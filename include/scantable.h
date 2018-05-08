@@ -6,13 +6,13 @@ class scantable :public table <type> {
 protected:	
 	line<type>* stab;
 	void Realloc()override;
+	bool BSearch(const string k);			//true если элемент найдет. для Insert	
 public:	
-	scantable(int sizeT) : table(sizeT) { stab = new line<type>[sizeT]; }
-	~scantable() { delete[] stab; }
+	scantable(int sizeT=DEFAULTSIZE) : table(sizeT) { stab = new line<type>[sizeT]; }
+	~scantable() { delete[] stab; }	
 	void Insert(const string k, const type& d) override;
 	void Delete(const string k) override;
-	type Search(const string k) override;
-	bool BSearch(const string k);			//true если элемент найдет. для Insert	
+	type Search(const string k) override;	
 	void Reset() override;			
 	bool IsTabEnded() override;
 	void GetNext()override;
@@ -38,8 +38,8 @@ template<class type> bool scantable<type>::IsTabEnded() {
 }
 
 template<class type> type scantable<type>::GetCurrent() {
-	if (!IsTabEnded())
-	return stab[ind].data;
+	if (ind <= size - 1)
+	return *(stab[ind].data);
 	else
 		throw "not found";
 }
@@ -51,7 +51,7 @@ template <class type> type scantable<type>::Search(const string k) {
 	if (i == size)
 		throw "not found";
 	else
-		return stab[i].data;
+		return *(stab[i].data);
 }
 
 template <class type> bool scantable<type>::BSearch(const string k) {
@@ -95,3 +95,4 @@ template <class type> void scantable<type>::Realloc() {
 	delete[] stab;
 	stab = temp;
 }
+

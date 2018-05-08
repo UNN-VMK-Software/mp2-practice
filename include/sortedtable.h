@@ -1,14 +1,15 @@
 #pragma once
 #include "table.h"
+#include "scantable.h"
 
 template <class type>
 class sortedtable :public table <type> {
-protected:
-	line<type>* stab;
+protected:	
 	int BinSearch(const string k);
 	void Realloc()override;
+	line<type>* stab;
 public:	
-	sortedtable(int sizeT) : table(sizeT) { stab = new line<type>[sizeT]; }
+	sortedtable(int sizeT= DEFAULTSIZE) : table(sizeT) { stab = new line<type>[sizeT]; }
 	~sortedtable() { delete[] stab; }
 	void Insert(const string k, const type& d) override;
 	void Delete(const string k) override;
@@ -38,8 +39,8 @@ template<class type> bool sortedtable<type>::IsTabEnded() {
 }
 
 template<class type> type sortedtable<type>::GetCurrent() {
-	if (!IsTabEnded())
-		return stab[ind].data;
+	if (ind <= size - 1)
+		return *(stab[ind].data);
 	else
 		throw "not found";
 }
@@ -74,7 +75,7 @@ template <class type> void sortedtable<type>::Insert(const string k, const type&
 template <class type> type sortedtable<type>::Search(const string k) {		
 	int pos = BinSearch(k);
 	if (pos < size && stab[pos].key == k)
-		return  stab[pos].data;
+		return  *(stab[pos].data);
 	else 
 		throw "not found";
 }
