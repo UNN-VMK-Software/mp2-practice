@@ -33,6 +33,11 @@ void main()
 
 		cout << "-------------------------" << endl;
 
+		res = p1 - p2;
+		cout << "p1 - p2 = " << res << endl;
+
+		cout << "-------------------------" << endl;
+
 		res = p1 * p2;
 		cout << "p1 * p2 = " << res << endl;
 

@@ -11,8 +11,8 @@ Ringlist<Monom> Polinom::AddSameAndInsert(const Monom& c,const Ringlist<Monom> r
 		{
 			temp.GetCurr().coeff += c.coeff;
 			k++;
-			if (!temp.GetCurr().coeff)
-				temp.GetCurr().abc = 0;
+			//if (!temp.GetCurr().coeff)
+				//temp.GetCurr().abc = 0;
 		}
 		temp.SetNext();
 	}
@@ -247,28 +247,31 @@ ostream& operator<< (ostream& os, const Polinom& p)
 				else
 					if ((tempM.coeff == 1 || tempM.coeff == -1) && tempM.abc == 0)
 						os << ' ' << tempM.coeff;
-			if (tempM.abc / 100)
+			if (tempM.coeff)
 			{
-				if (tempM.abc / 100 == 1)
-					os << "a";
-				else
-					os << "a^" << tempM.abc / 100;
-			}
+				if (tempM.abc / 100)
+				{
+					if (tempM.abc / 100 == 1)
+						os << "a";
+					else
+						os << "a^" << tempM.abc / 100;
+				}
 
-			if (((tempM.abc % 100) - (tempM.abc % 10)) / 10)
-			{
-				if (((tempM.abc % 100) - (tempM.abc % 10)) / 10 == 1)
-					os << 'b';
-				else
-					os << "b^" << ((tempM.abc % 100) - (tempM.abc % 10)) / 10;
-			}
+				if (((tempM.abc % 100) - (tempM.abc % 10)) / 10)
+				{
+					if (((tempM.abc % 100) - (tempM.abc % 10)) / 10 == 1)
+						os << 'b';
+					else
+						os << "b^" << ((tempM.abc % 100) - (tempM.abc % 10)) / 10;
+				}
 
-			if (tempM.abc % 10)
-			{
-				if (tempM.abc % 10 == 1)
-					os << 'c';
-				else
-					os << "c^" << tempM.abc % 10;
+				if (tempM.abc % 10)
+				{
+					if (tempM.abc % 10 == 1)
+						os << 'c';
+					else
+						os << "c^" << tempM.abc % 10;
+				}
 			}
 			tempP.pol.SetNext();
 		}
