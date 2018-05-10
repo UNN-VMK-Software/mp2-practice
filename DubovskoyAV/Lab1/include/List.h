@@ -1,6 +1,8 @@
 #ifndef LIST_H
 #define LIST_H
 
+#include "Node.h"
+
 template <typename TKey>
 class List
 {
@@ -18,17 +20,21 @@ public:
 	void InsertEnd(TKey);
 	void print() const;
 	int Size() const;
+	TKey GetRoot()const;
 	Node<TKey> *Search(TKey);
 };
 
 template <typename TKey>
 List<TKey>::List()
-{};
+{
+	root = 0;
+};
 
 template <typename TKey>
 List<TKey>::List(const List<TKey>&L)
 {
-	 this->root = L;
+	L->pNext=this->root;
+	this->root = L;
 };
 
 template <typename TKey>
@@ -45,19 +51,20 @@ List<TKey>::~List()
 };
 
 template <typename TKey>
-void List<TKey>::Add(TKey K)
+void List<TKey>::Add(TKey key)
 {
 	Node<TKey> * a = new Node<TKey>;
 	a->key = key;
 	a->pNext = root;
 	root = a;
 };
+
 template <typename TKey>
 void List<TKey>::Remove(TKey K)
 {
 	if (root == 0)
-		throw "Node is empty";
-	if (root->key == K->key)
+		throw "List is empty";
+	if (this->root->key == K)
 	{
 		Node<TKey>*n = root;
 		root = root->pNext;
@@ -74,6 +81,7 @@ void List<TKey>::Remove(TKey K)
 	Node<TKey>*n = tmp->pNext;
 	tmp->pNext = n->pNext;
 };
+
 template <typename TKey>
 void List<TKey>::InsertBefore(TKey K1, TKey K2)
 {
@@ -85,6 +93,7 @@ void List<TKey>::InsertBefore(TKey K1, TKey K2)
 
 	}
 };
+
 template <typename TKey>
 void List<TKey>::InsertAfter(TKey K1, TKey K2)
 {
@@ -97,11 +106,12 @@ void List<TKey>::InsertAfter(TKey K1, TKey K2)
 	{
 		throw "Key not  found";
 	}
-	Node<Tkey>*a = new Node<TKey>;
+	Node<TKey>*a = new Node<TKey>;
 	a->key = K1;
 	a->pNext = root -> pNext;
 	root->pNext = a;
 };
+
 template <typename TKey>
 void List<TKey>::InsertEnd(TKey K)
 {
@@ -120,22 +130,24 @@ void List<TKey>::InsertEnd(TKey K)
 	root->pNext->key = K;
 	root->pNext -> pNext = 0;
 };
+
 template <typename TKey>
 int List<TKey>::Size() const
 {
-	Node<TKey>*a = root;
-	int i = 0;
-	while (a->pNext!=0)
+	Node<TKey>* a = root;
+	int i = 0;	
+	while (a != 0)
 	{
 		i++;
 		a = a->pNext;
 	}
 	return i;
 };
+
 template <typename TKey>
 Node<TKey>* List<TKey>::Search(TKey K)
 {
-	Node<TKey>*a = root;
+	Node<TKey>* a = root;
 	while (a!= 0 && a->key!=K)
 	{
 		a = a->pNext;
@@ -143,6 +155,16 @@ Node<TKey>* List<TKey>::Search(TKey K)
 	if (a == 0) throw "Key not found";
 	return a;
 };
+
+template <typename TKey>
+TKey  List<TKey>::GetRoot()const
+{
+	if (root!=0)
+		return root->key;
+	else
+		return '!';
+	
+}
 
 template <typename TKey>
 void List<TKey>::print() const

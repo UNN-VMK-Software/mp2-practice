@@ -1,33 +1,36 @@
 #ifndef STACK_H
 #define STACK_H
-
+#include "List.h"
 
 template <typename TKey>
 class Stack
 {
 private:
-	List<TKey>* List;
+	List<TKey>* list;
 public:
 	Stack();
 	Stack(const Stack<TKey>&);
-	~Stack;
+	~Stack();
 
 	void Push(TKey);
 	TKey Pop();
-	TKey Take();
+	TKey Take() const;
 	bool IsEmpty() const;
 	bool IsFull() const;
 };
+
 template <typename TKey>
 Stack<TKey>::Stack()
 {
 	list = new List<TKey>;
 };
+
 template <typename TKey>
 Stack<TKey>::Stack(const Stack&S)
 {
 	list = new List<TKey>(S.list);
 };
+
 template <typename TKey>
 Stack<TKey>::~Stack()
 {
@@ -42,18 +45,17 @@ void Stack<TKey>::Push(TKey key)
 };
 
 template <typename TKey>
-TKey Stack<TKey>::Take()
+TKey Stack<TKey>::Take()const
 {
-	if (IsEmpty()) throw "Is Empty";
-	TKey key = list->key;
-	return key;
+
+	return list->GetRoot();
 };
 
 template <typename TKey>
 TKey Stack<TKey>::Pop()
 {
 	if (IsEmpty()) throw "Is Empty";
-	TKey key = list->key;
+	TKey key = list->GetRoot();
 	try {
 		list->Remove(key);
 	}
@@ -67,26 +69,20 @@ TKey Stack<TKey>::Pop()
 template <typename TKey>
 bool Stack<TKey>::IsEmpty() const
 {
-	return(list->Size == 0);
+	return(list->Size() == 0);
 };
 template <typename TKey>
 bool Stack<TKey>::IsFull() const
 {
 	TKey key = -1;
-	try
-	{
+	try {
 		list -> Add(key);
-		try {
-			list->Remove(key);
-		}
-		catch (const char* ex)
-		{
-			cout << ex << endl;
-		}
+		list->Remove(key);
 	}
-	catch (bool) {
+	catch (const char* ex)
+	{
 		return true;
-	};
+	}
 	return false;
 };
 
