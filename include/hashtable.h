@@ -12,10 +12,7 @@ protected:
 	int hashf(const string k);
 public:	
 	hashtable(int sizeT = DEFAULTSIZE);
-	~hashtable() { for (int i = 0; i < maxsize; i++) delete htab[i]; 
-		delete[] htab; 
-	}
-	
+	~hashtable();
 	type Search(const string k) override;
 	void Insert(const string k, const type& d) override;
 	void Delete(const string k) override;
@@ -32,6 +29,12 @@ template <class type> hashtable<type>::hashtable(int sizeT = DEFAULTSIZE) : tabl
 		htab[i] = new List<line<type>>;
 }
 
+template <class type> hashtable<type>::~hashtable(){
+	for (int i = 0; i < maxsize; i++)
+		delete htab[i];
+		delete[] htab;
+}
+
 template <class type> void hashtable<type>::Reset() {
 	int i = 0;
 	if (size != 0)
@@ -42,20 +45,24 @@ template <class type> void hashtable<type>::Reset() {
 		htab[ind]->Reset();
 	}
 	else
-		throw "not found";
+		throw "empty table";
 }
 
 template <class type> bool hashtable<type>::IsTabEnded() {
 	bool res = false;
 	int i = ind;
-	if (htab[ind]->IsEnded())
+	if (size != 0)
 	{
-		i++;
-		while (i < maxsize && htab[i]->IsEmpty())
+		if (htab[ind]->IsEnded())
+		{
 			i++;
-		if (i == maxsize)
-			res = true;
+			while (i < maxsize && htab[i]->IsEmpty())
+				i++;
+			if (i == maxsize)
+				res = true;
+		}
 	}
+	else res = true;
 	return res;
 
 }
@@ -75,10 +82,11 @@ template <class type> void hashtable<type>::GetNext() {
 	}
 }
 
-template <class type> line<type> hashtable<type>::GetCurrent() {
-	Node < line < type >>* a= (htab[ind]->GetCur());
-	line<type> res = a->data;
-	return res;
+template <class type> line<type> hashtable<type>::GetCurrent() {	
+	if (!IsTabEnded())
+		return htab[ind]->GetCur()->data;
+	else
+		throw "not found";
 }
 
 template <class type> int hashtable<type>::hashf(const string k) {
@@ -90,8 +98,10 @@ template <class type> int hashtable<type>::hashf(const string k) {
 }
 
 template <class type> type hashtable<type>::Search(const string k) {
-	int s = hashf(k);
-	Node<line<type>>* el = htab[s]->Search(line<type>(k, NULL));
+	int s = hashf(k);	
+	
+	Node<line<type>>* el = htab[s]->Search(line<type>(k));
+
 	if (el != NULL)
 		return *((el->data).data);
 	else 
@@ -101,7 +111,7 @@ template <class type> type hashtable<type>::Search(const string k) {
 template <class type> void hashtable<type>::Insert(const string k, const type& d) {
 	
 	int i = 0;
-	Node<line<type>>* el = htab[hashf(k)]->Search(line<type>(k, NULL));
+	Node<line<type>>* el = htab[hashf(k)]->Search(line<type>(k));
 	if (el == NULL)
 	{
 		if (htab[hashf(k)]->IsEmpty())
@@ -118,10 +128,10 @@ template <class type> void hashtable<type>::Insert(const string k, const type& d
 
 template <class type> void hashtable<type>::Delete(const string k) {
 	int s = hashf(k);
-	Node<line<type>>* el = htab[s]->Search(line<type>(k, NULL));
+	Node<line<type>>* el = htab[s]->Search(line<type>(k));
 	if (el != NULL)
 	{
-		htab[s]->Delete(line<type>(k, NULL));
+		htab[s]->Delete(line<type>(k));
 		if (htab[s]->IsEmpty())
 			size--;
 	}
@@ -157,11 +167,11 @@ template<class type> ostream& operator<<(ostream& os,  hashtable<type>& t) {
 	if (t.size != 0)
 	{
 		t.Reset();
-		os << t.GetCurrent().key << "     " << *(t.GetCurrent().data) << endl;
+		os << setw(WIDTHFIRSTCOLUMN) << left << t.GetCurrent().key << *(t.GetCurrent().data) << endl;
 		while (!t.IsTabEnded())
 		{
 			t.GetNext();
-			os << t.GetCurrent().key << "     " << *(t.GetCurrent().data) << endl;
+			os << setw(WIDTHFIRSTCOLUMN) << left << t.GetCurrent().key << *(t.GetCurrent().data) << endl;
 		}
 	}
 	return os;

@@ -1,10 +1,12 @@
 #pragma once
 #include "line.h"
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
-#define DEFAULTSIZE 5
+#define WIDTHFIRSTCOLUMN 30
+#define DEFAULTSIZE 10
 
 template <class type>
 class table {

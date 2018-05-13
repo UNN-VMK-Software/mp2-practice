@@ -114,11 +114,11 @@ template<class type> ostream& operator<<(ostream& os,  sortedtable<type>& t) {
 	if (t.size != 0)
 	{
 		t.Reset();
-		os << t.GetCurrent().key << "     " << *(t.GetCurrent().data) << endl;
+		os << setw(WIDTHFIRSTCOLUMN) << left << t.GetCurrent().key << *(t.GetCurrent().data) << endl;
 		while (!t.IsTabEnded())
 		{
 			t.GetNext();
-			os << t.GetCurrent().key << "     " << *(t.GetCurrent().data) << endl;
+			os << setw(WIDTHFIRSTCOLUMN) << left << t.GetCurrent().key << *(t.GetCurrent().data) << endl;
 		}
 	}
 	return os;

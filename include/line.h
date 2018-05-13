@@ -9,6 +9,7 @@ struct line {
 	string key;
 	line() { key = ""; data = NULL; }
 	line(string k, type d) { key = k; data =new type(d); }
+	line(string k) { key = k; data = NULL; }
 	line<type>& operator=(const line<type>& l);
 	~line() { delete data; }
 	line (const line<type>& l);
