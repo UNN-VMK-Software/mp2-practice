@@ -11,7 +11,7 @@ using namespace std;
 struct TMonom
 {
 	double cf; // коэффициент монома
-	unsigned int abc; // степень монов=ма 
+	unsigned int abc; // степень монома 
 
 	TMonom(); // конструктор 
 	TMonom(const string s); // конструктор по строке

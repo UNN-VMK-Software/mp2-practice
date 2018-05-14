@@ -1,4 +1,5 @@
-#include "TPolinom.h"
+#include "ScanTable.h"
+#include "SortedTable.h"
 
 #include <iostream>
 #include <stdio.h>
@@ -10,116 +11,31 @@ using namespace std;
 void main()
 {
 	setlocale(LC_ALL, "Russian");
-
-	TPolinom A;
-	TPolinom B;
-	TPolinom C;
+	int i = 0;
 	string s;
-	string c;
+	SortedTable A;
 
-	int i = 1;
-	int j = 0;
-	int k;
-	while (i == 1)
+	while (i<5)
 	{
-		cout << "Что хотите сделать с полиномами ?" << endl;
-		cout << "1. Сумма полиномов." << endl;
-		cout << "2. Разность полиномов." << endl;
-		cout << "3. Произведение полиномов." << endl;
-		cout << "4. Произведение полинома и числa." << endl;
-		cout << "5. Произведение числа и полинома." << endl;
-		cout << "Ваш выбор: ";
-		cin >> j;
-		cout << endl;
+		getline(cin, s);
 
-		if (j == 1)
-		{
-			cout << "Введите первый полином: ";
-			cin.ignore();
-			getline(cin, s);
-			cout << endl;
-			cout << "Введите второй полином: ";
-			getline(cin, c);
-			cout << endl;
-
-			TPolinom A(s);
-			TPolinom B(c);
-			C = A + B;
-			cout << C;
-			cout << endl;
-		}
-
-		if (j == 2)
-		{
-			cout << "Введите первый полином: ";
-			cin.ignore();
-			getline(cin, s);
-			cout << endl;
-			cout << "Введите второй полином: ";
-			getline(cin, c);
-			cout << endl;
-
-			TPolinom A(s);
-			TPolinom B(c);
-			C = A - B;
-			cout << C;
-			cout << endl;
-		}
-
-		if (j == 3)
-		{
-			cout << "Введите первый полином: ";
-			cin.ignore();
-			getline(cin, s);
-			cout << endl;
-			cout << "Введите второй полином: ";
-			getline(cin, c);
-			cout << endl;
-
-			TPolinom A(s);
-			TPolinom B(c);
-			C = A * B;
-			cout << C;
-			cout << endl;
-		}
-
-		if (j == 4)
-		{
-			cout << "Введите полином: ";
-			cin.ignore();
-			getline(cin, s);
-			cout << endl;
-			cout << "Введите число: ";
-			cin >> k;
-			TPolinom A(s);
-			C = A * k;
-			cout << C;
-			cout << endl;
-		}
-		
-		if (j == 5)
-		{
-			cout << "Введите число: ";
-			cin >> k;
-			cout << endl;
-			cout << "Введите полином: ";
-			cin.ignore();
-			getline(cin, s);
-			cout << endl;
-			TPolinom A(s);
-			C = k * A;
-			cout << C;
-			cout << endl;
-		}
-
-		cout << endl;
-		cout << "Повторить работу в программе ? " << endl;
-		cout << "1. Да" << endl;
-		cout << "2. Нет" << endl;
-		cout << "Ваш выбор: ";
-		cin >> i;
-		cout << endl;
+		TPolinom B(s);
+		A.Insert(s, B);
+		i++;
 	}
+	string c;
+	getline(cin, c);
+	A.Delete(c);
 
+	getline(cin, s);
+
+	TPolinom B(s);
+	A.Insert(s, B);
+
+	/*string c;
+	getline(cin, c);
+	A.Search(c);*/
+
+	cout << "Hello" << endl;
 	cin.get();
 }
