@@ -1,8 +1,8 @@
 #include "polinom.h"
 
-Ringlist<Monom> Polinom::AddSameAndInsert(const Monom& c,const Ringlist<Monom> r)
+Ringlist<Monom> Polinom::AddSameAndInsert(const Monom& c,const Ringlist<Monom>& p)
 {
-	Ringlist<Monom> temp = r;
+	Ringlist<Monom> temp = p;
 	temp.reset();
 	int k = 0;
 	while (!temp.isended())
@@ -11,8 +11,6 @@ Ringlist<Monom> Polinom::AddSameAndInsert(const Monom& c,const Ringlist<Monom> r
 		{
 			temp.GetCurr().coeff += c.coeff;
 			k++;
-			//if (!temp.GetCurr().coeff)
-				//temp.GetCurr().abc = 0;
 		}
 		temp.SetNext();
 	}

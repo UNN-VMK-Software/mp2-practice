@@ -31,7 +31,6 @@ public:
 class Polinom
 {
 	Ringlist<Monom> pol;
-	Ringlist<Monom> AddSameAndInsert(const Monom& c, const Ringlist<Monom> r);
 	Ringlist<Monom> Parse(const string& s);
 
 public:
@@ -39,13 +38,14 @@ public:
 	Polinom(const string& str);
 	Polinom(const Polinom& p);
 	Polinom(const Ringlist<Monom>& p) { pol = p; }
+	Ringlist<Monom> AddSameAndInsert(const Monom& c, const Ringlist<Monom>& p);
 
 	Polinom& operator=(const Polinom& p);
 	Polinom operator+(const Polinom& p);
 	Polinom operator-(const Polinom& p)
 	{
 		Polinom temp(*this);
-		temp =temp + (-1) * p;
+		temp = temp + (-1) * p;
 		return temp;
 	}
 	Polinom operator*(const int& c);
