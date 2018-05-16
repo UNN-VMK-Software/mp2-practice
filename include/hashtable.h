@@ -7,31 +7,27 @@
 template <class type>
 class hashtable :public table <type> {
 protected:	
-	List<line<type>>** htab;
+	List<line<type>>* htab;
 	void Realloc()override;
 	int hashf(const string k);
 public:	
 	hashtable(int sizeT = DEFAULTSIZE);
 	~hashtable();
-	type Search(const string k) override;
+	type* Search(const string k) override;
 	void Insert(const string k, const type& d) override;
 	void Delete(const string k) override;
 	void Reset() override;
 	void GetNext()override;
-	bool IsTabEnded() override;
-	line<type> GetCurrent() override;
+	bool IsTabEnded() const override;
+	line<type> GetCurrent() const override;
 	template<class t> friend ostream& operator<<(ostream& os, hashtable<t>& t);
 };
 
 template <class type> hashtable<type>::hashtable(int sizeT = DEFAULTSIZE) : table(sizeT) {
-	htab = new List<line<type>>*[maxsize];
-	for (int i = 0; i < maxsize; i++)
-		htab[i] = new List<line<type>>;
+	htab = new List<line<type>>[maxsize];
 }
 
-template <class type> hashtable<type>::~hashtable(){
-	for (int i = 0; i < maxsize; i++)
-		delete htab[i];
+template <class type> hashtable<type>::~hashtable(){	
 		delete[] htab;
 }
 
@@ -39,24 +35,24 @@ template <class type> void hashtable<type>::Reset() {
 	int i = 0;
 	if (size != 0)
 	{
-		while (htab[i]->IsEmpty())
+		while (htab[i].IsEmpty())
 			i++;
 		ind = i;	
-		htab[ind]->Reset();
+		htab[ind].Reset();
 	}
 	else
 		throw "empty table";
 }
 
-template <class type> bool hashtable<type>::IsTabEnded() {
+template <class type> bool hashtable<type>::IsTabEnded() const {
 	bool res = false;
 	int i = ind;
 	if (size != 0)
 	{
-		if (htab[ind]->IsEnded())
+		if (htab[ind].IsEnded())
 		{
 			i++;
-			while (i < maxsize && htab[i]->IsEmpty())
+			while (i < maxsize && htab[i].IsEmpty())
 				i++;
 			if (i == maxsize)
 				res = true;
@@ -68,25 +64,22 @@ template <class type> bool hashtable<type>::IsTabEnded() {
 }
 
 template <class type> void hashtable<type>::GetNext() {
-	if (!htab[ind]->IsEnded())
-		htab[ind]->GetNext();
+	if (!htab[ind].IsEnded())
+		htab[ind].GetNext();
 	else
 	{
 		ind++;
-		while (ind<maxsize && htab[ind]->IsEmpty())
+		while (ind<maxsize && htab[ind].IsEmpty())
 			ind++;
 		if (ind==maxsize)
 			Reset();		
 		else			
-			htab[ind]->Reset();		
+			htab[ind].Reset();		
 	}
 }
 
-template <class type> line<type> hashtable<type>::GetCurrent() {	
-	if (!IsTabEnded())
-		return htab[ind]->GetCur()->data;
-	else
-		throw "not found";
+template <class type> line<type> hashtable<type>::GetCurrent() const {	
+		return htab[ind].GetCur()->data;
 }
 
 template <class type> int hashtable<type>::hashf(const string k) {
@@ -97,13 +90,13 @@ template <class type> int hashtable<type>::hashf(const string k) {
 	return res;
 }
 
-template <class type> type hashtable<type>::Search(const string k) {
+template <class type> type* hashtable<type>::Search(const string k) {
 	int s = hashf(k);	
 	
-	Node<line<type>>* el = htab[s]->Search(line<type>(k));
+	Node<line<type>>* el = htab[s].Search(line<type>(k));
 
 	if (el != NULL)
-		return *((el->data).data);
+		return (el->data).data;
 	else 
 		throw "not found";
 }
@@ -111,16 +104,16 @@ template <class type> type hashtable<type>::Search(const string k) {
 template <class type> void hashtable<type>::Insert(const string k, const type& d) {
 	
 	int i = 0;
-	Node<line<type>>* el = htab[hashf(k)]->Search(line<type>(k));
+	Node<line<type>>* el = htab[hashf(k)].Search(line<type>(k));
 	if (el == NULL)
 	{
-		if (htab[hashf(k)]->IsEmpty())
+		if (htab[hashf(k)].IsEmpty())
 		{
 			size++;
 			if (double(size) / maxsize > LOADFACTOR)
 				Realloc();
 		}
-		htab[hashf(k)]->InsertToHead(line<type>(k, d));
+		htab[hashf(k)].InsertToHead(line<type>(k, d));
 	}
 	else
 		throw "repeated key";
@@ -128,11 +121,11 @@ template <class type> void hashtable<type>::Insert(const string k, const type& d
 
 template <class type> void hashtable<type>::Delete(const string k) {
 	int s = hashf(k);
-	Node<line<type>>* el = htab[s]->Search(line<type>(k));
+	Node<line<type>>* el = htab[s].Search(line<type>(k));
 	if (el != NULL)
 	{
-		htab[s]->Delete(line<type>(k));
-		if (htab[s]->IsEmpty())
+		htab[s].Delete(line<type>(k));
+		if (htab[s].IsEmpty())
 			size--;
 	}
 	else
@@ -142,21 +135,17 @@ template <class type> void hashtable<type>::Delete(const string k) {
 template <class type> void hashtable<type>::Realloc() {
 
 	int nmaxsize = maxsize * 2;
-	List<line<type>>** temp;
-	temp = new List<line<type>>*[nmaxsize];
-	for (int i = 0; i < nmaxsize; i++)
-		temp[i] = new List<line<type>>;
+	List<line<type>>* temp;
+	temp = new List<line<type>>[nmaxsize];	
 
 	Reset();	
-	temp[hashf(GetCurrent().key)]->InsertToHead(GetCurrent());
+	temp[hashf(GetCurrent().key)].InsertToHead(GetCurrent());
 	while (!IsTabEnded())
 	{
 		GetNext();
-		temp[hashf(GetCurrent().key)]->InsertToHead(GetCurrent());
+		temp[hashf(GetCurrent().key)].InsertToHead(GetCurrent());
 	}
-
-	for (int i = 0; i < maxsize; i++)
-		delete htab[i];
+	
 	delete[] htab;
 	
 	maxsize = nmaxsize;

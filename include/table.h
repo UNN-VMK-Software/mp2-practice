@@ -20,13 +20,14 @@ public:
 	virtual ~table() {};
 	virtual void Insert(const string k, const type& d)=0;
 	virtual void Delete(const string k) = 0;
-	virtual type Search(const string k) = 0;	
+	virtual type* Search(const string k) = 0;	
 	virtual void Reset() = 0;
-	virtual bool IsTabEnded() = 0;
+	virtual bool IsTabEnded() const = 0;
 	virtual void GetNext()=0;
-	virtual line<type> GetCurrent() = 0;
-	bool IsEmpty() { return size == 0; }
-	int GetSize() { return size; }
+	virtual line<type> GetCurrent() const = 0;
+	bool IsEmpty() const { return size == 0; }
+	bool IsFull() const { return size == maxsize; }
+	int GetSize() const { return size; }
 	
 };
 

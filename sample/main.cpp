@@ -2,6 +2,7 @@
 #include "hashtable.h"
 #include "sortedtable.h"
 #include <iostream>
+#include <sstream>
 
 char main_menu()
 {
@@ -32,7 +33,9 @@ void main() {
 	hashtable<polynom>hasht;
 	polynom p, res;
 	string polynom, yn;
-	string k1, k2;
+	string k, k1;
+	stringstream b;
+
 
 	do {
 
@@ -40,14 +43,14 @@ void main() {
 		{
 			system("cls");
 
-			cout << "Polynom: " << res << endl << "Enter the key: ";
-			cin >> k1;
-			 
+			b << res;
+			k = b.str();  
+
 			try
 			{
-				scant.Insert(k1, res);
-				sortt.Insert(k1, res);
-				hasht.Insert(k1, res);
+				scant.Insert(k, res);
+				sortt.Insert(k, res);
+				hasht.Insert(k, res);
 			}
 			catch (...)
 			{
@@ -77,18 +80,17 @@ void main() {
 		{
 			system("cls");
 
-			cout << "Add polynom" << endl << "Enter the key: ";			
-			cin >> k1;
-			cout << "Enter the polynom: ";
+			cout << "Add polynom" << endl << "Enter the polynom: ";					
 			cin >> polynom;
 			cout << endl;
 			p = polynom;
+			k = polynom; 
 
 			try
 			{
-				scant.Insert(k1, p);
-				sortt.Insert(k1, p);
-				hasht.Insert(k1, p);
+				scant.Insert(k, p);
+				sortt.Insert(k, p);
+				hasht.Insert(k, p);
 			}
 			catch (...)
 			{
@@ -103,15 +105,13 @@ void main() {
 			system("cls");
 
 			cout << "Delete polynom" << endl << "Enter the key: ";
-			cin >> k1;
+			cin >> k;
 			
 			try
 			{
-				cout <<"Polynom: "<< sortt.Search(k1) << endl;
-
-				scant.Delete(k1);
-				sortt.Delete(k1);
-				hasht.Delete(k1);
+				scant.Delete(k);
+				sortt.Delete(k);
+				hasht.Delete(k);
 			}
 			catch (...)
 			{
@@ -126,11 +126,13 @@ void main() {
 			system("cls");
 
 			cout << "Find polynom" << endl<< "Enter the key: ";
-			cin >> k1;
+			cin >> k;
 
 			try
 			{
-				cout << sortt.Search(k1) << endl;
+				cout << *(scant.Search(k)) << endl;
+				cout << *(sortt.Search(k)) << endl;
+				cout << *(hasht.Search(k)) << endl;
 			}
 			catch (...)
 			{
@@ -145,14 +147,14 @@ void main() {
 			system("cls");
 
 			cout << "Enter the key of the first polynom: ";
-			cin >> k1;
+			cin >> k;
 			cout << "Enter the key of the second polynom: ";
-			cin >> k2;
+			cin >> k1;
 
 			try
 			{
-				res = sortt.Search(k1) + sortt.Search(k2);
-				cout << endl << sortt.Search(k1) << '+' << sortt.Search(k2) << '=' << res << endl;
+				res = *(sortt.Search(k)) + *(sortt.Search(k1));
+				cout << endl << *(sortt.Search(k)) << '+' << *(sortt.Search(k1)) << '=' << res << endl;
 
 				cout << endl << "Save polynom?" << endl << " 1) Yes" << endl << " 2) No" << endl << "Your choice: " << endl;
 				cin >> yn;
@@ -171,14 +173,14 @@ void main() {
 			system("cls");
 
 			cout << "Enter the key of the first polynom: ";
-			cin >> k1;
+			cin >> k;
 			cout << "Enter the key of the second polynom: ";
-			cin >> k2;
+			cin >> k1;
 
 			try
 			{
-				res = sortt.Search(k1) - sortt.Search(k2);
-				cout << sortt.Search(k1) << '-' << sortt.Search(k2) << '=' << res << endl;
+				res = *(sortt.Search(k)) - *(sortt.Search(k1));
+				cout << *(sortt.Search(k)) << '-' << *(sortt.Search(k1)) << '=' << res << endl;
 
 				cout << endl << "Save polynom?" << endl << " 1) Yes" << endl << " 2) No" << endl << "Your choice: " << endl;
 				cin >> yn;
@@ -196,14 +198,14 @@ void main() {
 			system("cls");
 
 			cout << "Enter the key of the first polynom: ";
-			cin >> k1;
+			cin >> k;
 			cout << "Enter the key of the second polynom: ";
-			cin >> k2;
+			cin >> k1;
 
 			try
 			{
-				res = sortt.Search(k1) * sortt.Search(k2);
-				cout << endl << sortt.Search(k1) << '*' << sortt.Search(k2) << '=' << res << endl;
+				res = *(sortt.Search(k)) * *(sortt.Search(k1));
+				cout << endl << *(sortt.Search(k)) << '*' << *(sortt.Search(k1)) << '=' << res << endl;
 
 				cout << endl << "Save polynom?" << endl << " 1) Yes" << endl << " 2) No" << endl << "Your choice: " << endl;
 				cin >> yn;

@@ -7,25 +7,37 @@ class sortedtable :public table <type> {
 protected:	
 	int BinSearch(const string k);
 	void Realloc()override;
-	line<type>* stab;
+	line<type>** stab;
 public:	
-	sortedtable(int sizeT= DEFAULTSIZE) : table(sizeT) { stab = new line<type>[sizeT]; }
-	~sortedtable() { delete[] stab; }
+	sortedtable(int sizeT = DEFAULTSIZE);
+	~sortedtable();
 	sortedtable(const scantable<type> & t); // преобрпзование таблицы типа scantable к sortedtable
 	void Insert(const string k, const type& d) override;
 	void Delete(const string k) override;
-	type Search(const string k) override;	
+	type* Search(const string k) override;	
 	void Reset() override;
-	bool IsTabEnded() override;
+	bool IsTabEnded() const  override;
 	void GetNext()override;
-	line<type> GetCurrent() override;	
+	line<type> GetCurrent() const override;	
 	template<class type> friend ostream& operator<<(ostream& os, sortedtable<type>& t);
 };
 
-template <class type> sortedtable<type>::sortedtable(const scantable<type> & t): table (t.maxsize){
-	stab = new line<type>[maxsize];
+template <class type> sortedtable<type>::sortedtable(int sizeT = DEFAULTSIZE) : table(sizeT) {
+	stab = new line<type>*[maxsize];
+}
+
+template <class type> sortedtable<type>::~sortedtable() {
 	for (int i = 0; i < size; i++)
-		Insert(t.stab[i].key, *(t.stab[i].data));
+		delete stab[i];
+	delete[] stab;
+}
+
+template <class type> sortedtable<type>::sortedtable(const scantable<type> & t): table (t.maxsize){
+	stab = new line<type>*[maxsize];
+	for (int i = 0; i < maxsize; i++)
+		stab[i] = new line<type>;
+	for (int i = 0; i < size; i++)
+		Insert(t.stab[i]->key, *(t.stab[i]->data));
 
 }
 
@@ -43,13 +55,13 @@ template <class type> void sortedtable<type>::GetNext() {
 		Reset();
 }
 
-template<class type> bool sortedtable<type>::IsTabEnded() {
+template<class type> bool sortedtable<type>::IsTabEnded() const {
 	return (ind >= size - 1);
 }
 
-template<class type> line<type> sortedtable<type>::GetCurrent() {
+template<class type> line<type> sortedtable<type>::GetCurrent() const {
 	if (ind <= size - 1)
-		return stab[ind];
+		return *(stab[ind]);
 	else
 		throw "not found";
 }
@@ -59,7 +71,7 @@ template <class type> int sortedtable<type>::BinSearch(const string k) {
 	while (st <= fn)
 	{
 		mid = (st + fn) / 2;
-		if (k > stab[mid].key)
+		if (k > stab[mid]->key)
 			st = mid + 1;
 		else fn = mid - 1;
 	}
@@ -68,33 +80,34 @@ template <class type> int sortedtable<type>::BinSearch(const string k) {
 
 template <class type> void sortedtable<type>::Insert(const string k, const type& d) {
 	int pos = BinSearch(k);
-	if ((pos < size && stab[pos].key != k) || pos==size)
+	if ((pos < size && stab[pos]->key != k) || pos==size)
 	{
 		if (size == maxsize)
 			Realloc();
 		for (int i = size - 1; i >= pos; i--)
 			stab[i + 1] = stab[i];
 		size++;
-		stab[pos] = line<type>(k, d);
+		stab[pos] = new line<type>(k, d);
 	}
 	else
 		throw "repeated key";
 }
 
-template <class type> type sortedtable<type>::Search(const string k) {		
+template <class type> type* sortedtable<type>::Search(const string k) {		
 	int pos = BinSearch(k);
-	if (pos < size && stab[pos].key == k)
-		return  *(stab[pos].data);
+	if (pos < size && stab[pos]->key == k)
+		return  stab[pos]->data;
 	else 
 		throw "not found";
 }
 
 template <class type> void sortedtable<type>::Delete(const string k) {	
 	int pos = BinSearch(k);
-	if (pos<size && stab[pos].key == k)
+	if (pos<size && stab[pos]->key == k)
 	{
 		size--;
-		for (int i = pos; i < size; i++)
+		delete stab[pos];
+		for (int i = pos; i < size; i++)			
 			stab[i] = stab[i + 1];
 	}
 	else 
@@ -103,7 +116,10 @@ template <class type> void sortedtable<type>::Delete(const string k) {
 
 template <class type> void sortedtable<type>::Realloc() {
 	maxsize *= 2;
-	line<type>* temp = new line<type>[maxsize];
+	line<type>** temp;
+	temp = new line<type>*[maxsize];
+	for (int i = 0; i < maxsize; i++)
+		temp[i] = new line<type>;
 	for (int i = 0; i < size; i++)
 		temp[i] = stab[i];
 	delete[] stab;
