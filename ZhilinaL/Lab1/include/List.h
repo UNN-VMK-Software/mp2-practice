@@ -5,24 +5,25 @@ template<typename T>
 class list
 {
 private:
-	Node<T>* head;									
-	Node<T>* cur;
+	Node<T>* head;//указатель на голову списка-фиктивное звено							
+	Node<T>* cur;//указатель на текущий элемент
 public:
-	void Clean();
-	list();												
-	list(const list<T>& a);                  	    
-	~list();											
-	list<T>& operator=(const list<T> &a);		    
-	void Insert(T elem);					        	
-	void InsertToTail(T elem);   
-	void InsertAfter(Node<T>* N, T Data);
+	void Clean();//очистка списка
+	list();//конструктор по умолчанию						
+	list(const list<T>& a);//конструктор копировния        	    
+	~list();//деструктор	
+	list<T>& operator=(const list<T> &a);//перегрузка оператора присваивания		    
+	void Insert(T elem);//вставка элемента в упорядоченный список
+	void InsertToTail(T elem);//вставка в конец списка   
+	void InsertAfter(Node<T>* N, T Data);//вставка после определенного звена
+	//перегрузка операторов сравнения
 	bool operator==(const list<T>& sp) const;
 	bool operator!=(const list<T>& sp) const { return !(*this == sp); }
-
-	void Reset() { cur = head->next; }
-	void Step() { cur = cur->next; }
-	Node<T>* GetCur() const { return cur; }
-	bool IsNotOver() const { return !(cur == head); }
+	//методы навигации
+	void Reset() { cur = head->next; }//в начало списка
+	void Step() { cur = cur->next; }//шаг на одно звено вперед
+	Node<T>* GetCur() const { return cur; }//получить текущий элемент
+	bool IsNotOver() const { return !(cur == head); }//проверка на окончание списка
 };
 
 

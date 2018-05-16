@@ -217,7 +217,9 @@ ostream& operator<<(ostream &ostr, const Polinom& pol)
 {
 	Polinom p = pol;
 	p.Plist.Reset();
-
+	Polinom zero("");
+	if (pol == zero)
+		ostr << "0";
 	while (p.Plist.IsNotOver())
 	{
 		monom temp = p.Plist.GetCur()->data;
@@ -254,5 +256,6 @@ ostream& operator<<(ostream &ostr, const Polinom& pol)
 				ostr << "z";
 		p.Plist.Step();
 	}
+
 	return ostr;
 }

@@ -25,7 +25,7 @@ int main()
 			cout << "Enter second polinom: ";
 			cin >> s2;
 			p2 = s2;
-			cout << "Result of operation: " << p1<<"+"<<p2<<"="<<p1 + p2 << endl << endl;
+			cout << "Result of operation: " << p1 + p2 << endl << endl;
 			break;
 		}
 		case '2':
