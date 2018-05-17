@@ -11,13 +11,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{93E66E49-D18B-467E-8D40-EEF22CFED32F}</ProjectGuid>
+    <ProjectGuid>{84C03AD3-F6AF-4FDA-8C24-9086B5542B97}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Table</RootNamespace>
+    <RootNamespace>lab2</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -78,13 +78,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\hash_table.h" />
-    <ClInclude Include="..\..\..\include\prosm_table.h" />
-    <ClInclude Include="..\..\..\include\table.h" />
-    <ClInclude Include="..\..\..\include\upor_table.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\src\table.cpp">
+    <ClCompile Include="..\..\..\samples\main1.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../../include</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemGroup>
