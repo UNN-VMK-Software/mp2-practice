@@ -61,14 +61,14 @@ int Stack<valtype>::isFull() const
 template <class valtype>
 void Stack<valtype>::push(valtype key)
 {
-	if (isFull()) throw "Stack is full";
+	if (isFull()) throw "Стэк полон!";
 	list->insertFirst(key);
 }
 
 template <class valtype>
 valtype Stack<valtype>::pop()
 {
-	if (isEmpty()) throw "Stack is empty";
+	if (isEmpty()) throw "Стэк пуст!";
 	valtype result = list->getFirst()->key;
 	list->erase(result);
 	return result;
@@ -77,6 +77,6 @@ valtype Stack<valtype>::pop()
 template <class valtype>
 valtype Stack<valtype>::look()
 {
-	if (isEmpty()) throw "Stack is empty";
+	if (isEmpty()) throw "Стэк пуст!";
 	return list->getFirst()->key;
 }

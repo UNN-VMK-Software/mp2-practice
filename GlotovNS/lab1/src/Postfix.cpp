@@ -39,20 +39,20 @@ string Postfix::postfix_notation(string expression)
 			while ((!opStack.isEmpty()) && (opStack.look() != '('))		 									
 				trackStack.push(opStack.pop());							
 			if (opStack.isEmpty())										
-				throw "brackets are not consistent";
+				throw "несогласованные скобки!";
 			opStack.pop();
 			continue;
 		}
-		throw "invalid characters";
+		throw "недопустимые символы";
 	}
 	while (!opStack.isEmpty()) {
 		if (opStack.look() == '(')
-			throw "brackets are not consistent";
+			throw "несогласованные скобки!";
 		trackStack.push(opStack.pop());
 	}
 
 	if (trackStack.isEmpty())
-		throw "no data";
+		throw "нет данных";
 
 	string result;
 	string tmp;
@@ -67,7 +67,7 @@ string Postfix::postfix_notation(string expression)
 float Postfix::postfix_calculation(string expression)
 {
 	if (expression == "")
-		throw "no data";
+		throw "нет данных";
 	Stack<float> trackStack;
 	char buff;
 	float leftOperand;
@@ -75,7 +75,7 @@ float Postfix::postfix_calculation(string expression)
 
 	map<char, float> values;
 
-	cout << "Input values: " << endl;
+	cout << "Введите значения: " << endl;
 	for (int i = 0; i < expression.length(); i++) {
 		buff = expression[i];
 		if (expression[expression.length() - 1] == '=')
@@ -91,10 +91,10 @@ float Postfix::postfix_calculation(string expression)
 		}
 
 		if (trackStack.isEmpty())
-			throw "does not match the number of operands";
+			throw "не соответствует количеству операндов";
 		rightOperand = trackStack.pop();
 		if (trackStack.isEmpty())
-			throw "does not match the number of operands";
+			throw "не соответствует количеству операндов";
 		leftOperand = trackStack.pop();
 
 		switch (buff) {
@@ -108,6 +108,6 @@ float Postfix::postfix_calculation(string expression)
 
 	float result = trackStack.pop();
 	if (!trackStack.isEmpty())
-		throw "many operands";
+		throw "много операндов!";
 	return result;
 }

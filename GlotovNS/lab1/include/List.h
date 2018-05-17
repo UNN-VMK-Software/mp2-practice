@@ -69,7 +69,7 @@ template <class valtype>
 void List<valtype>::print()
 {
 	if (!pFirst) {
-		std::cout << "No members" << std::endl;
+		std::cout << "Нет участников" << std::endl;
 		return;
 	}
 
@@ -84,7 +84,7 @@ void List<valtype>::print()
 template <class valtype>
 NODE<valtype>* List<valtype>::search(valtype key)
 {
-	if (!pFirst) throw "List is empty";
+	if (!pFirst) throw "Список пуст!";
 
 	NODE<valtype> *tmp = pFirst;
 	while ((tmp != 0) && (tmp->key != key))
@@ -118,7 +118,7 @@ NODE<valtype>* List<valtype>::searchPrev(valtype key, NODE<valtype> *&elem)
 template <class valtype>
 void List<valtype>::erase(NODE<valtype> *elem)
 {
-	if (!pFirst) throw "List is empty";
+	if (!pFirst) throw "Список пуст!";
 	NODE<valtype> *point = pFirst;
 	NODE<valtype> *pPrev = 0;
 	while ((point != 0) && (point != elem)) {
@@ -140,11 +140,11 @@ void List<valtype>::erase(NODE<valtype> *elem)
 template <class valtype>
 void List<valtype>::erase(valtype key)
 {
-	if (!pFirst) throw "List is empty";
+	if (!pFirst) throw "Список пуст!";
 	NODE<valtype> *point;
 	NODE<valtype> *pPrev = searchPrev(key, point);
 	if ((!pPrev) && (pFirst->key != key))
-		throw "Can't find element";
+		throw "Не удается найти элемент";
 	if (!pPrev) {
 		pFirst = pFirst->pNext;
 		delete point;
@@ -183,11 +183,11 @@ void List<valtype>::insertLast(valtype key)
 template <class valtype>
 void List<valtype>::insertBefore(valtype key, NODE<valtype> *elem)
 {
-	if (!pFirst) throw "List is empty";
+	if (!pFirst) throw "Список пуст!";
 	NODE<valtype> *point;
 	NODE<valtype> *pPrev = searchPrev(key, point);
 	if ((!pPrev) && (pFirst->key != key))
-		throw "No place with sourse key to insert";
+		throw "Нет места с исходным ключом для вставки";
 
 	elem->pNext = point;
 	if (!pPrev) {
@@ -200,10 +200,10 @@ void List<valtype>::insertBefore(valtype key, NODE<valtype> *elem)
 template <class valtype>
 void List<valtype>::insertAfter(valtype key, NODE<valtype> *elem)
 {
-	if (!pFirst) throw "List is empty";
+	if (!pFirst) throw "Список пуст!";
 	NODE<valtype> *point = search(key);
 	if (!point)
-		throw "No place with sourse key to insert";
+		throw "Нет места с исходным ключом для вставки";
 	elem->pNext = point->pNext;
 	point->pNext = elem;
 }
