@@ -105,54 +105,9 @@ TEST_P(Mult_const, polynom_mult_const)
 }
 
 INSTANTIATE_TEST_CASE_P(Inst4, Mult_const, ::testing::Values(
-	Calc("", "x", "", 0),
-	Calc("-4z", "z", "", -4),
+	Calc("", "z", "", 0),
+	Calc("-8x", "x", "", -8),
 	Calc("12x-18", "-6x+9", "", -2),
 	Calc("16xy+104x-8", "8xy+52x-4", "", 2),
 	Calc("4.5yz+18x+1.5y", "3yz+12x+y", "", 1.5)
 ));
-/*#include "gtest.h"
-#include "Polinom.h"
-#include <vector>
-
-using namespace std;
-struct calc_st
-{
-	string a, b, res;
-	double c;
-	calc_st(string s, string ia, string ib = "", double ic = 0)
-	{
-		a = ia;
-		b = ib;
-		c = ic;
-		res = s;
-	}
-};
-class Test_Polinom : public testing::Test
-{
-protected:
-	Polinom p1;
-	Polinom p2;
-	string s1;
-	string s2 = "x^5";
-public:
-	//Test_Polinom() { l2.Insert(2), l2.Insert(5); }
-	~Test_Polinom() {};
-};
-TEST_F(Test_Polinom, can_create_polinom)
-{
-	ASSERT_NO_THROW(Polinom p);
-}
-TEST_F(Test_Polinom, can_create_polinom_from_string)
-{
-	ASSERT_NO_THROW(Polinom p(s2));
-}
-TEST_F(Test_Polinom, can_assign_polinom_to_string)
-{
-	ASSERT_NO_THROW(Polinom p=s1);
-}
-
-TEST(Test_Polinom, can_copy_polinom)
-{
-	ASSERT_NO_THROW(Polinom a("x^5"));
-}*/
