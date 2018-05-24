@@ -76,12 +76,13 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\include\monom.h" />
     <ClInclude Include="..\..\..\include\polinom.h" />
     <ClInclude Include="..\..\..\include\ringlist.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\polinom.cpp" />
-    <ClCompile Include="..\..\..\src\ringlist.cpp" />
+    <ClCompile Include="..\..\..\src\monom.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
