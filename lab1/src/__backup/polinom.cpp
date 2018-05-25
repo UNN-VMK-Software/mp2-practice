@@ -1,6 +1,6 @@
 #include "Polinoms.h"
 
-TPolinom::TPolinom(const std::string& s)
+TPolinom::TPolinom(const string& s)
 {
 	string str = s;
 	if (str[0] != '\0')
@@ -89,20 +89,16 @@ TPolinom::TPolinom(const std::string& s)
 					}
 				}
 			}
-			if (temp.abc != 0 && temp.cf != 0) {
+			if (temp.abc != 0) {
 				TLink<Tmonom>* link = monoms.Search(temp);
 				if (link != NULL)
-				{	
-					if (link->data.cf + temp.cf != 0)
-					{
-						link->data.cf += temp.cf;
-					}
-					else monoms.Delete(link->data);
+				{
+					link->data.cf += temp.cf;
 				}
-				else 
+				else
 					monoms.Insert(temp);
 			}
-			else if (temp.abc == 0 && temp.cf != 0)
+			else
 			{
 				monoms.InsertInEnd(temp);
 			}
@@ -128,34 +124,32 @@ TPolinom TPolinom::operator+ (const TPolinom & _polinom)
 	res.monoms.Reset();
 	while (!copy_of_polinom.monoms.IsEnded() && !(*this).monoms.IsEnded())
 	{
-		if (copy_of_polinom.monoms.GetCurrent()->data < (*this).monoms.GetCurrent()->data)
+		if (copy_of_polinom.monoms.current->data < (*this).monoms.current->data)
 		{
-			res.monoms.InsertInEnd((*this).monoms.GetCurrent()->data);
+			res.monoms.InsertInEnd((*this).monoms.current->data);
 			(*this).monoms.GetNext();
 		}
-		else if (copy_of_polinom.monoms.GetCurrent()->data == (*this).monoms.GetCurrent()->data)
+		else if ((copy_of_polinom.monoms.current->data == (*this).monoms.current->data)
+			&& ((*this).monoms.current->data.cf + copy_of_polinom.monoms.current->data.cf != 0.0))
 		{
-			if ((*this).monoms.GetCurrent()->data.cf + copy_of_polinom.monoms.GetCurrent()->data.cf != 0.0)
-			{
-				res.monoms.InsertInEnd((*this).monoms.GetCurrent()->data + copy_of_polinom.monoms.GetCurrent()->data);
-			}
+			res.monoms.InsertInEnd((*this).monoms.current->data + copy_of_polinom.monoms.current->data);
 			(*this).monoms.GetNext();
 			copy_of_polinom.monoms.GetNext();
 		}
 		else
 		{
-			res.monoms.InsertInEnd(copy_of_polinom.monoms.GetCurrent()->data);
+			res.monoms.InsertInEnd(copy_of_polinom.monoms.current->data);
 			copy_of_polinom.monoms.GetNext();
 		}
 	}
 	while (!copy_of_polinom.monoms.IsEnded())
 	{
-		res.monoms.InsertInEnd(copy_of_polinom.monoms.GetCurrent()->data);
+		res.monoms.InsertInEnd(copy_of_polinom.monoms.current->data);
 		copy_of_polinom.monoms.GetNext();
 	}
 	while (!(*this).monoms.IsEnded())
 	{
-		res.monoms.InsertInEnd((*this).monoms.GetCurrent()->data);
+		res.monoms.InsertInEnd((*this).monoms.current->data);
 		(*this).monoms.GetNext();
 	}
 	return res;
@@ -165,20 +159,13 @@ TPolinom & TPolinom::operator+=(const TPolinom & _polinom)
 {
 	TPolinom copy_of_polinom(_polinom);
 	copy_of_polinom.monoms.Reset();
-	for (copy_of_polinom.monoms.GetCurrent(); !copy_of_polinom.monoms.IsEnded(); copy_of_polinom.monoms.GetNext())
+	for (copy_of_polinom.monoms.current; !copy_of_polinom.monoms.IsEnded(); copy_of_polinom.monoms.GetNext())
 	{
-		TLink<Tmonom>* tmp2 = (*this).monoms.Search(copy_of_polinom.monoms.GetCurrent()->data);
+		TLink<Tmonom>* tmp2 = (*this).monoms.Search(copy_of_polinom.monoms.current->data);
 		if (tmp2 != NULL)
-		{
-			if (tmp2->data.cf + copy_of_polinom.monoms.GetCurrent()->data.cf != 0)
-			{
-				tmp2->data.cf += copy_of_polinom.monoms.GetCurrent()->data.cf;
-			}
-			else
-				(*this).monoms.Delete(tmp2->data);
-		}
+			tmp2->data.cf += copy_of_polinom.monoms.current->data.cf;
 		else
-			(*this).monoms.Insert(copy_of_polinom.monoms.GetCurrent()->data);
+			(*this).monoms.Insert(copy_of_polinom.monoms.current->data);
 	}
 	return *this;
 }
@@ -190,23 +177,19 @@ TPolinom TPolinom::operator* (const TPolinom & _polinom)
 	copy_of_polinom.monoms.Reset();
 	TPolinom res;
 	res.monoms.Reset();
-	for ((*this).monoms.GetCurrent(); !(*this).monoms.IsEnded(); (*this).monoms.GetNext())
+	for ((*this).monoms.current; !(*this).monoms.IsEnded(); (*this).monoms.GetNext())
 	{
-		for (copy_of_polinom.monoms.GetCurrent(); !copy_of_polinom.monoms.IsEnded(); copy_of_polinom.monoms.GetNext())
+		for (copy_of_polinom.monoms.current; !copy_of_polinom.monoms.IsEnded(); copy_of_polinom.monoms.GetNext())
 		{
-			if (((*this).monoms.GetCurrent()->data.abc + copy_of_polinom.monoms.GetCurrent()->data.abc < 1000) &&
-				(((*this).monoms.GetCurrent()->data.abc / 10 % 10 + copy_of_polinom.monoms.GetCurrent()->data.abc / 10 % 10) < 10) &&
-				(((*this).monoms.GetCurrent()->data.abc % 10 + copy_of_polinom.monoms.GetCurrent()->data.abc % 10) < 10))
+			if (((*this).monoms.current->data.abc + copy_of_polinom.monoms.current->data.abc < 1000) &&
+				(((*this).monoms.current->data.abc / 10 % 10 + copy_of_polinom.monoms.current->data.abc / 10 % 10) < 10) &&
+				(((*this).monoms.current->data.abc % 10 + copy_of_polinom.monoms.current->data.abc % 10) < 10))
 			{
-				unsigned int tmpabc = (*this).monoms.GetCurrent()->data.abc + copy_of_polinom.monoms.GetCurrent()->data.abc;
-				Tmonom tmp((*this).monoms.GetCurrent()->data.cf * copy_of_polinom.monoms.GetCurrent()->data.cf, tmpabc);
+				unsigned int tmpabc = (*this).monoms.current->data.abc + copy_of_polinom.monoms.current->data.abc;
+				Tmonom tmp((*this).monoms.current->data.cf * copy_of_polinom.monoms.current->data.cf, tmpabc);
 				TLink<Tmonom>* tmp2 = res.monoms.Search(tmp);
 				if (tmp2 != NULL)
-					if ((tmp2->data.cf += (*this).monoms.GetCurrent()->data.cf * copy_of_polinom.monoms.GetCurrent()->data.cf) == 0)
-					{
-						res.monoms.Delete(tmp2->data);
-					}
-					else tmp2->data.cf += (*this).monoms.GetCurrent()->data.cf * copy_of_polinom.monoms.GetCurrent()->data.cf;
+					tmp2->data.cf = (*this).monoms.current->data.cf * copy_of_polinom.monoms.current->data.cf;
 				else
 					res.monoms.Insert(tmp);
 			}
@@ -217,6 +200,14 @@ TPolinom TPolinom::operator* (const TPolinom & _polinom)
 	return res;
 }
 
+//const TPolinom TPolinom::operator- (const TPolinom & _polinom)
+//{
+//	TPolinom res, operand2;
+//	operand2 = _polinom * (-1);
+//	res = *this + operand2;
+//	return res;
+//}
+
 TPolinom TPolinom::operator* (double d)
 {
 	TPolinom res = (*this);
@@ -226,7 +217,7 @@ TPolinom TPolinom::operator* (double d)
 	else {
 		while (!res.monoms.IsEnded())
 		{
-			res.monoms.GetCurrent()->data.cf *= d;
+			res.monoms.current->data.cf *= d;
 			res.monoms.GetNext();
 		}
 	}

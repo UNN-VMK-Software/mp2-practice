@@ -7,8 +7,8 @@ template <typename T>
 class TRingList {
 private:
 	TLink <T> *head;
-	TLink <T> *current;
 public:
+	TLink <T> *current; //private
 	TRingList();
 	TRingList(const TRingList <T> &);
 	~TRingList();
@@ -16,17 +16,12 @@ public:
 	void InsertInEnd(const T datum);
 	void Reset();
 	void Clean();
-	bool IsEnded() const; //const
+	bool IsEnded(); //const
 	TRingList<T>& operator=(const TRingList<T>& _TRingList);
 	bool operator==(const TRingList<T>& list2) const;
-	bool operator<(const TRingList<T>& list2) const;
-	bool operator>(const TRingList<T>& list2) const;
 	bool operator!=(const TRingList<T>& list2) const { return !((*this) == list2);  }
 	TLink<T>* GetNext();
 	TLink<T>* Search(const TLink<T>& d);
-	void Delete(const T & d);
-	TLink<T>* GetCurrent() { return current; }
-
 };
 
 template <typename T>
@@ -41,39 +36,20 @@ template <typename T>
 TLink<T>* TRingList<T>::Search(const TLink<T> & d)
 {
 	TLink<T>* tmp = head;
-	while ((tmp->pNext != head) && (tmp->pNext->data != d.data))
+	if (tmp->pNext != head)
 	{
-		tmp = tmp->pNext;
-	}
-	if (tmp->pNext == head)
-	{
-		return nullptr;
-	}
-	return tmp->pNext;
-};
-
-template<typename T>
-void TRingList<T>::Delete(const T & d)
-{
-	TLink<T>* tmp = head;
-	TLink<T>* tmp2 = head->pNext;
-	if (tmp != tmp2)
-	{
-		while ((tmp2->pNext != head) && (tmp2->data != d))
+		while ((tmp->pNext != head) && (tmp->data != d.data))
 		{
-			tmp = tmp2;
-			tmp2 = tmp2->pNext;
+			tmp = tmp->pNext;
 		}
-		if (tmp2->data == d)
-		{	
-			tmp->pNext = tmp2->pNext;
-			delete tmp2;
-		}
-		else throw "element does not exist in your list";
+		if (tmp->data == d.data)
+			return tmp;
+		else
+			return nullptr;
 	}
-	else throw "element does not exist in your list";
+	else
+		return nullptr;
 };
-
 
 template <typename T>
 TRingList<T>::TRingList(const TRingList <T> & Ring)
@@ -116,7 +92,7 @@ void TRingList<T>::Insert(const T datum)
 	{
 		TLink<T>* prev = head;
 		TLink<T>* tmp = head->pNext;
-		while ((tmp != head) && (datum < tmp->data))  
+		while ((tmp != head) && (datum < tmp->data))  // проблема с вставкой монома 0-ой степени
 		{
 			prev = tmp;
 			tmp = tmp->pNext;
@@ -156,7 +132,7 @@ void TRingList<T>::Clean()
 };
 
 template<typename T>
-bool TRingList<T>::IsEnded() const
+bool TRingList<T>::IsEnded()
 {
 	return (current == head);
 };
@@ -202,50 +178,6 @@ bool TRingList<T>::operator==(const TRingList<T> & list2) const
 	while ((temp->pNext != head) && (temp2->pNext != list2.head) && (f))
 	{
 		if (temp->data != temp2->data)
-			f = false;
-		temp = temp->pNext;
-		temp2 = temp2->pNext;
-	}
-	return f;
-};
-
-template<typename T>
-bool TRingList<T>::operator<(const TRingList<T> & list2) const
-{
-	TLink<T> *temp = head;
-	TLink<T> *temp2 = list2.head;
-	bool f = true;
-	if ((temp->pNext == head) && (temp2->pNext == list2.head))
-		f = false;
-	else if ((temp->pNext != head) && (temp2->pNext == list2.head))
-		f = false;
-	else if ((temp2->pNext != list2.head) && (temp->pNext == head))
-		f = true;
-	while ((temp->pNext != head) && (temp2->pNext != list2.head) && (f))
-	{
-		if ((temp->data > temp2->data) || (temp->data == temp2->data))
-			f = false;
-		temp = temp->pNext;
-		temp2 = temp2->pNext;
-	}
-	return f;
-};
-
-template<typename T>
-bool TRingList<T>::operator>(const TRingList<T> & list2) const
-{
-	TLink<T> *temp = head;
-	TLink<T> *temp2 = list2.head;
-	bool f = true;
-	if ((temp->pNext == head) && (temp2->pNext == list2.head))
-		f = true;
-	else if ((temp->pNext != head) && (temp2->pNext == list2.head))
-		f = true;
-	else if ((temp2->pNext != list2.head) && (temp->pNext == head))
-		f = false;
-	while ((temp->pNext != head) && (temp2->pNext != list2.head) && (f))
-	{
-		if ((temp->data < temp2->data) || (temp->data == temp2->data))
 			f = false;
 		temp = temp->pNext;
 		temp2 = temp2->pNext;
