@@ -6,11 +6,11 @@ using namespace std;
 
 struct unit
 {
-	TPolinom *data; 
+	TPolinom *data;
 	string key;
 
-	unit() { key = "", data = &TPolinom(); }
-	unit(const string s, const TPolinom *poli2) { key = s; data = const_cast<TPolinom*>(poli2);}
+	unit() { key = "", data = &TPolinom(); } 
+	unit(const string s, const TPolinom *poli2) { key = s; data = const_cast<TPolinom*>(poli2);} 
 	
 	unit& operator= (const unit &tmp) { data = tmp.data; key = tmp.key.substr(0, tmp.key.length()); return *this; }
 };
@@ -18,26 +18,26 @@ struct unit
 class table
 {
 protected:
-	unit **str; // указатель на структуру 
-	int max_size; // максимальный размер
-	int size; // текущее количество записей
-	int index; // индекс текущей записи 
-	virtual void Repacking() = 0; // перепаковка 
+	unit **str;
+	int max_size;
+	int size;
+	int index;
+	virtual void Repacking() = 0;
 public:
-	table(int nsize = 10); // конструктор
-	virtual ~table() { delete[] str; } // деструктор
+	table(int nsize = 10);
+	virtual ~table() { delete[] str; }
 
-	virtual void Insert(const string k, const TPolinom *poli2) = 0; // вставка 
-	virtual unit* Search(const string k) = 0; // поиск 
-	virtual void Delete(const string k) = 0; // удаление 
+	virtual void Insert(const string k, const TPolinom *poli2) = 0;
+	virtual unit* Search(const string k) = 0;
+	virtual void Delete(const string k) = 0;
 
-	virtual void Reset() ;// первая запись является текущей 
-	virtual bool IsFull() const ; // проверка на полноту списка 
-	virtual void Next() ; // index++ 
-	virtual unit* GetCurrent() const ; // вернуть текущий 
-	virtual int GetSize() const ; // вернуть size
-	virtual int GetMaxSize() const ; // вернуть max_size
-	virtual int GetIndex() const; // вернуть index
+	virtual void Reset();
+	virtual bool IsFull() const ;
+	virtual void Next();
+	virtual unit* GetCurrent() const;
+	virtual int GetSize() const;
+	virtual int GetMaxSize() const;
+	virtual int GetIndex() const;
 
 	virtual void PrintTable(); 
 };

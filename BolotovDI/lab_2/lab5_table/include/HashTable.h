@@ -2,21 +2,17 @@
 
 #include "Table.h"
 
-//#define freedom = 0; // элемент свободен 
-//#define busy = 1; // элемент занят
-//#define removed = -1; // элемент был удалён
-
 class HashTable : public table
 {
 private:
-	int hash(string key) const; // хэш-функция
-	void Repacking() override; // перепаковка
-	int *State; // состояние элемента
+	int hash(string key) const; 
+	void Repacking() override; 
+	int *State; 
 public:
-	HashTable(int nsize = 10) : table(nsize) { size = 0;	index = -1;	State = new int[nsize]; for (int i = 0; i < max_size; i++) {	State[i] = 0; } }; // конструктор
+	HashTable(int nsize = 10) : table(nsize) { size = 0;	index = -1;	State = new int[nsize]; for (int i = 0; i < max_size; i++) {	State[i] = 0; } };
 
 	void Insert(const string s, const TPolinom *poli2) override;
-	void Delete(const string k) override; // переделать
+	void Delete(const string k) override;
 	unit* Search(const string k) override;
 };
 

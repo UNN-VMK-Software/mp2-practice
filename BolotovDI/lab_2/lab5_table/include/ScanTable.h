@@ -5,15 +5,15 @@
 class ScanTable : public table
 {
 private:
-	void Repacking() override; // перепаковка
+	void Repacking() override; 
 public:
-	ScanTable(int nsize = 10) : table(nsize) { size = 0; index = -1; } // конструктор
+	ScanTable(int nsize = 10) : table(nsize) { size = 0; index = -1; } 
 	ScanTable(const ScanTable &T);
-	~ScanTable() {} // деструктор
+	~ScanTable() {}
 
-	void Insert(const string k, const TPolinom *poli2) override; // вставка // переделать
-	unit* Search(const string k) override; // поиск
-	void Delete(const string k) override; // удаление // переделать
+	void Insert(const string k, const TPolinom *poli2) override; 
+	unit* Search(const string k) override; 
+	void Delete(const string k) override; 
 };
 
 void ScanTable::Repacking()
