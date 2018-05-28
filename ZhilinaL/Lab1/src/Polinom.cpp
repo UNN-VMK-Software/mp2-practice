@@ -203,7 +203,7 @@ Polinom Polinom::operator*(const Polinom& pol) const
 				temp.Plist.GetCur()->data.coeff *= pthis_coeff;
 			}
 			else
-				throw "large index";
+				throw "Too big degree";
 			temp.Plist.Step();
 		}
 		res = res + temp;
