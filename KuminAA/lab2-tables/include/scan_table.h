@@ -6,27 +6,26 @@ class ScanTable :public Table<type>
 {
 public:
 	ScanTable(int i = 10) : Table(i) {};
-	ScanTable(const SortedTable& CopyTab) : Table(CopyTab) {};
+	ScanTable(const ScanTable<type>& CopyTab) : Table(CopyTab) {};
 	~ScanTable() { };
 
 	type& Search(const string& KEY) const override;
 	void Insert(const string& KEY, const type& DATA) override;
 	void Delete(const string& KEY) override;
-
-	template<class type> friend ostream& operator<< (std::ostream& os, const ScanTable<type>& Tab);
 };
 
 //-----------------------------------------------------------
 template<typename type>
 type& ScanTable<type>::Search(const string& KEY) const
-{
-	reset();
-	if (CurrIndex > -1)
+{	
+	ScanTable<type> Temp(*this);
+	Temp.reset();
+	if (Temp.CurrIndex > -1)
 	{
-		while (((CurrIndex > -1) && (Records[CurrIndex]->key != KEY) && (CurrIndex < CurrRecord))
-			SetNext();
-		if (CurrIndex < CurrRecord)
-			return Records[CurrIndex];
+		while ((Temp.CurrIndex > -1) && (Temp.Records[Temp.CurrIndex]->key != KEY) && (Temp.CurrIndex < Temp.CurrRecord))
+			Temp.SetNext();
+		if (Temp.CurrIndex < Temp.CurrRecord)
+			return Temp.Records[Temp.CurrIndex]->data;
 		else
 			throw "key does not exist";
 	}
@@ -40,41 +39,39 @@ void ScanTable<type>::Insert(const string& KEY, const type& DATA)
 	if (CurrRecord == MaxRecords)
 		Realloc();
 	reset();
-	while (((CurrIndex > -1) && (Records[CurrIndex]->key != KEY) && (CurrIndex < CurrRecord))
-		CurrIndex++;
-	if (CurrIndex == CurrSize)
+	if (CurrRecord)
 	{
-		Records[CurrIndex] == TabRecord<type>(KEY, DATA);
-		CurrSize++;
+		while ((CurrIndex < CurrRecord) && (Records[CurrIndex]->key != KEY))
+			CurrIndex++;
+		if (CurrIndex == CurrRecord)
+		{
+			Records[CurrIndex] = new TabRecord<type>(KEY, DATA);
+			CurrRecord++;
+		}
+		else
+			throw "Such key already exists";
 	}
 	else
-		throw "Such key already exists";
+	{
+		CurrIndex++;
+		Records[CurrIndex] = new TabRecord<type>(KEY, DATA);
+		CurrRecord++;
+	}
 }
 
 template<typename type>
 void ScanTable<type>::Delete(const string& KEY)
 {
 	reset();
-	while (((CurrIndex > -1) && (Records[CurrIndex]->key != KEY) && (CurrIndex < CurrRecord))
+	while ((CurrIndex > -1) && (Records[CurrIndex]->key != KEY) && (CurrIndex < CurrRecord))
 		CurrIndex++;
-	if (CurrIndex < CurrSize)
+	if (CurrRecord && (CurrIndex < CurrRecord))
 	{
-		if (CurrSize > 1)
-			Records[CurrIndex] = Records[--CurrSize];
+		if (CurrRecord > 1)
+			Records[CurrIndex] = Records[--CurrRecord];
 		else
-			CurrSize = 0;
+			CurrRecord = 0;
 	}
 	else
-		throw "Key does not exist"
-}
-
-template <typename type>
-ostream& operator<< (ostream& os, const ScanTable<type>& Tab)
-{
-	if (Tab.CurrRecord)
-		for (int i = 0; i < CurrRecod; i++)
-			os << i << " | " << Tab.Records[i]->key << " | " << Tab.Records[i]->data << endl;
-	else
-		os << "Table is empty" << endl;
-	return os;
+		throw "Key does not exist";
 }

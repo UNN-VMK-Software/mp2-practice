@@ -2,23 +2,22 @@
 #include "table.h"
 
 template<typename type>
-class SortedTable :public Table<type>
+class SortedTable : public Table<type>
 {
 protected:
 	int BinarySearch(const string& KEY) const;
 public:
 	SortedTable(int i = 10) : Table(i) {};
-	SortedTable(const SortedTable& CopyTab) : Table(CopyTab) {};
+	SortedTable(const SortedTable<type>& CopyTab) : Table(CopyTab) {};
 	~SortedTable() { };
 
 	type& Search(const string& KEY) const override;
 	void Insert(const string& KEY, const type& DATA) override;
 	void Delete(const string& KEY) override;
-
-	template<class type> friend ostream& operator<< (std::ostream& os, const SortedTable<type>& Tab);
 };
 
 //-----------------------------------------------------------
+
 template<typename type>
 int SortedTable<type>::BinarySearch(const string& KEY) const
 {
@@ -27,10 +26,10 @@ int SortedTable<type>::BinarySearch(const string& KEY) const
 	while (i <= j)
 	{
 		mid = (i + j) / 2;
-		if (KEY > Records[i]->key)
-			i = mid;
+		if (KEY > Records[mid]->key)
+			i = mid + 1;
 		else
-			j = mid;
+			j = mid - 1;
 	}
 	return i;
 }
@@ -38,12 +37,13 @@ int SortedTable<type>::BinarySearch(const string& KEY) const
 template<typename type>
 type& SortedTable<type>::Search(const string& KEY) const
 {
-	reset();
+	SortedTable<type> Temp(*this);
+	Temp.reset();
 	if (CurrIndex > -1)
 	{
-		int k = BinerySearch(KEY);
-		if (Records[k]->key == KEY)
-			return Records[k];
+		int k = Temp.BinarySearch(KEY);
+		if (Temp.Records[k]->key == KEY)
+			return Temp.Records[k]->data;
 		else
 			throw "Key does not exist";
 	}
@@ -57,45 +57,54 @@ void SortedTable<type>::Insert(const string& KEY, const type& DATA)
 	if (CurrRecord == MaxRecords)
 		Realloc();
 	reset();
-	int k = BinerySearch(KEY);
-	if (Records[k]->key != KEY)
+	
+	if (CurrRecord)
 	{
-		for (int i = CurrRecord; i > k; i--)
-			Records[i] = Records[i - 1];
-		Records[k] = TabRecord<type>(KEY, DATA);
+		int k = BinarySearch(KEY);
+		if (k != CurrRecord)
+		{
+			if (Records[k]->key != KEY)
+			{
+				for (int i = CurrRecord; i > k; i--)
+					Records[i] = Records[i - 1];
+				Records[k] = new TabRecord<type>(KEY, DATA);
+				CurrRecord++;
+			}
+			else
+				throw "Such key already exists";
+		}
+		else
+		{
+			Records[k] = new TabRecord<type>(KEY, DATA);
+			CurrRecord++;
+		}
 	}
 	else
-		throw "Such key already exists";
+	{
+		CurrIndex++;
+		Records[CurrIndex] = new TabRecord<type>(KEY, DATA);
+		CurrRecord++;
+	}
 }
 
 template<typename type>
 void SortedTable<type>::Delete(const string& KEY)
 {
 	reset();
-	if (CurrIndex > -1)
+	if (CurrRecord)
 	{
 		int k = BinarySearch(KEY);
 		if (Records[k]->key == KEY)
 		{
-			for (int i = k; i < CurrRecord - 1; i++)
-				Records[i] = Records[i + 1];
+				for (int i = k; i < CurrRecord - 1; i++)
+					Records[i] = Records[i + 1];
+				CurrRecord--;
 		}
 		else
-			throw "Key does not exist"
+			throw "Key does not exist";
 	}
 	else
 		throw "Table is Empty";
-}
-
-template <typename type>
-ostream& operator<< (ostream& os, const SortedTable<type>& Tab)
-{
-	if (Tab.CurrRecord)
-		for (int i = 0; i < CurrRecod; i++)
-			os << i << " | " << Tab.Records[i]->key << " | " << Tab.Records[i]->data << endl;
-	else
-		os << "Table is empty" << endl;
-	return os;
 }
 
 

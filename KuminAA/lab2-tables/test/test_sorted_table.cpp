@@ -1,141 +1,166 @@
-#include "list.h"
-#include "node.h"
+#include "sorted_table.h"
 #include <gtest.h>
 
-TEST(Node, can_create_node)
+TEST(SortedTable, can_create_sorted_table)
 {
-	ASSERT_NO_THROW(Node<double> l(0));
-}
-
-TEST(Ringlist, can_create_ringlist)
-{
-	ASSERT_NO_THROW(Ringlist<double> l);
+	ASSERT_NO_THROW(SortedTable<int> T);
 }
 
 //---------------------------------------------------------
-class EmptyList : public testing::Test
+class EmptySortedTable : public testing::Test
 {
 protected:
-	Ringlist<double> l;
+	SortedTable<int> Tab;
 public:
-	EmptyList() {};
-	~EmptyList() {};
+	EmptySortedTable() {};
+	~EmptySortedTable() {};
 };
 
-TEST_F(EmptyList, can_GetCurr_from_empty_list)
+TEST_F(EmptySortedTable, empty_sorted_tab_is_empty)
 {
-	ASSERT_NO_THROW(l.GetCurr());
-	int a = l.GetCurr();
-	l.reset();
-	EXPECT_EQ(a, l.GetCurr());
+	EXPECT_EQ(true, Tab.isended());
 }
 
-TEST_F(EmptyList, can_SetNext_from_empty_list)
+TEST_F(EmptySortedTable, copy_empty_sorted_tab_and_correct)
 {
-	ASSERT_NO_THROW(l.SetNext());
+	
+	ASSERT_NO_THROW(SortedTable<int> Tab1(Tab));
+	SortedTable<int> Tab1(Tab);
+	EXPECT_EQ(true, Tab1.isended());
 }
 
-TEST_F(EmptyList, can_reset_from_empty_list)
+TEST_F(EmptySortedTable, cant_getcurr_empty)
 {
-	ASSERT_NO_THROW(l.reset());
+	ASSERT_ANY_THROW(Tab.GetCurr());
 }
 
-TEST_F(EmptyList, new_list_is_empty)
+TEST_F(EmptySortedTable, can_reset_empty)
 {
-	EXPECT_EQ(NULL, l.GetCurr());
+	ASSERT_NO_THROW(Tab.reset());
+	Tab.reset();
+	ASSERT_ANY_THROW(Tab.GetCurr());
 }
 
-
-TEST_F(EmptyList, can_isended_from_empty_list)
+TEST_F(EmptySortedTable, cant_setnext_empty)
 {
-	ASSERT_NO_THROW(l.isended());
-	EXPECT_EQ(1, l.isended());
+	ASSERT_ANY_THROW(Tab.SetNext());
 }
 
-TEST_F(EmptyList, can_copy_empty_list)
+TEST_F(EmptySortedTable, cant_delete_empty)
 {
-	ASSERT_NO_THROW(Ringlist<double> l1(l));
+	ASSERT_ANY_THROW(Tab.Delete("p"));
 }
 
-TEST_F(EmptyList, empty_list_copy_is_correct)
+TEST_F(EmptySortedTable, cant_search_empty)
 {
-	Ringlist<double> l1(l);
-	EXPECT_EQ(l.GetCurr(), l1.GetCurr());
-	EXPECT_EQ(NULL, l1.GetCurr());
+	ASSERT_ANY_THROW(Tab.Search("p"));
 }
 
-TEST_F(EmptyList, can_assign_two_empty_lists)
+TEST_F(EmptySortedTable, can_insert_empty)
 {
-	Ringlist<double> l1;
-	ASSERT_NO_THROW(l = l1);
-	l = l1;
-	EXPECT_EQ(l.GetCurr(), l1.GetCurr());
+	ASSERT_NO_THROW(Tab.Insert("first", 1));
+	EXPECT_EQ(1, Tab.GetCurr());
+	EXPECT_EQ(1, Tab.Search("first"));
 }
 
-TEST_F(EmptyList, can_insert_to_ordered_for_empty_list)
-{
-	l.InsertToOrdered(1);
-	l.InsertToOrdered(2);
-	l.reset();
-	EXPECT_EQ(2, l.GetCurr());
-	l.SetNext();
-	EXPECT_EQ(1, l.GetCurr());
-}
-
-//-------------------------------------------------------------------------------
-
-class ThreeNodesList : public testing::Test
+//---------------------------------------------------------
+class FilledSortedTable : public testing::Test
 {
 protected:
-	Ringlist<double> l;
+	SortedTable<int> Tab;
 public:
-	ThreeNodesList()
-	{
-		l.InsertToOrdered(1);
-		l.InsertToOrdered(2);
-		l.InsertToOrdered(3);
-	}
-	~ThreeNodesList() {};
+	FilledSortedTable() {
+		Tab.Insert("3", 3);
+		Tab.Insert("2", 2);
+		Tab.Insert("1", 1);
+	};
+	~FilledSortedTable() {};
 };
 
-TEST_F(ThreeNodesList, can_copy_not_empty_list)
+TEST_F(FilledSortedTable, can_reset_filled)
 {
-	ASSERT_NO_THROW(Ringlist<double> l1(l));
+	ASSERT_NO_THROW(Tab.reset());
 }
 
-TEST_F(ThreeNodesList, copy_of_not_empty_list_is_correct)
+TEST_F(FilledSortedTable, can_getcurr_filled)
 {
-	Ringlist<double> l1(l);
-	l.reset();
-	l1.reset();
-	EXPECT_EQ(3, l1.GetCurr());
-	l1.SetNext();
-	l.SetNext();
-	EXPECT_EQ(2, l1.GetCurr());
-	l1.SetNext();
-	l.SetNext();
-	EXPECT_EQ(1, l1.GetCurr());
-	l1.SetNext();
-	l.SetNext();
+	Tab.reset();
+	ASSERT_NO_THROW(Tab.GetCurr());
+	EXPECT_EQ(1, Tab.GetCurr());
 }
 
-TEST_F(ThreeNodesList, can_assign_not_empty_list)
+TEST_F(FilledSortedTable, can_setnext_filled)
 {
-	ASSERT_NO_THROW(Ringlist<double> l1 = l);
+	Tab.reset();
+	ASSERT_NO_THROW(Tab.SetNext());
+	EXPECT_EQ(2, Tab.GetCurr());
 }
 
-TEST_F(ThreeNodesList, assign_of_not_empty_list_is_correct)
+TEST_F(FilledSortedTable, setnext_isend_and_correct_table_insert)
 {
-	Ringlist<double> l1 = l;
-	l.reset();
-	l1.reset();
-	EXPECT_EQ(3, l1.GetCurr());
-	l1.SetNext();
-	l.SetNext();
-	EXPECT_EQ(2, l1.GetCurr());
-	l1.SetNext();
-	l.SetNext();
-	EXPECT_EQ(1, l1.GetCurr());
-	l1.SetNext();
-	l.SetNext();
+	Tab.reset();
+	EXPECT_EQ(1, Tab.GetCurr());
+	Tab.SetNext();
+	EXPECT_EQ(2, Tab.GetCurr());
+	Tab.SetNext();
+	EXPECT_EQ(3, Tab.GetCurr());
+	Tab.SetNext();
+	EXPECT_EQ(1, Tab.GetCurr());
+}
+
+TEST_F(FilledSortedTable, can_copy_and_correct)
+{
+	ASSERT_NO_THROW(SortedTable<int> Tab1(Tab));
+	SortedTable<int> Tab1(Tab);
+	Tab1.reset();
+	EXPECT_EQ(1, Tab1.GetCurr());
+	Tab1.SetNext();
+	EXPECT_EQ(2, Tab1.GetCurr());
+	Tab1.SetNext();
+	EXPECT_EQ(3, Tab1.GetCurr());
+	Tab1.SetNext();
+	EXPECT_EQ(1, Tab1.GetCurr());
+}
+
+TEST_F(FilledSortedTable, can_delete_and_correct)
+{
+	Tab.reset();
+	ASSERT_NO_THROW(Tab.Delete("1"));
+	Tab.reset();
+	EXPECT_EQ(2, Tab.GetCurr());
+}
+
+TEST_F(FilledSortedTable, copy_tab_is_own_memory)
+{
+	SortedTable<int> Tab1(Tab);
+	Tab.reset();
+	Tab.Delete("1");
+	EXPECT_NE(Tab.GetCurr(), Tab1.GetCurr());
+}
+
+TEST_F(FilledSortedTable, can_realloc)
+{
+	for (int i = 3; i < 10; i++)
+		Tab.Insert(to_string(i + 1), i);
+	ASSERT_NO_THROW(Tab.Insert("11", 11));
+}
+
+TEST_F(FilledSortedTable, can_insert_after_deletion)
+{
+	Tab.Delete("1");
+	Tab.Delete("2");
+	Tab.Delete("3");
+	Tab.Insert("1", 0);
+	EXPECT_EQ(0, Tab.GetCurr());
+}
+
+TEST_F(FilledSortedTable, can_search)
+{
+	ASSERT_NO_THROW(Tab.Search("2"));
+	EXPECT_EQ(2, Tab.Search("2"));
+}
+
+TEST_F(FilledSortedTable, can_insret_exect)
+{
+	ASSERT_ANY_THROW(Tab.Insert("2", 2));
 }

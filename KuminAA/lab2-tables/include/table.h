@@ -10,7 +10,7 @@ class TabRecord
 public:
 	string key;
 	type data;
-	TabRecord() { key = "empty"; data = NULL; }
+	TabRecord() { key = "empty"; type p; data = p; }
 	TabRecord(const string& KEY, const type& DATA) { key = KEY; data = DATA; }
 	TabRecord(const TabRecord& T) { key = T.key; data = T.data; }
 	TabRecord& operator=(const TabRecord& T) { key = T.key; data = T.data; }
@@ -27,7 +27,7 @@ protected:
 	virtual void Realloc();
 public:
 	Table(int i = 10);
-	Table(Table& CopyTab);
+	Table(const Table<type>& CopyTab);
 	virtual ~Table() { delete[] Records; };
 
 	virtual type& Search(const string& KEY) const = 0;
@@ -35,10 +35,10 @@ public:
 	virtual void Delete(const string& KEY) = 0;
 
 	virtual void reset();
-	virtual int isended() const { return CurrIndex == -1 || CurrIndex == CurrRecord; } 
+	virtual int isended() const { return CurrIndex == -1 || ((CurrIndex + 1) == CurrRecord); } 
 	virtual type& GetCurr() const;
 	virtual void SetNext();
-
+	template<class type> friend ostream& operator<< (std::ostream& os, const Table<type>& Tab);
 };
 
 //-----------------------------------------------------------
@@ -48,11 +48,8 @@ void Table<type>::Realloc()
 	int NewMax = MaxRecords * ReallocCoeff;
 	TabRecord<type>** temp = new TabRecord<type>*[NewMax];
 	reset();
-	while (!isended())
-	{
-		temp[CurrIndex] = Records[CurrIndex];
-		SetNext();
-	}
+	for (int i = 0; i < CurrRecord; i++)
+		temp[i] = Records[i];
 	delete[] Records;
 	Records = temp;
 	MaxRecords = NewMax;
@@ -68,7 +65,7 @@ Table<type>::Table(int i = 10)
 }
 
 template<typename type>
-Table<type>::Table(Table& CopyTab)
+Table<type>::Table(const Table<type>& CopyTab)
 {
 	MaxRecords = CopyTab.MaxRecords;
 	CurrRecord = CopyTab.CurrRecord;
@@ -91,7 +88,7 @@ void Table<type>::reset()
 template<typename type>
 type& Table<type>::GetCurr() const
 {
-	if (CurrIndex > -1)
+	if (CurrRecord)
 		return Records[CurrIndex]->data;
 	else
 		throw "table is empty";
@@ -100,10 +97,21 @@ type& Table<type>::GetCurr() const
 template<typename type>
 void Table<type>::SetNext()
 {
-	if (CurrIndex > -1)
+	if (CurrRecord)
 		CurrIndex++;
 	else
-		throw "tab is empty";
-	if (isended())
+		throw "table is empty";
+	if (CurrIndex == CurrRecord)
 		reset();
+}
+
+template <typename type>
+ostream& operator<< (ostream& os, const Table<type>& Tab)
+{
+	if (Tab.CurrRecord)
+		for (int i = 0; i < Tab.CurrRecord; i++)
+			os << i << " | " << Tab.Records[i]->key << " | " << Tab.Records[i]->data << endl;
+	else
+		os << "Table is empty" << endl;
+	return os;
 }

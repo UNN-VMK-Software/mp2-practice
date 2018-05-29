@@ -9,9 +9,9 @@ protected:
 	int Hash(const string& KEY) const;
 	void Realloc() override;
 public:
-	HashTable(int i = 10) override;
-	HashTable(const HashTable& CopyTab) override;
-	~Table() { delete[] H; };
+	HashTable(int i = 10);
+	HashTable(const HashTable& CopyTab);
+	~HashTable() { delete[] H; };
 
 	type& Search(const string& KEY) const override;
 	void Insert(const string& KEY, const type& DATA) override;
@@ -20,6 +20,8 @@ public:
 	void reset() override;
 	type& GetCurr() const override;
 	void SetNext() override;
+
+	template<class type> friend ostream& operator<< (std::ostream& os, const HashTable<type>& Tab);
 };
 
 //-----------------------------------------------------------
@@ -34,7 +36,7 @@ HashTable<type>::HashTable(int i = 10) : Table(i)
 template<typename type>
 int HashTable<type>::Hash(const string& KEY) const
 {
-	int seed = 171;
+	int seed = 11;
 	int hash = 0;
 	for (int i = 0; i < KEY.length(); i++)
 		hash = (hash * seed) + int(KEY[i]);
@@ -70,7 +72,7 @@ HashTable<type>::HashTable(const HashTable& CopyTab)
 	delete[] H;
 	Records = new TabRecord<type>*[MaxRecords];
 	H = new int[MaxRecords];
-	for (int i = 0; i < CurrRecord; i++)
+	for (int i = 0; i < MaxRecords; i++)
 	{
 		H[i] = CopyTab.H[i];
 		Records[i] = CopyTab.Records[i];
@@ -80,20 +82,23 @@ HashTable<type>::HashTable(const HashTable& CopyTab)
 template<typename type>
 type& HashTable<type>::Search(const string& KEY) const
 {
-	reset();
-	if (CurrRecord)
+	HashTable<type> Temp(*this);
+	Temp.reset();
+	if (Temp.CurrRecord)
 	{
-		CurrIndex = Hash[KEY];
-		int l = CurrIndex;
-		if (Records[CurrIndex]->key == KEY)
-			return Records[CurrIndex]->data;
+		Temp.CurrIndex = Temp.Hash(KEY);
+		int l = Temp.CurrIndex;
+		if (Temp.Records[Temp.CurrIndex]->key == KEY)
+			return Temp.Records[Temp.CurrIndex]->data;
 		else
 		{
-			while (H[CurrIndex] && ((CurrIndex + 1) != l) && (Records[CurrIndex]->key == KEY))
-				CurrIndex = (CurrIndex + 1) % MaxRecords;
-			return Records[CurrIndex]->data;	
+			while (Temp.H[Temp.CurrIndex] && ((Temp.CurrIndex + 1) != l) && (Temp.Records[Temp.CurrIndex]->key == KEY))
+				Temp.CurrIndex = (Temp.CurrIndex + 1) % Temp.MaxRecords;
+			if(Temp.Records[Temp.CurrIndex]->key == KEY)
+				return Temp.Records[Temp.CurrIndex]->data;
+			else 
+				throw "Key does not exist";
 		}
-			throw "Key does not exist";
 	}
 	else
 		throw "Table is empty";
@@ -109,28 +114,41 @@ void HashTable<type>::Insert(const string& KEY, const type& DATA)
 	if (!H[CurrIndex])
 	{
 		Records[CurrIndex] = new TabRecord<type>(KEY, DATA);
-		CurrRecords++;
+		CurrRecord++;
 		H[CurrIndex] = 1;
 	}
-	else 
+	else
 		if (Records[CurrIndex]->key != KEY)
 		{
 			int l = CurrIndex;
-			while (H[CurrIndex] && ((CurrIndex + 1) != l)
+			while (H[CurrIndex] && ((CurrIndex + 1) != l))
 				CurrIndex = (CurrIndex + 1) % MaxRecords;
 			Records[CurrIndex] = new TabRecord<type>(KEY, DATA);
-			CurrRecords++;
+			CurrRecord++;
 			H[CurrIndex] = 1;
 		}
 		else
-			throw "this key exists"
+			throw "this key exists";
 }
 
 template<typename type>
 void HashTable<type>::Delete(const string& KEY)
 {
 	reset();
-	Search(KEY);
+	if (CurrRecord)
+	{
+		CurrIndex = Hash(KEY);
+		int l = CurrIndex;
+		if (Records[CurrIndex]->key != KEY)
+		{
+			while (H[CurrIndex] && ((CurrIndex + 1) != l) && (Records[CurrIndex]->key == KEY))
+				CurrIndex = (CurrIndex + 1) % MaxRecords;
+			if (Records[CurrIndex]->key != KEY)
+				throw "Key does not exist";
+		}
+	}
+	else
+		throw "Table is empty";
 	Records[CurrIndex] = new TabRecord<type>;
 	H[CurrIndex] = 0;
 	CurrRecord--;
@@ -165,9 +183,23 @@ void HashTable<type>::SetNext()
 	if (CurrRecord)
 	{
 		CurrIndex++;
-		while (flag[CurrIndex] != 1)
+		while (H[CurrIndex] != 1)
 			CurrIndex = (CurrIndex + 1) % MaxRecords;
 	}
 	else
 		throw "table is empty";
+}
+
+template <typename type>
+ostream& operator<< (ostream& os, const HashTable<type>& Tab)
+{
+	if (Tab.CurrRecord)
+	{
+		for (int i = 0; i < Tab.MaxRecords; i++)
+			if (Tab.H[i])
+				os << i << " | " << Tab.Records[i]->key << " | " << Tab.Records[i]->data << endl;
+	}
+	else
+		os << "Table is empty" << endl;
+	return os;
 }
