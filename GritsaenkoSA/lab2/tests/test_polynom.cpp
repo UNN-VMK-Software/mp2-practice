@@ -3,7 +3,7 @@
 #include <vector>
 
 using namespace std;
-TEST(polynom, check_build_polinom)
+TEST(polynom, check_build_polynom)
 {
 
 	ASSERT_NO_THROW(polynom a("x+1"));
@@ -12,7 +12,7 @@ TEST(polynom, check_build_polinom)
 
 TEST(polynom, degree_not_more_than_9_1)
 {
-	polynom a("x^4"), b("x^5");
+	polynom a("x^3"), b("x^5");
 	ASSERT_NO_THROW(a*b);
 }
 
@@ -22,10 +22,10 @@ TEST(polynom, degree_not_more_than_9_2)
 	ASSERT_ANY_THROW(a*b);
 }
 
-TEST(polynom, check_polinom )    
+TEST(polynom, check_polynom )    
 {
 	
-	ASSERT_ANY_THROW(polynom a("x+1"));
+	ASSERT_NO_THROW(polynom a("x+1"));
 }
 
 struct parse_test
@@ -58,17 +58,17 @@ TEST_P(pol_parse, correct_parse_of_polynom_strings)
 }
 
 /*INSTANTIATE_TEST_CASE_P(Inst1,	pol_parse,	::testing::Values(
-		parse_test("", vector<monom> {}),
-		parse_test("1", vector<monom> {monom(1,0)}),
-		parse_test("1.5", vector<monom> {monom(1.5,0)}),
-		parse_test("-3.57", vector<monom> {monom(-3.57, 0)}),
-		parse_test("15xyz", vector<monom> {monom(15, 111)}),
-		parse_test("-zyx", vector<monom> {monom(-1, 111)}),
-		parse_test("-x^2", vector<monom> {monom(-1, 200)}),
-		parse_test("z^2+x^2+y^2", vector<monom> {monom(1,2), monom(1,20), monom(1,200)}),
-		parse_test("x^9y^9z^9-3.22xyz", vector<monom> {monom(1,999), monom(-3.22,111)}),
-		parse_test("1-2x+3xy-4xyz", vector<monom> {monom(1,0), monom(-2,100), monom(3,110), monom(-4,111)}),
-		parse_test("0", vector<monom> {})
+		parse_test("", vecOrdTr<monom> {}),
+		parse_test("1", vecOrdTr<monom> {monom(1,0)}),
+		parse_test("1.5", vecOrdTr<monom> {monom(1.5,0)}),
+		parse_test("-3.57", vecOrdTr<monom> {monom(-3.57, 0)}),
+		parse_test("15xyz", vecOrdTr<monom> {monom(15, 111)}),
+		parse_test("-zyx", vecOrdTr<monom> {monom(-1, 111)}),
+		parse_test("-x^2", vecOrdTr<monom> {monom(-1, 200)}),
+		parse_test("z^2+x^2+y^2", vecOrdTr<monom> {monom(1,2), monom(1,20), monom(1,200)}),
+		parse_test("x^9y^9z^9-3.22xyz", vecOrdTr<monom> {monom(1,999), monom(-3.22,111)}),
+		parse_test("1-2x+3xy-4xyz", vecOrdTr<monom> {monom(1,0), monom(-2,100), monom(3,110), monom(-4,111)}),
+		parse_test("0", vecOrdTr<monom> {})
 	));*/
 
 
@@ -76,13 +76,13 @@ TEST_P(pol_parse, correct_parse_of_polynom_strings)
 struct calc_test
 {
 	string left;
-	string right;
+	string rigHashT;
 	double c;
 	string res;
 	calc_test(string ires, string il, string ir = "", double ic = 0)
 	{
 		left = il;
-		right = ir;
+		rigHashT = ir;
 		c = ic;
 		res = ires;
 	}
@@ -95,7 +95,7 @@ class pol_plus : public ::testing::TestWithParam<calc_test>
 {
 protected: polynom pl, pr, pres;
 public:
-	pol_plus() : pl(GetParam().left), pr(GetParam().right), pres(GetParam().res)
+	pol_plus() : pl(GetParam().left), pr(GetParam().rigHashT), pres(GetParam().res)
 	{
 	}
 	~pol_plus() {}
@@ -114,7 +114,7 @@ INSTANTIATE_TEST_CASE_P(Inst2,
 		calc_test("2x", "-3x", "5x"),
 		calc_test("", "-6.1xy", "6.1xy"),
 		calc_test("5xy^2", "3x^2y", "5xy^2-3x^2y"),
-		calc_test("1+2y+3z", "1+x+2y", "3z-x"),
+		calc_test("1+2y+3z", "x+1+2y", "3z-x"),
 		calc_test("", "1.1", "-1.1"),
 		calc_test("", "0", "0"),
 		calc_test("0", "1.8z", "-1.8z"),
@@ -134,7 +134,7 @@ class pol_mult : public ::testing::TestWithParam<calc_test>
 {
 protected: polynom pl, pr, pres;
 public:
-	pol_mult() : pl(GetParam().left), pr(GetParam().right), pres(GetParam().res)
+	pol_mult() : pl(GetParam().left), pr(GetParam().rigHashT), pres(GetParam().res)
 	{
 	}
 	~pol_mult() {}

@@ -30,31 +30,31 @@ void main()
 		{
 		case 1:
 		{
-				  polynom res = S1 + S2;
-				  cout << res;
-				  break;
+			polynom res = S1 + S2;
+			cout << res;
+			break;
 		}
 		case 2:
 		{
-				  polynom res = S1 - S2;
-				  cout << res;
-				  break;
+			polynom res = S1 - S2;
+			cout << res;
+			break;
 		}
 		case 3:
 		{
-				  polynom res = S1 * S2;
-				  cout << res;
-				  break;
+			polynom res = S1 * S2;
+			cout << res;
+			break;
 		}
 		case 4:
 		{
-				  string con;
-				  cout << " Write const" << endl;
-				  cin >> con;
-				  polynom C(con);
-				  polynom res = C*S1;
-				  cout << res;
-				  break;
+			string con;
+			cout << " Write const" << endl;
+			cin >> con;
+			polynom C(con);
+			polynom res = C*S1;
+			cout << res;
+			break;
 		}
 		default:
 			break;
@@ -62,6 +62,6 @@ void main()
 
 		cout << " \n Repead : 1" << endl;
 		cin >> flag;
-
+		
 	}
 }

@@ -1,5 +1,5 @@
 ﻿#pragma once
-
+#include <stdlib.h>
 //Шаблон класса Элемент списка
 template<class T>
 class node

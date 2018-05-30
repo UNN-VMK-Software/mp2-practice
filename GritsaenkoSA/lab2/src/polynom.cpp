@@ -17,7 +17,7 @@ polynom::polynom(string ipm)
 		part = ipm.substr(0, pos);//берет с нулевой позиции pos эл-тов
 		ipm.erase(0, pos);//Удаляет элементы в диапазоне
 		pos = 0;
-		while (part[pos] != 'x' && part[pos] != 'y' && part[pos] != 'z' && pos < part.length())
+		while (pos < part.length() && part[pos] != 'x' && part[pos] != 'y' && part[pos] != 'z' )
 			pos++;
 
 		string coef = part.substr(0,pos);

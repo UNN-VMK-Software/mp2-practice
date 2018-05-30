@@ -1,8 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
-MinimumVisualStudioVersion = 10.0.40219.1
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lab1", "lab1\lab1.vcxproj", "{1600288A-3345-41F5-823E-3B1A97F44403}"
 	ProjectSection(ProjectDependencies) = postProject
 		{FB99A97E-893D-4CB1-ADC7-F07BFB89A952} = {FB99A97E-893D-4CB1-ADC7-F07BFB89A952}
@@ -23,7 +21,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Table", "Table\Table.vcxpro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lab2", "lab2\lab2.vcxproj", "{84C03AD3-F6AF-4FDA-8C24-9086B5542B97}"
 	ProjectSection(ProjectDependencies) = postProject
-		{93E66E49-D18B-467E-8D40-EEF22CFED32F} = {93E66E49-D18B-467E-8D40-EEF22CFED32F}
+		{FB99A97E-893D-4CB1-ADC7-F07BFB89A952} = {FB99A97E-893D-4CB1-ADC7-F07BFB89A952}
 	EndProjectSection
 EndProject
 Global
