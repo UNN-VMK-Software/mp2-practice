@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lab4-Dijkstra", "lab4-Dijkstra\lab4-Dijkstra.vcxproj", "{D5131769-E792-4613-92AF-E9DCDCEF968D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Graph_lib", "Graph_lib\Graph_lib.vcxproj", "{12C6BB94-97AD-4058-80DA-4EB7F156CDB8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Gen_graph", "Gen_graph\Gen_graph.vcxproj", "{DBAC126A-0EFE-49AB-82FA-32FAEBC3B853}"
+	ProjectSection(ProjectDependencies) = postProject
+		{12C6BB94-97AD-4058-80DA-4EB7F156CDB8} = {12C6BB94-97AD-4058-80DA-4EB7F156CDB8}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D5131769-E792-4613-92AF-E9DCDCEF968D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D5131769-E792-4613-92AF-E9DCDCEF968D}.Debug|Win32.Build.0 = Debug|Win32
+		{D5131769-E792-4613-92AF-E9DCDCEF968D}.Release|Win32.ActiveCfg = Release|Win32
+		{D5131769-E792-4613-92AF-E9DCDCEF968D}.Release|Win32.Build.0 = Release|Win32
+		{12C6BB94-97AD-4058-80DA-4EB7F156CDB8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{12C6BB94-97AD-4058-80DA-4EB7F156CDB8}.Debug|Win32.Build.0 = Debug|Win32
+		{12C6BB94-97AD-4058-80DA-4EB7F156CDB8}.Release|Win32.ActiveCfg = Release|Win32
+		{12C6BB94-97AD-4058-80DA-4EB7F156CDB8}.Release|Win32.Build.0 = Release|Win32
+		{DBAC126A-0EFE-49AB-82FA-32FAEBC3B853}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DBAC126A-0EFE-49AB-82FA-32FAEBC3B853}.Debug|Win32.Build.0 = Debug|Win32
+		{DBAC126A-0EFE-49AB-82FA-32FAEBC3B853}.Release|Win32.ActiveCfg = Release|Win32
+		{DBAC126A-0EFE-49AB-82FA-32FAEBC3B853}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
