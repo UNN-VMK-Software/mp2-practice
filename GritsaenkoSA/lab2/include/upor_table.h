@@ -16,7 +16,7 @@ public:
 
 	virtual void Insert(const type_k & key, const type_d & Row); //вставка
 	virtual void Delete(const type_k & key);					//удаление
-	virtual TableRec<type_k, type_d>* Search(const type_k & key) const;	//поиск
+	virtual TableRec<type_k, type_d>* Search(const type_k & key) ;	//поиск
 
 };
 
@@ -88,21 +88,30 @@ void OrdTab <type_k, type_d> ::Insert(const type_k & key, const type_d & Row)
 		this->CurSizeT++;
 	}
 	else 
+		//cout << "error the same key" << endl;
 		throw "error the same key";
 }
 
 
 template <class type_k, class type_d>//поиск
-TableRec<type_k, type_d>* OrdTab <type_k, type_d> ::Search(const type_k & key) const
+TableRec<type_k, type_d>* OrdTab <type_k, type_d> ::Search(const type_k & key) 
 {
 	int temp = Search_bin(key);
 
-	if ((*(this->Rows[temp])).KEY != key)
-
-		throw "error ne found";
+	if ((*(this->Rows[temp])).KEY == key)
+		return this->Rows[temp];
 	else
-		return 	this -> Rows[temp];
+		throw "error ne found";
+	
 		
+	
+
+		/*int area = BinarSearch(KT_T);
+	if ((*(this->DT[area])).Key == KT_T)
+		//return (*(this->DT[area])).Data;
+		return this->DT[area];
+	else //throw "element doesn't exist";
+	return NULL;*/
 }
 
 
@@ -119,6 +128,7 @@ void  OrdTab <type_k, type_d> ::Delete(const type_k & key)
 		this -> CurSizeT = CurSizeT - 1;
 	}
 	else
+		//cout << "error net key" << endl;
 		throw "error net key";
 }
 

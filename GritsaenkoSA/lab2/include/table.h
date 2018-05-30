@@ -29,7 +29,7 @@ public:
 
 	virtual void Insert(const type_k & key, const type_d & Row) = 0;// вставка
 	virtual void Delete(const type_k & key) = 0; //удаление
-	virtual TableRec<type_k, type_d> * Search(const type_k & key) const = 0; //поиск
+	virtual TableRec<type_k, type_d> * Search(const type_k & key)  = 0; //поиск
 	//Методы навигации
 	virtual  void Reset();	//установка в начало CurIndex = 0;
 	virtual  bool IsTabEnded() const;	//проверка на конец 

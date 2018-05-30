@@ -41,9 +41,12 @@ int main()
 			cout << "Write polynom" << endl;
 			cin >> str;
 			polynom a(str);
-			A.Insert(str, a);
-			B.Insert(str, a);
-			C.Insert(str, a);
+			try { A.Insert(str, a); }
+			catch (...) { cout << "the same key" << endl; }
+			try { B.Insert(str, a); }
+			catch (...) { cout << "the same key" << endl; }
+			try { C.Insert(str, a); }
+			catch (...) { cout << "the same key" << endl; }
 			cout << "ScanTable :" << endl;
 			cout << A << endl;
 			cout << "OrdTab :" << endl;
@@ -58,9 +61,12 @@ int main()
 			cout << "Write polynom" << endl;
 			cin >> str;
 			polynom a(str);
-			A.Delete(str);
-			B.Delete(str);
-			C.Delete(str);
+			try { A.Delete(str); }
+			catch (...) { cout << "ne found" << endl; }
+			try { B.Delete(str); }
+			catch (...) { cout << "ne found" << endl; }
+			try { C.Delete(str); }
+			catch (...) { cout << "ne found" << endl; }
 			cout << "ScanTable :" << endl;
 			cout << A << endl;
 			cout << "OrdTab :" << endl;
@@ -74,16 +80,13 @@ int main()
 			string str;
 			cout << "Write polynom" << endl;
 			cin >> str;
-			polynom a(str);
-			if (A.Search(str) == NULL)
-				cout << "error: ne found" << endl;
-			else cout << " Found " << A.Search(str)->Data << endl;
-			if (B.Search(str) == NULL)
-				cout << "error: ne found" << endl;
-			else cout << " Found " << B.Search(str)->Data << endl;
-			if (C.Search(str) == NULL)
-				cout << "error: ne found" << endl;
-			else cout << " Found " << C.Search(str)->Data << endl;
+			polynom a(str);	
+			try { cout << "find: " << A.Search(str)->Data; }
+			catch (...) { cout << "ne found" << endl; }
+			try { cout << "find: " << B.Search(str)->Data; }
+			catch (...) { cout << "ne found" << endl; }
+			try { cout << "find: " << C.Search(str)->Data; }
+			catch (...) { cout << "ne found" << endl; }
 			break;
 		}
 		default:

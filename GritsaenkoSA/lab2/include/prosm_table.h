@@ -18,7 +18,7 @@ public:
 
 	virtual void Insert(const type_k & key, const type_d & Row);	//вставка
 	virtual void Delete(const type_k & key);							//удаление
-	virtual TableRec<type_k, type_d>* Search(const type_k & key) const;		//поиск
+	virtual TableRec<type_k, type_d>* Search(const type_k & key) ;		//поиск
 																					
 
 };
@@ -58,20 +58,33 @@ void ScanTable< type_k, type_d> ::Insert(const type_k & key, const type_d & Row)
 	//if (IsFull())
 		Realloc();
 
+	int flag = 0;
 	for (int i = 0; i < this->CurSizeT; i++)
+	{
+		if ((*(this->Rows[i])).KEY == key) 
+		{
+			throw "error: the same key";
+			flag = 1;
+		}
+	}
+	if (flag==0) 
+		this->Rows[this->CurSizeT++] = new TableRec<type_k, type_d>(key, Row);
+	
+	/*for (int i = 0; i < this->CurSizeT; i++)
 	{
 		if ((*(this->Rows[i])).KEY == key)
 		{
 			throw "error: the same key";
 		}
 	}
-	this -> Rows[this -> CurSizeT++] = new TableRec<type_k, type_d>(key, Row);
+	this -> Rows[this -> CurSizeT++] = new TableRec<type_k, type_d>(key, Row);*/
 }
 
 
 template <class type_k, class type_d>//поиск
-TableRec<type_k, type_d>* ScanTable< type_k, type_d> ::Search(const type_k & key) const
+TableRec<type_k, type_d>* ScanTable< type_k, type_d> ::Search(const type_k & key) 
 {
+
 	int i = 0;
 	while (i < this->CurSizeT)
 	{
@@ -79,7 +92,7 @@ TableRec<type_k, type_d>* ScanTable< type_k, type_d> ::Search(const type_k & key
 			return this->Rows[i];
 		i++;
 	}
-	throw "error: ne found";
+	throw "error";//return NULL;
 }
 
 
@@ -106,6 +119,7 @@ void ScanTable< type_k, type_d> ::Delete(const type_k & key)
 		this->Rows[i] = NULL;
 		this->CurSizeT--;
 	}
+	//cout << "error: ne found" << endl;
 	else throw "error: ne found";
 }
 

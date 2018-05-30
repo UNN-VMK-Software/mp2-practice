@@ -25,7 +25,7 @@ public:
 
 	void Insert(const type_k & key, const type_d & Row);			//вставка
 	void Delete(const type_k &key);									//удаление
-	TableRec<type_k, type_d>* Search(const type_k & key) const;		//поиск
+	TableRec<type_k, type_d>* Search(const type_k & key) ;		//поиск
 
 	virtual void Reset();	//установка в начало CurIndex = 0;
 	virtual bool IsTabEnded() const;	//проверка на конец 
@@ -96,14 +96,33 @@ void HashTable<type_k, type_d>::Realloc()
 template <class type_k, class type_d>//вставка
 void HashTable<type_k, type_d>::Insert(const type_k & key, const type_d & Row)
 {
+	/*
+	int temp = Hashf(key);//индекс
+	if ((double)this->CurIndex / (double)this->MaxSizeT > 0.7) 
+		Realloc();
+	//if (Search(key) == (this->Rows[temp]))//нашли ключ и он равен записи искомого индекса
+
+		if (flag[temp] == free) //если свободный
+	{
+		this->Rows[temp] = new TableRec<type_k, type_d>(key, Row); //создание нового
+		flag[temp] = busy; //обозначение что он занят
+		this->CurIndex++;
+	}
+		else 
+		if (flag[temp] == delet)//если удален
+	{
+		this->Rows[temp] = new TableRec<type_k, type_d>(key, Row); //вставка
+		flag[temp] = busy; //обозначение что он занят
+	}
+	*/
+
+
 	if ((double)this->CurIndex / (double)this->MaxSizeT > 0.7) 
 	//if (IsFull())
 		Realloc();
 	int temp = Hashf(key);//индекс
-	Search(key);
 	
 	
-
 	if (flag[temp] == free) //если свободный
 	{
 		this->Rows[temp] = new TableRec<type_k, type_d>(key, Row); //создание нового
@@ -116,14 +135,14 @@ void HashTable<type_k, type_d>::Insert(const type_k & key, const type_d & Row)
 		this->Rows[temp] = new TableRec<type_k, type_d>(key, Row); //вставка
 		flag[temp] = busy; //обозначение что он занят
 	}
-	else
+	else//если занят
 	{
-		if ((*(this->Rows[temp])).KEY == key)//если занят
+		if ((*(this->Rows[temp])).KEY == key)
 		{
 			throw "error: the same key";
 		}
 		srand(temp);//srand выполняет инициализацию генератора случайных чисел rand
-		int temp1 = rand() % (this->MaxSizeT);
+		int temp1 = rand() % (this->MaxSizeT);//новый индекс
 		while (flag[temp1] == busy) //пока занят
 		{
 			temp1 = rand() % (this->MaxSizeT);
@@ -139,29 +158,33 @@ void HashTable<type_k, type_d>::Insert(const type_k & key, const type_d & Row)
 	}
 }
 template <class type_k, class type_d>//поиск
-TableRec<type_k, type_d>* HashTable<type_k, type_d>::Search(const type_k &key) const
+TableRec<type_k, type_d>* HashTable<type_k, type_d>::Search(const type_k & key) 
 {
-	int temp = Hashf(key);
+	int temp = Hashf(key);//индекс занятости
 	if (flag[temp] == 0) //если свободен
 	{
 		throw "error: ne found";
 	}
-	if ((this->Rows[temp] != NULL) && ((*(this->Rows[temp])).KEY) == key)
+	if ((this->Rows[temp] != NULL) && ((*(this->Rows[temp])).KEY) == key)//если ключи совпали
 	{
-		return this->Rows[temp];
+		return this->Rows[temp];//Нашли
 	}
 	else
 	{
 		srand(temp);
-		while ((flag[temp] == -1) || ((flag[temp] == 1) && ((*(this->Rows[temp])).KEY != key))) //пока удален илм занят и ключи не совпадают
-			temp = rand() % (this->MaxSizeT);
+		while ((flag[temp] == -1) || ((flag[temp] == 1) && ((*(this->Rows[temp])).KEY != key))) //пока удален или занят и ключи не совпадают
+			temp = rand() % (this->MaxSizeT);//новый индекс
 		if (flag[temp] == 1) // если занят
 		{
-			return this->Rows[temp];
+			return this->Rows[temp];//нашли
 		}
 		else
+			//cout << "error ne found" << endl;
 			throw "error: ne found";
 	}
+	
+	
+
 
 }
 
@@ -169,7 +192,21 @@ TableRec<type_k, type_d>* HashTable<type_k, type_d>::Search(const type_k &key) c
 template <class type_k, class type_d>//удаление
 void HashTable<type_k, type_d>::Delete(const type_k & key)
 {
-	int temp = Hashf(key);
+	int temp = Hashf(key);//индекс занятости
+	if (Search(key) == (this->Rows[temp]))//нашли ключ
+	{
+		delete this->Rows[temp];
+		this->Rows[temp] = NULL;
+		flag[temp] = delet;
+	}
+	else 
+			{
+				//cout << "error ne found" << endl;
+				throw "error: ne found";
+			}
+
+
+	/*int temp = Hashf(key);
 	if (flag[temp] == 0) //если свободен
 	{
 		throw "error: ne found";
@@ -195,7 +232,7 @@ void HashTable<type_k, type_d>::Delete(const type_k & key)
 			{
 				throw "error: ne found";
 			}
-	}
+	}*/
 }
 
 template <class type_k, class type_d>
@@ -242,6 +279,7 @@ type_d HashTable<type_k, type_d>::GetCur() const
 	if (flag[CurIndex] == 1)
 		return (*(this->Rows[CurIndex])).Data;
 	else 
+		//cout << "error ne found" << endl;
 		throw "error: ne found";
 }
 
