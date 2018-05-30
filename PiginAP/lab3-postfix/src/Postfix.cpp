@@ -31,7 +31,7 @@ int Postfix::priority(char x)
         return 0;
     }
 	return -1;
-}
+} 
 //==========================================================||==========================================================
 string Postfix::create_form(string inp_text)
 {
@@ -67,7 +67,7 @@ string Postfix::create_form(string inp_text)
 	}
 
 	while (!Stack_two.IsEmpty()) { Stack_one.push(Stack_two.pop()); }
-	std::string s = "";
+	string s = "";
 	while (!Stack_one.IsEmpty()) { s = Stack_one.pop() + s; }
 	
 	return s;
@@ -77,26 +77,41 @@ string Postfix::create_form(string inp_text)
 double Postfix::calc_form(string form)
 {
 	Stack<double> double_list;
-	for (size_t i = form.size()-1; i < form.size(); i--) {
-		if (Postfix::operand(form[i])) {
+	for (size_t i = form.size()-1; i < form.size(); i--) 
+	{
+		if (Postfix::operand(form[i])) 
+		{
 			std::cout << "input var " << form[i] << " : ";
 			double var;
+			
+
 			std::cin >> var;
 			double_list.push(var);
 		}
 
 	}
 	Stack<double> end_list;
-	for (int i = 0; i < form.size(); i++) {
+	for (int i = 0; i < form.size(); i++) 
+	{
 		char element = form[i];
-		if (Postfix::operand(element)) {
+		if (Postfix::operand(element)) 
+		{
 			end_list.push(double_list.pop());
 		}
 		else {
 			double two = end_list.pop();
 			double one = end_list.pop();
-			end_list.push(calc_op(one, two, element));
-		}
+			try
+			{
+			const double st = calc_op(one, two, element);
+			end_list.push(st); 
+			}
+			catch( const char* ex)
+			{ 
+			cout<<ex;
+			}
+			
+			}
 	}
 	return end_list.pop();
 }
@@ -112,7 +127,11 @@ double Postfix::calc_op(double one, double two, char op)
 		case '*':
 			return (one * two);
 		case '/':
-			return (one / two);
+			if(two == 0)
+			{
+				throw " Error, x/0 is impossible";
+			}
+			else return (one / two);
 		default:
 			return -1;
 		}
