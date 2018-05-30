@@ -10,7 +10,7 @@ class TabRecord
 public:
 	string key;
 	type data;
-	TabRecord() { key = "empty"; type p; data = p; }
+	TabRecord() { key = "empty"; }
 	TabRecord(const string& KEY, const type& DATA) { key = KEY; data = DATA; }
 	TabRecord(const TabRecord& T) { key = T.key; data = T.data; }
 	TabRecord& operator=(const TabRecord& T) { key = T.key; data = T.data; }

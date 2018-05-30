@@ -63,7 +63,7 @@ template<typename type>
 void ScanTable<type>::Delete(const string& KEY)
 {
 	reset();
-	while ((CurrIndex > -1) && (Records[CurrIndex]->key != KEY) && (CurrIndex < CurrRecord))
+	while ((CurrIndex > -1) && (CurrIndex < CurrRecord) && (Records[CurrIndex]->key != KEY))
 		CurrIndex++;
 	if (CurrRecord && (CurrIndex < CurrRecord))
 	{

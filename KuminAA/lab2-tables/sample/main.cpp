@@ -14,15 +14,15 @@ void main()
 	string key;
 	Polinom P;
 
-	while (!c || (c == ' '))
-	{
+	while (c != ' ')
+	{/*
 		cout << "ScanTable: " << endl << Tab1 << endl;
 		cout << "-------------------------" << endl;
 		cout << "SortedTable:" << endl << Tab2 << endl;
 		cout << "-------------------------" << endl;
 		cout << "HashTable:" << endl << Tab3 << endl << endl;
-		cout << "-------------------------" << endl;
-		cout << "1. Insert   2. Delete   3. Search" << endl;
+		cout << "-------------------------" << endl;*/
+		cout << "1. Insert   2. Delete   3. Search   4.Show" << endl;
 		cin >> str;
 		switch (str)
 		{
@@ -33,15 +33,22 @@ void main()
 				if (key == "")
 					getline(cin, key);
 				P = Polinom(key);
-				Tab1.Insert(key, P);
-				Tab2.Insert(key, P);
-				Tab3.Insert(key, P);
+				try
+				{
+					Tab1.Insert(key, P);
+					Tab2.Insert(key, P);
+					Tab3.Insert(key, P);
+				}
+				catch (...)
+				{
+					cout << "Error" << endl;
+				}/*
 				cout << "ScanTable: " << endl << Tab1 << endl;
 				cout << "-------------------------" << endl;
 				cout << "SortedTable:" << endl << Tab2 << endl;
 				cout << "-------------------------" << endl;
 				cout << "HashTable:" << endl << Tab3 << endl << endl;
-				cout << "-------------------------" << endl;
+				cout << "-------------------------" << endl;*/
 				break;
 			}
 			
@@ -51,15 +58,22 @@ void main()
 				getline(cin, key);
 				if (key == "")
 					getline(cin, key);
-				Tab1.Delete(key);
-				Tab2.Delete(key);
-				Tab3.Delete(key);
+				try
+				{
+					Tab1.Delete(key);
+					Tab2.Delete(key);
+					Tab3.Delete(key);
+				}
+				catch (...)
+				{
+					cout << "Error" << endl;
+				}/*
 				cout << "ScanTable: " << endl << Tab1 << endl;
 				cout << "-------------------------" << endl;
 				cout << "SortedTable:" << endl << Tab2 << endl;
 				cout << "-------------------------" << endl;
 				cout << "HashTable:" << endl << Tab3 << endl << endl;
-				cout << "-------------------------" << endl;
+				cout << "-------------------------" << endl;*/
 				break;
 			}
 			case '3':
@@ -68,29 +82,41 @@ void main()
 				getline(cin, key);
 				if (key == "")
 					getline(cin, key);
-				Tab1.Delete(key);
-				Tab2.Delete(key);
-				Tab3.Delete(key);
+				try
+				{
+					cout << "ScanTable: " << endl << Tab1 << endl;
+					cout << "-------------------------" << endl;
+					cout << "Search in ScanTable: " << Tab1.Search(key) << endl;
+					cout << "-------------------------" << endl;
+					cout << "SortedTable:" << endl << Tab2 << endl;
+					cout << "-------------------------" << endl;
+					cout << "Search in SortedTable: " << Tab2.Search(key) << endl;
+					cout << "-------------------------" << endl;
+					cout << "HashTable:" << endl << Tab3 << endl << endl;
+					cout << "-------------------------" << endl;
+					cout << "Search in HashTable: " << Tab3.Search(key) << endl;
+					cout << "-------------------------" << endl;
+				}
+				catch (...)
+				{
+					cout << "Error" << endl;
+				}
+				break;
+			}
+			case '4':
+			{
 				cout << "ScanTable: " << endl << Tab1 << endl;
-				cout << "-------------------------" << endl;
-				cout << "Search in ScanTable: " << Tab1.Search(key) << endl;
 				cout << "-------------------------" << endl;
 				cout << "SortedTable:" << endl << Tab2 << endl;
 				cout << "-------------------------" << endl;
-				cout << "Search in SortedTable: " << Tab2.Search(key) << endl;
-				cout << "-------------------------" << endl;
 				cout << "HashTable:" << endl << Tab3 << endl << endl;
 				cout << "-------------------------" << endl;
-				cout << "Search in HashTable: " << Tab3.Search(key) << endl;
-				cout << "-------------------------" << endl;
-				break;
 			}
 			default:
 				cout << "try again" << endl;
 		}
-		cout << "Press SPACE to retry" << endl;
-		cout << "Press any key to exit" << endl;
-
+		cout << "Press SPACE to exit" << endl;
+		cout << "Press any key to enter" << endl;
 		c = _getch();
 	}
 }

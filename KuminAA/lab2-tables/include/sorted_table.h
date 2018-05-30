@@ -94,7 +94,7 @@ void SortedTable<type>::Delete(const string& KEY)
 	if (CurrRecord)
 	{
 		int k = BinarySearch(KEY);
-		if (Records[k]->key == KEY)
+		if ((k < CurrRecord) && (Records[k]->key == KEY))
 		{
 				for (int i = k; i < CurrRecord - 1; i++)
 					Records[i] = Records[i + 1];

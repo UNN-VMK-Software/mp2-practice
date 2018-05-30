@@ -36,11 +36,13 @@ HashTable<type>::HashTable(int i = 10) : Table(i)
 template<typename type>
 int HashTable<type>::Hash(const string& KEY) const
 {
-	int seed = 11;
-	int hash = 0;
+	int seed = 0;
+	//int hash = 0;
 	for (int i = 0; i < KEY.length(); i++)
-		hash = (hash * seed) + int(KEY[i]);
-	return  hash % MaxRecords;
+		seed = seed + int(KEY[i]);
+	//srand(seed);
+	//hash = rand()
+	return  seed % MaxRecords;
 }
 
 template<typename type>
@@ -92,7 +94,7 @@ type& HashTable<type>::Search(const string& KEY) const
 			return Temp.Records[Temp.CurrIndex]->data;
 		else
 		{
-			while (Temp.H[Temp.CurrIndex] && ((Temp.CurrIndex + 1) != l) && (Temp.Records[Temp.CurrIndex]->key == KEY))
+			while (Temp.H[Temp.CurrIndex] && ((Temp.CurrIndex + 1) != l) && (Temp.Records[Temp.CurrIndex]->key != KEY))
 				Temp.CurrIndex = (Temp.CurrIndex + 1) % Temp.MaxRecords;
 			if(Temp.Records[Temp.CurrIndex]->key == KEY)
 				return Temp.Records[Temp.CurrIndex]->data;
@@ -108,27 +110,35 @@ template<typename type>
 void HashTable<type>::Insert(const string& KEY, const type& DATA)
 {
 	if (CurrRecord == MaxRecords)
-		Realloc();
-	reset();
-	CurrIndex = Hash(KEY);
-	if (!H[CurrIndex])
 	{
+		Realloc();
+		CurrIndex = Hash(KEY);
 		Records[CurrIndex] = new TabRecord<type>(KEY, DATA);
 		CurrRecord++;
 		H[CurrIndex] = 1;
 	}
 	else
-		if (Records[CurrIndex]->key != KEY)
+	{
+		CurrIndex = Hash(KEY);
+		if (!H[CurrIndex])
 		{
-			int l = CurrIndex;
-			while (H[CurrIndex] && ((CurrIndex + 1) != l))
-				CurrIndex = (CurrIndex + 1) % MaxRecords;
 			Records[CurrIndex] = new TabRecord<type>(KEY, DATA);
 			CurrRecord++;
 			H[CurrIndex] = 1;
 		}
 		else
-			throw "this key exists";
+			if (Records[CurrIndex]->key != KEY)
+			{
+				int l = CurrIndex;
+				while (H[CurrIndex] && ((CurrIndex + 1) != l))
+					CurrIndex = (CurrIndex + 1) % MaxRecords;
+				Records[CurrIndex] = new TabRecord<type>(KEY, DATA);
+				CurrRecord++;
+				H[CurrIndex] = 1;
+			}
+			else
+				throw "this key exists";
+	}
 }
 
 template<typename type>
@@ -139,19 +149,33 @@ void HashTable<type>::Delete(const string& KEY)
 	{
 		CurrIndex = Hash(KEY);
 		int l = CurrIndex;
-		if (Records[CurrIndex]->key != KEY)
+		if (H[CurrIndex])
 		{
-			while (H[CurrIndex] && ((CurrIndex + 1) != l) && (Records[CurrIndex]->key == KEY))
-				CurrIndex = (CurrIndex + 1) % MaxRecords;
 			if (Records[CurrIndex]->key != KEY)
-				throw "Key does not exist";
+			{
+				while (H[CurrIndex] && ((CurrIndex + 1) != l) && (Records[CurrIndex]->key != KEY))
+					CurrIndex = (CurrIndex + 1) % MaxRecords;
+				if (!H[CurrIndex] || Records[CurrIndex]->key != KEY)
+					throw "Key does not exist";
+				else
+				{
+					Records[CurrIndex] = new TabRecord<type>;
+					H[CurrIndex] = 0;
+					CurrRecord--;
+				}
+			}
+			else
+			{
+				Records[CurrIndex] = new TabRecord<type>;
+				H[CurrIndex] = 0;
+				CurrRecord--;
+			}
 		}
+		else
+			throw "Key does not exist";
 	}
 	else
 		throw "Table is empty";
-	Records[CurrIndex] = new TabRecord<type>;
-	H[CurrIndex] = 0;
-	CurrRecord--;
 }
 
 template<typename type>
