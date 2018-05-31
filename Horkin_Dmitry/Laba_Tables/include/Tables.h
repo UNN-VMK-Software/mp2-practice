@@ -46,7 +46,7 @@ std::ostream& operator<<(std::ostream& os, const  Table<KeyType, DataType>& p) {
 	int i = 0;
 	for (i = 0; i < p.MaxSize; i++) {
 		if (p.DT[i] != NULL) os << i<< "| "<< (*(p.DT[i])).Key << "---> "<<(*(p.DT[i])).Data;
-		else { os << i << " NULL SUKA" << endl;}
+		else { os << i << " NULL" << endl;}
 	}
 	return os;
 }

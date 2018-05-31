@@ -5,7 +5,7 @@ class node {
 public:
 	Type1 date;
 	node* next;
-	node() { next = NULL; }; //гениально
+	node() { next = NULL; };
 	node(const Type1 date, node* next = NULL); 
 	node(const node<Type1> &con);
 	node(const node* con);

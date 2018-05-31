@@ -18,8 +18,6 @@ public:
 	polinom& operator = (const polinom &polinom2);
 	polinom operator * (const polinom &polinom2);
 	polinom operator * (const Monom Mon);
-	void delnuls(polinom &res);
-	void vporydok(polinom &res);
 	bool operator == (const polinom &polinom2) const;
 	bool operator != (const polinom &polinom2) const;
 	bool can_multyply(Monom A, Monom B);

@@ -12,7 +12,9 @@ void main()
 	while (flag == 1)
 	{
 		system("cls");
-		cout << "Please, write your first string" << endl;
+		cout << "You can write your polinom like" << endl;
+		cout << "degree x1 or y3" << endl<< "number - 12.43"<< endl<< "Monom -12.43x1y3z1"<<endl;
+		cout << "Please, write your first polinom" << endl;
 		string s1;
 		cin >> s1;
 		polinom S1(s1);
@@ -25,7 +27,9 @@ void main()
 		cout << "2  -" << endl;
 		cout << "3 *" << endl;
 		cout << "4 * on constant" << endl;
+		cout << "Your choise is - ";
 		cin >> k;
+		
 		switch (k)
 		{
 		case 1:
@@ -42,8 +46,13 @@ void main()
 		}
 		case 3:
 		{
-			polinom res = S1 * S2;
-			cout << res;
+			try {
+				polinom res = S1 * S2;
+				cout << res;
+			}
+			catch (...) {
+				cout << "Can't multiply because"<< endl<< "you wrote very big stepen"<<endl;
+			}
 			break;
 		}
 		case 4:
@@ -54,8 +63,13 @@ void main()
 			cout << "Please, write const for multyplication" << endl;
 			cin >> a;
 			//Polinom C(con);
-			polinom res = a*S1;
-			cout << res;
+			
+				polinom res = a * S1;
+
+				cout << res;
+			
+			
+
 			break;
 		}
 		default:

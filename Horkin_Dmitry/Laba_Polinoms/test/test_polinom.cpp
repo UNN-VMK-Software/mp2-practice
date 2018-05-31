@@ -193,6 +193,13 @@ TEST(list, can_getnext_node)
 /***************************************************/
  //тесты мономов и полиномов
 
+
+TEST(polinom, Assert_trow_to_mult_bug_steepeny)
+{
+	ASSERT_ANY_THROW(polinom("12+x3+x6")*polinom("1+x7-y2"));
+}
+
+
 struct monom_mod
 {
 	string s;

@@ -1,8 +1,11 @@
-#include <gtest.h>
+п»ї#include <gtest.h>
 #include "polinom.h"
 #include "monom.h"
-
-TEST(list, insert_to_end) // вставка в конец 
+#include "TablesHash.h"
+#include "TablesUnord.h"
+#include "TablesOrdered.h"
+//*****************POLINOMS_TEST*************************************************
+TEST(list, insert_to_end) // РІСЃС‚Р°РІРєР° РІ РєРѕРЅРµС† 
 {
 	Monom a(12, 14);
 	Monom b(14, 43);
@@ -15,12 +18,12 @@ TEST(list, insert_to_end) // вставка в конец
 
 }
 
-TEST(list, can_create_list) // может создать лист 
+TEST(list, can_create_list) // РјРѕР¶РµС‚ СЃРѕР·РґР°С‚СЊ Р»РёСЃС‚ 
 {
 	EXPECT_NO_THROW(list<Monom> l);
 }
 
-TEST(list, delete_last_not_empty_list) // Удаление не пустого листа 
+TEST(list, delete_last_not_empty_list) // РЈРґР°Р»РµРЅРёРµ РЅРµ РїСѓСЃС‚РѕРіРѕ Р»РёСЃС‚Р° 
 {
 	Monom a(12, 14);
 	Monom b(14, 43);
@@ -31,7 +34,7 @@ TEST(list, delete_last_not_empty_list) // Удаление не пустого листа
 	EXPECT_EQ(l.IsEmpty(), 1);
 }
 
-TEST(list, can_check_is_empty) // проверка на пустоту не пустого листа 
+TEST(list, can_check_is_empty) // РїСЂРѕРІРµСЂРєР° РЅР° РїСѓСЃС‚РѕС‚Сѓ РЅРµ РїСѓСЃС‚РѕРіРѕ Р»РёСЃС‚Р° 
 {
 	Monom a(12, 14);
 	Monom b(14, 43);
@@ -41,14 +44,14 @@ TEST(list, can_check_is_empty) // проверка на пустоту не пустого листа
 	EXPECT_EQ(0, l.IsEmpty());
 }
 
-TEST(list, can_check_is_empty_if_empty) // проверка на пустоту пустого листа 
+TEST(list, can_check_is_empty_if_empty) // РїСЂРѕРІРµСЂРєР° РЅР° РїСѓСЃС‚РѕС‚Сѓ РїСѓСЃС‚РѕРіРѕ Р»РёСЃС‚Р° 
 {
 	list<Monom> l;
 	EXPECT_EQ(1, l.IsEmpty());
 }
 
 
-TEST(list, operator_ravno_for_list) // проверка оператора = 
+TEST(list, operator_ravno_for_list) // РїСЂРѕРІРµСЂРєР° РѕРїРµСЂР°С‚РѕСЂР° = 
 {
 	Monom a(12, 14);
 	Monom b(14, 43);
@@ -191,7 +194,7 @@ TEST(list, can_getnext_node)
 
 }
 /***************************************************/
- //тесты мономов и полиномов
+ //С‚РµСЃС‚С‹ РјРѕРЅРѕРјРѕРІ Рё РїРѕР»РёРЅРѕРјРѕРІ
 
 struct monom_mod
 {
@@ -292,4 +295,206 @@ INSTANTIATE_TEST_CASE_P(instantiation3,
 TEST_P (parameterizedpolinom_multyply, can_right_multyply_polinoms)
 {
 	EXPECT_EQ(GetParam().iscorrect_mul, true);
+}
+
+//************************************TABLE_TESTS***********************************************
+TEST(TableUnord, can_create) 
+{
+	TableUnord<string, polinom> A(20);
+	polinom a("1+x1");
+	ASSERT_NO_THROW(A.Insert("1+x1", a));
+}
+
+class TableforCheck : public ::testing::Test
+{
+public:
+	HashTable <string, polinom> HT;
+	TableOrdered <string, polinom> TO;
+	TableUnord <string, polinom> TU;
+
+	TableforCheck() : HT(10), TO(10), TU(10)
+	{
+		HT.Insert("1+x1", polinom("1+x1"));
+		TO.Insert("1+x1", polinom("1+x1"));
+		TU.Insert("1+x1", polinom("1+x1"));
+		HT.Insert("10+x1y1z1", polinom("10+x1y1z1"));
+		TO.Insert("10+x1y1z1", polinom("10+x1y1z1"));
+		TU.Insert("10+x1y1z1", polinom("10+x1y1z1"));
+		HT.Insert("x4", polinom("x4"));
+		TO.Insert("x4", polinom("x4"));
+		TU.Insert("x4", polinom("x4"));
+	};
+
+};
+
+
+TEST_F(TableforCheck, can_get_curr_data_TU)
+{
+	TU.Reset();
+	polinom p("1+x1");
+	EXPECT_EQ(TU.GetCurData(), p);
+}
+
+TEST_F(TableforCheck, can_get_next_TO)
+{
+	ASSERT_NO_THROW(TO.GetNext());
+}
+
+TEST_F(TableforCheck, can_get_next_HT)
+{
+	ASSERT_NO_THROW(HT.GetNext());
+}
+
+TEST_F(TableforCheck, can_get_next_TU)
+{
+	ASSERT_NO_THROW(TU.GetNext());
+}
+
+TEST_F(TableforCheck, can_find_existed_element_HT)
+{
+	EXPECT_EQ(HT.Search("1+x1")->Data, polinom("1+x1"));
+}
+
+TEST_F(TableforCheck, can_find_existed_element_TU)
+{
+	EXPECT_EQ(TU.Search("1+x1")->Data, polinom("1+x1"));
+}
+
+TEST_F(TableforCheck, can_find_existed_element_TO)
+{
+	EXPECT_EQ(TO.Search("1+x1")->Data, polinom("1+x1"));
+}
+
+TEST_F(TableforCheck, can_dell_existed_element_HT)
+{
+	HT.Dell("1+x1");
+	ASSERT_ANY_THROW(HT.Search("1+x1"));
+}
+
+TEST_F(TableforCheck, can_dell_existed_element_TU)
+{
+	TU.Dell("1+x1");
+	ASSERT_ANY_THROW(TU.Search("1+x1"));
+}
+
+TEST_F(TableforCheck, can_dell_existed_element_TO)
+{
+	TO.Dell("1+x1");
+	ASSERT_ANY_THROW(TO.Search("1+x1"));
+}
+
+TEST_F(TableforCheck, can_insert_element_HT)
+{
+	HT.Insert("1+2x1+y1", polinom("1+2x1+y1"));
+	EXPECT_EQ(HT.Search("1+2x1+y1")->Data, polinom("1+2x1+y1"));
+}
+
+TEST_F(TableforCheck, can_insert_element_TU)
+{
+	TU.Insert("1+z1", polinom("1+z1"));
+	EXPECT_EQ(TU.Search("1+z1")->Data, polinom("1+z1"));
+}
+
+TEST_F(TableforCheck, can_insert_element_TO)
+{
+	TO.Insert("x1y1z1+z5", polinom("x1y1z1+z5"));
+	EXPECT_EQ(TO.Search("x1y1z1+z5")->Data, polinom("x1y1z1+z5"));
+}
+
+TEST_F(TableforCheck, can_find_existed_element2_HT)
+{
+	EXPECT_EQ(HT.Search("10+x1y1z1")->Data, polinom("10+x1y1z1"));
+}
+
+TEST_F(TableforCheck, can_find_existed_element2_TU)
+{
+	EXPECT_EQ(TU.Search("10+x1y1z1")->Data, polinom("10+x1y1z1"));
+}
+
+TEST_F(TableforCheck, can_find_existed_element2_TO)
+{
+	EXPECT_EQ(TO.Search("10+x1y1z1")->Data, polinom("10+x1y1z1"));
+}
+
+TEST_F(TableforCheck, can_find_existed_element3_HT)
+{
+	EXPECT_EQ(HT.Search("x4")->Data, polinom("x4"));
+}
+
+TEST_F(TableforCheck, can_find_existed_element3_TU)
+{
+	EXPECT_EQ(TU.Search("x4")->Data, polinom("x4"));
+}
+
+TEST_F(TableforCheck, can_find_existed_element3_TO)
+{
+	EXPECT_EQ(TO.Search("x4")->Data, polinom("x4"));
+}
+
+TEST_F(TableforCheck, can_insert_element2_HT)
+{
+	HT.Insert("111+z1", polinom("111+z1"));
+	EXPECT_EQ(HT.Search("111+z1")->Data, polinom("111+z1"));
+}
+
+TEST_F(TableforCheck, can_insert_element2_TU)
+{
+	TU.Insert("1+32.1x1", polinom("1+32.1x1"));
+	EXPECT_EQ(TU.Search("1+32.1x1")->Data, polinom("1+32.1x1"));
+}
+
+TEST_F(TableforCheck, can_insert_element2_TO)
+{
+	TO.Insert("x1y1z1", polinom("x1y1z1"));
+	EXPECT_EQ(TO.Search("x1y1z1")->Data, polinom("x1y1z1"));
+}
+
+TEST_F(TableforCheck, cannot_dell_element_HT)
+{
+	ASSERT_ANY_THROW(HT.Dell("12"));
+}
+
+TEST_F(TableforCheck, cannot_dell_element_TU)
+{
+	ASSERT_ANY_THROW(TU.Dell("12"));
+}
+
+TEST_F(TableforCheck, cannot_dell_element_TO)
+{
+	ASSERT_ANY_THROW(TO.Dell("12"));
+}
+
+TEST_F(TableforCheck, cannot_Inset_ex_element_HT)
+{
+	ASSERT_ANY_THROW(HT.Insert("1+x1", polinom("1+x1")));
+}
+
+TEST_F(TableforCheck, cannot_Inset_ex_element_TU)
+{
+	ASSERT_ANY_THROW(TU.Insert("1+x1", polinom("1+x1")));
+}
+
+TEST_F(TableforCheck, cannot_Inset_ex_element_TO)
+{
+	ASSERT_ANY_THROW(TO.Insert("1+x1", polinom("1+x1")));
+}
+
+TEST_F(TableforCheck, cannot_Inset_ex_element2_HT)
+{
+	ASSERT_ANY_THROW(HT.Insert("1+x1", polinom("1+x1")));
+}
+
+TEST_F(TableforCheck, cannot_Inset_ex_element2_TU)
+{
+	ASSERT_ANY_THROW(TU.Insert("1+x1", polinom("1+x1")));
+}
+
+TEST_F(TableforCheck, cannot_Inset_ex_element2_TO)
+{
+	ASSERT_ANY_THROW(TO.Insert("1+x1", polinom("1+x1")));
+}
+
+TEST_F(TableforCheck, jast_sotka_test_e_booy)
+{
+	ASSERT_ANY_THROW(TO.Dell("100"));
 }

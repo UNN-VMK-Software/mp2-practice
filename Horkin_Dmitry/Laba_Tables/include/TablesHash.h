@@ -2,6 +2,7 @@
 #include "Tables.h" 
 #include <string>
 #include <cstdlib> // для рандомма
+#include <cmath>
 using namespace std;
 #define Mark0 0
 #define Mark1 1
@@ -45,7 +46,7 @@ int GetDigKey<string>(const string &k)  // сама реализация хэш функции от string
 template <class KeyType, class DataType>  // хэш функция внутри класса (метод)
 int HashTable<KeyType, DataType>::Hashfunc(const KeyType& k) const
 {
-	int temp = GetDigKey(k);
+	int temp = abs(GetDigKey(k));
 	return (temp % (this->MaxSize));
 }
 
@@ -91,11 +92,9 @@ void HashTable<KeyType, DataType>::Insert(const KeyType &KT_T, const DataType &D
 	{
 		if ((*(this->DT[place])).Key == KT_T)
 		{
-			cout << "duplicated key" << endl;
-			flag = 1;
+			throw "dsadasd";
 		}
-		if (flag != 1)
-		{
+		
 			srand(place);
 			int laker = rand() % (this->MaxSize);
 			while ((DM[laker] == Mark1) && (flag != 1)) //пока элемент занят 
@@ -105,18 +104,14 @@ void HashTable<KeyType, DataType>::Insert(const KeyType &KT_T, const DataType &D
 
 				if ((this->DT[laker] !=NULL)&&((*(this->DT[laker])).Key == KT_T))
 				{
-					cout << "duplicated key" << endl; flag = 1;
+					throw "dsad";
 				}
 			}
 
-
-			if (flag != 1) {
 				this->DT[laker] = new DataTable<KeyType, DataType>(KT_T, DT_D);
 				if (DM[laker] == 0)
 					this->curindex++;
 				DM[laker] = Mark1;
-			}
-		}
 	}
 }
 
@@ -128,6 +123,7 @@ void HashTable<KeyType, DataType>::Dell(const KeyType &KT_T)
 	if (DM[place] == 0) //элемента нет
 	{
 		cout << "element doesn't exist" << endl;
+		throw "asdas";
 		flag = 1;
 	}
 	if (flag == 0) {
@@ -148,7 +144,11 @@ void HashTable<KeyType, DataType>::Dell(const KeyType &KT_T)
 				this->DT[place] = NULL;
 				DM[place] = Markminus1;
 			}
-			else cout << "element doesn't exist" << endl;
+			else {
+				cout << "element doesn't exist" << endl;
+				throw "dsad";
+			}
+
 		}
 	}
 }
@@ -159,11 +159,10 @@ DataTable<KeyType, DataType>* HashTable<KeyType, DataType>::Search(const KeyType
 {
 	int place = Hashfunc(KT_T);
 	if (DM[place] == 0) //элемента нет
-						//throw "element doesn't exist";
-		return NULL;
+						throw "element doesn't exist";
+
 	if ((this->DT[place] != NULL) && ((*(this->DT[place])).Key) == KT_T)
 	{
-		//return ((*(this->DT[place])).Data);
 		return this->DT[place];
 	}
 	else
@@ -173,11 +172,9 @@ DataTable<KeyType, DataType>* HashTable<KeyType, DataType>::Search(const KeyType
 			place = rand() % (this->MaxSize);
 		if (DM[place] == 1) // совпадают ключи
 		{
-			//return ((*(this->DT[place])).Data);
 			return this->DT[place];
 		}
-		else //throw "element doesn't exist";
-			return NULL;
+		else throw "element doesn't exist";
 	}
 
 }

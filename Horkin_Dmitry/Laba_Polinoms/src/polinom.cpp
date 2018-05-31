@@ -207,33 +207,6 @@ bool can = true;
 	 }
 	 return res;
  }
- void polinom::delnuls(polinom &res) {
-	 res.mnogochlen.reset();
-	 while (!res.mnogochlen.IsEnd()) {
-		 if (res.mnogochlen.getcurrentdate() == Monom(0, 0)) res.mnogochlen.Delete(Monom(0, 0));
-		 res.mnogochlen.getnext();
-	 }
-	 if (res.mnogochlen.getcurrentdate() == Monom(0, 0)) res.mnogochlen.Delete(Monom(0, 0));
-	 res.mnogochlen.getnext();
-	 if (res.mnogochlen.IsEmpty()) res.mnogochlen.Insert_to_tail();
- }
- void  polinom::vporydok(polinom &res) {
-	 Monom max;
-	 polinom copy(res);
-	 res.mnogochlen.clear();
-	 while (!copy.mnogochlen.IsEmpty()) {
-		 copy.mnogochlen.reset();
-		 max = copy.mnogochlen.getcurrentdate();
-		 copy.mnogochlen.getnext();
-		 while (!copy.mnogochlen.IsEnd()) {
-			 if (max < copy.mnogochlen.getcurrentdate()) max = copy.mnogochlen.getcurrentdate();
-			 copy.mnogochlen.getnext();
-		 }
-		 if (max < copy.mnogochlen.getcurrentdate()) max = copy.mnogochlen.getcurrentdate();
-		 copy.mnogochlen.Delete(max);
-		 res.mnogochlen.Insert_to_tail(max);
-	 }
- }
 
  polinom polinom:: operator * (const Monom Mon) {
 	 polinom res;
@@ -247,11 +220,14 @@ bool can = true;
 		 res.mnogochlen.Insert_to_tail();
 	 }
 	else {
-		 res.mnogochlen.Insert_to_tail(copy.mnogochlen.getcurrentdate()*Mon);
+		if (can_multyply(copy.mnogochlen.getcurrentdate(), Mon))
+			res.mnogochlen.Insert_to_tail(copy.mnogochlen.getcurrentdate()*Mon); else throw "Stepenm vey big";
 		 //перемножили
 		 while (!copy.mnogochlen.IsEnd()) {
-			 res.mnogochlen.Insert_to_tail(copy.mnogochlen.getnextcurrentdate()*Mon);
-			 copy.mnogochlen.getnext();
+			 if (can_multyply(copy.mnogochlen.getcurrentdate(), Mon)) {
+				 res.mnogochlen.Insert_to_tail(copy.mnogochlen.getnextcurrentdate()*Mon);
+				 copy.mnogochlen.getnext();
+			 } else throw "Stepenm vey big";
 		 }
 	 } 
 

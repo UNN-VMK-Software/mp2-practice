@@ -6,24 +6,24 @@ template <typename T>
 class list {
 private:
 	node<T>* current;
-     // это просто напросто ходилка
-	node<T>* Head; // это указательн а фиктивную штуку ... след за ней данные
+   
+	node<T>* Head; 
 public:
-	list();//Готово
-	list(const list<T> &list2);     //готово
-	~list();   //готово
-	list<T>& operator = (const list<T> &list2); // годово
-	bool IsEmpty() const;  // готово
-	void Insert_to_tail(const T con = 0); //готово
-	void clear();//готово
-	bool operator == (const list<T> &list2) const; //недописал
+	list();
+	list(const list<T> &list2);     
+	~list();   
+	list<T>& operator = (const list<T> &list2); 
+	bool IsEmpty() const;  
+	void Insert_to_tail(const T con = 0); 
+	void clear();
+	bool operator == (const list<T> &list2) const; 
 	bool operator != (const list<T> &list2) const;
 	void Dellcurrent();
-	void reset();//reset - переход в начало
-	void getnext();//Getnext - переход в листе на следующий за ним
-	T getcurrentdate();//GetCurrent - возвращать данные
+	void reset();
+	void getnext();
+	T getcurrentdate();
 	T getnextcurrentdate();
-	bool IsEnd();//дошли ли до конца
+	bool IsEnd();
 	void Delete(const T date);
 };
 template <typename T>
@@ -63,7 +63,6 @@ void list<T>:: Delete(const T date1) {
 				Head->next = Head;
 				current = NULL;
 			}
-			//вдруг ptr это current
 		}
 		else
 		{
@@ -73,7 +72,7 @@ void list<T>:: Delete(const T date1) {
 			delete ptr;
 			pprev->next = pnext;
 			current = pprev;
-			//вдруг ptr это current
+			
 		}
 
 	}
@@ -132,7 +131,6 @@ list<T>::list(const list<T> &list2) {
 	Head->next = Head;
 	current = NULL;
 	if (!list2.IsEmpty()) {
-		//найдём конец у list2
 		node<T>* ptr2 = list2.Head;//указывает на фиктивную list2 ноду
 		ptr2 = ptr2->next;//  нода с данными у того от куда копирую
 		Head->next = new node<T>(ptr2);

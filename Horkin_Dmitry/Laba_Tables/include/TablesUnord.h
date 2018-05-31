@@ -40,7 +40,7 @@ void TableUnord< KeyType, DataType> ::Insert(const KeyType &KT_T, const DataType
 	int flag = 0;
 	for (int i = 0; i < this->Top; i++){
 		if ((*(this->DT[i])).Key == KT_T) {
-			cout << "dublicated Key"<<endl;
+			throw "dasd";
 			flag = 1;
 		}
 	}
@@ -66,7 +66,9 @@ void TableUnord< KeyType, DataType> ::Dell(const KeyType &KT_T)
 		this->DT[i] = NULL;
 		this->Top--;
 	}
-	else cout << "element doesn't exist" << endl;
+	else {
+		throw "dasda";
+	}
 };
 
 template <class KeyType, class DataType>
@@ -79,6 +81,6 @@ DataTable<KeyType, DataType>* TableUnord< KeyType, DataType> ::Search(const KeyT
 			return this->DT[i];
 		i++;
 	}
-	return NULL;
+	throw "netu";
 };
 

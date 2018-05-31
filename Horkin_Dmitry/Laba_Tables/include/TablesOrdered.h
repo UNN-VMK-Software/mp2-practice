@@ -64,7 +64,9 @@ void TableOrdered <KeyType, DataType> ::Insert(const KeyType &KT_T, const DataTy
 		this->DT[j] = new DataTable<KeyType, DataType>(KT_T, DT_D);
 		this->Top++;
 	}
-	else cout << "duplicate key" << endl;
+	else {
+		throw "dasd";
+	}
 }
 
 template <class KeyType, class DataType>
@@ -79,17 +81,16 @@ void  TableOrdered <KeyType, DataType> ::Dell(const KeyType &KT_T)
 			this->DT[i] = this->DT[i + 1];
 		this->Top -= 1;
 	}
-	else
-		cout << "element doesn't exist" << endl;
+	else {
+		throw "dasdasd";
+	}
 }
 
 template <class KeyType, class DataType>
 DataTable<KeyType, DataType>* TableOrdered <KeyType, DataType> ::Search(const KeyType &KT_T) const
 {
 	int area = BinarSearch(KT_T);
-	if ((*(this->DT[area])).Key == KT_T)
-		//return (*(this->DT[area])).Data;
+	if ( (this->DT[area]!=NULL)&&((*(this->DT[area])).Key == KT_T))
 		return this->DT[area];
-	else //throw "element doesn't exist";
-		return NULL;
+	else throw "element doesn't exist";
 }
