@@ -17,6 +17,10 @@ int main()
 	string form = Postfix::create_form(inp_text);
 	cout << "Post. form: " << form << endl;
 	double calc_form = Postfix::calc_form(form);
+	if(calc_form == 0)
+	{
+		return 0;
+	}
 	cout << calc_form << endl;
 	
 	return 0;

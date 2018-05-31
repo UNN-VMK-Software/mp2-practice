@@ -1,5 +1,6 @@
 #include "Postfix.h"
 #include <string>
+#include <map>
 
 using namespace std;
 
@@ -75,46 +76,47 @@ string Postfix::create_form(string inp_text)
 }
 //==========================================================||==========================================================
 double Postfix::calc_form(string form)
-{
-	Stack<double> double_list;
+{ 
+	map<char, double> nums; 
 	for (size_t i = form.size()-1; i < form.size(); i--) 
-	{
-		if (Postfix::operand(form[i])) 
-		{
-			std::cout << "input var " << form[i] << " : ";
-			double var;
-			
+	{ 
+	if (Postfix::operand(form[i]) && nums.count(form[i]) == 0 ) 
+	{ 
+	double var; 
+	cout << "input var " << form[i] << " : "; 
+	cin >> var; 
+	nums.insert(pair<char, double>(form[i], var)); 
+	} 
 
-			std::cin >> var;
-			double_list.push(var);
-		}
+	} 
 
-	}
-	Stack<double> end_list;
+	Stack<double> end_list; 
 	for (int i = 0; i < form.size(); i++) 
-	{
-		char element = form[i];
+	{ 
+		char element = form[i]; 
 		if (Postfix::operand(element)) 
-		{
-			end_list.push(double_list.pop());
-		}
+		{ 
+			end_list.push(nums[element]); 
+		} 
 		else {
 			double two = end_list.pop();
 			double one = end_list.pop();
 			try
 			{
-			const double st = calc_op(one, two, element);
-			end_list.push(st); 
+				const double st = calc_op(one, two, element);
+				end_list.push(st); 
 			}
 			catch( const char* ex)
 			{ 
-			cout<<ex;
+				cout<<ex;
+				break;
 			}
 			
-			}
-	}
-	return end_list.pop();
+		}
+	} 
+	return end_list.pop(); 
 }
+
 //==========================================================||==========================================================
 double Postfix::calc_op(double one, double two, char op)
 {
@@ -129,7 +131,7 @@ double Postfix::calc_op(double one, double two, char op)
 		case '/':
 			if(two == 0)
 			{
-				throw " Error, x/0 is impossible";
+				throw " Error, x/0 is impossible\ní";
 			}
 			else return (one / two);
 		default:
