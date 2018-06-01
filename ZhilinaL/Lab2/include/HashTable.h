@@ -179,16 +179,14 @@ template <typename T>
 T* HashTable<T>::Search(const string Key)
 {
 	this->Reset();
-	T* tmp = nullptr;
 	if (this->IsEmpty())
 		throw (string)"Can't Search In Empty Table";
 	this->currIndex = HashFunc(Key);
 
-	if(flag[this->currIndex] ==1)
-		tmp = this->rows[this->currIndex]->data;
+	if(flag[this->currIndex] == 1)
+		return (this->rows[this->currIndex]->data);
 	else
 		throw "Your key wasn't found, was deleted or nothing";
-	
 }
 template <typename T>
 void HashTable<T>::Delete(string key)
