@@ -1,0 +1,73 @@
+﻿  main.cpp
+d:\mp2-practice\lakshinaar\lab2\include\scan_table.h(25): warning C4244: '*=': conversion from 'double' to 'unsigned int', possible loss of data
+  d:\mp2-practice\lakshinaar\lab2\include\scan_table.h(24): note: while compiling class template member function 'void scantable<polynom>::Realloc(void)'
+  d:\mp2-practice\lakshinaar\lab1\sample\main.cpp(30): note: see reference to class template instantiation 'scantable<polynom>' being compiled
+d:\mp2-practice\lakshinaar\lab2\include\scan_table.h(27): warning C4018: '<': signed/unsigned mismatch
+d:\mp2-practice\lakshinaar\lab2\include\scan_table.h(37): warning C4018: '<': signed/unsigned mismatch
+  d:\mp2-practice\lakshinaar\lab2\include\scan_table.h(35): note: while compiling class template member function 'polynom *scantable<polynom>::Search(const std::string &)'
+  d:\mp2-practice\lakshinaar\lab1\sample\main.cpp(99): note: see reference to function template instantiation 'polynom *scantable<polynom>::Search(const std::string &)' being compiled
+d:\mp2-practice\lakshinaar\lab2\include\scan_table.h(39): warning C4018: '<': signed/unsigned mismatch
+d:\mp2-practice\lakshinaar\lab2\include\scan_table.h(50): warning C4018: '<': signed/unsigned mismatch
+  d:\mp2-practice\lakshinaar\lab2\include\scan_table.h(47): note: while compiling class template member function 'void scantable<polynom>::Insert(const std::string &,const type &)'
+          with
+          [
+              type=polynom
+          ]
+  d:\mp2-practice\lakshinaar\lab1\sample\main.cpp(62): note: see reference to function template instantiation 'void scantable<polynom>::Insert(const std::string &,const type &)' being compiled
+          with
+          [
+              type=polynom
+          ]
+d:\mp2-practice\lakshinaar\lab2\include\scan_table.h(71): warning C4018: '<': signed/unsigned mismatch
+  d:\mp2-practice\lakshinaar\lab2\include\scan_table.h(69): note: while compiling class template member function 'void scantable<polynom>::Delete(const std::string &)'
+  d:\mp2-practice\lakshinaar\lab1\sample\main.cpp(81): note: see reference to function template instantiation 'void scantable<polynom>::Delete(const std::string &)' being compiled
+d:\mp2-practice\lakshinaar\lab2\include\scan_table.h(73): warning C4018: '<': signed/unsigned mismatch
+d:\mp2-practice\lakshinaar\lab2\include\scan_table.h(82): warning C4018: '<': signed/unsigned mismatch
+  d:\mp2-practice\lakshinaar\lab2\include\scan_table.h(81): note: while compiling class template member function 'record<type> scantable<type>::GetCurrent(void) const'
+          with
+          [
+              type=polynom
+          ]
+d:\mp2-practice\lakshinaar\lab2\include\table.h(44): warning C4018: '>=': signed/unsigned mismatch
+  d:\mp2-practice\lakshinaar\lab2\include\table.h(43): note: while compiling class template member function 'bool table<type>::IsTabEnded(void) const'
+          with
+          [
+              type=polynom
+          ]
+  d:\mp2-practice\lakshinaar\lab2\include\scan_table.h(6): note: see reference to class template instantiation 'table<type>' being compiled
+          with
+          [
+              type=polynom
+          ]
+d:\mp2-practice\lakshinaar\lab2\include\sorted_table.h(32): warning C4244: '*=': conversion from 'double' to 'unsigned int', possible loss of data
+  d:\mp2-practice\lakshinaar\lab2\include\sorted_table.h(31): note: while compiling class template member function 'void sortedtable<polynom>::Realloc(void)'
+  d:\mp2-practice\lakshinaar\lab1\sample\main.cpp(31): note: see reference to class template instantiation 'sortedtable<polynom>' being compiled
+d:\mp2-practice\lakshinaar\lab2\include\sorted_table.h(34): warning C4018: '<': signed/unsigned mismatch
+d:\mp2-practice\lakshinaar\lab2\include\sorted_table.h(68): warning C4018: '<': signed/unsigned mismatch
+  d:\mp2-practice\lakshinaar\lab2\include\sorted_table.h(66): note: while compiling class template member function 'polynom *sortedtable<polynom>::Search(const std::string &)'
+  d:\mp2-practice\lakshinaar\lab1\sample\main.cpp(100): note: see reference to function template instantiation 'polynom *sortedtable<polynom>::Search(const std::string &)' being compiled
+d:\mp2-practice\lakshinaar\lab2\include\sorted_table.h(95): warning C4018: '<': signed/unsigned mismatch
+  d:\mp2-practice\lakshinaar\lab2\include\sorted_table.h(93): note: while compiling class template member function 'void sortedtable<polynom>::Delete(const std::string &)'
+  d:\mp2-practice\lakshinaar\lab1\sample\main.cpp(82): note: see reference to function template instantiation 'void sortedtable<polynom>::Delete(const std::string &)' being compiled
+d:\mp2-practice\lakshinaar\lab2\include\sorted_table.h(97): warning C4018: '<': signed/unsigned mismatch
+d:\mp2-practice\lakshinaar\lab2\include\sorted_table.h(108): warning C4018: '<': signed/unsigned mismatch
+  d:\mp2-practice\lakshinaar\lab2\include\sorted_table.h(107): note: while compiling class template member function 'record<type> sortedtable<type>::GetCurrent(void) const'
+          with
+          [
+              type=polynom
+          ]
+d:\mp2-practice\lakshinaar\lab2\include\hash_table.h(40): warning C4244: '*=': conversion from 'double' to 'unsigned int', possible loss of data
+  d:\mp2-practice\lakshinaar\lab2\include\hash_table.h(39): note: while compiling class template member function 'void hashtable<polynom>::Realloc(void)'
+  d:\mp2-practice\lakshinaar\lab1\sample\main.cpp(32): note: see reference to class template instantiation 'hashtable<polynom>' being compiled
+d:\mp2-practice\lakshinaar\lab2\include\hash_table.h(116): warning C4018: '<': signed/unsigned mismatch
+  d:\mp2-practice\lakshinaar\lab2\include\hash_table.h(110): note: while compiling class template member function 'void hashtable<polynom>::GetNext(void)'
+  d:\mp2-practice\lakshinaar\lab2\include\hash_table.h(46): note: see reference to function template instantiation 'void hashtable<polynom>::GetNext(void)' being compiled
+d:\mp2-practice\lakshinaar\lab2\include\hash_table.h(135): warning C4018: '<': signed/unsigned mismatch
+  d:\mp2-practice\lakshinaar\lab2\include\hash_table.h(127): note: while compiling class template member function 'bool hashtable<polynom>::IsTabEnded(void) const'
+  d:\mp2-practice\lakshinaar\lab2\include\hash_table.h(44): note: see reference to function template instantiation 'bool hashtable<polynom>::IsTabEnded(void) const' being compiled
+d:\mp2-practice\lakshinaar\lab2\include\hash_table.h(33): warning C4018: '<': signed/unsigned mismatch
+  d:\mp2-practice\lakshinaar\lab2\include\hash_table.h(30): note: while compiling class template member function 'int hashtable<polynom>::hf(const std::string)'
+  d:\mp2-practice\lakshinaar\lab2\include\hash_table.h(43): note: see reference to function template instantiation 'int hashtable<polynom>::hf(const std::string)' being compiled
+  d:\mp2-practice\lakshinaar\lab2\include\hash_table.h(39): note: while compiling class template member function 'void hashtable<polynom>::Realloc(void)'
+  sample.vcxproj -> D:\mp2-practice\LakshinaAR\lab2\sln\Debug\sample.exe
+  sample.vcxproj -> D:\mp2-practice\LakshinaAR\lab2\sln\Debug\sample.pdb (Full PDB)

@@ -1,101 +1,112 @@
-#include "polinom.h"
+#include "scan_table.h"
+#include "sorted_table.h"
+#include "hash_table.h"
 #include <iostream>
-#include <string>
-
-using namespace std;
+#include "polinom.h"
 
 
 
-char menu()
+char main_menu()
 {
-	char choice;
-	cout<<"Choose a operation"<<endl;
-	cout<<"1. p1 + p2"<<endl;
-	cout<<"2. p1 - p2"<<endl; 
-	cout<<"3. p1*p2"<<endl;
-	cout<<"4. c*p1"<<endl;
-	cout<<"5. p1*c"<<endl;
-	cout<<"6. Exit"<<endl;
+	system("cls");
 
+	char str;
+
+	cout << "What will you do with tables?" << endl;
+	cout << "1. Show tables" << endl;
+	cout << "2. Insert" << endl;
+	cout << "3. Delete" << endl;
+	cout << "4. Search" << endl;
+	cout << "5. Exit" << endl;
+	cout << endl;
 	cout << "Your choice: ";
-	cin >> choice;
-	return choice;
+	cin >> str;
+	return str;
 }
 
+void main()
+{	
+	char pmenu;
+	scantable<polynom> ScT;
+	sortedtable<polynom> SrT;
+	hashtable<polynom> HsT;
 
+	polynom pol;
+	string inp_pol;
 
-int main()          
-{
-	string s1,s2;
-	polynom p1, p2;
-	double c;
-	char number;
+	do {
 
-	do
-	{
-		number = menu();
-		switch(number)
+		pmenu = main_menu();
+
+		switch (pmenu)
 		{
 		case '1':
-			{
-				cout << "Enter polinom p1: ";
-				cin >> s1;
-				p1 = s1;
-				cout << "Enter polinom p2: ";
-				cin >> s2;
-				p2 = s2;
-				cout << "Result of operation: " << p1 + p2 << endl << endl;
-				break;
-			}
-		case '2':
-			{
-				cout << "Enter polinom p1: ";
-				cin >> s1;
-				p1 = s1;
-				cout << "Enter polinom p2: ";
-				cin >> s2;
-				p2 = s2;
-				cout << "Result of operation: " << p1 - p2 << endl << endl;
-				break;
-			}
-		case '3':
-			{
-				cout << "Enter polinom p1: ";
-				cin >> s1;
-				p1 = s1;
-				cout << "Enter polinom p2: ";
-				cin >> s2;
-				p2 = s2;
-				cout << "Result of operation: " << p1 * p2 << endl << endl;
-				break;
-			}
-		case '4':
-			{
-				cout << "Enter polinom p1: ";
-				cin >> s1;
-				p1 = s1;
-				cout << "Enter const c: ";
-				cin >> c;
-				cout << "Result of operation: " << c*p1 << endl << endl;
-				break;
-			}
-		case '5':
-			{
-				cout << "Enter polinom p1: ";
-				cin >> s1;
-				p1 = s1;
-				cout << "Enter const c: ";
-				cin >> c;
-				cout << "Result of operation: " << p1*c << endl << endl;
-				break;
-			}
-		case '6':
-			{
-				break;
-			}
+		{
+			system("cls");
+			cout << "ScanTable: " << endl << ScT << endl;
+			cout << "SortTable: " << endl << SrT << endl;
+			cout << "HashTable: " << endl << HsT << endl;
+			cout << endl << endl;
+			system("pause");
+			break;
 		}
-	}
-	while (number != '6');
+		case '2':
+		{
+			system("cls");
+			cout << "Input polynom: ";
+			cin >> inp_pol;
+			cout << endl;
+			pol = inp_pol;
+			try
+			{
+				ScT.Insert(inp_pol, pol);
+				SrT.Insert(inp_pol, pol);
+				HsT.Insert(inp_pol, pol);
+			}
+			catch (...)
+			{
+				cout << "This key has already been entered earlier" << endl << endl; 
+			}
+			system("pause");
+			break;
+		}
+		case '3':
+		{
+			system("cls");
 
-	return 0;
+			cout << "Enter key: ";
+			cin >> inp_pol;
+			try
+			{
+				ScT.Delete(inp_pol);
+				SrT.Delete(inp_pol);
+				HsT.Delete(inp_pol);
+			}
+			catch (...)
+			{
+				cout << endl << "Key was not found" << endl << endl;
+			}
+			system("pause");
+			break;
+		}
+		case '4':
+		{
+			system("cls");
+			cout << "Enter key: ";
+			cin >> inp_pol;
+			try
+			{
+				cout << "Polynom with such key was found in scantable:    " << *(ScT.Search(inp_pol)) << endl;
+				cout << "Polynom with such key was found in sortedtable:  " << *(SrT.Search(inp_pol)) << endl;
+				cout << "Polynom with such key was found in hashtable:    " << *(HsT.Search(inp_pol)) << endl;
+			}
+			catch (...)
+			{
+				cout << endl << "Polynom with such key was not found" << endl;
+			}
+			system("pause");
+			break;
+		}
+		}
+	} while (pmenu != '5');
 }
