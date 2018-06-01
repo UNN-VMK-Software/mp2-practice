@@ -15,7 +15,7 @@ int main()
 	while (i != 5)
 	{
 		cout << "Choose your action: " << endl;
-		cout << "1.Input: " << endl;
+		cout << "1.Input " << endl;
 		cout << "2.Delete" << endl;
 		cout << "3.Search" << endl;
 		cout << "4.Print tables" << endl;

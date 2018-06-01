@@ -178,67 +178,17 @@ void HashTable<T>::Insert(const T data, const string key)
 template <typename T>
 T* HashTable<T>::Search(const string Key)
 {
-	/*this->Reset();
-	T* tmp = nullptr;
-	if (!(this->IsEmpty()))
-	{
-		this->currIndex = HashFunc(key);
-		if (this->rows[this->currIndex]->key == key)
-			tmp = this->rows[this->currIndex]->data;
-		else
-		{
-			int ind = this->currIndex;
-			while (flag[this->currIndex] == 1 && this->currIndex + 1 != ind)
-			{
-				this->currIndex = (this->currIndex + 1) % this->maxRecord;
-				if (this->rows[this->currIndex]->key == key)
-				{
-					tmp = this->rows[this->currIndex]->data;
-					break;
-				}
-			}
-
-			if (tmp == nullptr)
-			{
-				this->Reset();
-				throw "Your key wasn't found";
-			}
-		}
-	}
-	else
-	{
-		throw (string)"Can't Search In Empty Table";
-	}
-	return tmp;*/
 	this->Reset();
 	T* tmp = nullptr;
 	if (this->IsEmpty())
 		throw (string)"Can't Search In Empty Table";
 	this->currIndex = HashFunc(Key);
 
-	if (((this->rows[this->currIndex]->key)=!nullptr) && (this->rows[this->currIndex]->key == Key))
+	if(flag[this->currIndex] ==1)
 		tmp = this->rows[this->currIndex]->data;
 	else
-	{
-		int ind = this->currIndex;
-		while (flag[this->currIndex] == 1 && this->currIndex + 1 != ind)
-		{
-			this->currIndex = (this->currIndex + 1) % this->maxRecord;
-			if (this->rows[this->currIndex]->key == Key)
-			{
-				tmp = this->rows[this->currIndex]->data;
-				break;
-			}
-		}
-
-		if (tmp == nullptr)
-		{
-			this->Reset();
-			throw "Your key wasn't found";
-		}
-
-	}
-	return tmp;
+		throw "Your key wasn't found, was deleted or nothing";
+	
 }
 template <typename T>
 void HashTable<T>::Delete(string key)
@@ -253,16 +203,7 @@ void HashTable<T>::Delete(string key)
 		flag[this->currIndex] = -1;
 		this->currRecord = this->currRecord - 1;
 	}
-	/*this->Reset();
-	if (this->IsEmpty())
-		throw (string)"Can't Delete From Empty Table";
-	this->Search(key);
-
-	TabRecord<T> A;
-	flag[this->currIndex] = -1;
-	this->rows[this->currIndex] = new TabRecord<T>(A);
-	this->currRecord--;
-	this->Reset();*/
+	
 }
 
 template <typename T>
