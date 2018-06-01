@@ -120,17 +120,25 @@ unit* HashTable::Search(const string k)
 	int place = hash(k);
 	int first = -10;
 
-	if (str[place] == NULL)
+	if (State[place] == 0)
 	{
 		return nullptr;
 	}
-	else if ((State[place] != 0) && (str[place]->key != k))
+	else if ((State[place] != -1) && (str[place]->key != k))
 	{
 		first = place;
 		place = (place + 11) % max_size;
-		while ((State[place] != 0) && (place != first) && (str[place]->key != k))
+		while ((State[place] != 0) && (place != first))
 		{
-			place = (place + 11) % max_size;
+			if ((State[place] != -1) && (str[place]->key == k))
+			{
+				index = place;
+				return str[place];
+			}
+			else
+			{
+				place = (place + 11) % max_size;
+			}
 		}
 	}
 
@@ -141,10 +149,5 @@ unit* HashTable::Search(const string k)
 	else if (place == first)
 	{
 		return nullptr;
-	}
-	else if (str[place]->key == k)
-	{
-		index = place;
-		return str[place];
 	}
 }

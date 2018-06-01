@@ -88,7 +88,7 @@ unit* SortedTable::Search(const string k)
 	else
 	{
 		index = middle;
-		return str[left];
+		return str[middle];
 	}
 }
 
