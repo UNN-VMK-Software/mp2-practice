@@ -22,7 +22,7 @@ type& ScanTable<type>::Search(const string& KEY) const
 	Temp.reset();
 	if (Temp.CurrIndex > -1)
 	{
-		while ((Temp.CurrIndex > -1) && (Temp.Records[Temp.CurrIndex]->key != KEY) && (Temp.CurrIndex < Temp.CurrRecord))
+		while (Temp.Records[Temp.CurrIndex]->key != KEY) && (Temp.CurrIndex < Temp.CurrRecord))
 			Temp.SetNext();
 		if (Temp.CurrIndex < Temp.CurrRecord)
 			return Temp.Records[Temp.CurrIndex]->data;
@@ -63,15 +63,20 @@ template<typename type>
 void ScanTable<type>::Delete(const string& KEY)
 {
 	reset();
-	while ((CurrIndex > -1) && (CurrIndex < CurrRecord) && (Records[CurrIndex]->key != KEY))
-		CurrIndex++;
-	if (CurrRecord && (CurrIndex < CurrRecord))
+	if (CurrIndex > -1)
 	{
-		if (CurrRecord > 1)
-			Records[CurrIndex] = Records[--CurrRecord];
+		while ((CurrIndex < CurrRecord) && (Records[CurrIndex]->key != KEY))
+			CurrIndex++;
+		if (CurrRecord && (CurrIndex < CurrRecord))
+		{
+			if (CurrRecord > 1)
+				Records[CurrIndex] = Records[--CurrRecord];
+			else
+				CurrRecord = 0;
+		}
 		else
-			CurrRecord = 0;
+			throw "Key does not exist";
 	}
 	else
-		throw "Key does not exist";
+		throw "Table is empty";
 }

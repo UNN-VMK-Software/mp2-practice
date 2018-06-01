@@ -36,13 +36,10 @@ HashTable<type>::HashTable(int i = 10) : Table(i)
 template<typename type>
 int HashTable<type>::Hash(const string& KEY) const
 {
-	int seed = 0;
-	//int hash = 0;
+	int hash = 0;
 	for (int i = 0; i < KEY.length(); i++)
-		seed = seed + int(KEY[i]);
-	//srand(seed);
-	//hash = rand()
-	return  seed % MaxRecords;
+		hash = hash + int(KEY[i]);
+	return  hash % MaxRecords;
 }
 
 template<typename type>
@@ -110,35 +107,26 @@ template<typename type>
 void HashTable<type>::Insert(const string& KEY, const type& DATA)
 {
 	if (CurrRecord == MaxRecords)
-	{
 		Realloc();
-		CurrIndex = Hash(KEY);
+	CurrIndex = Hash(KEY);
+	if (!H[CurrIndex])
+	{
 		Records[CurrIndex] = new TabRecord<type>(KEY, DATA);
 		CurrRecord++;
 		H[CurrIndex] = 1;
 	}
 	else
-	{
-		CurrIndex = Hash(KEY);
-		if (!H[CurrIndex])
+		if (Records[CurrIndex]->key != KEY)
 		{
+			int l = CurrIndex;
+			while (H[CurrIndex] && ((CurrIndex + 1) != l))
+				CurrIndex = (CurrIndex + 1) % MaxRecords;
 			Records[CurrIndex] = new TabRecord<type>(KEY, DATA);
 			CurrRecord++;
 			H[CurrIndex] = 1;
 		}
 		else
-			if (Records[CurrIndex]->key != KEY)
-			{
-				int l = CurrIndex;
-				while (H[CurrIndex] && ((CurrIndex + 1) != l))
-					CurrIndex = (CurrIndex + 1) % MaxRecords;
-				Records[CurrIndex] = new TabRecord<type>(KEY, DATA);
-				CurrRecord++;
-				H[CurrIndex] = 1;
-			}
-			else
-				throw "this key exists";
-	}
+			throw "this key exists";
 }
 
 template<typename type>
