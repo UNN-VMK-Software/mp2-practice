@@ -39,15 +39,15 @@ template <class type_k, class type_d>//переупаковка
 void ScanTable <type_k, type_d>::Realloc()
 {
 	int MaxSizeT1 = MaxSizeT*2;
+	//int MaxSizeT1 = (int)(this->MaxSizeT + 20)*1.65;
 	TableRec<type_k, type_d> ** temp = new TableRec<type_k, type_d>*[MaxSizeT1];
 	for (int i = 0; i < this -> MaxSizeT; i++)
 		temp[i] = this -> Rows[i];
 	for (int i = this->MaxSizeT; i<MaxSizeT1; i++)
 		temp[i] = NULL;
-	this -> MaxSizeT = MaxSizeT1;
 	delete[] this -> Rows;
 	this -> Rows = temp;
-	
+	this -> MaxSizeT = MaxSizeT1;
 }
 
 

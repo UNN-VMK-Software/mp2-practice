@@ -25,7 +25,7 @@ int main()
 	OrdTab<string, polynom> B(SIZE);
 	HashTable<string, polynom> C(SIZE);
 
-	while (c != 1)
+	while (c != -1)
 	{
 		system("cls");
 		cout << "Chouse operation" << endl;
@@ -81,11 +81,11 @@ int main()
 			cout << "Write polynom" << endl;
 			cin >> str;
 			polynom a(str);	
-			try { cout << "find: " << A.Search(str)->Data; }
+			try { cout << "find: " << A.Search(str)->Data << endl; }
 			catch (...) { cout << "ne found" << endl; }
-			try { cout << "find: " << B.Search(str)->Data; }
+			try { cout << "find: " << B.Search(str)->Data << endl; }
 			catch (...) { cout << "ne found" << endl; }
-			try { cout << "find: " << C.Search(str)->Data; }
+			try { cout << "find: " << C.Search(str)->Data << endl; }
 			catch (...) { cout << "ne found" << endl; }
 			break;
 		}
@@ -96,7 +96,7 @@ int main()
 		}
 		}
 
-		cout << "Exit: 1" << endl;
+		cout << "Exit: -1" << endl;
 		cin >> c;
 	}
 return 0;

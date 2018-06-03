@@ -18,8 +18,11 @@ private:
 	int *flag; //Массив flag, определитель занятости
 	void Realloc(); //переупаковка
 	int Hashf(const type_k & k) const;//хэш функция
+	//int freepos;
+	int GetNextPos(int pos){return (pos + 5)% MaxSizeT;}
 	
 public:
+	int freepos;
 	HashTable(int size = 20); //конструктор
 	~HashTable();//деструктор
 
@@ -65,7 +68,7 @@ HashTable<type_k, type_d>::~HashTable()
 template <class type_k, class type_d>  // хэш функция
 int HashTable<type_k, type_d>::Hashf(const type_k & k) const
 {
-	int temp = NewKey(k);
+	int temp = abs(NewKey(k));
 	return (temp % (this -> MaxSizeT));
 }
 
@@ -74,6 +77,7 @@ void HashTable<type_k, type_d>::Realloc()
 {
 	int i = 0;
 	int MaxSizeT1 = MaxSizeT*2;
+	//int MaxSizeT1 = (int)(this->MaxSizeT + 20)*1.65;
 	TableRec<type_k, type_d> ** temp = new TableRec<type_k, type_d> *[MaxSizeT1];
 	int * flag1 = new int[MaxSizeT1];
 	for (int i = 0; i < this->MaxSizeT; i++)
@@ -93,11 +97,170 @@ void HashTable<type_k, type_d>::Realloc()
 	this->MaxSizeT = MaxSizeT1;
 }
 
+template <class type_k, class type_d>//поиск
+TableRec<type_k, type_d>* HashTable<type_k, type_d>::Search(const type_k & key) 
+{
+	TableRec<string, polynom>* tmp = nullptr;
+	int temp = Hashf(key);
+	freepos = -1;
+	int i;
+	for ( i = 0; i<MaxSizeT; i++)
+	{
+		if ((this->Rows[i] == NULL) && (flag[temp] == 0))//если свободна
+		{
+			freepos = temp;
+			return tmp;//?
+		}
+		else
+			if ((this->Rows[temp] != NULL) && ((*(this->Rows[temp])).KEY) == key)
+			{
+				return this->Rows[temp];//Нашли ??? не идет в удаление
+			}
+		else 
+			if (flag[temp] == -1)//если удалена
+			{
+				if (freepos == -1) 
+					freepos = temp;//запоминаем первую свободную ячейку
+			}
+			temp = GetNextPos(temp);
+	}
+			throw "error: ne found";
+}	
+			
+		
+
+	//исходная реализация работает
+	/*int temp = Hashf(key);//индекс занятости
+	if (flag[temp] == 0) //если свободен
+	{
+		throw "error: ne found";
+	}
+	if ((this->Rows[temp] != NULL) && ((*(this->Rows[temp])).KEY) == key)//если ключи совпали
+	{
+		return this->Rows[temp];//Нашли
+	}
+	else
+	{
+		srand(temp);
+		while ((flag[temp] == -1) || ((flag[temp] == 1) && ((*(this->Rows[temp])).KEY != key))) //пока удален или занят и ключи не совпадают
+			temp = rand() % (this->MaxSizeT);//новый индекс
+		if (flag[temp] == 1) // если занят
+		{
+			return this->Rows[temp];//нашли
+		}
+		else
+			//cout << "error ne found" << endl;
+			throw "error: ne found";
+	}*/
+	
+	
+/*srand(temp);//srand выполняет инициализацию генератора случайных чисел rand
+		int temp1 = rand() % (this->MaxSizeT);//новый индекс
+			while (flag[temp1] == busy) //пока занят
+		{
+			temp1 = rand() % (this->MaxSizeT);
+			if ((this->Rows[temp1] != NULL) && ((*(this->Rows[temp1])).KEY == key))//если занят
+			{
+				throw "error: the same key";
+			}
+		}
+		if (flag[temp1] == 0)//если свободен
+			this->CurIndex++;
+		flag[temp1] = busy;
+		temp = temp1;*/
+		//srand(temp);
+		//temp = rand() % (this->MaxSizeT);//заново считаем индекс
+
+
+template <class type_k, class type_d>//удаление
+void HashTable<type_k, type_d>::Delete(const type_k & key)
+{
+	int temp = Hashf(key);//индекс занятости
+	TableRec<string, polynom>* tmp = Search(key);//запись с искомым кючом
+	if (tmp == (this->Rows[temp]))//нашли ключ
+		{
+		delete this->Rows[temp];
+		this->Rows[temp] = NULL;
+		flag[temp] = delet;
+		//freepos = 
+	}
+	else 
+			{
+				throw "error: ne found";
+			}
+
+	
+
+	//исходная реализация работает
+	/*int temp = Hashf(key);
+	if (flag[temp] == 0) //если свободен
+	{
+		throw "error: ne found";
+	}
+	if ((this->Rows[temp] != NULL) && ((*(this->Rows[temp])).KEY == key))//если нашли
+	{
+		delete this->Rows[temp];
+		this->Rows[temp] = NULL;
+		flag[temp] = delet;//обозначенме что он удален
+	}
+	else
+	{
+		srand(temp);
+		while ((flag[temp] == -1) || ((flag[temp] == 1) && ((*(this->Rows[temp])).KEY != key))) //пока удален или занят и ключи не совпадают
+			temp = rand() % (this->MaxSizeT);
+		if (flag[temp] == 1) // если занят
+		{
+			delete this->Rows[temp];
+			this->Rows[temp] = NULL;
+			flag[temp] = delet;
+		}
+		else 
+			{
+				throw "error: ne found";
+			}
+	}*/
+
+	//моя реализация неработает
+	/*int temp = Hashf(key);//индекс занятости
+	if ((this->Rows[temp]) == Search(key))//нашли ключ
+	{
+		delete this->Rows[temp];
+		this->Rows[temp] = NULL;
+		flag[temp] = delet;
+	}
+	else 
+			{
+				
+				throw "error: ne found";
+			}*/
+}
+
 template <class type_k, class type_d>//вставка
 void HashTable<type_k, type_d>::Insert(const type_k & key, const type_d & Row)
 {
-	/*
+	if ((double)this->CurIndex / (double)this->MaxSizeT > 0.7) 
+		Realloc();
 	int temp = Hashf(key);//индекс
+
+	TableRec<string, polynom>* tmp = Search(key);
+	//TableRec<string, polynom>* freepos = this -> Search(key);
+	if(freepos < 0)
+	{
+		this->Rows[temp] = new TableRec<type_k, type_d>(key, Row); //вставка
+		flag[temp] = busy; //обозначение что он занят
+	}
+	else
+		if (freepos > -1)// найдена свободная или удаленная ячейка
+	{
+		this->Rows[freepos] = new TableRec<type_k, type_d>(key, Row); //вставка
+		flag[freepos] = busy; //обозначение что он занят
+	}
+	
+	
+
+
+	
+	/*int temp = Hashf(key);//индекс
 	if ((double)this->CurIndex / (double)this->MaxSizeT > 0.7) 
 		Realloc();
 	//if (Search(key) == (this->Rows[temp]))//нашли ключ и он равен записи искомого индекса
@@ -116,8 +279,8 @@ void HashTable<type_k, type_d>::Insert(const type_k & key, const type_d & Row)
 	}
 	*/
 
-
-	if ((double)this->CurIndex / (double)this->MaxSizeT > 0.7) 
+	//исходная реализация работает
+	/*if ((double)this->CurIndex / (double)this->MaxSizeT > 0.7) 
 	//if (IsFull())
 		Realloc();
 	int temp = Hashf(key);//индекс
@@ -155,88 +318,11 @@ void HashTable<type_k, type_d>::Insert(const type_k & key, const type_d & Row)
 		if (flag[temp1] == 0)//если свободен
 			this->CurIndex++;
 		flag[temp1] = busy;
-	}
-}
-template <class type_k, class type_d>//поиск
-TableRec<type_k, type_d>* HashTable<type_k, type_d>::Search(const type_k & key) 
-{
-	int temp = Hashf(key);//индекс занятости
-	if (flag[temp] == 0) //если свободен
-	{
-		throw "error: ne found";
-	}
-	if ((this->Rows[temp] != NULL) && ((*(this->Rows[temp])).KEY) == key)//если ключи совпали
-	{
-		return this->Rows[temp];//Нашли
-	}
-	else
-	{
-		srand(temp);
-		while ((flag[temp] == -1) || ((flag[temp] == 1) && ((*(this->Rows[temp])).KEY != key))) //пока удален или занят и ключи не совпадают
-			temp = rand() % (this->MaxSizeT);//новый индекс
-		if (flag[temp] == 1) // если занят
-		{
-			return this->Rows[temp];//нашли
-		}
-		else
-			//cout << "error ne found" << endl;
-			throw "error: ne found";
-	}
-	
-	
-
-
-}
-
-
-template <class type_k, class type_d>//удаление
-void HashTable<type_k, type_d>::Delete(const type_k & key)
-{
-	int temp = Hashf(key);//индекс занятости
-	if (Search(key) == (this->Rows[temp]))//нашли ключ
-	{
-		delete this->Rows[temp];
-		this->Rows[temp] = NULL;
-		flag[temp] = delet;
-	}
-	else 
-			{
-				//cout << "error ne found" << endl;
-				throw "error: ne found";
-			}
-
-
-	/*int temp = Hashf(key);
-	if (flag[temp] == 0) //если свободен
-	{
-		throw "error: ne found";
-	}
-	if ((this->Rows[temp] != NULL) && ((*(this->Rows[temp])).KEY == key))//если нашли
-	{
-		delete this->Rows[temp];
-		this->Rows[temp] = NULL;
-		flag[temp] = delet;//обозначенме что он удален
-	}
-	else
-	{
-		srand(temp);
-		while ((flag[temp] == -1) || ((flag[temp] == 1) && ((*(this->Rows[temp])).KEY != key))) //пока удален или занят и ключи не совпадают
-			temp = rand() % (this->MaxSizeT);
-		if (flag[temp] == 1) // если занят
-		{
-			delete this->Rows[temp];
-			this->Rows[temp] = NULL;
-			flag[temp] = delet;
-		}
-		else 
-			{
-				throw "error: ne found";
-			}
 	}*/
 }
 
 template <class type_k, class type_d>
-void HashTable<type_k, type_d>::Reset()
+void HashTable<type_k, type_d>::Reset()//+
 {
 	if (CurSizeT == 0)
 		CurIndex = 0;
@@ -249,19 +335,19 @@ void HashTable<type_k, type_d>::Reset()
 }
 
 template <class type_k, class type_d>
-bool HashTable<type_k, type_d>::IsTabEnded() const
+bool HashTable<type_k, type_d>::IsTabEnded() const//+
 {
-	if (CurSizeT == 0)
-		return true;
-	if (CurIndex == CurSizeT-1) 
-		return 1; 
-	else return 0;
+	
+	int t = CurIndex;
+	while (t < MaxSizeT && flag[t] != 1)
+		t++;
+	return t == MaxSizeT;
 }
 
 
 
 template <class type_k, class type_d>
-void HashTable<type_k, type_d>::gonext()
+void HashTable<type_k, type_d>::gonext()//+
 {
 	do 
 	{
@@ -274,7 +360,7 @@ void HashTable<type_k, type_d>::gonext()
 }
 
 template <class type_k, class type_d>
-type_d HashTable<type_k, type_d>::GetCur() const
+type_d HashTable<type_k, type_d>::GetCur() const//+
 {
 	if (flag[CurIndex] == 1)
 		return (*(this->Rows[CurIndex])).Data;
