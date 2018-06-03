@@ -1,0 +1,43 @@
+﻿  test_tables.cpp
+c:\temp\mp2-practice\vyatchaninr\lab_2\include\scantable.h(37): warning C5037: "ScanTable<T>::ScanTable": внешнее определение члена шаблона класса не может иметь аргументы по умолчанию
+c:\temp\mp2-practice\vyatchaninr\lab_2\include\sorttable.h(39): warning C5037: "SortTable<T>::SortTable": внешнее определение члена шаблона класса не может иметь аргументы по умолчанию
+c:\temp\mp2-practice\vyatchaninr\lab_2\include\hashtable.h(54): warning C5037: "HashTable<T>::HashTable": внешнее определение члена шаблона класса не может иметь аргументы по умолчанию
+c:\temp\mp2-practice\vyatchaninr\lab_2\include\hashtable.h(46): warning C4018: <: несоответствие типов со знаком и без знака
+  c:\temp\mp2-practice\vyatchaninr\lab_2\include\hashtable.h(44): note: при компиляции функции-члена "<Нет данных>" класса класс <Нет данных>
+  c:\temp\mp2-practice\vyatchaninr\lab_2\include\hashtable.h(31): note: выполняется компиляция ссылки на экземпляр шаблон функции "int HashTable<int>::H(const std::string)"
+  c:\temp\mp2-practice\vyatchaninr\lab_2\include\hashtable.h(27): note: при компиляции функции-члена "<Нет данных>" класса класс <Нет данных>
+  c:\temp\mp2-practice\vyatchaninr\lab_2\test\test_tables.cpp(22): note: выполняется компиляция ссылки на экземпляр шаблон класс "HashTable<int>"
+c:\temp\mp2-practice\vyatchaninr\lab_2\gtest\gtest.h(18863): warning C4805: ==: небезопасное смешение типа "const int" и типа "const bool" в операции
+  c:\temp\mp2-practice\vyatchaninr\lab_2\gtest\gtest.h(18940): note: выполняется компиляция ссылки на экземпляр шаблон функции "testing::AssertionResult testing::internal::CmpHelperEQ<T1,T2>(const char *,const char *,const T1 &,const T2 &)"
+          with
+          [
+              T1=int,
+              T2=bool
+          ]
+  c:\temp\mp2-practice\vyatchaninr\lab_2\test\test_tables.cpp(10): note: выполняется компиляция ссылки на экземпляр шаблон функции "testing::AssertionResult testing::internal::EqHelper<true>::Compare<int,bool>(const char *,const char *,const T1 &,const T2 &,testing::internal::EnableIf<true>::type *)"
+          with
+          [
+              T1=int,
+              T2=bool
+          ]
+c:\temp\mp2-practice\vyatchaninr\lab_2\gtest\gtest.h(18863): warning C4805: ==: небезопасное смешение типа "const bool" и типа "const int" в операции
+  c:\temp\mp2-practice\vyatchaninr\lab_2\gtest\gtest.h(18900): note: выполняется компиляция ссылки на экземпляр шаблон функции "testing::AssertionResult testing::internal::CmpHelperEQ<T1,T2>(const char *,const char *,const T1 &,const T2 &)"
+          with
+          [
+              T1=bool,
+              T2=int
+          ]
+  c:\temp\mp2-practice\vyatchaninr\lab_2\test\test_tables.cpp(17): note: выполняется компиляция ссылки на экземпляр шаблон функции "testing::AssertionResult testing::internal::EqHelper<false>::Compare<bool,int>(const char *,const char *,const T1 &,const T2 &)"
+          with
+          [
+              T1=bool,
+              T2=int
+          ]
+  c:\temp\mp2-practice\vyatchaninr\lab_2\test\test_tables.cpp(17): note: выполняется компиляция ссылки на экземпляр шаблон функции "testing::AssertionResult testing::internal::EqHelper<false>::Compare<bool,int>(const char *,const char *,const T1 &,const T2 &)"
+          with
+          [
+              T1=bool,
+              T2=int
+          ]
+  tests.vcxproj -> C:\Temp\mp2-practice\VyatchaninR\Lab_2\build\Lab_tables\Debug\tests.exe
+  tests.vcxproj -> C:\Temp\mp2-practice\VyatchaninR\Lab_2\build\Lab_tables\Debug\tests.pdb (Partial PDB)

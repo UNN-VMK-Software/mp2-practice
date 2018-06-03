@@ -1,2 +1,11 @@
-﻿  sample.vcxproj -> C:\Temp\mp2-practice\VyatchaninR\Lab_2\build\Lab_tables\Debug\sample.exe
+﻿  main.cpp
+c:\temp\mp2-practice\vyatchaninr\lab_2\include\hashtable.h(54): warning C5037: "HashTable<T>::HashTable": внешнее определение члена шаблона класса не может иметь аргументы по умолчанию
+c:\temp\mp2-practice\vyatchaninr\lab_2\include\scantable.h(37): warning C5037: "ScanTable<T>::ScanTable": внешнее определение члена шаблона класса не может иметь аргументы по умолчанию
+c:\temp\mp2-practice\vyatchaninr\lab_2\include\sorttable.h(39): warning C5037: "SortTable<T>::SortTable": внешнее определение члена шаблона класса не может иметь аргументы по умолчанию
+c:\temp\mp2-practice\vyatchaninr\lab_2\include\hashtable.h(46): warning C4018: <: несоответствие типов со знаком и без знака
+  c:\temp\mp2-practice\vyatchaninr\lab_2\include\hashtable.h(44): note: при компиляции функции-члена "<Нет данных>" класса класс <Нет данных>
+  c:\temp\mp2-practice\vyatchaninr\lab_2\include\hashtable.h(31): note: выполняется компиляция ссылки на экземпляр шаблон функции "int HashTable<Polynom>::H(const std::string)"
+  c:\temp\mp2-practice\vyatchaninr\lab_2\include\hashtable.h(27): note: при компиляции функции-члена "<Нет данных>" класса класс <Нет данных>
+  c:\temp\mp2-practice\vyatchaninr\lab_2\samples\main.cpp(32): note: выполняется компиляция ссылки на экземпляр шаблон класс "HashTable<Polynom>"
+  sample.vcxproj -> C:\Temp\mp2-practice\VyatchaninR\Lab_2\build\Lab_tables\Debug\sample.exe
   sample.vcxproj -> C:\Temp\mp2-practice\VyatchaninR\Lab_2\build\Lab_tables\Debug\sample.pdb (Partial PDB)

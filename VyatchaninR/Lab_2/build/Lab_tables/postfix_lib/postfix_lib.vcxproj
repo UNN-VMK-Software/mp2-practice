@@ -26,8 +26,11 @@
     <ClInclude Include="..\..\..\include\Polynom.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\include\Table.cpp" />
     <ClCompile Include="..\..\..\src\CList.cpp">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\HashTable.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\include</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\include</AdditionalIncludeDirectories>
     </ClCompile>
@@ -44,6 +47,18 @@
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\include</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile Include="..\..\..\src\Polynom.cpp">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\ScanTable.cpp">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\SortTable.cpp">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Table.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\include</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\include</AdditionalIncludeDirectories>
     </ClCompile>
