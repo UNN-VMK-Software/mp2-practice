@@ -1,0 +1,6 @@
+﻿  Main.cpp
+c:\users\andre\desktop\lab2\include\dheap.h(7): error C2011: Data: переопределение типа "class"
+  c:\users\andre\desktop\lab2\include\dheap.h(7): note:  см. объявление "Data"
+c:\users\andre\desktop\lab2\include\dheap.h(12): error C2011: DHeap: переопределение типа "class"
+  c:\users\andre\desktop\lab2\include\dheap.h(12): note:  см. объявление "DHeap"
+c:\users\andre\desktop\lab2\include\dijkstra.h(6): error C2504: Data: не определен базовый класс

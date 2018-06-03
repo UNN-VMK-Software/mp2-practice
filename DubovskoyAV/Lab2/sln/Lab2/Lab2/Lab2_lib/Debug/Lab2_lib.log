@@ -1,0 +1,32 @@
+﻿  PriorityQueue.cpp
+  Graph.cpp
+c:\users\andre\desktop\lab2\src\graph.cpp(23): warning C4244: return: преобразование "double" в "float", возможна потеря данных
+c:\users\andre\desktop\lab2\src\graph.cpp(94): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  Dijkstra.cpp
+c:\users\andre\desktop\lab2\include\dheap.h(7): error C2011: Data: переопределение типа "class"
+  c:\users\andre\desktop\lab2\include\dheap.h(7): note:  см. объявление "Data"
+c:\users\andre\desktop\lab2\include\dheap.h(12): error C2011: DHeap: переопределение типа "class"
+  c:\users\andre\desktop\lab2\include\dheap.h(12): note:  см. объявление "DHeap"
+c:\users\andre\desktop\lab2\include\dijkstra.h(6): error C2504: Data: не определен базовый класс
+c:\users\andre\desktop\lab2\src\dijkstra.cpp(6): error C2065: priorities: необъявленный идентификатор
+c:\users\andre\desktop\lab2\src\dijkstra.cpp(23): error C2440: =: невозможно преобразовать "DataFloat *" в "Data *"
+  c:\users\andre\desktop\lab2\src\dijkstra.cpp(23): note: Типы, на которые указывают указатели, не связаны; для преобразования требуется reinterpret_cast, приведение в стиле С или приведение в стиле функции
+c:\users\andre\desktop\lab2\src\dijkstra.cpp(25): error C2027: использование неопределенного типа "Data"
+  c:\users\andre\desktop\lab2\include\dheap.h(7): note:  см. объявление "Data"
+c:\users\andre\desktop\lab2\src\dijkstra.cpp(25): error C2227: выражение слева от "->priorities" должно указывать на тип класса, структуры или объединения либо на универсальный тип
+c:\users\andre\desktop\lab2\src\dijkstra.cpp(44): error C2027: использование неопределенного типа "Data"
+  c:\users\andre\desktop\lab2\include\dheap.h(7): note:  см. объявление "Data"
+c:\users\andre\desktop\lab2\src\dijkstra.cpp(44): error C2227: выражение слева от "->priorities" должно указывать на тип класса, структуры или объединения либо на универсальный тип
+c:\users\andre\desktop\lab2\src\dijkstra.cpp(45): error C2027: использование неопределенного типа "Data"
+  c:\users\andre\desktop\lab2\include\dheap.h(7): note:  см. объявление "Data"
+c:\users\andre\desktop\lab2\src\dijkstra.cpp(45): error C2227: выражение слева от "->priorities" должно указывать на тип класса, структуры или объединения либо на универсальный тип
+c:\users\andre\desktop\lab2\src\dijkstra.cpp(48): error C2027: использование неопределенного типа "Data"
+  c:\users\andre\desktop\lab2\include\dheap.h(7): note:  см. объявление "Data"
+c:\users\andre\desktop\lab2\src\dijkstra.cpp(48): error C2227: выражение слева от "->priorities" должно указывать на тип класса, структуры или объединения либо на универсальный тип
+c:\users\andre\desktop\lab2\src\dijkstra.cpp(57): error C2027: использование неопределенного типа "Data"
+  c:\users\andre\desktop\lab2\include\dheap.h(7): note:  см. объявление "Data"
+c:\users\andre\desktop\lab2\src\dijkstra.cpp(57): error C2227: выражение слева от "->priorities" должно указывать на тип класса, структуры или объединения либо на универсальный тип
+c:\users\andre\desktop\lab2\src\dijkstra.cpp(60): warning C4150: удаление указателя на неполный тип "Data"; деструктор не вызван
+  c:\users\andre\desktop\lab2\include\dheap.h(7): note:  см. объявление "Data"
+  DHeap.cpp
+  Создание кода...
