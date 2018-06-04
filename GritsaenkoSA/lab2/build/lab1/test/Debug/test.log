@@ -1,0 +1,31 @@
+﻿Построение начато 30.05.2018 23:06:51.
+     1>Проект "F:\proga\mp2-practice\GritsaenkoSA\lab2\build\lab1\test\test.vcxproj" в узле 3 (целевые объекты build).
+       Файл проекта содержит ToolsVersion="14.0", не поддерживаемую данной версией MSBuild. Считается, что проект имеет ToolsVersion="4.0".
+     1>InitializeBuildStatus:
+         Создание "Debug\test.unsuccessfulbuild", так как было задано "AlwaysCreate".
+       ClCompile:
+         C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I../../../include /I../../../gtest /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\..\tests\test_table.cpp
+         test_table.cpp
+     1>f:\proga\mp2-practice\gritsaenkosa\lab2\include\hash_table.h(48): warning C4018: <: несоответствие типов со знаком и без знака
+       ManifestResourceCompile:
+         Для всех выходных данных обновления не требуется.
+       Link:
+         C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\proga\mp2-practice\GritsaenkoSA\lab2\build\lab1\Debug\test.exe" /INCREMENTAL /NOLOGO /LIBPATH:../Debug gtest.lib polinomlib.lib Table.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\test.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"F:\proga\mp2-practice\GritsaenkoSA\lab2\build\lab1\Debug\test.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\proga\mp2-practice\GritsaenkoSA\lab2\build\lab1\Debug\test.lib" /MACHINE:X86 Debug\test.exe.embed.manifest.res
+         Debug\test_main.obj
+         Debug\test_polynom.obj
+         Debug\test_ringlist.obj
+         Debug\test_table.obj
+       Manifest:
+         C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\test.exe.embed.manifest" /manifest Debug\test.exe.intermediate.manifest
+         Для всех выходных данных обновления не требуется.
+       LinkEmbedManifest:
+         Для всех выходных данных обновления не требуется.
+         test.vcxproj -> F:\proga\mp2-practice\GritsaenkoSA\lab2\build\lab1\Debug\test.exe
+       FinalizeBuildStatus:
+         Файл "Debug\test.unsuccessfulbuild" удаляется.
+         Обращение к "Debug\test.lastbuildstate".
+     1>Построение проекта "F:\proga\mp2-practice\GritsaenkoSA\lab2\build\lab1\test\test.vcxproj" завершено (целевые объекты build).
+
+Построение успешно завершено.
+
+Затраченное время: 00:00:03.03
