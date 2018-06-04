@@ -133,4 +133,96 @@ void  OrdTab <type_k, type_d> ::Delete(const type_k & key)
 		//cout << "error net key" << endl;
 		throw "error net key";
 }
+//поиск
+/*int temp = Hashf(key);//индекс занятости
+	if (flag[temp] == 0) //если свободен
+	{
+		throw "error: ne found";
+	}
+	if ((this->Rows[temp] != NULL) && ((*(this->Rows[temp])).KEY) == key)//если ключи совпали
+	{
+		return this->Rows[temp];//Нашли
+	}
+	else
+	{
+		srand(temp);
+		while ((flag[temp] == -1) || ((flag[temp] == 1) && ((*(this->Rows[temp])).KEY != key))) //пока удален или занят и ключи не совпадают
+			temp = rand() % (this->MaxSizeT);//новый индекс
+		if (flag[temp] == 1) // если занят
+		{
+			return this->Rows[temp];//нашли
+		}
+		else
+			//cout << "error ne found" << endl;
+			throw "error: ne found";
+	}*/
 
+//вставка
+/*if ((double)this->CurIndex / (double)this->MaxSizeT > 0.7) 
+	//if (IsFull())
+		Realloc();
+	int temp = Hashf(key);//индекс
+	
+	
+	if (flag[temp] == free) //если свободный
+	{
+		this->Rows[temp] = new TableRec<type_k, type_d>(key, Row); //создание нового
+		flag[temp] = busy; //обозначение что он занят
+		this->CurIndex++;
+	}
+	else 
+		if (flag[temp] == delet)//если удален
+	{
+		this->Rows[temp] = new TableRec<type_k, type_d>(key, Row); //вставка
+		flag[temp] = busy; //обозначение что он занят
+	}
+	else//если занят
+	{
+		if ((*(this->Rows[temp])).KEY == key)
+		{
+			throw "error: the same key";
+		}
+		srand(temp);//srand выполняет инициализацию генератора случайных чисел rand
+		int temp1 = rand() % (this->MaxSizeT);//новый индекс
+		while (flag[temp1] == busy) //пока занят
+		{
+			temp1 = rand() % (this->MaxSizeT);
+			if ((this->Rows[temp1] != NULL) && ((*(this->Rows[temp1])).KEY == key))//если занят
+			{
+				throw "error: the same key";
+			}
+		}
+		this->Rows[temp1] = new TableRec<type_k, type_d>(key, Row);
+		if (flag[temp1] == 0)//если свободен
+			this->CurIndex++;
+		flag[temp1] = busy;
+	}*/
+
+//удаление
+/*int temp = Hashf(key);
+	if (flag[temp] == 0) //если свободен
+	{
+		throw "error: ne found";
+	}
+	if ((this->Rows[temp] != NULL) && ((*(this->Rows[temp])).KEY == key))//если нашли
+	{
+		delete this->Rows[temp];
+		this->Rows[temp] = NULL;
+		flag[temp] = delet;//обозначенме что он удален
+	}
+	else
+	{
+		srand(temp);
+		while ((flag[temp] == -1) || ((flag[temp] == 1) && ((*(this->Rows[temp])).KEY != key))) //пока удален или занят и ключи не совпадают
+			temp = rand() % (this->MaxSizeT);
+		if (flag[temp] == 1) // если занят
+		{
+			delete this->Rows[temp];
+			this->Rows[temp] = NULL;
+			flag[temp] = delet;
+		}
+		else 
+			{
+				throw "error: ne found";
+			}
+	}*/

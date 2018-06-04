@@ -101,138 +101,49 @@ template <class type_k, class type_d>//поиск
 TableRec<type_k, type_d>* HashTable<type_k, type_d>::Search(const type_k & key) 
 {
 	TableRec<string, polynom>* tmp = nullptr;
-	int temp = Hashf(key);
+	CurIndex = Hashf(key);
 	freepos = -1;
 	int i;
 	for ( i = 0; i<MaxSizeT; i++)
 	{
-		if ((this->Rows[i] == NULL) && (flag[temp] == 0))//если свободна
+		if ((this->Rows[i] == NULL) && (flag[CurIndex] == 0))//если свободна
 		{
-			freepos = temp;
+			freepos = CurIndex;
 			return tmp;//?
 		}
 		else
-			if ((this->Rows[temp] != NULL) && ((*(this->Rows[temp])).KEY) == key)
+			if ((this->Rows[CurIndex] != NULL) && ((*(this->Rows[CurIndex])).KEY) == key)
 			{
-				return this->Rows[temp];//Нашли ??? не идет в удаление
+				return this->Rows[CurIndex];//Нашли ??? не идет в удаление
 			}
 		else 
-			if (flag[temp] == -1)//если удалена
+			if (flag[CurIndex] == -1)//если удалена
 			{
 				if (freepos == -1) 
-					freepos = temp;//запоминаем первую свободную ячейку
+					freepos = CurIndex;//запоминаем первую свободную ячейку
 			}
-			temp = GetNextPos(temp);
+			CurIndex = GetNextPos(CurIndex);
 	}
-			throw "error: ne found";
-}	
-			
-		
-
-	//исходная реализация работает
-	/*int temp = Hashf(key);//индекс занятости
-	if (flag[temp] == 0) //если свободен
-	{
-		throw "error: ne found";
-	}
-	if ((this->Rows[temp] != NULL) && ((*(this->Rows[temp])).KEY) == key)//если ключи совпали
-	{
-		return this->Rows[temp];//Нашли
-	}
-	else
-	{
-		srand(temp);
-		while ((flag[temp] == -1) || ((flag[temp] == 1) && ((*(this->Rows[temp])).KEY != key))) //пока удален или занят и ключи не совпадают
-			temp = rand() % (this->MaxSizeT);//новый индекс
-		if (flag[temp] == 1) // если занят
-		{
-			return this->Rows[temp];//нашли
-		}
-		else
-			//cout << "error ne found" << endl;
-			throw "error: ne found";
-	}*/
-	
-	
-/*srand(temp);//srand выполняет инициализацию генератора случайных чисел rand
-		int temp1 = rand() % (this->MaxSizeT);//новый индекс
-			while (flag[temp1] == busy) //пока занят
-		{
-			temp1 = rand() % (this->MaxSizeT);
-			if ((this->Rows[temp1] != NULL) && ((*(this->Rows[temp1])).KEY == key))//если занят
-			{
-				throw "error: the same key";
-			}
-		}
-		if (flag[temp1] == 0)//если свободен
-			this->CurIndex++;
-		flag[temp1] = busy;
-		temp = temp1;*/
-		//srand(temp);
-		//temp = rand() % (this->MaxSizeT);//заново считаем индекс
+			return tmp;
+}
 
 
 template <class type_k, class type_d>//удаление
 void HashTable<type_k, type_d>::Delete(const type_k & key)
 {
-	int temp = Hashf(key);//индекс занятости
+	//int temp = Hashf(key);//индекс занятости
 	TableRec<string, polynom>* tmp = Search(key);//запись с искомым кючом
-	if (tmp == (this->Rows[temp]))//нашли ключ
+	if (Search(key))//если нашли ключ???
 		{
-		delete this->Rows[temp];
-		this->Rows[temp] = NULL;
-		flag[temp] = delet;
-		//freepos = 
+		delete this->Rows[CurIndex];
+		this->Rows[CurIndex] = NULL;
+		flag[CurIndex] = delet;
 	}
 	else 
 			{
 				throw "error: ne found";
 			}
 
-	
-
-	//исходная реализация работает
-	/*int temp = Hashf(key);
-	if (flag[temp] == 0) //если свободен
-	{
-		throw "error: ne found";
-	}
-	if ((this->Rows[temp] != NULL) && ((*(this->Rows[temp])).KEY == key))//если нашли
-	{
-		delete this->Rows[temp];
-		this->Rows[temp] = NULL;
-		flag[temp] = delet;//обозначенме что он удален
-	}
-	else
-	{
-		srand(temp);
-		while ((flag[temp] == -1) || ((flag[temp] == 1) && ((*(this->Rows[temp])).KEY != key))) //пока удален или занят и ключи не совпадают
-			temp = rand() % (this->MaxSizeT);
-		if (flag[temp] == 1) // если занят
-		{
-			delete this->Rows[temp];
-			this->Rows[temp] = NULL;
-			flag[temp] = delet;
-		}
-		else 
-			{
-				throw "error: ne found";
-			}
-	}*/
-
-	//моя реализация неработает
-	/*int temp = Hashf(key);//индекс занятости
-	if ((this->Rows[temp]) == Search(key))//нашли ключ
-	{
-		delete this->Rows[temp];
-		this->Rows[temp] = NULL;
-		flag[temp] = delet;
-	}
-	else 
-			{
-				
-				throw "error: ne found";
-			}*/
 }
 
 template <class type_k, class type_d>//вставка
@@ -240,14 +151,14 @@ void HashTable<type_k, type_d>::Insert(const type_k & key, const type_d & Row)
 {
 	if ((double)this->CurIndex / (double)this->MaxSizeT > 0.7) 
 		Realloc();
-	int temp = Hashf(key);//индекс
-
-	TableRec<string, polynom>* tmp = Search(key);
-	//TableRec<string, polynom>* freepos = this -> Search(key);
+	
+	TableRec<string, polynom>* tmp = Search(key);//найденный элемент
+	if (tmp != )//проверка на похожий ключ???
+	{
 	if(freepos < 0)
 	{
-		this->Rows[temp] = new TableRec<type_k, type_d>(key, Row); //вставка
-		flag[temp] = busy; //обозначение что он занят
+		this->Rows[CurIndex] = new TableRec<type_k, type_d>(key, Row); //вставка
+		flag[CurIndex] = busy; //обозначение что он занят
 	}
 	else
 		if (freepos > -1)// найдена свободная или удаленная ячейка
@@ -255,70 +166,8 @@ void HashTable<type_k, type_d>::Insert(const type_k & key, const type_d & Row)
 		this->Rows[freepos] = new TableRec<type_k, type_d>(key, Row); //вставка
 		flag[freepos] = busy; //обозначение что он занят
 	}
-	
-	
-
-
-	
-	/*int temp = Hashf(key);//индекс
-	if ((double)this->CurIndex / (double)this->MaxSizeT > 0.7) 
-		Realloc();
-	//if (Search(key) == (this->Rows[temp]))//нашли ключ и он равен записи искомого индекса
-
-		if (flag[temp] == free) //если свободный
-	{
-		this->Rows[temp] = new TableRec<type_k, type_d>(key, Row); //создание нового
-		flag[temp] = busy; //обозначение что он занят
-		this->CurIndex++;
 	}
-		else 
-		if (flag[temp] == delet)//если удален
-	{
-		this->Rows[temp] = new TableRec<type_k, type_d>(key, Row); //вставка
-		flag[temp] = busy; //обозначение что он занят
-	}
-	*/
-
-	//исходная реализация работает
-	/*if ((double)this->CurIndex / (double)this->MaxSizeT > 0.7) 
-	//if (IsFull())
-		Realloc();
-	int temp = Hashf(key);//индекс
-	
-	
-	if (flag[temp] == free) //если свободный
-	{
-		this->Rows[temp] = new TableRec<type_k, type_d>(key, Row); //создание нового
-		flag[temp] = busy; //обозначение что он занят
-		this->CurIndex++;
-	}
-	else 
-		if (flag[temp] == delet)//если удален
-	{
-		this->Rows[temp] = new TableRec<type_k, type_d>(key, Row); //вставка
-		flag[temp] = busy; //обозначение что он занят
-	}
-	else//если занят
-	{
-		if ((*(this->Rows[temp])).KEY == key)
-		{
-			throw "error: the same key";
-		}
-		srand(temp);//srand выполняет инициализацию генератора случайных чисел rand
-		int temp1 = rand() % (this->MaxSizeT);//новый индекс
-		while (flag[temp1] == busy) //пока занят
-		{
-			temp1 = rand() % (this->MaxSizeT);
-			if ((this->Rows[temp1] != NULL) && ((*(this->Rows[temp1])).KEY == key))//если занят
-			{
-				throw "error: the same key";
-			}
-		}
-		this->Rows[temp1] = new TableRec<type_k, type_d>(key, Row);
-		if (flag[temp1] == 0)//если свободен
-			this->CurIndex++;
-		flag[temp1] = busy;
-	}*/
+	else throw "error: the same key";
 }
 
 template <class type_k, class type_d>
