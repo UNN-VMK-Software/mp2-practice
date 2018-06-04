@@ -1,2 +1,6 @@
 ﻿  Main.cpp
-c:\users\andre\desktop\mp2-practice\dubovskoyav\lab2\sample\main.cpp(1): fatal error C1083: Не удается открыть файл включение: Dijkstra.h: No such file or directory
+c:\users\andre\desktop\mp2-practice\dubovskoyav\lab2\include\dheap.h(7): error C2011: Data: переопределение типа "class"
+  c:\users\andre\desktop\mp2-practice\dubovskoyav\lab2\include\dheap.h(7): note:  см. объявление "Data"
+c:\users\andre\desktop\mp2-practice\dubovskoyav\lab2\include\dheap.h(12): error C2011: DHeap: переопределение типа "class"
+  c:\users\andre\desktop\mp2-practice\dubovskoyav\lab2\include\dheap.h(12): note:  см. объявление "DHeap"
+c:\users\andre\desktop\mp2-practice\dubovskoyav\lab2\include\dijkstra.h(6): error C2504: Data: не определен базовый класс
