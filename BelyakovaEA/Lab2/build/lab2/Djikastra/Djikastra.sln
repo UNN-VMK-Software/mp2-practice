@@ -1,0 +1,67 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Kruskal", "..\Kruskal\Kruskal.vcxproj", "{A79AF118-E17D-458F-B464-C9E646C93C8D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DACC956A-F0C4-4098-8304-530878DCEADE} = {DACC956A-F0C4-4098-8304-530878DCEADE}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PySort", "..\PySort\PySort.vcxproj", "{616C8F6D-0779-455D-B628-FC61B0F35C80}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DACC956A-F0C4-4098-8304-530878DCEADE} = {DACC956A-F0C4-4098-8304-530878DCEADE}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Graph_lib", "..\Graph_lib\Graph_lib.vcxproj", "{DACC956A-F0C4-4098-8304-530878DCEADE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Dijkstra", "..\Dijkstra\Dijkstra.vcxproj", "{0A941875-030C-4C0F-98FF-FCDF8EA39AF6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DACC956A-F0C4-4098-8304-530878DCEADE} = {DACC956A-F0C4-4098-8304-530878DCEADE}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A79AF118-E17D-458F-B464-C9E646C93C8D}.Debug|x64.ActiveCfg = Debug|x64
+		{A79AF118-E17D-458F-B464-C9E646C93C8D}.Debug|x64.Build.0 = Debug|x64
+		{A79AF118-E17D-458F-B464-C9E646C93C8D}.Debug|x86.ActiveCfg = Debug|Win32
+		{A79AF118-E17D-458F-B464-C9E646C93C8D}.Debug|x86.Build.0 = Debug|Win32
+		{A79AF118-E17D-458F-B464-C9E646C93C8D}.Release|x64.ActiveCfg = Release|x64
+		{A79AF118-E17D-458F-B464-C9E646C93C8D}.Release|x64.Build.0 = Release|x64
+		{A79AF118-E17D-458F-B464-C9E646C93C8D}.Release|x86.ActiveCfg = Release|Win32
+		{A79AF118-E17D-458F-B464-C9E646C93C8D}.Release|x86.Build.0 = Release|Win32
+		{616C8F6D-0779-455D-B628-FC61B0F35C80}.Debug|x64.ActiveCfg = Debug|x64
+		{616C8F6D-0779-455D-B628-FC61B0F35C80}.Debug|x64.Build.0 = Debug|x64
+		{616C8F6D-0779-455D-B628-FC61B0F35C80}.Debug|x86.ActiveCfg = Debug|Win32
+		{616C8F6D-0779-455D-B628-FC61B0F35C80}.Debug|x86.Build.0 = Debug|Win32
+		{616C8F6D-0779-455D-B628-FC61B0F35C80}.Release|x64.ActiveCfg = Release|x64
+		{616C8F6D-0779-455D-B628-FC61B0F35C80}.Release|x64.Build.0 = Release|x64
+		{616C8F6D-0779-455D-B628-FC61B0F35C80}.Release|x86.ActiveCfg = Release|Win32
+		{616C8F6D-0779-455D-B628-FC61B0F35C80}.Release|x86.Build.0 = Release|Win32
+		{DACC956A-F0C4-4098-8304-530878DCEADE}.Debug|x64.ActiveCfg = Debug|x64
+		{DACC956A-F0C4-4098-8304-530878DCEADE}.Debug|x64.Build.0 = Debug|x64
+		{DACC956A-F0C4-4098-8304-530878DCEADE}.Debug|x86.ActiveCfg = Debug|Win32
+		{DACC956A-F0C4-4098-8304-530878DCEADE}.Debug|x86.Build.0 = Debug|Win32
+		{DACC956A-F0C4-4098-8304-530878DCEADE}.Release|x64.ActiveCfg = Release|x64
+		{DACC956A-F0C4-4098-8304-530878DCEADE}.Release|x64.Build.0 = Release|x64
+		{DACC956A-F0C4-4098-8304-530878DCEADE}.Release|x86.ActiveCfg = Release|Win32
+		{DACC956A-F0C4-4098-8304-530878DCEADE}.Release|x86.Build.0 = Release|Win32
+		{0A941875-030C-4C0F-98FF-FCDF8EA39AF6}.Debug|x64.ActiveCfg = Debug|x64
+		{0A941875-030C-4C0F-98FF-FCDF8EA39AF6}.Debug|x64.Build.0 = Debug|x64
+		{0A941875-030C-4C0F-98FF-FCDF8EA39AF6}.Debug|x86.ActiveCfg = Debug|Win32
+		{0A941875-030C-4C0F-98FF-FCDF8EA39AF6}.Debug|x86.Build.0 = Debug|Win32
+		{0A941875-030C-4C0F-98FF-FCDF8EA39AF6}.Release|x64.ActiveCfg = Release|x64
+		{0A941875-030C-4C0F-98FF-FCDF8EA39AF6}.Release|x64.Build.0 = Release|x64
+		{0A941875-030C-4C0F-98FF-FCDF8EA39AF6}.Release|x86.ActiveCfg = Release|Win32
+		{0A941875-030C-4C0F-98FF-FCDF8EA39AF6}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
