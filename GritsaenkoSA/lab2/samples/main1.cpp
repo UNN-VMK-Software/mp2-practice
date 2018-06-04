@@ -81,11 +81,29 @@ int main()
 			cout << "Write polynom" << endl;
 			cin >> str;
 			polynom a(str);	
-			try { cout << "find: " << A.Search(str)->Data << endl; }
+			try
+			{
+				if (A.Search(str) != nullptr)
+					cout << "find: " << A.Search(str)->Data << endl;
+				else
+					cout << "Not found!" << endl;
+			}
 			catch (...) { cout << "ne found" << endl; }
-			try { cout << "find: " << B.Search(str)->Data << endl; }
+			try
+			{
+				if (B.Search(str) != nullptr)
+					cout << "find: " << B.Search(str)->Data << endl;
+				else
+					cout << "Not found!" << endl;
+			}
 			catch (...) { cout << "ne found" << endl; }
-			try { cout << "find: " << C.Search(str)->Data << endl; }
+			try
+			{
+				if (C.Search(str) != nullptr)
+					cout << "find: " << C.Search(str)->Data << endl;
+				else
+					cout <<  "Not found!" << endl;
+			}
 			catch (...) { cout << "ne found" << endl; }
 			break;
 		}

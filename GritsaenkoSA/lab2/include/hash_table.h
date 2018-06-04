@@ -103,47 +103,46 @@ TableRec<type_k, type_d>* HashTable<type_k, type_d>::Search(const type_k & key)
 	TableRec<string, polynom>* tmp = nullptr;
 	CurIndex = Hashf(key);
 	freepos = -1;
-	int i;
-	for ( i = 0; i<MaxSizeT; i++)
+	
+	for (int i = 0; i < MaxSizeT; i++ )
 	{
-		if ((this->Rows[i] == NULL) && (flag[CurIndex] == 0))//если свободна
+		if ((this->Rows[i] == NULL) && (flag[CurIndex] == 0)) // если свободна
 		{
 			freepos = CurIndex;
-			return tmp;//?
+			return tmp; //?
 		}
-		else
-			if ((this->Rows[CurIndex] != NULL) && ((*(this->Rows[CurIndex])).KEY) == key)
-			{
-				return this->Rows[CurIndex];//Нашли ??? не идет в удаление
-			}
-		else 
-			if (flag[CurIndex] == -1)//если удалена
-			{
-				if (freepos == -1) 
-					freepos = CurIndex;//запоминаем первую свободную ячейку
-			}
-			CurIndex = GetNextPos(CurIndex);
+		else if ((this->Rows[CurIndex] != NULL) && ((*(this->Rows[CurIndex])).KEY) == key)
+		{
+			return this->Rows[CurIndex]; // Нашли ??? не идет в удаление
+		}
+		else if (flag[CurIndex] == -1) // если удалена
+		{
+			if (freepos == -1) 
+				freepos = CurIndex; // запоминаем первую свободную ячейку
+		}
+
+		CurIndex = GetNextPos(CurIndex);
 	}
-			return tmp;
+
+	return tmp;
 }
 
 
 template <class type_k, class type_d>//удаление
 void HashTable<type_k, type_d>::Delete(const type_k & key)
 {
-	//int temp = Hashf(key);//индекс занятости
-	TableRec<string, polynom>* tmp = Search(key);//запись с искомым кючом
-	if (Search(key))//если нашли ключ???
-		{
+	TableRec<string, polynom>* tmp = Search(key); //запись с искомым кючом
+	
+	if (tmp != nullptr) // если нашли ключ???  // if (((*(this->Rows[CurIndex])).KEY) == key)
+	{
 		delete this->Rows[CurIndex];
 		this->Rows[CurIndex] = NULL;
 		flag[CurIndex] = delet;
 	}
 	else 
-			{
-				throw "error: ne found";
-			}
-
+	{
+		throw "error: ne found";
+	}
 }
 
 template <class type_k, class type_d>//вставка
@@ -152,22 +151,28 @@ void HashTable<type_k, type_d>::Insert(const type_k & key, const type_d & Row)
 	if ((double)this->CurIndex / (double)this->MaxSizeT > 0.7) 
 		Realloc();
 	
-	TableRec<string, polynom>* tmp = Search(key);//найденный элемент
-	if (tmp != )//проверка на похожий ключ???
+	TableRec<string, polynom>* tmp = Search(key); //найденный элемент
+	
+	//if (mt[ind].key != key)
+	//if (((*(this->Rows[CurIndex])).KEY) != key)
+		
+	if (tmp != nullptr) //проверка на похожий ключ???
 	{
-	if(freepos < 0)
-	{
-		this->Rows[CurIndex] = new TableRec<type_k, type_d>(key, Row); //вставка
-		flag[CurIndex] = busy; //обозначение что он занят
+		throw "error: the same key";
 	}
 	else
-		if (freepos > -1)// найдена свободная или удаленная ячейка
 	{
-		this->Rows[freepos] = new TableRec<type_k, type_d>(key, Row); //вставка
-		flag[freepos] = busy; //обозначение что он занят
-	}
-	}
-	else throw "error: the same key";
+		if(freepos < 0)
+		{
+			this->Rows[CurIndex] = new TableRec<type_k, type_d>(key, Row); //вставка
+			flag[CurIndex] = busy; //обозначение что он занят
+		}
+		else if (freepos > -1)// найдена свободная или удаленная ячейка
+		{
+			this->Rows[freepos] = new TableRec<type_k, type_d>(key, Row); //вставка
+			flag[freepos] = busy; //обозначение что он занят
+		}
+	}	
 }
 
 template <class type_k, class type_d>
