@@ -1,0 +1,4 @@
+﻿  Graph.cpp
+c:\temp\lab2-dijkstra\src\graph.cpp(115): warning C4244: return: преобразование "double" в "float", возможна потеря данных
+c:\temp\lab2-dijkstra\src\graph.cpp(140): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  Graph.vcxproj -> C:\temp\lab2-dijkstra\sln\vc\lab2-DHeap\Debug\Graph.lib

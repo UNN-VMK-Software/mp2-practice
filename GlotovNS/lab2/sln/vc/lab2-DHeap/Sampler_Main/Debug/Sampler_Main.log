@@ -1,0 +1,3 @@
+﻿  Sample-Main.cpp
+c:\temp\lab2-dijkstra\samples\sample-main.cpp(44): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+  Sampler_Main.vcxproj -> C:\temp\lab2-dijkstra\sln\vc\lab2-DHeap\Debug\Sampler_Main.exe
