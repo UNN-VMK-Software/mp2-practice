@@ -1,6 +1,0 @@
-﻿  polinom.cpp
-c:\users\sasha\desktop\lab2\src\polinom.cpp(39): warning C4018: '<': signed/unsigned mismatch
-c:\users\sasha\desktop\lab2\src\polinom.cpp(44): warning C4018: '<': signed/unsigned mismatch
-  monom.cpp
-  Generating Code...
-  polinom.vcxproj -> D:\mp2-practice\LakshinaAR\lab2\sln\Debug\polinom.lib
