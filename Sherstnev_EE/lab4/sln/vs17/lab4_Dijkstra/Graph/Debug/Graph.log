@@ -1,0 +1,5 @@
+﻿  Graph.cpp
+c:\users\walker_state\documents\labs\mp-lab4-dijkstra\src\graph.cpp(34): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+c:\users\walker_state\documents\labs\mp-lab4-dijkstra\src\graph.cpp(85): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\walker_state\documents\labs\mp-lab4-dijkstra\src\graph.cpp(175): warning C4715: 'Graph::GetWeight': not all control paths return a value
+  Graph.vcxproj -> C:\Users\walker_state\Documents\labs\mp-lab4-Dijkstra\sln\vs17\lab4_Dijkstra\Debug\Graph.lib

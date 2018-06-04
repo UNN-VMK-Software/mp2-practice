@@ -1,0 +1,3 @@
+﻿  Dheap.cpp
+c:\users\walker_state\documents\labs\mp-lab4-dijkstra\src\dheap.cpp(133): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  Dheap.vcxproj -> C:\Users\walker_state\Documents\labs\mp-lab4-Dijkstra\sln\vs17\lab4_Dijkstra\Debug\Dheap.lib
