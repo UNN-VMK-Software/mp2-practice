@@ -1,0 +1,6 @@
+﻿  Dijkstra.cpp
+  main.cpp
+..\samples\main.cpp(39): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+  Создание кода...
+  Dijkstra.vcxproj -> C:\Users\Sort\Desktop\Ermiln\ErmlinEA\Dijkstra\sln\Debug\Dijkstra.exe
+  Dijkstra.vcxproj -> C:\Users\Sort\Desktop\Ermiln\ErmlinEA\Dijkstra\sln\Debug\Dijkstra.pdb (Full PDB)
