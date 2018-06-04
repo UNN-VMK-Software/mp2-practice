@@ -11,10 +11,10 @@ public:
 
 	virtual void Push(Data *&key) = 0;
 	virtual Data* Pop() = 0;
-	virtual void Refresh() = 0;
 
-	virtual int IsFull() = 0;
-	virtual int IsEmpty() = 0;
+
+	virtual int IsFull()const = 0;
+	virtual int IsEmpty()const = 0;
 };
 
 class DHeapBasedPriorityQueue : public PriorityQueue {
@@ -28,10 +28,9 @@ public:
 
 	virtual void Push(Data *&key);
 	virtual Data* Pop();
-	virtual void Refresh();
 
-	virtual int IsFull();
-	virtual int IsEmpty();
+	virtual int IsFull()const;
+	virtual int IsEmpty()const;
 };
 
 class QueueFactory {

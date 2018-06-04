@@ -114,12 +114,12 @@ void DHeap::Hilling()
 		Sinking(i);
 }
 
-int DHeap::IsFull()
+const int DHeap::IsFull()
 {
 	return idx >= maxSize - 1;
 }
 
-int DHeap::IsEmpty()
+const int DHeap::IsEmpty()
 {
 	return idx == -1;
 }

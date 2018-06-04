@@ -32,17 +32,12 @@ Data* DHeapBasedPriorityQueue::Pop()
 	return heap->Remove(0);
 }
 
-void DHeapBasedPriorityQueue::Refresh()
-{
-	heap->Hilling();
-}
-
-int DHeapBasedPriorityQueue::IsFull()
+int DHeapBasedPriorityQueue::IsFull()const
 {
 	return heap->IsFull();
 }
 
-int DHeapBasedPriorityQueue::IsEmpty()
+int DHeapBasedPriorityQueue::IsEmpty()const
 {
 	return heap->IsEmpty();
 }

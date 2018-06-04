@@ -12,7 +12,7 @@ void Dejkstra::dejkstra(Graph *&graph, int s, float *&distance, int *&up)
 	int n = graph->GetVerticesNum();
 	int m = graph->GetRealSize();
 	if ((s < 0) || (s >= n))
-		throw "DEjkstra: Invalid start vertex";
+		throw "Dejkstra: Invalid start vertex";
 
 	Data** dist = new Data*[n];
 	up = new int[n];
@@ -48,7 +48,6 @@ void Dejkstra::dejkstra(Graph *&graph, int s, float *&distance, int *&up)
 			{
 				dist[vIncident]->priorities = way;		//поскольку в очереди лежат указатели на объекты dist[i],
 				up[vIncident] = vConsidered;			//то значение в очереди автоматически измен€тс€
-				queue->Refresh();
 			}
 		}
 	}

@@ -30,8 +30,8 @@ public:
 	void Surfacing(int i);					//всплытие
 	void Sinking(int i);					//погружение
 	void Hilling();							//окучивание
-	int IsFull();
-	int IsEmpty();
+	int IsFull()const;
+	int IsEmpty()const;
 
 private:
 	int MinChild(int i);					//погружение узла i
