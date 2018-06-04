@@ -13,7 +13,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sample", "sample\sample.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "polinom_lib", "polinom_lib\polinom_lib.vcxproj", "{6266FA93-039A-45A5-85A4-8F43C7E05FA2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tests", "tests\tests.vcxproj", "{6A4E2794-CB14-47E0-88D2-408A41741EA1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_table", "tests\tests.vcxproj", "{6A4E2794-CB14-47E0-88D2-408A41741EA1}"
 	ProjectSection(ProjectDependencies) = postProject
 		{F2685559-3735-490F-A947-AC9E6F75FFC1} = {F2685559-3735-490F-A947-AC9E6F75FFC1}
 		{6266FA93-039A-45A5-85A4-8F43C7E05FA2} = {6266FA93-039A-45A5-85A4-8F43C7E05FA2}

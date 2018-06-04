@@ -13,10 +13,10 @@
     <ClCompile Include="..\..\..\..\tests\hash_table_test.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\tests\ordered_table_test.cpp">
+    <ClCompile Include="..\..\..\..\tests\sorted_table_test.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\tests\unordered_table_test.cpp">
+    <ClCompile Include="..\..\..\..\tests\scan_table_test.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
