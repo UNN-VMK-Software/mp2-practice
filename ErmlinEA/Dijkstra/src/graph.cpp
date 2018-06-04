@@ -1,66 +1,113 @@
-#include "..//include/DHeap.h"
+#ifndef GRAPH_H
+#define GRAPH_H
 
-Edge::Edge(int N, int K, float weight)
+#include "..//include/Graph.h"
+
+WeightedEdge::WeightedEdge(int n, int k, float weight)
 {
-	this->N = N;
-	this->K = K;
+	this->k = k;
+	this->n = n;
 	this->weight = weight;
 }
 
-Graph::Graph(int n)
+Graph::Graph(int ver)
 {
-	if ((n < 0) || (n > maxVerticesSize))
-		throw "Invalid namber of vertices";
+	if ((ver < 0) || (ver > maxSizeVertices))
+	{
+		throw "Err";
+	}
 	else
-	this->n = n;
-	this->m = n*(n - 1) / 2;
-	last = 0;
-	vertices = new int[n];
-	edges = new Edge*[m];
+	{
+		this->ver = ver;
+	}
+	this->reb = ver * (ver - 1) / 2;
+	current_reb = 0;
+	vertices = new int[ver];
+	edges = new WeightedEdge*[reb];
 }
 
-Graph::Graph(int n, int m)
+Graph::Graph(int ver, int reb)
 {
-	if ((n < 0) || (n > maxVerticesSize))
-		throw "Invalid namber of vertices";
+	if ((ver < 0) || (ver > maxSizeVertices))
+	{
+		throw "Err";
+	}
 	else
-		this->n = n;
-	if ((m < 0) || (m > n*(n - 1) / 2))
-		throw "Invalid namber of edges";
+	{
+		this->ver = ver;
+	}
+	if ((reb < 0) || (reb > ver*(ver - 1) / 2) || (reb < ver - 1))
+	{
+		throw "Err";
+	}
 	else
-		this->m = m;
-	last = 0;
-	vertices = new int[n];
-	edges = new Edge*[m];
+	{
+		this->reb = reb;
+	}
+	current_reb = 0;
+	current_ver = 0;
+	vertices = new int[ver];
+	for (int i = 0; i < ver - 1; i++)
+	{
+		vertices[i] = -1;
+	}
+	edges = new WeightedEdge*[reb];
 }
+
 
 Graph::~Graph()
 {
-	cleaner();
+	Cleaner();
 	delete[] edges;
-	delete[]vertices;
+	delete[] vertices;
 }
 
-int Graph::findEdge(int N, int K)
+
+int Graph::SearchEdge(int n, int k)
 {
-	for (int j = 0; j < last ; j++)
-		if ((edges[j]->K == K) &&
-			(edges[j]->N == N) ||
-			(edges[j]->N == K) &&
-			(edges[j]->K == N))
-			return j;
+	for (int i = 0; i < current_reb; i++)
+	{
+		if ((edges[i]->k == k) && (edges[i]->n == n) || (edges[i]->n == k) && (edges[i]->k == n))
+		{
+			return i;
+		}
+	}
 	return -1;
 }
-
-void Graph::generateVertices(int &N, int &K)
+bool Graph::SearchVershinu(int ver)
 {
-	do {
-		N = rand() % n;
-		K = rand() % n;
-	} while ((N == K) || (findEdge(N, K) != -1));
+	for (int i = 0; i < current_reb; i++)
+	{
+		if ((edges[i]->n == ver) || edges[i]->k == ver)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+void Graph::AddVershini(int n, int k)
+{
+	if (!SearchVershinu(n))
+	{
+		vertices[current_ver] = n;
+		current_ver++;
+	}
+	if (!SearchVershinu(k))
+	{
+		vertices[current_ver] = k;
+		current_ver++;
+	}
 }
 
-float Graph::generateWeight(float minRange, float maxRange)
+void Graph::GenerateVertices(int & nver, int & kver)
+{
+	do {
+		nver = rand() % ver;
+		kver = rand() % ver;
+	} while ((nver == kver) || (SearchEdge(nver, kver) != -1));
+}
+
+float Graph::GenerateWeight(float minRange, float maxRange)
 {
 	double d = minRange;
 	double c = (double)(maxRange - minRange) / RAND_MAX;
@@ -68,102 +115,139 @@ float Graph::generateWeight(float minRange, float maxRange)
 	return result;
 }
 
-void Graph::cleaner()
+void Graph::Cleaner()
 {
-	for (int i = 0; i < last; i++)
+	for (int i = 0; i < current_reb; i++)
+	{
 		delete edges[i];
+	}
 }
 
-void Graph::generateGraph(float minRange, float maxRange)
+void Graph::GenerateGraph(float minRange, float maxRange)
 {
-	int N;
-	int K;
+	int nver;
+	int kver;
 	float weight;
 	if (minRange > maxRange)
-		throw "Invalid ranges";
-	if (last) {
-		cleaner();
-		last = 0;
+	{
+		throw "Err";
+	}
+	if (current_ver)// Если граф не пуст
+	{
+		Cleaner();
+		current_ver = 0;
 	}
 	srand(time(NULL));
-	for (int i = 0; i < m; i++) {
-		generateVertices(N, K);
-		weight = generateWeight(minRange, maxRange);
-		edges[i] = new Edge(N, K, weight);
-		last++;
+	for (int i = 0; i < reb; i++)
+	{
+		GenerateVertices(nver, kver);
+		weight = GenerateWeight(minRange, maxRange);
+		edges[i] = new WeightedEdge(nver, kver, weight);
+		AddVershini(nver, kver);
+		current_reb++;
 	}
 }
 
-void Graph::addEdge(int N, int K, float weight)
+
+void Graph::AddEdge(int nver, int kver, float weight)
 {
-	if (last == m)
-		throw "Graph is full";
-	if (N == K)
-		throw "Loops are disabled";
-	if (findEdge(N, K) != -1)
-		throw "multiple edges arent allowed!";
-	edges[last] = new Edge(N, K, weight);
-	last++;
+	if (current_reb == reb)
+	{
+		throw "Err";
+	}
+	if (nver == kver)
+	{
+		throw "Err";
+	}
+	if (SearchEdge(nver, kver) != -1)
+	{
+		throw "Err";
+	}
+	edges[current_reb] = new WeightedEdge(nver, kver, weight);
+	AddVershini(nver, kver);
+	current_reb++;
 }
 
-void Graph::delEdge(int N, int K)
+void Graph::RemoveEdge(int nver, int kver)
 {
-	int j = findEdge(N, K);
+	int j = SearchEdge(nver, kver);
 	if (j == -1)
-		throw "try delete non-existent edge";
+	{
+		throw "Err";
+	}
 	delete edges[j];
-	edges[j] = edges[last - 1];
-	last--;
+	edges[j] = edges[current_reb - 1];
+	current_reb--;
 }
 
-int Graph::getVerticesNum()
+int Graph::GetVerticesNum()
 {
-	return n;
+	return ver;
 }
 
-int Graph::getEdgeSize()
+int Graph::GetEdgeSize()
 {
-	return m;
+	return reb;
 }
 
-int Graph::getRealSize()
+int Graph::GetRealSize()
 {
-	return last;
+	return current_reb;
+}
+bool Graph::IsConnectivity()
+{
+	for (int i = 0; i < ver; i++)
+	{
+		if (vertices[i] < 0)
+		{
+			return false;
+		}
+	}
+	return true;
 }
 
-Edge** Graph::getEdgeSet()
+WeightedEdge** Graph::GetEdgeSet()
 {
-	if (last == 0)
+	if (current_reb == 0)
+	{
 		return 0;
+	}
 	return edges;
 }
 
-Edge* Graph::getEdge(int j)
+WeightedEdge* Graph::GetEdge(int j)
 {
 	return edges[j];
 }
 
-float Graph::getWeight(int N, int K)
+float Graph::GetWeight(int nver, int kver)
 {
-	int j = findEdge(N, K);
+	int j = SearchEdge(nver, kver);
 	if (j == -1)
-		throw "Graph: Invalid edge!";
+	{
+		throw "Err";
+	}
 	return edges[j]->weight;
 }
 
-void Graph::printgraph()
+void Graph::PrintList()
 {
 	using namespace std;
-	for (int i = 0; i < n; i++)
+	for (int i = 0; i < ver; i++)
 	{
 		cout << i << " : ";
-		for (int j = 0; j < last; j++)
+		for (int j = 0; j < current_reb; j++)
 		{
-			if (edges[j]->N == i)
-				cout << edges[j]->K << '(' << edges[j]->weight << ')' << ", ";
-			if (edges[j]->K == i)
-				cout << edges[j]->N << '(' << edges[j]->weight << ')' << ", ";
+			if (edges[j]->n == i)
+			{
+				cout << edges[j]->k << '(' << edges[j]->weight << ')' << ", ";
+			}
+			if (edges[j]->k == i)
+			{
+				cout << edges[j]->n << '(' << edges[j]->weight << ')' << ", ";
+			}
 		}
 		cout << endl;
 	}
 }
+#endif

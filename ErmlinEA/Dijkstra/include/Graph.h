@@ -1,41 +1,52 @@
 #pragma once
-#include <ctime>
-#include <cstdlib>
+
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 
-#define maxVerticesSize 100
+#define maxSizeVertices 1000
 
-class Edge {
+
+class WeightedEdge
+{
 public:
-	int N;
-	int K;
-	float weight;
-	Edge(int N, int K, float weight);
+	int n;			   
+	int k;			   
+	float weight;	       
+	WeightedEdge(int n, int k, float weight);
 };
 
-class Graph {
+class Graph
+{
 private:
-	int n;
-	int m;
-	int last;
-	Edge** edges;
-	int* vertices;
-	void generateVertices(int &N, int &K);
-	float generateWeight(float minRange, float maxRange);
-	void cleaner();
-	int findEdge(int N, int K);
+	int ver;			
+	int reb;				
+	int current_reb;			
+	int current_ver;		
+	WeightedEdge** edges;   
+	int* vertices;	
+	void GenerateVertices(int &N, int &K);
+	float GenerateWeight(float minRange, float maxRange);
+	void Cleaner();
+	int SearchEdge(int n, int k);
+	bool SearchVershinu(int ver);
+	void AddVershini(int n, int k);
 public:
+	// Конструкторы
 	Graph(int n);
 	Graph(int n, int m);
 	~Graph();
-	void generateGraph(float minRange, float maxRange);
-	void addEdge(int N, int K, float weight);
-	void delEdge(int N, int K);
-	int getVerticesNum();
-	int getEdgeSize();
-	int getRealSize();
-	Edge** getEdgeSet();
-	Edge*  getEdge(int j); 
-	float getWeight(int N, int K);
-	void printgraph();
+	void GenerateGraph(float minRange, float maxRange);     
+	void AddEdge(int N, int K, float weight);				
+	void RemoveEdge(int N, int K);							
+	int GetVerticesNum();					
+	int GetEdgeSize();						
+	int GetRealSize();						
+	bool IsConnectivity();					
+	WeightedEdge** GetEdgeSet();			
+	WeightedEdge*  GetEdge(int j);			
+	float GetWeight(int N, int K);		
+	void PrintList();                       		      
 };
+
+
