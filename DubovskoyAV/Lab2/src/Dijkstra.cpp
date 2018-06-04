@@ -17,7 +17,7 @@ void Dijkstra::dijkstra(Graph *&graph, int s, float *&distance, int *&up)
 	Data** dist = new Data*[n];
 	up = new int[n];
 
-	PriorityQueue *queue = new DHeapPriorityQueue();
+	DHeapPriorityQueue *queue = new DHeapPriorityQueue();
 
 	for (int i = 0; i < n; i++) {
 		up[i] = i;
@@ -48,7 +48,7 @@ void Dijkstra::dijkstra(Graph *&graph, int s, float *&distance, int *&up)
 			{
 				dist[vIncident]->priorities = way;
 				up[vIncident] = vConsidered;
-				queue->refresh();
+				queue->heap->hilling();
 			}
 		}
 	}

@@ -55,11 +55,11 @@ int main() {
 		try
 		{
 			for (int i = 0; i < m; i++) {
-				cout << "Enter start vershinu" << endl;
+				cout << "Enter start vertex" << endl;
 				cin >> Ne;
-				cout << "Enter finish vershinu" << endl;
+				cout << "Enter finish vertex" << endl;
 				cin >> Ke;
-				cout << "Enter W" << endl;
+				cout << "Enter Weight " << endl;
 				cin >> W;
 				graph->addEdge(Ne, Ke, W);
 			}
@@ -74,9 +74,12 @@ int main() {
 	
 	graph->printList(); //Вывод графа
 	cout << endl;
+	cout <<"N: "<< n << ' ' << " M: " << m << endl;	      // Печать количества вершин
+	
 
 	cout << "Enter start vertex for Dijkstra" << endl;
 	cin >> s;
+	cout << "Start vertex: " << s << endl;					  // Печать стартовой вершины
 
 	float *dist;    // Массив расстояний между стартовой вершиной и i-той вершиной
 	int *up;		// Массив вершин, предшествующих в кратчайшем пути
@@ -87,32 +90,32 @@ int main() {
 		return -2;
 	}
 
-	cout << n << ' ' << m << endl;	      // Печать количества вершин
-	cout << s << endl;					  // Печать стартовой вершины
-
+	cout << endl;
 	m = graph->getRealSize();
 	WeightedEdge* edge;
-	cout << "// Matrix edges //" << endl; // Печать матрицы взвешенных вершин
+	cout << "// Matrix edges //" << endl; // Печать матрицы взвешенных ребер
 	for (int j = 0; j < m; j++) {
 		edge = graph->getEdge(j);
 		cout << edge->Ne << ' ' << edge->Ke << ' ' << edge->W << endl;
 	}
-
-	cout << "// Distances //" << endl;	   // Печать расстояний от заданной стартовой вершины до i-той вершины
+	cout << endl;
+	cout << "Distances" << endl;	   // Печать расстояний от заданной стартовой вершины до i-той вершины
 	for (int i = 0; i < n; i++)
 		if (dist[i] != FLT_MAX)
 			cout << dist[i] << ' ';
 		else
 			cout << "inf" << ' ';
+	cout << endl;
 
-	cout << endl << "// Ways //" << endl;   // Печать путей всех вершин  
+	cout << endl << "// Ways //" << endl;   
 	for (int i = 0; i < n; i++) {
 		cout << endl;
-		cout << i;							// - i-я вершина
-		cout << ' ' << dist[i];				// - расстояние до стартовой вершины от этой вершины
-		cout << ' ' << up[i];				// - предшествующая вершина i-ой
+		cout << i;							
+		cout << ' ' << dist[i];				
+		cout << ' ' << up[i];				
 		cout << endl;
 	}
+
 
 	/* Освобождение памяти */
 	delete graph;

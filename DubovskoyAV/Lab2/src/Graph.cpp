@@ -18,9 +18,9 @@ void Graph::generateVertices(int & Ne, int & Ke)
 
 float Graph::generateW(float minRange, float maxRange)
 {
-	double d = minRange;
-	double c = (double)(maxRange - minRange) / RAND_MAX;
-	double result = c * rand() + d;
+	double i = minRange;
+	double j = (double)(maxRange - minRange) / RAND_MAX;
+	double result = j * rand() + i;
 	return result;
 }
 
@@ -45,7 +45,7 @@ int Graph::searchEdge(int Ne, int Ke)
 Graph::Graph(int n)
 {
 	if ((n < 0) || (n > maxVerticesSize))
-		throw "Graph: Nepravilnoe chislo vershin";
+		throw "Graph: invalid number of vertexes";
 	else
 		this->n = n;
 	this->m = n * (n - 1) / 2;
@@ -57,12 +57,12 @@ Graph::Graph(int n)
 Graph::Graph(int n, int m)
 {
 	if ((n < 0) || (n > maxVerticesSize))
-		throw "Graph: Nepravilnoe chislo vershin";
+		throw "Graph: invalid number of vertexes";
 	else
 		this->n = n;
 
 	if ((m < 0) || (m > n*(n - 1) / 2) || (m < n - 1))
-		throw "Graph: Nepravilnoe chislo reber";
+		throw "Graph: invalid number of edges";
 	else
 		this->m = m;
 
@@ -104,11 +104,11 @@ void Graph::generateGraph(float minRange, float maxRange)
 void Graph::addEdge(int Ne, int Ke, float _W)
 {
 	if (m_cur == m)
-		throw "Graph: Graph polniy";
+		throw "Graph: Graph is full";
 	if (Ne == Ke)
-		throw "Graph: Nelzya cikly";
+		throw "Graph: Ne!=Ke";
 	if (searchEdge(Ne, Ke) != -1)
-		throw "Graph: Ne dostupni neskolko re";
+		throw "Graph: edge already being";
 	edges[m_cur] = new WeightedEdge(Ne, Ke, _W);
 	m_cur++;
 }
@@ -117,7 +117,7 @@ void Graph::removeEdge(int Ne, int Ke)
 {
 	int j = searchEdge(Ne, Ke);
 	if (j == -1)
-		throw "Graph: Popytka ydaleniya ne sush. m";
+		throw "Graph: edge not found";
 	delete edges[j];
 	edges[j] = edges[m_cur - 1];
 	m_cur--;
@@ -154,7 +154,7 @@ float Graph::getW(int Ne, int Ke)
 {
 	int j = searchEdge(Ne, Ke);
 	if (j == -1)
-		throw "Graph: Nevernoe rebro";
+		throw "Graph: edge not found";
 	return edges[j]->W;
 }
 
