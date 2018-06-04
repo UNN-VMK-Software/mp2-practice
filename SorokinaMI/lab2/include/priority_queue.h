@@ -11,6 +11,7 @@ public:
     virtual T pop();
 	//virtual T get();
 	virtual bool IsEmpty();
+	virtual void refresh();
 };
 
 template <typename T>
@@ -23,6 +24,12 @@ template <typename T>
 void PriorityQueue<T>::push(T val)
 {
 	
+}
+
+template <typename T>
+void PriorityQueue<T>::refresh()
+{
+
 }
 
 template <typename T>

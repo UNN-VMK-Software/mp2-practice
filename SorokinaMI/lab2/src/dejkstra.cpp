@@ -14,14 +14,21 @@ void AlgoritmDejkstri::Dejkstra(Graph* g, PriorityQueue<Vertex>* q)
 	Vertex* dist = new Vertex[n];
 
 	int* up = new int[n];
+	char* lables = new char[m];
+	for (int i = 0;i < m;i++)
+	{
+		lables[i] = 0;
+	}
 	
-	for (int i = 0; i < n; i++) {
+	up[0] = 0;
+	Vertex trr(0, 0);
+	dist[0] = trr;
+	q->push(dist[0]);
+	for (int i = 1; i < n; i++) {
 	    Vertex tmp(i,100000);
 		up[i] = i;
 		dist[i] = tmp;
-		q->push(dist[i]);
 	}
-	dist[0].SetMark(0);
 
 	Edge** edges = new Edge*[m];
 	for (int i = 0;i < m;i++)
@@ -37,18 +44,23 @@ void AlgoritmDejkstri::Dejkstra(Graph* g, PriorityQueue<Vertex>* q)
 		for (int i = 0; i < m; i++)
 		{
 			int vIncident = -1;
-			if (edges[i]->GetFinish() == vConsidered)
+			if (edges[i]->GetFinish() == vConsidered && lables[i]==0)
 				vIncident = edges[i]->GetStart();
-			if (edges[i]->GetStart() == vConsidered)
+			if (edges[i]->GetStart() == vConsidered && lables[i]==0)
 				vIncident = edges[i]->GetFinish();
 			if (vIncident == -1) continue;
 
+			lables[i] = 1;
+
 			float way = dist[vConsidered].GetMark() + g->GetEdgeWeight(vConsidered, vIncident);
+			if (way <= 0) continue;
 			delta = dist[vIncident].GetMark() - way;
 			if (delta > 0)
 			{
 				dist[vIncident].SetMark(way);  
-				up[vIncident] = vConsidered;		
+				up[vIncident] = vConsidered;
+				q->push(dist[vIncident]);
+				q->refresh();
 			}
 		}
 	}

@@ -10,10 +10,17 @@ Vertex::Vertex(int i, float k)
 }
 bool Vertex::operator<(const Vertex& e)
 {
-	if (id < e.id)
+	if (mark < e.mark)
+	{
 		return true;
-	else 
-		return false;
+	}
+	else return false;
+	/*{
+		if (mark = e.mark)
+		{
+			if (id < e.id) return true;
+		} else return false;
+	}*/
 }
 Vertex& Vertex::operator=(const Vertex& e)
 {
@@ -82,7 +89,7 @@ float Graph::GetEdgeWeight(int n, int k)
 {
 	for (int i = 0; i < m;i++)
 	{
-		if ((edges[i].GetStart() == n) && (edges[i].GetFinish() == k))
+		if (((edges[i].GetStart() == n) && (edges[i].GetFinish() == k))||((edges[i].GetStart() == k)&&(edges[i].GetFinish() == n)))
 			return edges[i].GetWeight();
 	}
 	return -1;

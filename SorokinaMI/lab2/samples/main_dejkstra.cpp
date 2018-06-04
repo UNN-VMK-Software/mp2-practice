@@ -36,7 +36,7 @@ int main()
 	}
 
 	Graph G(n, m, E);
-	PriorityQueue<Vertex>* Q = new PriorityQueueBasedDHeap<Vertex>(m);
+	PriorityQueue<Vertex>* Q = new PriorityQueueBasedDHeap<Vertex>(n);
 	AlgoritmDejkstri AD;
 	AD.Dejkstra(&G, Q);
 	return 0;

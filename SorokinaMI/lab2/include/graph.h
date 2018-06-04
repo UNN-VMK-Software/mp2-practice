@@ -29,7 +29,7 @@ class Vertex
 	int id;
 	float mark;
 public:
-	Vertex(){};
+	Vertex() { id = -1; mark = 1000000.0; };
 	~Vertex() {};
 	Vertex(int i, float k);
 

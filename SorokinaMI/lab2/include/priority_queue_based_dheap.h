@@ -14,6 +14,7 @@ public:
 	 T pop();
 	// T get();
 	 bool IsEmpty();
+	 void refresh();
 };
 
 
@@ -33,6 +34,12 @@ template <typename T>
 void PriorityQueueBasedDHeap<T>::push(T val)
 {
 	H->insert(val);
+}
+
+template <typename T>
+void PriorityQueueBasedDHeap<T>::refresh()
+{
+	H->makeitheap();
 }
 
 template <typename T>

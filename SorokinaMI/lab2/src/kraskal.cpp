@@ -16,9 +16,11 @@ Edge* AlgoritmKraskala::Kraskal(Graph*g, PriorityQueue<Edge>* queue)
 	{
 		Edge Tmp = queue->pop();
 		int A = Tmp.GetStart(), B = Tmp.GetFinish();
-		if (U.DefineSubset(A) != U.DefineSubset(B)) 
+		int uA = U.DefineSubset(A);
+		int uB = U.DefineSubset(B);
+		if (uA != uB) 
 		{
-			U.Unite(B, A);
+			U.Unite(uA,uB);
 			E[kE] = Tmp;
 			kE++;
 		}

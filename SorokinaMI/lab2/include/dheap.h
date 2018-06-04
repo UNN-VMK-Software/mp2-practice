@@ -91,14 +91,14 @@ void DHeap<T>::insert(const T& key)
 template<typename T>
 void DHeap<T>::emerge(int i)
 {
-	int p;
+	int p = (i - 1) / d;
 	while (i>0)
 	{
-		p = (i - 1) / d;
 		if (keys[p] > keys[i])
 		{
-			transpose(i, p);
+			transpose(p, i);
 			i = p;
+			p = (i - 1) / d;
 		}
 		else break;
 	}
@@ -108,9 +108,9 @@ template<typename T>
 void DHeap<T>::sinking(int i)
 {
 	int c = minchild(i);
-	while (c != -1 && keys[c] < keys[i])
+	while ((c != -1) && (keys[c] < keys[i]))
 	{
-		transpose(c, i);
+		transpose(i, c);
 		i = c;
 		c = minchild(i);
 	}
@@ -120,33 +120,28 @@ void DHeap<T>::sinking(int i)
 template<typename T>
 int DHeap<T>::minchild(int id)
 {
-	if (id + 1 > k) return -1;
+	int f = id + 1;
+	if (f > k) return -1;
 
-	if (id + 1 == k) return id;
-	else
-	{
-		int firstchild = id + 1;
-		int lastchild = (id + d < k) ? id + d : k;
-		T minkey = keys[firstchild];
-		int minchild = firstchild;
-		for (int i = firstchild; i < lastchild; i++)
-		{
-			if (keys[i] < minkey)
-			{
-				minkey = keys[i];
-				minchild = i;
-			}
+	int l = (id + d < k)? id + d : k;
+	int c;
+
+	T minKey = keys[f];
+	c = f;
+	for (int j = f; j < l; j++) {
+		if (minKey > keys[j]) {
+			minKey = keys[j];
+			c = j;
 		}
-		return minchild;
-
 	}
+	return c;
 }
 
 template<typename T>
 T DHeap<T>::deleteminkey()
 {
 	T tmp = keys[0];
-	keys[0] = keys[k - 1];
+	transpose(0,k-1);
 	k--;
 	sinking(0);
 	return tmp;
@@ -155,7 +150,7 @@ T DHeap<T>::deleteminkey()
 template<typename T>
 void DHeap<T>::makeitheap()
 {
-	for (int i = (n - 1); i >= 0; i--)
+	for (int i = (k - 1); i >= 0; i--)
 	{
 		sinking(i);
 	}
