@@ -1,3 +1,4 @@
+
 #include "Dijkstra.h"
 
 DataFloat::DataFloat(int v, float dist)

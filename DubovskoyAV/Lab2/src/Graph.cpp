@@ -1,3 +1,4 @@
+
 #include "graph.h"
 
 WeightedEdge::WeightedEdge(int Ne, int Ke, float W)

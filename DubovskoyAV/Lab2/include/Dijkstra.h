@@ -1,3 +1,4 @@
+#pragma once
 #include "Graph.h"
 #include "DHeap.h"
 #include "PriorityQueue.h"

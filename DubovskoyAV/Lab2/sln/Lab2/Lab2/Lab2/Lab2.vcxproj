@@ -154,6 +154,11 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\sample\Main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lab2_lib\Lab2_lib.vcxproj">
+      <Project>{25a690f1-9a7c-4ebb-b3f7-44298550a005}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -33,16 +33,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\src\DHeap.cpp">
-      <Filter>Файлы ресурсов</Filter>
+      <Filter>Файлы исходного кода</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\src\Dijkstra.cpp">
-      <Filter>Файлы ресурсов</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\src\Graph.cpp">
-      <Filter>Файлы ресурсов</Filter>
+      <Filter>Файлы исходного кода</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\src\PriorityQueue.cpp">
-      <Filter>Файлы ресурсов</Filter>
+      <Filter>Файлы исходного кода</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\Graph.cpp">
+      <Filter>Файлы исходного кода</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
