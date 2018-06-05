@@ -15,6 +15,7 @@ public:
 	Tabrecord(const string& key1, const T& data1);
 	Tabrecord(const Tabrecord& t);
 	Tabrecord& operator=(const Tabrecord<T>& t);
+	~Tabrecord() {}
 };
 
 template <typename T>
@@ -50,6 +51,7 @@ template<typename T>
 Tabrecord<T>::Tabrecord()
 {
 	key = "null";
+	data = T();
 }
 
 template<typename T>
@@ -71,13 +73,15 @@ Tabrecord<T>& Tabrecord<T>::operator=(const Tabrecord<T>& t)
 {
 	key = t.key;
 	data = t.data;
+	return *this;
 }
 
 //реализация класса Table
 template <typename T>
 void Table<T>::Realloc()
 {
-	int maxrec1 = maxrec * 2;
+	int realloccof = 2;
+	int maxrec1 = maxrec * realloccof;
 	Tabrecord<T>** temp = new Tabrecord<T>*[maxrec1];
 	Reset();
 	for (int i = 0; i < maxrec; i++)

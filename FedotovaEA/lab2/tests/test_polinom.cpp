@@ -1,4 +1,4 @@
-#include "polinom.h"
+п»ї#include "polinom.h"
 #include <gtest.h>
 
 TEST(TMonom, can_create)
@@ -54,7 +54,7 @@ TEST(TMonom, can_mult_const1)
 	TMonom a(2.0, 3);
 	TMonom c;
 	double d = 5.0;
-	c = a*d;
+	c = a * d;
 	EXPECT_EQ(c.coeff, 10.0);
 }
 
@@ -63,14 +63,14 @@ TEST(TMonom, can_mult_const2)
 	TMonom a(2.0, 3);
 	TMonom c;
 	double d = 5.0;
-	c = d*a;
+	c = d * a;
 	EXPECT_EQ(c.coeff, 10.0);
 }
 
 TEST(TMonom, can_mult)
 {
 	TMonom a(2.0, 3), b(3.0, 21), c;
-	c = a*b;
+	c = a * b;
 	EXPECT_EQ(c.coeff, 6.0);
 	EXPECT_EQ(c.abc, 24);
 }
@@ -78,7 +78,7 @@ TEST(TMonom, can_mult)
 TEST(TMonom, can_check)
 {
 	TMonom a(2.0, 800), b(3.0, 200), c;
-	ASSERT_ANY_THROW(TMonom c = a*b);
+	ASSERT_ANY_THROW(TMonom c = a * b);
 }
 
 
@@ -185,7 +185,7 @@ TEST(TPolinom, can_mult_const3)
 	EXPECT_EQ(c, d*a);
 }
 
-//подобные в полиноме
+//ГЇГ®Г¤Г®ГЎГ­Г»ГҐ Гў ГЇГ®Г«ГЁГ­Г®Г¬ГҐ
 
 TEST(TPolinom, can_pod1)
 {
@@ -218,9 +218,3 @@ TEST(TPolinom, can_pod4)
 	TPolinom c1;
 	EXPECT_EQ(c1, a*b);
 }
-
-
-
-
-
-

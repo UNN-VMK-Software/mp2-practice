@@ -1,5 +1,0 @@
-﻿  test_polinom.cpp
-  test_main.cpp
-  test_list.cpp
-  Generating Code...
-gtest.lib(gtest-all.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64'

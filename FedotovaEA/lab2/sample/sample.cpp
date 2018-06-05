@@ -71,6 +71,7 @@ void main()
 				getline(cin, key);
 			try
 			{
+				Tab1.Search(key);
 				cout << "Scantable: " << endl << Tab1 << endl;
 				cout << "-------------------------" << endl;
 				cout << "Поиск в Scantable: " << Tab1.Search(key) << endl;

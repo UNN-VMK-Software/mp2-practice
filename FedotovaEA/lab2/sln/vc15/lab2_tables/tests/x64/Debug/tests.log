@@ -1,7 +1,0 @@
-﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (tests.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  scan_table_test.cpp
-  test_main.cpp
-  sorted_table_test.cpp
-  hash_table_test.cpp
-  Generating Code...
-  tests.vcxproj -> C:\temp1\lab2\sln\vc15\lab2_tables\x64\Debug\test_table.exe

@@ -65,16 +65,6 @@ TEST(Hashtable, can_search1)
 	ASSERT_ANY_THROW(t.Search("2"));
 }
 
-/*TEST(Hashtable, can_search2)
-{
-	Hashtable<TPolinom> t;
-	TPolinom tt("2x+1");
-	t.Insert(tt, "2");
-	TPolinom ttt("2x");
-	t.Insert(ttt, "3");
-	ASSERT_ANY_THROW(t.Search("5"));
-}*/
-
 TEST(Hashtable, can_search3)
 {
 	Hashtable<TPolinom> t(3);

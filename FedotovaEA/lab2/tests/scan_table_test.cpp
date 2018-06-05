@@ -65,15 +65,6 @@ TEST(Scantable, can_search1)
 	ASSERT_ANY_THROW(t.Search("2"));
 }
 
-/*TEST(Scantable, can_search2)
-{
-	Scantable<TPolinom> t;
-	TPolinom tt("2x+1");
-	t.Insert(tt, "2");
-	TPolinom ttt("2x");
-	t.Insert(ttt, "3");
-	ASSERT_ANY_THROW(t.Search("1"));
-}*/
 
 TEST(Scantable, can_search3)
 {

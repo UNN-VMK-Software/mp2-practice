@@ -66,7 +66,8 @@ int Hashtable<T>::HashFunc(const string& key) const
 template<typename T>
 void Hashtable<T>::Realloc()
 {
-	int maxrec1 = maxrec * 2;
+	int realloccof = 2;
+	int maxrec1 = maxrec * realloccof;
 	int* flag1 = new int[maxrec1];
 	Tabrecord<T>** temp = new Tabrecord<T>*[maxrec1];
 	for (int i = 0; i < maxrec; i++)
@@ -149,7 +150,7 @@ void Hashtable<T>::Insert(const T& data1, const string& key1)
 }
 
 template<typename T>
-T& Hashtable<T>::Search(const string& key1)
+T& Hashtable<T>::Search(const string& key1) 
 {
 	Reset();
 	if (currrec)

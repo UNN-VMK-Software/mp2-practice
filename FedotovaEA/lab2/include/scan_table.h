@@ -42,13 +42,13 @@ void Scantable<T>::Insert(const T& data1, const string& key1)
 }
 
 template<typename T>
-T& Scantable<T>::Search(const string &key1)
+T& Scantable<T>::Search(const string &key1)  
 {
 	Reset();
 	if (currind > -1)
 	{
-		while((tab[currind]->key != key1) && (currind < currrec))
-			TGetnext();
+		while ((tab[currind]->key != key1) && (currind < currrec))
+			currind++;
 		if (currind < currrec)
 			return tab[currind]->data;
 		else

@@ -65,15 +65,6 @@ TEST(SortedTable, can_search1)
 	ASSERT_ANY_THROW(t.Search("2"));
 }
 
-/*TEST(SortedTable, can_search2)
-{
-	SortedTable<TPolinom> t(3);
-	TPolinom tt("2x+1");
-	t.Insert(tt, "2");
-	TPolinom ttt("2x");
-	t.Insert(ttt, "3");
-	ASSERT_ANY_THROW(t.Search("5"));
-} */
 
 TEST(SortedTable, can_search3)
 {
@@ -91,16 +82,16 @@ TEST(SortedTable, can_delete1)
 	ASSERT_ANY_THROW(t.Delete("2"));
 }
 
-/*TEST(SortedTable, can_delete2)
+TEST(SortedTable, can_delete2)
 {
 	SortedTable<TPolinom> t(1);
 	TPolinom tt("2x+1");
 	t.Insert(tt, "2");
 	t.Delete("2");
 	EXPECT_EQ(t.Getcurrrec(), 0);
-}*/
+}
 
-/*TEST(SortedTable, can_delete3)
+TEST(SortedTable, can_delete3)
 {
 	SortedTable<TPolinom> t(2);
 	TPolinom tt("2x+1");
@@ -109,7 +100,7 @@ TEST(SortedTable, can_delete1)
 	t.Insert(ttt, "3");
 	t.Delete("3");
 	EXPECT_EQ(t.Getcurrrec(), 1);
-} */
+} 
 
 
 

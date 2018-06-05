@@ -71,7 +71,7 @@ void SortedTable<T>::Insert(const T& data1, const string& key1)
 }
 
 template<typename T>
-T& SortedTable<T>::Search(const string& key1)
+T& SortedTable<T>::Search(const string& key1) 
 {
 	Reset();
 	if (currind > -1)
