@@ -120,15 +120,16 @@ void DHeap<T>::sinking(int i)
 template<typename T>
 int DHeap<T>::minchild(int id)
 {
-	int f = id + 1;
-	if (f > k) return -1;
+	int f = id*d + 1;
+	if (f > k-1)
+		return -1;
 
-	int l = (id + d < k)? id + d : k;
+	int l = (id*d + d < k-1)? id*d + d : k-1;
 	int c;
 
 	T minKey = keys[f];
 	c = f;
-	for (int j = f; j < l; j++) {
+	for (int j = f + 1; j <= l; j++) {
 		if (minKey > keys[j]) {
 			minKey = keys[j];
 			c = j;

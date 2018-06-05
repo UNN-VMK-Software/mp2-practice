@@ -15,12 +15,6 @@ bool Vertex::operator<(const Vertex& e)
 		return true;
 	}
 	else return false;
-	/*{
-		if (mark = e.mark)
-		{
-			if (id < e.id) return true;
-		} else return false;
-	}*/
 }
 Vertex& Vertex::operator=(const Vertex& e)
 {

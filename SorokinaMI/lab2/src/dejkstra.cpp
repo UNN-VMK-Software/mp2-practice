@@ -14,6 +14,7 @@ void AlgoritmDejkstri::Dejkstra(Graph* g, PriorityQueue<Vertex>* q)
 	Vertex* dist = new Vertex[n];
 
 	int* up = new int[n];
+
 	char* lables = new char[m];
 	for (int i = 0;i < m;i++)
 	{
@@ -23,7 +24,9 @@ void AlgoritmDejkstri::Dejkstra(Graph* g, PriorityQueue<Vertex>* q)
 	up[0] = 0;
 	Vertex trr(0, 0);
 	dist[0] = trr;
+
 	q->push(dist[0]);
+
 	for (int i = 1; i < n; i++) {
 	    Vertex tmp(i,100000);
 		up[i] = i;
