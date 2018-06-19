@@ -1,0 +1,25 @@
+﻿Построение начато 04.06.2018 14:51:02.
+     1>Проект "C:\mp2-practice\PiginAP\lab4-Dijkstra\sln\vc10\lab4-Dijkstra\lab4-Dijkstra\lab4-Dijkstra.vcxproj" в узле 2 (целевые объекты build).
+     1>InitializeBuildStatus:
+         Создание "Debug\lab4-Dijkstra.unsuccessfulbuild", так как было задано "AlwaysCreate".
+       ClCompile:
+         Для всех выходных данных обновления не требуется.
+       ManifestResourceCompile:
+         Для всех выходных данных обновления не требуется.
+       Link:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\mp2-practice\PiginAP\lab4-Dijkstra\sln\vc10\lab4-Dijkstra\Debug\lab4-Dijkstra.exe" /INCREMENTAL /NOLOGO /LIBPATH:..\Debug Graph_lib.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\lab4-Dijkstra.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\mp2-practice\PiginAP\lab4-Dijkstra\sln\vc10\lab4-Dijkstra\Debug\lab4-Dijkstra.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\mp2-practice\PiginAP\lab4-Dijkstra\sln\vc10\lab4-Dijkstra\Debug\lab4-Dijkstra.lib" /MACHINE:X86 "Debug\lab4-Dijkstra.exe.embed.manifest.res"
+         Debug\sample_dheap.obj
+       Manifest:
+         c:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\lab4-Dijkstra.exe.embed.manifest" /manifest "Debug\lab4-Dijkstra.exe.intermediate.manifest"
+         Для всех выходных данных обновления не требуется.
+       LinkEmbedManifest:
+         Для всех выходных данных обновления не требуется.
+         lab4-Dijkstra.vcxproj -> C:\mp2-practice\PiginAP\lab4-Dijkstra\sln\vc10\lab4-Dijkstra\Debug\lab4-Dijkstra.exe
+       FinalizeBuildStatus:
+         Файл "Debug\lab4-Dijkstra.unsuccessfulbuild" удаляется.
+         Обращение к "Debug\lab4-Dijkstra.lastbuildstate".
+     1>Построение проекта "C:\mp2-practice\PiginAP\lab4-Dijkstra\sln\vc10\lab4-Dijkstra\lab4-Dijkstra\lab4-Dijkstra.vcxproj" завершено (целевые объекты build).
+
+Построение успешно завершено.
+
+Затраченное время: 00:00:04.09

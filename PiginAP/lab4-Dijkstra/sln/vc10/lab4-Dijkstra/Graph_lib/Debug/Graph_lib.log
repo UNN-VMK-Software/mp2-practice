@@ -1,0 +1,25 @@
+﻿Построение начато 04.06.2018 12:17:23.
+     1>Проект "C:\mp2-practice\PiginAP\lab4-Dijkstra\sln\vc10\lab4-Dijkstra\Graph_lib\Graph_lib.vcxproj" в узле 3 (целевые объекты build).
+     1>InitializeBuildStatus:
+         Обращение к "Debug\Graph_lib.unsuccessfulbuild".
+       ClCompile:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I..\..\..\..\include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt "..\..\..\..\src\dheap-based-priority-queue.cpp" ..\..\..\..\src\dijkstra.cpp
+         dijkstra.cpp
+         Создание кода...
+         Компиляция...
+         dheap-based-priority-queue.cpp
+         Создание кода...
+       Lib:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\Lib.exe /OUT:"C:\mp2-practice\PiginAP\lab4-Dijkstra\sln\vc10\lab4-Dijkstra\Debug\Graph_lib.lib" /NOLOGO "Debug\d-heap.obj"
+         "Debug\dheap-based-priority-queue.obj"
+         Debug\dijkstra.obj
+         Debug\graph.obj
+         Graph_lib.vcxproj -> C:\mp2-practice\PiginAP\lab4-Dijkstra\sln\vc10\lab4-Dijkstra\Debug\Graph_lib.lib
+       FinalizeBuildStatus:
+         Файл "Debug\Graph_lib.unsuccessfulbuild" удаляется.
+         Обращение к "Debug\Graph_lib.lastbuildstate".
+     1>Построение проекта "C:\mp2-practice\PiginAP\lab4-Dijkstra\sln\vc10\lab4-Dijkstra\Graph_lib\Graph_lib.vcxproj" завершено (целевые объекты build).
+
+Построение успешно завершено.
+
+Затраченное время: 00:00:03.19
