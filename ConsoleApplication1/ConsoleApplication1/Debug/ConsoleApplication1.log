@@ -1,0 +1,17 @@
+﻿  main.cpp
+c:\users\леонид\desktop\лаб\dejkstra\consoleapplication1\consoleapplication1\main.cpp(41): warning C4244: '=': conversion from 'int' to 'KeyType', possible loss of data
+c:\users\леонид\desktop\лаб\dejkstra\consoleapplication1\consoleapplication1\algorithm.h(61): warning C4244: '=': conversion from 'KeyType' to 'int', possible loss of data
+  c:\users\леонид\desktop\лаб\dejkstra\consoleapplication1\consoleapplication1\algorithm.h(23): note: while compiling class template member function 'KeyType *Algorithm<KeyType>::Dijkstra(int,KeyType *&,Graph<KeyType> *&)'
+          with
+          [
+              KeyType=KeyType
+          ]
+  c:\users\леонид\desktop\лаб\dejkstra\consoleapplication1\consoleapplication1\main.cpp(42): note: see reference to function template instantiation 'KeyType *Algorithm<KeyType>::Dijkstra(int,KeyType *&,Graph<KeyType> *&)' being compiled
+          with
+          [
+              KeyType=KeyType
+          ]
+  c:\users\леонид\desktop\лаб\dejkstra\consoleapplication1\consoleapplication1\main.cpp(42): note: see reference to class template instantiation 'Algorithm<KeyType>' being compiled
+c:\users\леонид\desktop\лаб\dejkstra\consoleapplication1\consoleapplication1\algorithm.h(71): warning C4244: '=': conversion from 'int' to 'KeyType', possible loss of data
+  ConsoleApplication1.vcxproj -> C:\Users\Леонид\Desktop\лаб\dejkstra\ConsoleApplication1\Debug\ConsoleApplication1.exe
+  ConsoleApplication1.vcxproj -> C:\Users\Леонид\Desktop\лаб\dejkstra\ConsoleApplication1\Debug\ConsoleApplication1.pdb (Full PDB)
