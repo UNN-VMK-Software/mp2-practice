@@ -9,18 +9,14 @@ public:
 	Queue(Queue& lhs) :Stack<A2>(lhs){}
 	Queue(int _size) :Stack<A2>(_size){}
 	~Queue(){}
-	void push(A2& lhs)override
-	{
-		if ((*this).IsFull()) throw logic_error("Queue is overfull");
-		this->Array[this->last] = &lhs;
-		this->last++;
-	}
-	A2& pop() override
+	
+	const A2& pop() override
 	{
 		if (this->IsEmpty()) throw logic_error("Queue is empty");
-		A2* tmp = this->Array[this->first];
+		const A2* tmp = this->Array[this->first];
 		this->Array[this->first] = 0;
 		this->first++;
+		this->DataCount--;
 		return (*tmp);
 	}
 

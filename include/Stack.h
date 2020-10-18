@@ -11,23 +11,26 @@ public:
 	{
 		Array = 0;
 		size = 0;
-		first = 0;
-		last = 1;
+		first =0;
+		last = -1;
+		DataCount = 0;
 	}
 	Stack(int _size)
 	{
 		if (_size < 0)throw logic_error("negative size");
-		Array = new A1*[_size];
+		Array = new const A1*[_size];
 		size = _size;
 		first = 0;
-		last = 0;
+		last = -1;
+		DataCount = 0;
 	}
 	Stack(Stack& lhs)
 	{
-		Array = new A1*[lhs.size];
+		Array = new const A1*[lhs.size];
 		size = lhs.size;
 		first = lhs.first;
 		last = lhs.last;
+		DataCount = lhs.DataCount;
 	}
 
 	virtual ~Stack()
@@ -36,28 +39,30 @@ public:
 	}
 	bool IsEmpty()
 	{
-		return(last==first);
+		return(DataCount==0);
 	}
 	bool IsFull()
 	{
-		return(last==size);
+		return(DataCount==size);
 	}
-	A1** GetMemory()
+	const A1** GetMemory()
 	{
 		return Array;
 	}
-	virtual void push(A1& lhs)
+	 void push (const A1& lhs)
 	{
-		if ((*this).IsFull()) throw logic_error("Stack is overflow");
-		Array[last] = &lhs;
+		if ((*this).IsFull()) throw logic_error("Container is overflow");
 		last++;
+		Array[last] = &lhs;
+		DataCount++;
 	}
-	virtual A1& pop()
+	virtual const A1& pop()
 	{
 		if (this->IsEmpty()) throw logic_error("Stack is empty");
-		A1* tmp = Array[last - 1];
-		Array[last - 1] = 0;
+		const A1* tmp = Array[last];
+		Array[last] = 0;
 		last--;
+		DataCount--;
 		return (*tmp);
 	}
 	int GetSize()
@@ -70,8 +75,9 @@ public:
 	}
 protected:
 
-A1** Array;
+const A1** Array;
 int size;
 int first;
 int last;
+int DataCount;
 };
