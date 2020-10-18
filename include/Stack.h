@@ -52,6 +52,7 @@ public:
 	 void push (const A1& lhs)
 	{
 		if ((*this).IsFull()) throw logic_error("Container is overflow");
+		if (Array == 0) throw logic_error("");
 		last++;
 		Array[last] = &lhs;
 		DataCount++;
@@ -59,6 +60,7 @@ public:
 	virtual const A1& pop()
 	{
 		if (this->IsEmpty()) throw logic_error("Stack is empty");
+		if (Array == 0) throw logic_error("");
 		const A1* tmp = Array[last];
 		Array[last] = 0;
 		last--;

@@ -13,6 +13,7 @@ public:
 	const A2& pop() override
 	{
 		if (this->IsEmpty()) throw logic_error("Queue is empty");
+		if (Array == 0) throw logic_error("");
 		const A2* tmp = this->Array[this->first];
 		this->Array[this->first] = 0;
 		this->first++;
