@@ -76,4 +76,52 @@ TEST(Queue, pushAndpop)
 	}
 	EXPECT_EQ(A.pop(), 0);
 }
+TEST(Queue, findInNULLQueue)
+{
+	Stack<int>a;
+	ASSERT_ANY_THROW(a.find(1));
+}
+
+TEST(Queue, findInEmptyQueue)
+{
+	Queue<int>a(1);
+	int b = 2;
+	a.push(b);
+	a.pop();
+	ASSERT_ANY_THROW(a.find(2));
+}
+TEST(Queue, findInQueue)
+{
+	Queue<int>a(2);
+	int b = 2;
+	int c = 3;
+	a.push(b);
+	a.push(c);
+	EXPECT_EQ(a.find(1), 0);
+}
+TEST(Queue, findInQueue2)
+{
+	Queue<int>a(2);
+	int b = 2;
+	int c = 3;
+	a.push(b);
+	a.push(c);
+	EXPECT_EQ(a.find(2), 1);
+}
+TEST(Queue, minInQueue)
+{
+	Queue<int>a(2);
+	int b = 2;
+	int c = 3;
+	a.push(b);
+	a.push(c);
+	EXPECT_EQ(a.min(), 2);
+}
+TEST(Queue, minInEmptyQueue)
+{
+	Queue<int>a;
+	ASSERT_ANY_THROW(a.min());
+}
+
+
 

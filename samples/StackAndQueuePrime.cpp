@@ -28,6 +28,7 @@ int main()
 		stack2.push(ptr[i]);
 		stack1.push(ptr[i]);
 	}
+	
 	cout << "\n";
 	for (int i = stack1.GetFirst(); i < stack1.GetSize(); i++)
 	{
